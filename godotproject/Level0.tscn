@@ -90,8 +90,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 200, 100 )
-collision_layer = 2
+position = Vector2( 1850, 100 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -125,11 +124,13 @@ position = Vector2( -72.3171, 119.408 )
 color = Color( 0.356863, 0.219608, 0.12549, 1 )
 polygon = PoolVector2Array( 86.1093, 267.958, 134.881, 367.184, 402.286, 328.502, 576, 359, 832.825, 244.413, 688.191, 241.049, 498.148, 299.912 )
 script = ExtResource( 5 )
+phys_layer = 9
 
 [node name="Visual" type="Polygon2D" parent="."]
 color = Color( 0.356863, 0.219608, 0.12549, 1 )
 polygon = PoolVector2Array( 864.779, 357.093, 895.051, 461.364, 812.643, 589.181, 1236.45, 540.409, 1482, 432.774, 1469.65, 322.416, 1274.62, 297.443, 1221.32, 173.778, 1106.96, 303.276 )
 script = ExtResource( 5 )
+phys_layer = 9
 
 [node name="Visual2" type="Polygon2D" parent="."]
 color = Color( 0.356863, 0.219608, 0.12549, 1 )
