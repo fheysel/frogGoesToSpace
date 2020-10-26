@@ -20,6 +20,7 @@ func start_idle():
 	shooting = false
 	swinging = false
 	$TongueCollisionArea/CollisionShape2D/Sprite.visible = false
+	$TongueCollisionArea/CollisionShape2D.disabled = true
 	position = Vector2.ZERO
 
 func handle_idle(delta):
@@ -29,15 +30,24 @@ func start_shoot(dirn):
 	idle = false
 	shooting = true
 	swinging = false
+	$TongueCollisionArea/CollisionShape2D/Sprite.visible = true
+	$TongueCollisionArea/CollisionShape2D.disabled = false
 	shoot_direction = dirn
 
 func handle_shoot(delta):
-	$TongueCollisionArea/CollisionShape2D/Sprite.visible = true
 	# Advance tongue in direction
 	position += shoot_direction * shoot_speed * delta
 	if position.length_squared() >= max_shoot_dist * max_shoot_dist:
 		# We didn't hit anything. Stop shooting.
 		start_idle()
+
+func start_swing(body):
+	idle = false
+	shooting = false
+	swinging = true
+	$TongueCollisionArea/CollisionShape2D/Sprite.visible = false
+	$TongueCollisionArea/CollisionShape2D.disabled = true
+	emit_signal("tongue_swing", get_global_transform().xform(Vector2.ZERO))
 
 func handle_swing(delta):
 	pass
@@ -65,8 +75,9 @@ func _on_Player_tongue_start(facing):
 
 func _on_TongueCollisionArea_body_entered(body):
 	if shooting:
-		idle = false
-		shooting = false
-		swinging = true
-		emit_signal("tongue_swing", get_global_transform().xform(Vector2.ZERO))
-		$TongueCollisionArea/CollisionShape2D.disabled = true
+		start_swing(body)
+
+
+func _on_Player_tongue_stop():
+	if swinging:
+		start_idle()

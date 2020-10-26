@@ -32,8 +32,19 @@ func start_swing():
 	var swing_vec = frog_pos - swing_pivot_position
 	swing_radius = swing_vec.length()
 	swing_angle = swing_vec.angle() # Angle from positive X-axis to swing vector
-	swing_angular_speed = 0
-	print_debug('Tongue:',swing_pivot_position,'\nFrog:',frog_pos,'\nRadius:',swing_radius,'\nAngle:',swing_angle)
+	var swing_dir_vec = swing_vec.rotated(PI/2)
+	var dotprod = swing_dir_vec.dot(velocity)
+	if abs(dotprod)<  0.01 or swing_radius < 0.01:
+		swing_angular_speed = 0
+	else:
+		swing_angular_speed = dotprod / abs(dotprod) * pow(abs(dotprod), 0.5) / max(1, swing_radius)
+	print_debug('Tongue:',swing_pivot_position,'\nFrog:',frog_pos,'\nRadius:',swing_radius,'\nAngle:',swing_angle,'\nAng. Speed:',swing_angular_speed)
+
+func stop_swing():
+	# Convert swinging angular momentum into player velocity
+	velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
+	print_debug('Stop swing: Velocity=',velocity)
+	emit_signal("tongue_stop")
 
 func get_input():
 	var l = Input.is_action_pressed("walk_left")
@@ -55,13 +66,19 @@ func get_input():
 	tongue_pressed = Input.is_action_just_pressed("tongue")
 	tongue_held = Input.is_action_pressed("tongue")
 
+func _draw():
+	if $PlayerTongue.swinging:
+		var tgt = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * 100
+		draw_line(Vector2(0,0), tgt, Color(1,0,0))
+
 func do_movement(delta):
 	if $PlayerTongue.swinging:
-		swing_angular_speed += 0.05 * swing_radius * gravity * cos(swing_angle) * delta
-		swing_angular_speed = max(min(swing_angular_speed, 10), -10)
+		swing_angular_speed += 1 / swing_radius * gravity * cos(swing_angle) * delta
+		swing_angular_speed *= pow(0.5, delta)
+		# swing_angular_speed = max(min(swing_angular_speed, 10), -10)
 		swing_angle += swing_angular_speed * delta
 		var new_pos = swing_pivot_position + Vector2.RIGHT.rotated(swing_angle) * swing_radius
-		print_debug('Swing:', swing_pivot_position, '\nFrog:', new_pos)
+		# print_debug('Swing:', swing_angular_speed)
 		position = new_pos
 	else:
 		# Set X velocity based on user input
@@ -101,17 +118,25 @@ func get_tongue_direction():
 	return tdir.normalized()
 
 func _physics_process(delta):
+	update()
 	get_input()
 	do_movement(delta)
 
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
+		if $PlayerTongue.swinging:
+			stop_swing()
 			jump_frame_countdown = jump_length
 			jump_shorthop_countdown = shorthop_length
+		else:
+			if is_on_floor():
+				jump_frame_countdown = jump_length
+				jump_shorthop_countdown = shorthop_length
 	update_anim()
 	if Input.is_action_just_pressed("tongue"):
-		emit_signal("tongue_start", get_tongue_direction())
-		pass
+		if $PlayerTongue.swinging:
+			stop_swing()
+		else:
+			emit_signal("tongue_start", get_tongue_direction())
 
 func die():
 	print_debug("ded")
