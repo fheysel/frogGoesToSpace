@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Node2D
 
 signal tongue_start
 signal tongue_stop
@@ -21,19 +21,12 @@ var tongue_pressed = false
 var jump_held = false
 var tongue_held = false
 
-var swing_angular_speed = 0
-var swing_radius = 0
-var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
 
 func start_swing():
-	# Calculate initial angle and radius
-	var frog_pos = get_global_transform().xform(Vector2.ZERO)
-	var swing_vec = frog_pos - swing_pivot_position
-	swing_radius = swing_vec.length()
-	swing_angle = swing_vec.angle() # Angle from positive X-axis to swing vector
-	swing_angular_speed = 0
-	print_debug('Tongue:',swing_pivot_position,'\nFrog:',frog_pos,'\nRadius:',swing_radius,'\nAngle:',swing_angle)
+	# Create tongue's PhysicsBody
+	
+	pass
 
 func get_input():
 	var l = Input.is_action_pressed("walk_left")
@@ -56,31 +49,22 @@ func get_input():
 	tongue_held = Input.is_action_pressed("tongue")
 
 func do_movement(delta):
-	if $PlayerTongue.swinging:
-		swing_angular_speed += 0.05 * swing_radius * gravity * cos(swing_angle) * delta
-		swing_angular_speed = max(min(swing_angular_speed, 10), -10)
-		swing_angle += swing_angular_speed * delta
-		var new_pos = swing_pivot_position + Vector2.RIGHT.rotated(swing_angle) * swing_radius
-		print_debug('Swing:', swing_pivot_position, '\nFrog:', new_pos)
-		position = new_pos
-	else:
-		# Set X velocity based on user input
-		# TODO: maybe do this differently? give the frog a little X momentum?
-		velocity.x = user_direction.x * speed
-		
-		# Adjust Y velocity based on gravity and jump
-		velocity.y += gravity * delta
-		if jump_shorthop_countdown > 0:
-			jump_shorthop_countdown -= delta
-			if jump_shorthop_countdown <= 0 and not Input.is_action_pressed("jump"):
-				jump_frame_countdown = 0
-				velocity.y = jump_speed * shorthop_ratio
-		if jump_frame_countdown > 0:
-			jump_frame_countdown -= delta
-			velocity.y = jump_speed
-		velocity.y = max(min(velocity.y, 1200), -1200)
-		velocity = move_and_slide(velocity, Vector2.UP)
-	pass
+	# Set X velocity based on user input
+	# TODO: maybe do this differently? give the frog a little X momentum?
+	velocity.x = user_direction.x * speed
+	
+	# Adjust Y velocity based on gravity and jump
+	velocity.y += gravity * delta
+	if jump_shorthop_countdown > 0:
+		jump_shorthop_countdown -= delta
+		if jump_shorthop_countdown <= 0 and not Input.is_action_pressed("jump"):
+			jump_frame_countdown = 0
+			velocity.y = jump_speed * shorthop_ratio
+	if jump_frame_countdown > 0:
+		jump_frame_countdown -= delta
+		velocity.y = jump_speed
+	velocity.y = max(min(velocity.y, 1200), -1200)
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 func update_anim():
 	var facing_lock = !$PlayerTongue.idle
