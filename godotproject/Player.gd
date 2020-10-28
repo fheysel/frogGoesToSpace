@@ -9,6 +9,9 @@ export (int) var gravity = 1200
 export (float) var jump_length = 10 / 60.0
 export (float) var shorthop_length = 6 / 60.0
 export (float) var shorthop_ratio = 0.6
+export (float) var swing_user_anglespeed_per_s = 1
+export (float) var swing_user_radius_per_s = 40
+
 
 var velocity = Vector2.ZERO
 var jump_frame_countdown = 0
@@ -28,23 +31,28 @@ var swing_pivot_position = Vector2.ZERO
 
 func start_swing():
 	# Calculate initial angle and radius
-	var frog_pos = get_global_transform().xform(Vector2.ZERO)
-	var swing_vec = frog_pos - swing_pivot_position
-	swing_radius = swing_vec.length()
-	swing_angle = swing_vec.angle() # Angle from positive X-axis to swing vector
+	var swing_vec = update_swing_radius_angle()
 	var swing_dir_vec = swing_vec.rotated(PI/2)
 	var dotprod = swing_dir_vec.dot(velocity)
 	if abs(dotprod)<  0.01 or swing_radius < 0.01:
 		swing_angular_speed = 0
 	else:
 		swing_angular_speed = dotprod / abs(dotprod) * pow(abs(dotprod), 0.5) / max(1, swing_radius)
-	print_debug('Tongue:',swing_pivot_position,'\nFrog:',frog_pos,'\nRadius:',swing_radius,'\nAngle:',swing_angle,'\nAng. Speed:',swing_angular_speed)
 
 func stop_swing():
 	# Convert swinging angular momentum into player velocity
 	velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
 	print_debug('Stop swing: Velocity=',velocity)
 	emit_signal("tongue_stop")
+
+func update_swing_radius_angle():
+	# Calculate current angle and radius
+	var frog_pos = get_global_transform().xform(Vector2.ZERO)
+	var swing_vec = frog_pos - swing_pivot_position
+	swing_radius = swing_vec.length()
+	swing_angle = swing_vec.angle() # Angle from positive X-axis to swing vector
+	return swing_vec
+
 
 func get_input():
 	var l = Input.is_action_pressed("walk_left")
@@ -67,19 +75,47 @@ func get_input():
 	tongue_held = Input.is_action_pressed("tongue")
 
 func _draw():
+	# THIS IS JUST DEBUG
+	# TODO: Remove
+	# Draw swinging velocity vector
 	if $PlayerTongue.swinging:
 		var tgt = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * 100
 		draw_line(Vector2(0,0), tgt, Color(1,0,0))
 
 func do_movement(delta):
 	if $PlayerTongue.swinging:
+		# Handle user input
+		swing_angular_speed += swing_user_anglespeed_per_s * -user_direction.x * delta
+		# TODO: Fix this and uncomment
+		# # We don't directly compute the position. We need to use move_and_collide
+		# var change_in_swing_radius = swing_user_radius_per_s * user_direction.y * delta
+		# if abs(change_in_swing_radius) > 0.01:
+		# 	var proposed_movement = Vector2.RIGHT.rotated(swing_angle) * change_in_swing_radius
+		# 	collision_info = move_and_collide(proposed_movement)
+
+		# 	# Update swing radius based on what's shown on-screen
+		# 	update_swing_radius()
+		# 	var frog_pos = get_global_transform().xform(Vector2.ZERO)
+		# 	var swing_vec = frog_pos - swing_pivot_position
+		# 	swing_radius = swing_vec.length()
+
+
 		swing_angular_speed += 1 / swing_radius * gravity * cos(swing_angle) * delta
+
+		# Add some dampening to the swinging. Equivalent to speed being halved every second.
 		swing_angular_speed *= pow(0.5, delta)
-		# swing_angular_speed = max(min(swing_angular_speed, 10), -10)
+
+		# Adjust swing angle based on swing speed
 		swing_angle += swing_angular_speed * delta
-		var new_pos = swing_pivot_position + Vector2.RIGHT.rotated(swing_angle) * swing_radius
-		# print_debug('Swing:', swing_angular_speed)
-		position = new_pos
+
+		# === Uh oh. "When moving a KinematicBody2D, you should not set its position property directly."
+		# Instead of the direct position calculation, we can set velocity, and use move_and_collide
+		velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
+		var collision_info = move_and_collide(velocity * delta)
+		if collision_info:
+			print_debug('Collide while swinging with ', collision_info.collider.name)
+			swing_angular_speed *= -0.95
+			# TODO: ^^^ Add some dampening since not every collision is perfectly elastic
 	else:
 		# Set X velocity based on user input
 		# TODO: maybe do this differently? give the frog a little X momentum?
@@ -100,7 +136,7 @@ func do_movement(delta):
 	pass
 
 func update_anim():
-	var facing_lock = !$PlayerTongue.idle
+	var facing_lock = $PlayerTongue.shooting
 	if !facing_lock:
 		if abs(user_direction.x) > 0.01:
 			facing.x = user_direction.x
