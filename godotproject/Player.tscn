@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://realfrog.png" type="Texture" id=2]
+[ext_resource path="res://PlayerTongue.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 16.3637
+height = 18.7289
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+speed = 225
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 2 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
+shoot_speed = 900.0
+[connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
+[connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
+[connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
