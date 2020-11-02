@@ -10,7 +10,9 @@ export (float) var jump_length = 10 / 60.0
 export (float) var shorthop_length = 6 / 60.0
 export (float) var shorthop_ratio = 0.6
 export (float) var swing_user_anglespeed_per_s = 1
-export (float) var swing_user_radius_per_s = 40
+export (float) var swing_user_radius_per_s = 80
+export (float) var swing_radius_min = 50
+export (float) var swing_radius_max = 250
 
 
 var velocity = Vector2.ZERO
@@ -84,21 +86,34 @@ func _draw():
 
 func do_movement(delta):
 	if $PlayerTongue.swinging:
-		# Handle user input
+		# Allow user to "influence" frog swing angle
 		swing_angular_speed += swing_user_anglespeed_per_s * -user_direction.x * delta
-		# TODO: Fix this and uncomment
-		# # We don't directly compute the position. We need to use move_and_collide
-		# var change_in_swing_radius = swing_user_radius_per_s * user_direction.y * delta
-		# if abs(change_in_swing_radius) > 0.01:
-		# 	var proposed_movement = Vector2.RIGHT.rotated(swing_angle) * change_in_swing_radius
-		# 	collision_info = move_and_collide(proposed_movement)
 
-		# 	# Update swing radius based on what's shown on-screen
-		# 	update_swing_radius()
-		# 	var frog_pos = get_global_transform().xform(Vector2.ZERO)
-		# 	var swing_vec = frog_pos - swing_pivot_position
-		# 	swing_radius = swing_vec.length()
+		# Allow user to change swing radius
+		var change_in_swing_radius = swing_user_radius_per_s * user_direction.y * delta
+		var new_swing_radius = swing_radius + change_in_swing_radius
 
+		# Check to ensure we aren't exceeding the maximum or minimum swing radius (radiuses? radii?)
+		if new_swing_radius > swing_radius_max:
+			change_in_swing_radius = swing_radius_max - swing_radius
+		elif new_swing_radius < swing_radius_min:
+			change_in_swing_radius = swing_radius_min - swing_radius
+		
+		# Don't try to move the frog unless we've actually changed the radius.
+		if abs(change_in_swing_radius) > 0.01:
+			# We need to use move_and_collide to attempt to move the frog to its new position
+			# (the position after changing the radius). Using move_and_collide will prevent the frog
+			# from clipping inside something by adjusting the radius.
+			var proposed_movement = Vector2.RIGHT.rotated(swing_angle) * change_in_swing_radius
+			var _collision_info = move_and_collide(proposed_movement)
+			# We discard the collision result, however. We don't care if we collided while adjusting the radius,
+			# because if we collide now, it will just stop the frog where it collided and we'll calculate
+			# the new radius (and angle) based on that.
+
+			# Update swing radius and angle based on what's shown on-screen
+			# (the new position after trying to change the radius)
+			var _unused_swing_vec = update_swing_radius_angle()
+			# We just want to update the radius/angle, so there's no need to use the return value.
 
 		swing_angular_speed += 1 / swing_radius * gravity * cos(swing_angle) * delta
 
