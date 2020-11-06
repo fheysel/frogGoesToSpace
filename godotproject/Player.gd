@@ -39,6 +39,11 @@ var swing_pivot_position = Vector2.ZERO
 # with the hop animation
 var hop_sound_timer = 0
 
+# This counter keeps track of the number of star pieces collected.
+# This may be temporary, depending on if we want to track the number of star pieces
+# collected in-between levels or in-between deaths.
+var star_piece_count = 0
+
 func is_zero(x):
 	return abs(x) < 0.01
 
@@ -209,6 +214,14 @@ func die():
 	print_debug("ded")
 	get_tree().reload_current_scene()
 
+func collect_star_piece(star_piece):
+	# Increment star piece counter
+	star_piece_count += 1
+	print("Star piece count: ", star_piece_count)
+	# Play sound
+	$CollectStarPieceSoundPlayer.play(0)
+	# Delete star piece
+	star_piece.queue_free()
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
