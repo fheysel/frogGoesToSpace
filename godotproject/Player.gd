@@ -17,7 +17,6 @@ export (float) var hop_sound_timer_period = 0.2
 # in the code below for more detail
 export (float) var hop_sound_timer_period_variance = 0.1
 
-
 var velocity = Vector2.ZERO
 var jump_frame_countdown = 0
 var jump_shorthop_countdown = 0
@@ -34,6 +33,7 @@ var swing_radius = 0
 var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
 
+
 # Timer used to add delay between hop sound effects
 # This is temporary - in the future, hop sound will be synchronized
 # with the hop animation
@@ -46,6 +46,9 @@ var star_piece_count = 0
 
 func is_zero(x):
 	return abs(x) < 0.01
+
+var health = 3
+var isVulnerable = true
 
 func start_swing():
 	# Calculate initial angle and radius
@@ -210,6 +213,31 @@ func _physics_process(delta):
 		else:
 			emit_signal("tongue_start", get_tongue_direction())
 
+func takeDamage(damageTaken):
+	if isVulnerable:
+		print("Player receiving %d damage" % damageTaken)
+		health -= damageTaken
+		print("Player took damage, has %d health +remaining" % health)
+		if health <= 0:
+			print("Player is now dead")
+			die()
+			
+		#After the player gets hit set the player to invulnerable to damage for 1 second
+		isVulnerable = false
+		
+		#sets up timer to trigger after 1 second and set player to vulnerable again
+		print("Timer has started")
+		var invulnerable_timer = Timer.new()
+		invulnerable_timer.one_shot = true
+		invulnerable_timer.connect("timeout", self, "on_invulnerable_timeout")
+		add_child(invulnerable_timer)
+		invulnerable_timer.start()
+
+func on_invulnerable_timeout():
+	print("Timer has finished")
+	isVulnerable = true
+	print("Player is now vulnerable again")
+
 func die():
 	print_debug("ded")
 	get_tree().reload_current_scene()
@@ -222,6 +250,7 @@ func collect_star_piece(star_piece):
 	$CollectStarPieceSoundPlayer.play(0)
 	# Delete star piece
 	star_piece.queue_free()
+
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
