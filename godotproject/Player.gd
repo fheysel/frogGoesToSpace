@@ -11,11 +11,6 @@ export (float) var shorthop_length = 6 / 60.0
 export (float) var shorthop_ratio = 0.6
 export (float) var swing_user_anglespeed_per_s = 1
 export (float) var swing_user_radius_per_s = 40
-# How long to delay between hop sound effects
-export (float) var hop_sound_timer_period = 0.2
-# Used to add some randomness to hop sounds - see its use
-# in the code below for more detail
-export (float) var hop_sound_timer_period_variance = 0.1
 
 
 var velocity = Vector2.ZERO
@@ -33,14 +28,6 @@ var swing_angular_speed = 0
 var swing_radius = 0
 var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
-
-# Timer used to add delay between hop sound effects
-# This is temporary - in the future, hop sound will be synchronized
-# with the hop animation
-var hop_sound_timer = 0
-
-func is_zero(x):
-	return abs(x) < 0.01
 
 func start_swing():
 	# Calculate initial angle and radius
@@ -146,17 +133,6 @@ func do_movement(delta):
 			velocity.y = jump_speed
 		velocity.y = max(min(velocity.y, 1200), -1200)
 		velocity = move_and_slide(velocity, Vector2.UP)
-		# Count down the hop sound timer, ensuring it never goes below 0.
-		hop_sound_timer = max(hop_sound_timer - delta, 0)
-		# Play sound effect when timer has expired and frog is walking on floor.
-		if hop_sound_timer <= 0 && is_on_floor() && !is_zero(user_direction.x) && !is_zero(velocity.x):
-			# Calculate new timer value, based on period as well as random variance.
-			# This slight variance will hopefully make it sound more natural.
-			# Let P and V be the period and variance, the minimum timer value will be P and the max will be P*(1+V)
-			# In practice, with (P,V) = (0.2,0.1), the min will be 0.2 and the max will be 0.22
-			hop_sound_timer = hop_sound_timer_period * (1 + rand_range(0, hop_sound_timer_period_variance))
-			# Play sound effect.
-			$HopSoundPlayer.play(0)
 	pass
 
 func update_anim():
@@ -182,22 +158,15 @@ func _physics_process(delta):
 	get_input()
 	do_movement(delta)
 
-	# Factored out jump decision to avoid duplicating code.
-	var do_jump = false
 	if Input.is_action_just_pressed("jump"):
 		if $PlayerTongue.swinging:
-			do_jump = true
+			stop_swing()
+			jump_frame_countdown = jump_length
+			jump_shorthop_countdown = shorthop_length
 		else:
 			if is_on_floor():
-				do_jump = true
-	if do_jump:
-		# If the player is currently swinging, break them out of their swing.
-		if $PlayerTongue.swinging:
-			stop_swing()
-		# Set jump timers to cause frog to jump.
-		jump_frame_countdown = jump_length
-		jump_shorthop_countdown = shorthop_length
-		$JumpSoundPlayer.play(0)
+				jump_frame_countdown = jump_length
+				jump_shorthop_countdown = shorthop_length
 	update_anim()
 	if Input.is_action_just_pressed("tongue"):
 		if $PlayerTongue.swinging:
