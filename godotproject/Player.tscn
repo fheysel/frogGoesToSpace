@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://realfrog.png" type="Texture" id=2]
 [ext_resource path="res://PlayerTongue.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sfx/jump.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/hop.wav" type="AudioStream" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.3637
 height = 18.7289
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 5 )
+random_pitch = 1.4
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -22,6 +28,13 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
+
+[node name="HopSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 2 )
+
+[node name="JumpSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
