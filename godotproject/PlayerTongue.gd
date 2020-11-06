@@ -19,7 +19,7 @@ func start_idle():
 	idle = true
 	shooting = false
 	swinging = false
-	$TongueCollisionArea/CollisionShape2D/Sprite.visible = false
+	$Sprite.visible = false
 	$TongueCollisionArea/CollisionShape2D.disabled = true
 	# Stop all sound effects
 	$ShootSoundPlayer.playing = false
@@ -33,7 +33,7 @@ func start_shoot(dirn):
 	idle = false
 	shooting = true
 	swinging = false
-	$TongueCollisionArea/CollisionShape2D/Sprite.visible = true
+	$Sprite.visible = true
 	$TongueCollisionArea/CollisionShape2D.disabled = false
 	shoot_direction = dirn
 	$ShootSoundPlayer.play(0)
@@ -49,7 +49,7 @@ func start_swing(body):
 	idle = false
 	shooting = false
 	swinging = true
-	$TongueCollisionArea/CollisionShape2D/Sprite.visible = false
+	$Sprite.visible = false
 	$TongueCollisionArea/CollisionShape2D.disabled = true
 	# Stop playing shoot sound effect once tongue sticks
 	$ShootSoundPlayer.playing = false
