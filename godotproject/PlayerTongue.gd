@@ -2,7 +2,7 @@ extends Node2D
 
 signal tongue_swing
 
-export (float) var shoot_speed = 100000
+export (float) var shoot_speed = 1500
 export (float) var max_shoot_dist = 400
 export (float) var max_swing_dist = 100
 

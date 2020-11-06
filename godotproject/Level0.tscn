@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Level0/Level0_ground_auto.tres" type="TileSet" id=2]
@@ -8,13 +8,10 @@
 [ext_resource path="res://Tiles/Level0/background/1.png" type="Texture" id=6]
 [ext_resource path="res://Tiles/Level0/background/2.png" type="Texture" id=7]
 [ext_resource path="res://Tiles/Level0/background/4.png" type="Texture" id=8]
-[ext_resource path="res://Star.gd" type="Script" id=9]
-[ext_resource path="res://Tiles/Objects/coin.png" type="Texture" id=10]
+[ext_resource path="res://Star.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4110.89, 100 )
-
-[sub_resource type="CircleShape2D" id=2]
 
 [node name="Node2D" type="Node2D"]
 
@@ -106,23 +103,5 @@ scale = Vector2( 7.98327, 4.26907 )
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Star" type="Area2D" parent="."]
-position = Vector2( 3160, 554.051 )
-collision_layer = 32
-collision_mask = 2
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Star"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Star"]
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Star" parent="." instance=ExtResource( 9 )]
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_DeathPlane_body_entered"]
-[connection signal="body_entered" from="Star" to="Star" method="_on_Star_body_entered"]
