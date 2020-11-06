@@ -74,7 +74,6 @@ func update_swing_radius_angle():
 	swing_angle = swing_vec.angle() # Angle from positive X-axis to swing vector
 	return swing_vec
 
-
 func get_input():
 	var l = Input.is_action_pressed("walk_left")
 	var r = Input.is_action_pressed("walk_right")
@@ -219,24 +218,14 @@ func takeDamage(damageTaken):
 		health -= damageTaken
 		print("Player took damage, has %d health +remaining" % health)
 		if health <= 0:
-			print("Player is now dead")
 			die()
 			
 		#After the player gets hit set the player to invulnerable to damage for 1 second
 		isVulnerable = false
-		
-		#sets up timer to trigger after 1 second and set player to vulnerable again
-		print("Timer has started")
-		var invulnerable_timer = Timer.new()
-		invulnerable_timer.one_shot = true
-		invulnerable_timer.connect("timeout", self, "on_invulnerable_timeout")
-		add_child(invulnerable_timer)
-		invulnerable_timer.start()
+		$InvulnerableTimer.start()
 
 func on_invulnerable_timeout():
-	print("Timer has finished")
 	isVulnerable = true
-	print("Player is now vulnerable again")
 
 func die():
 	print_debug("ded")
@@ -250,7 +239,6 @@ func collect_star_piece(star_piece):
 	$CollectStarPieceSoundPlayer.play(0)
 	# Delete star piece
 	star_piece.queue_free()
-
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
