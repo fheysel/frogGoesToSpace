@@ -21,9 +21,6 @@ func start_idle():
 	swinging = false
 	$TongueCollisionArea/CollisionShape2D/Sprite.visible = false
 	$TongueCollisionArea/CollisionShape2D.disabled = true
-	# Stop all sound effects
-	$ShootSoundPlayer.playing = false
-	$StickSoundPlayer.playing = false
 	position = Vector2.ZERO
 
 func handle_idle(delta):
@@ -36,7 +33,6 @@ func start_shoot(dirn):
 	$TongueCollisionArea/CollisionShape2D/Sprite.visible = true
 	$TongueCollisionArea/CollisionShape2D.disabled = false
 	shoot_direction = dirn
-	$ShootSoundPlayer.play(0)
 
 func handle_shoot(delta):
 	# Advance tongue in direction
@@ -51,9 +47,6 @@ func start_swing(body):
 	swinging = true
 	$TongueCollisionArea/CollisionShape2D/Sprite.visible = false
 	$TongueCollisionArea/CollisionShape2D.disabled = true
-	# Stop playing shoot sound effect once tongue sticks
-	$ShootSoundPlayer.playing = false
-	$StickSoundPlayer.play(0)
 	emit_signal("tongue_swing", get_global_transform().xform(Vector2.ZERO))
 
 func handle_swing(delta):
