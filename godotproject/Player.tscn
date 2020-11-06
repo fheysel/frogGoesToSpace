@@ -34,6 +34,7 @@ stream = SubResource( 2 )
 
 [node name="JumpSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
