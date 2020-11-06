@@ -22,7 +22,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
-shoot_speed = 900.0
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]

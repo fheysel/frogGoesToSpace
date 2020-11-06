@@ -2,8 +2,8 @@ extends Node2D
 
 signal tongue_swing
 
-export (float) var shoot_speed = 600
-export (float) var max_shoot_dist = 250
+export (float) var shoot_speed = 1500
+export (float) var max_shoot_dist = 400
 export (float) var max_swing_dist = 100
 
 var shoot_direction = Vector2.RIGHT
@@ -70,8 +70,6 @@ func _process(delta):
 func _on_Player_tongue_start(facing):
 	if idle:
 		start_shoot(facing)
-	pass # Replace with function body.
-
 
 func _on_TongueCollisionArea_body_entered(body):
 	if shooting:
