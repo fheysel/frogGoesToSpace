@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star.jpg-7fd0ffca6bffc40533d4497aa3b816b0.stex"
+path="res://.import/Webp.net-resizeimage.png-e588aceb684ce52ac9c45bdeefab7c46.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://star.jpg"
-dest_files=[ "res://.import/star.jpg-7fd0ffca6bffc40533d4497aa3b816b0.stex" ]
+source_file="res://Tiles/Harmful/Webp.net-resizeimage.png"
+dest_files=[ "res://.import/Webp.net-resizeimage.png-e588aceb684ce52ac9c45bdeefab7c46.stex" ]
 
 [params]
 
