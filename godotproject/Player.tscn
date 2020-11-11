@@ -7,9 +7,8 @@
 [ext_resource path="res://sfx/hop.wav" type="AudioStream" id=5]
 [ext_resource path="res://sfx/collectstarpiece.wav" type="AudioStream" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 16.3637
-height = 18.7289
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.8653, 25.3458 )
 
 [sub_resource type="AudioStreamRandomPitch" id=2]
 audio_stream = ExtResource( 5 )
@@ -18,7 +17,6 @@ random_pitch = 1.4
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
-speed = 225
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.6, 0.6 )
@@ -40,6 +38,14 @@ stream = ExtResource( 4 )
 stream = ExtResource( 6 )
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="JumpButtonPressLeniencyTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="JumpOnGroundLeniencyTimer" type="Timer" parent="."]
+process_mode = 0
 one_shot = true
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
