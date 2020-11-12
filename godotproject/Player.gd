@@ -190,10 +190,9 @@ func handle_normal_horizontal_movement(delta):
 				velocity.x = sign(velocity.x) * max(abs(velocity.x), walk_speed_limit)
 	else:
 		# Handle air movement
-		if is_zero(user_direction.x):
-			# If the user isn't inputting a direction, don't adjust their velocity
-			pass
-		else:
+		# If the user isn't inputting a direction, don't adjust their velocity
+		# Otherwise...
+		if !is_zero(user_direction.x):
 			# Make the user move in the direction they're pointing if they're not already
 			# at the speed cap
 			if sign(user_direction.x) * velocity.x < air_speed_limit:
