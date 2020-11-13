@@ -82,3 +82,8 @@ func _on_TongueCollisionArea_body_entered(body):
 func _on_Player_tongue_stop():
 	if swinging:
 		start_idle()
+
+#func _draw():
+	#if $PlayerTongue.shooting:
+	#	#frog_pos = get_global_transform().xform(Vector2.ZERO)
+#	draw_line($Player.position, $Player.position + $PlayerTongue.position, Color(1,0,0))
