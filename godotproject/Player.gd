@@ -301,6 +301,7 @@ func do_movement(delta):
 
 		# Actually move the player along the velocity vector.
 		velocity = move_and_slide(velocity, Vector2.UP)
+
 		# Update our stored floor state.
 		on_floor_last_frame = is_on_floor()
 
@@ -341,7 +342,6 @@ func do_movement(delta):
 		else:
 			animation_tree.set('parameters/tongue_launch/blend_position', velocity.normalized())
 			animation_mode.travel("tongue_launch")#emit_signal("tongue_start", get_tongue_direction())		
-
 
 func handle_jump_starting():
 	# Adjust jump start related timers used to permit users to jump a short bit

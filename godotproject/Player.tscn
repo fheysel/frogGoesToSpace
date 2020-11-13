@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player_frog.png" type="Texture" id=2]
@@ -7,12 +6,17 @@
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/hop.wav" type="AudioStream" id=5]
 [ext_resource path="res://sfx/collectstarpiece.wav" type="AudioStream" id=6]
+[ext_resource path="res://tongue_end_bullet.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.5215
 height = 9.11848
 
-[sub_resource type="Animation" id=77]
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 5 )
+random_pitch = 1.4
+
+[sub_resource type="Animation" id=3]
 resource_name = "Dead_froggie"
 length = 0.4
 loop = true
@@ -29,7 +33,7 @@ tracks/0/keys = {
 "values": [ 25, 26, 27, 28 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 1.1
 loop = true
 tracks/0/type = "value"
@@ -45,7 +49,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 3, 1, 0, 0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.45
 loop = true
 step = 0.05
@@ -62,8 +66,7 @@ tracks/0/keys = {
 "values": [ 6, 8, 9, 10, 11, 13, 14, 15, 6 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "land_right"
+[sub_resource type="Animation" id=6]
 length = 1.25
 loop = true
 tracks/0/type = "value"
@@ -79,8 +82,7 @@ tracks/0/keys = {
 "values": [ 12, 12, 13, 13, 13, 14, 15, 6 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "launch_right"
+[sub_resource type="Animation" id=7]
 length = 0.35
 loop = true
 step = 0.05
@@ -97,7 +99,7 @@ tracks/0/keys = {
 "values": [ 9, 10, 10, 11, 11, 12, 12 ]
 }
 
-[sub_resource type="Animation" id=69]
+[sub_resource type="Animation" id=8]
 resource_name = "swing"
 length = 0.45
 loop = true
@@ -114,7 +116,7 @@ tracks/0/keys = {
 "values": [ 20, 20, 20, 20, 20 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -129,8 +131,7 @@ tracks/0/keys = {
 "values": [ 0, 15, 16, 17, 18, 18, 18, 19, 7, 6, 5 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "tongue_right _launch"
+[sub_resource type="Animation" id=10]
 length = 0.55
 loop = true
 step = 0.01
@@ -147,7 +148,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 18, 18, 18, 18, 18 ]
 }
 
-[sub_resource type="Animation" id=78]
+[sub_resource type="Animation" id=11]
 resource_name = "tongue_right _retract"
 length = 0.5
 loop = true
@@ -164,33 +165,27 @@ tracks/0/keys = {
 "values": [ 18, 19, 7, 6, 5 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Dead_froggie"
-
-[sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Dead_froggie"
-
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Dead_froggie"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Dead_froggie"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=14]
-blend_point_0/node = SubResource( 10 )
-blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 11 )
-blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 12 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 13 )
-blend_point_3/pos = Vector2( 0, 1 )
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Dead_froggie"
 
 [sub_resource type="AnimationNodeAnimation" id=15]
-animation = "hop_right"
+animation = "Dead_froggie"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
-animation = "hop_right"
+[sub_resource type="AnimationNodeBlendSpace2D" id=16]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = Vector2( 0, 1 )
 
 [sub_resource type="AnimationNodeAnimation" id=17]
 animation = "hop_right"
@@ -198,22 +193,22 @@ animation = "hop_right"
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "hop_right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=19]
-blend_point_0/node = SubResource( 15 )
-blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 16 )
-blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 17 )
-blend_point_2/pos = Vector2( 0, 1 )
-blend_point_3/node = SubResource( 18 )
-blend_point_3/pos = Vector2( 0, -1 )
-blend_mode = 1
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "hop_right"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
-animation = "Idle_froggie"
+animation = "hop_right"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
-animation = "Idle_froggie"
+[sub_resource type="AnimationNodeBlendSpace2D" id=21]
+blend_point_0/node = SubResource( 17 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 18 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 19 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 20 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=22]
 animation = "Idle_froggie"
@@ -221,182 +216,184 @@ animation = "Idle_froggie"
 [sub_resource type="AnimationNodeAnimation" id=23]
 animation = "Idle_froggie"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=24]
-blend_point_0/node = SubResource( 20 )
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "Idle_froggie"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Idle_froggie"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=26]
+blend_point_0/node = SubResource( 22 )
 blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 21 )
+blend_point_1/node = SubResource( 23 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 22 )
+blend_point_2/node = SubResource( 24 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 23 )
+blend_point_3/node = SubResource( 25 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=61]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "land_right"
 
-[sub_resource type="AnimationNodeAnimation" id=62]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "land_right"
 
-[sub_resource type="AnimationNodeAnimation" id=63]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "land_right"
 
-[sub_resource type="AnimationNodeAnimation" id=64]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "land_right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=55]
-blend_point_0/node = SubResource( 61 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=31]
+blend_point_0/node = SubResource( 27 )
 blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 62 )
+blend_point_1/node = SubResource( 28 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 63 )
+blend_point_2/node = SubResource( 29 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 64 )
+blend_point_3/node = SubResource( 30 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=56]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "launch_right"
 
-[sub_resource type="AnimationNodeAnimation" id=57]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "launch_right"
 
-[sub_resource type="AnimationNodeAnimation" id=58]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "launch_right"
 
-[sub_resource type="AnimationNodeAnimation" id=59]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "launch_right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=60]
-blend_point_0/node = SubResource( 56 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=36]
+blend_point_0/node = SubResource( 32 )
 blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 57 )
+blend_point_1/node = SubResource( 33 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 58 )
+blend_point_2/node = SubResource( 34 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 59 )
+blend_point_3/node = SubResource( 35 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=70]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "swing"
 
-[sub_resource type="AnimationNodeAnimation" id=71]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "swing"
 
-[sub_resource type="AnimationNodeAnimation" id=72]
+[sub_resource type="AnimationNodeAnimation" id=39]
 animation = "swing"
 
-[sub_resource type="AnimationNodeAnimation" id=73]
+[sub_resource type="AnimationNodeAnimation" id=40]
 animation = "swing"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=74]
-blend_point_0/node = SubResource( 70 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=41]
+blend_point_0/node = SubResource( 37 )
 blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 71 )
+blend_point_1/node = SubResource( 38 )
 blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 72 )
+blend_point_2/node = SubResource( 39 )
 blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 73 )
+blend_point_3/node = SubResource( 40 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=35]
-animation = "tongue_right _launch"
-
-[sub_resource type="AnimationNodeAnimation" id=36]
-animation = "tongue_right _launch"
-
-[sub_resource type="AnimationNodeAnimation" id=37]
-animation = "tongue_right _launch"
-
-[sub_resource type="AnimationNodeAnimation" id=38]
-animation = "tongue_right _launch"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=39]
-blend_point_0/node = SubResource( 35 )
-blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 36 )
-blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 37 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 38 )
-blend_point_3/pos = Vector2( 0, 1 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id=40]
-animation = "tongue_right _retract"
-
-[sub_resource type="AnimationNodeAnimation" id=41]
-animation = "tongue_right _retract"
-
 [sub_resource type="AnimationNodeAnimation" id=42]
-animation = "tongue_right _retract"
+animation = "tongue_right _launch"
 
 [sub_resource type="AnimationNodeAnimation" id=43]
-animation = "tongue_right _retract"
+animation = "tongue_right _launch"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=44]
-blend_point_0/node = SubResource( 40 )
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "tongue_right _launch"
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "tongue_right _launch"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=46]
+blend_point_0/node = SubResource( 42 )
 blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 41 )
+blend_point_1/node = SubResource( 43 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 42 )
+blend_point_2/node = SubResource( 44 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 43 )
+blend_point_3/node = SubResource( 45 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "tongue_right _retract"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-switch_mode = 2
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "tongue_right _retract"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "tongue_right _retract"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "tongue_right _retract"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=51]
+blend_point_0/node = SubResource( 47 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 48 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 49 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 50 )
+blend_point_3/pos = Vector2( 0, 1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=52]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=65]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=66]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=67]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
 
-[sub_resource type="AnimationNodeStateMachine" id=53]
-states/Dead/node = SubResource( 14 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+
+[sub_resource type="AnimationNodeStateMachine" id=63]
+states/Dead/node = SubResource( 16 )
 states/Dead/position = Vector2( 111.5, 404.976 )
-states/Hop/node = SubResource( 19 )
+states/Hop/node = SubResource( 21 )
 states/Hop/position = Vector2( 355.625, 30 )
-states/Idle/node = SubResource( 24 )
+states/Idle/node = SubResource( 26 )
 states/Idle/position = Vector2( 109, 152 )
-states/Land/node = SubResource( 55 )
+states/Land/node = SubResource( 31 )
 states/Land/position = Vector2( 380.812, 398.65 )
-states/Launch/node = SubResource( 60 )
+states/Launch/node = SubResource( 36 )
 states/Launch/position = Vector2( 382.562, 326.65 )
-states/swing/node = SubResource( 74 )
+states/swing/node = SubResource( 41 )
 states/swing/position = Vector2( 565.062, 200.243 )
-states/tongue_launch/node = SubResource( 39 )
+states/tongue_launch/node = SubResource( 46 )
 states/tongue_launch/position = Vector2( 390.75, 176.5 )
-states/tongue_retract/node = SubResource( 44 )
+states/tongue_retract/node = SubResource( 51 )
 states/tongue_retract/position = Vector2( 393, 242.75 )
-transitions = [ "Idle", "Hop", SubResource( 45 ), "Hop", "Idle", SubResource( 46 ), "Idle", "tongue_launch", SubResource( 49 ), "tongue_retract", "Idle", SubResource( 51 ), "Idle", "Dead", SubResource( 52 ), "Idle", "Launch", SubResource( 65 ), "Launch", "Land", SubResource( 66 ), "Land", "Idle", SubResource( 67 ), "tongue_launch", "tongue_retract", SubResource( 68 ), "tongue_launch", "swing", SubResource( 75 ), "swing", "tongue_retract", SubResource( 76 ) ]
+transitions = [ "Idle", "Hop", SubResource( 52 ), "Hop", "Idle", SubResource( 53 ), "Idle", "tongue_launch", SubResource( 54 ), "tongue_retract", "Idle", SubResource( 55 ), "Idle", "Dead", SubResource( 56 ), "Idle", "Launch", SubResource( 57 ), "Launch", "Land", SubResource( 58 ), "Land", "Idle", SubResource( 59 ), "tongue_launch", "tongue_retract", SubResource( 60 ), "tongue_launch", "swing", SubResource( 61 ), "swing", "tongue_retract", SubResource( 62 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -135.938, 138.243 )
+graph_offset = Vector2( -135.938, -63.3897 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=54]
-
-[sub_resource type="AudioStreamRandomPitch" id=2]
-audio_stream = ExtResource( 5 )
-random_pitch = 1.4
+[sub_resource type="AnimationNodeStateMachinePlayback" id=64]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -415,6 +412,10 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4.20448, 16.1872 )
+
+[node name="Sprite" type="Sprite" parent="PlayerTongue"]
+texture = ExtResource( 7 )
 
 [node name="HopSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 2 )
@@ -423,8 +424,8 @@ stream = SubResource( 2 )
 stream = ExtResource( 4 )
 
 [node name="CollectStarPieceSoundPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
 
+stream = ExtResource( 6 )
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
 one_shot = true
@@ -438,24 +439,24 @@ process_mode = 0
 one_shot = true
 
 position = Vector2( 3.25388, 15.6399 )
-shoot_speed = 900.0
+stream = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Dead_froggie = SubResource( 77 )
-anims/Idle_froggie = SubResource( 3 )
-anims/hop_right = SubResource( 4 )
-anims/land_right = SubResource( 5 )
-anims/launch_right = SubResource( 6 )
-anims/swing = SubResource( 69 )
-anims/tongue_right = SubResource( 7 )
-"anims/tongue_right _launch" = SubResource( 8 )
-"anims/tongue_right _retract" = SubResource( 78 )
+anims/Dead_froggie = SubResource( 3 )
+anims/Idle_froggie = SubResource( 4 )
+anims/hop_right = SubResource( 5 )
+anims/land_right = SubResource( 6 )
+anims/launch_right = SubResource( 7 )
+anims/swing = SubResource( 8 )
+anims/tongue_right = SubResource( 9 )
+"anims/tongue_right _launch" = SubResource( 10 )
+"anims/tongue_right _retract" = SubResource( 11 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 53 )
+tree_root = SubResource( 63 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 54 )
+parameters/playback = SubResource( 64 )
 parameters/Dead/blend_position = Vector2( 0, 0 )
 parameters/Hop/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
