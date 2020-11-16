@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:godotproject/froggfx.png.import
 path="res://.import/froggfx.png-51e1d8385be617f6845faa5fdac7549b.stex"
-=======
-path="res://.import/tileset.png-c4f41dd350dd922f9706332604c9eb36.stex"
->>>>>>> Update star sprite:godotproject/Tiles/Objects/tileset.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:godotproject/froggfx.png.import
 source_file="res://froggfx.png"
 dest_files=[ "res://.import/froggfx.png-51e1d8385be617f6845faa5fdac7549b.stex" ]
-=======
-source_file="res://Tiles/Objects/tileset.png"
-dest_files=[ "res://.import/tileset.png-c4f41dd350dd922f9706332604c9eb36.stex" ]
->>>>>>> Update star sprite:godotproject/Tiles/Objects/tileset.png.import
 
 [params]
 
