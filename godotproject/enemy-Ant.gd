@@ -8,16 +8,18 @@ const FLOOR = Vector2(0, -1)
 const FIREBALL = preload("res://AntAttackFire.tscn")
 
 enum STATE{
-	idle,
-	detected_player,
-	attacking_player
+	idle_e,
+	detected_player_e,
+	attacking_player_e
 }
+
+var GLOBAL_DEBUG = 0
 
 var velocity = Vector2(0, 0)
 var direction = -1
 
 var attackDamage = 1
-var attackState = STATE.idle
+var attackState = STATE.idle_e
 var is_dead = false
 
 # Called when the node enters the scene tree for the first time.
@@ -32,7 +34,7 @@ func dead():
 func _physics_process(delta):
 	
 	if is_dead == false:
-		if attackState == STATE.idle:
+		if attackState == STATE.idle_e:
 			#Play Animation
 			if direction == 1:
 				$Orientation.scale.x = -1
@@ -53,9 +55,16 @@ func _physics_process(delta):
 #func _process(delta):
 #	pass
 
+func begin_attack():
+	attackState = STATE.detected_player_e
+	$ActionDelay.start()
+
 func launch_attack():
-	if attackState == STATE.detected_player:
-		attackState = STATE.attacking_player
+	if GLOBAL_DEBUG == 1:
+		print("attack launched")
+		print(attackState)
+	if attackState == STATE.detected_player_e:
+		attackState = STATE.attacking_player_e
 		var fireball = FIREBALL.instance()
 		get_parent().add_child(fireball)
 		fireball.position = $Orientation/Position2D.global_position
@@ -63,12 +72,18 @@ func launch_attack():
 		$ActionDelay.start()
 
 func _on_PlayerDetector_body_entered(body):
-	if attackState == STATE.idle:
-		attackState = STATE.detected_player
-		$ActionDelay.start()
+	if attackState == STATE.idle_e:
+		begin_attack()
 
 func _on_ActionDelay_timeout():
-	if attackState == STATE.detected_player:
+	if attackState == STATE.detected_player_e:
 		launch_attack()
-	elif attackState == STATE.attacking_player:
-		attackState = STATE.idle
+	elif attackState == STATE.attacking_player_e:
+		attackState = STATE.idle_e
+		
+		#Checks area for player after finishing attack [FGTS-78]
+		var bodiesArr = $Orientation/Sprite/PlayerDetector.get_overlapping_bodies()
+		for body in bodiesArr:
+			if body.name == "Player":
+				begin_attack()
+
