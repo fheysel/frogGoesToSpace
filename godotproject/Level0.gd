@@ -1,6 +1,6 @@
 extends Node2D
 
-const STAR := 4
+const STAR := 12
 
 export (PackedScene) var Star
 
@@ -17,13 +17,13 @@ func setup_tiles():
 		var index = $TileMap.get_cell(cell.x, cell.y)
 		match index:
 			STAR:
-				create_instance_from_tilemap(cell, Star, self)
+				create_instance_from_tilemap(cell, Star, self, Vector2(20,20))
 				
 
-func create_instance_from_tilemap(coord:Vector2, prefab:PackedScene, parent:Node2D): #, offset:Vector2 = Vector2.ZERO)
+func create_instance_from_tilemap(coord:Vector2, prefab:PackedScene, parent:Node2D, offset:Vector2 = Vector2.ZERO): #, offset:Vector2 = Vector2.ZERO)
 	# This is where the actual replacement happens. 
 	
 	$TileMap.set_cell(coord.x, coord.y, -1) # Set the cell to be empty
 	var pf = prefab.instance() # Create an instance of the scene
-	pf.position = $TileMap.map_to_world(coord)  # Set its position
+	pf.position = $TileMap.map_to_world(coord) + offset # Set its position
 	parent.add_child(pf) # Add it to the level's scene

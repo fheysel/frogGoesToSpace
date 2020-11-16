@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/level0_mvp_tiles.png-83a742d752b93140f9d20e4a5aa322ed.stex"
+path="res://.import/stars.jpg-22165ebf3d2b528fc89dcd7c7aa71708.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level0_mvp_tiles.png"
-dest_files=[ "res://.import/level0_mvp_tiles.png-83a742d752b93140f9d20e4a5aa322ed.stex" ]
+source_file="res://Tiles/Objects/stars.jpg"
+dest_files=[ "res://.import/stars.jpg-22165ebf3d2b528fc89dcd7c7aa71708.stex" ]
 
 [params]
 
