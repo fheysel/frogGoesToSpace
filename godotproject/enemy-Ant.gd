@@ -24,7 +24,7 @@ func dead():
 	is_dead = true
 	velocity = 0
 	$AnimatedSprite.play("dead")
-
+	
 func _physics_process(delta):
 	
 	if is_dead == false:
