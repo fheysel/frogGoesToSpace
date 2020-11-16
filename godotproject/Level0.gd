@@ -1,7 +1,9 @@
 extends Node2D
 
+const SPIKE := 3
 const STAR := 12
 
+export (PackedScene) var Spike
 export (PackedScene) var Star
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +18,8 @@ func setup_tiles():
 	for cell in cells:
 		var index = $TileMap.get_cell(cell.x, cell.y)
 		match index:
+			SPIKE:
+				create_instance_from_tilemap(cell, Spike, self, Vector2(8, 12))
 			STAR:
 				create_instance_from_tilemap(cell, Star, self, Vector2(20,20))
 				
