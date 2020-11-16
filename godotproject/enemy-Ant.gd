@@ -49,10 +49,12 @@ func begin_attack():
 func launch_attack():
 	if attackState == STATE.detected_player_e:
 		attackState = STATE.attacking_player_e
+		
 		var fireball = FIREBALL.instance()
 		get_parent().add_child(fireball)
 		fireball.position = $Orientation/Position2D.global_position
-		fireball.direction = direction
+		fireball.set_direction(direction)
+		
 		$ActionDelay.start()
 
 func _on_PlayerDetector_body_entered(body):

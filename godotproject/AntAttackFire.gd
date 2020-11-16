@@ -17,3 +17,9 @@ func _physics_process(delta):
 func _on_PlayerCollisionArea_body_entered(body):
 	if "Player" in body.name:
 		body.takeDamage(3)
+
+func set_direction(dir):
+	if dir != direction:
+		$Sprite.flip_h = true
+	direction = dir
+
