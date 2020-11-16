@@ -173,8 +173,16 @@ func update_anim():
 		$Sprite.flip_h = facing.x < 0
 	pass
 
+# This function is used when the player shoots out their tongue
+# to determine what direction it should travel in.
 func get_tongue_direction():
 	var tdir = user_direction
+	# Block out tongueing down (positive Y dir'n)
+	# If we're currently going to tongue down by any amount...
+	if tdir.y > 0:
+		# Remove the tongue's vertical component so it goes either
+		# left or right
+		tdir.y = 0
 	if tdir.length_squared() < 0.01:
 		tdir = facing
 	if tdir.length_squared() < 0.01:
