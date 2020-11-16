@@ -194,7 +194,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump"):
 		if $PlayerTongue.swinging:
 			do_jump = true
-		else:
+		else: 
 			if is_on_floor():
 				do_jump = true
 	if do_jump:
@@ -224,9 +224,6 @@ func takeDamage(damageTaken):
 		isVulnerable = false
 		$InvulnerableTimer.start()
 
-func on_invulnerable_timeout():
-	isVulnerable = true
-
 func die():
 	print_debug("ded")
 	get_tree().reload_current_scene()
@@ -244,3 +241,8 @@ func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
 	start_swing()
 	pass # Replace with function body.
+
+
+func _on_InvulnerableTimer_timeout():
+	isVulnerable = true
+
