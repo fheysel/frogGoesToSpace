@@ -131,9 +131,9 @@ func do_movement(delta):
 		velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
 		var collision_info = move_and_collide(velocity * delta)
 		if collision_info:
-			print_debug('Collide while swinging with ', collision_info.collider.name)
-			swing_angular_speed *= -0.95
-			# TODO: ^^^ Add some dampening since not every collision is perfectly elastic
+			# We decided that the frog should exit swinging state when they hit a wall or the ground
+			# Let's just make them stop swinging no matter what they collided with
+			stop_swing()
 	else:
 		# Set X velocity based on user input
 		# TODO: maybe do this differently? give the frog a little X momentum?
