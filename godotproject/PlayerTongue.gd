@@ -39,8 +39,8 @@ func start_shoot(dirn):
 	$ShootSoundPlayer.play(0)
 
 func handle_shoot(delta):
-	# Advance tongue in direction
-	position += shoot_direction * shoot_speed * delta
+	# Advance tongue in direction 
+	position += shoot_direction * shoot_speed * delta 
 	if position.length_squared() >= max_shoot_dist * max_shoot_dist:
 		# We didn't hit anything. Stop shooting.
 		start_idle()
@@ -71,9 +71,6 @@ func _process(delta):
 		print_debug('Invalid tongue state. Resetting...')
 		idle = true
 
-
-
-
 func _on_Player_tongue_start(facing):
 	if idle:
 		start_shoot(facing)
@@ -81,7 +78,6 @@ func _on_Player_tongue_start(facing):
 func _on_TongueCollisionArea_body_entered(body):
 	if shooting:
 		start_swing(body)
-
 
 func _on_Player_tongue_stop():
 	if swinging:

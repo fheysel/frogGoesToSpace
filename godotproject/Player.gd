@@ -17,7 +17,6 @@ export (float) var hop_sound_timer_period = 0.2
 # in the code below for more detail
 export (float) var hop_sound_timer_period_variance = 0.1
 
-
 var velocity = Vector2.ZERO
 var jump_frame_countdown = 0
 var jump_shorthop_countdown = 0
@@ -43,6 +42,8 @@ var hop_sound_timer = 0
 # This may be temporary, depending on if we want to track the number of star pieces
 # collected in-between levels or in-between deaths.
 var star_piece_count = 0
+
+var health = 3
 
 func is_zero(x):
 	return abs(x) < 0.01
@@ -70,7 +71,6 @@ func update_swing_radius_angle():
 	swing_radius = swing_vec.length()
 	swing_angle = swing_vec.angle() # Angle from positive X-axis to swing vector
 	return swing_vec
-
 
 func get_input():
 	var l = Input.is_action_pressed("walk_left")
@@ -192,7 +192,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump"):
 		if $PlayerTongue.swinging:
 			do_jump = true
-		else:
+		else: 
 			if is_on_floor():
 				do_jump = true
 	if do_jump:
@@ -209,6 +209,15 @@ func _physics_process(delta):
 			stop_swing()
 		else:
 			emit_signal("tongue_start", get_tongue_direction())
+
+func takeDamage(damageTaken):
+	if $InvulnerableTimer.is_stopped():
+		health -= damageTaken
+		if health <= 0:
+			die()
+			
+		#After the player gets hit set the player to invulnerable to damage for 1 second
+		$InvulnerableTimer.start()
 
 func die():
 	print_debug("ded")
@@ -227,3 +236,7 @@ func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
 	start_swing()
 	pass # Replace with function body.
+
+# Keep this for now as a reminder the signal exists
+func _on_InvulnerableTimer_timeout():
+	pass

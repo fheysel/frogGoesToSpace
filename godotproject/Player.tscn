@@ -38,6 +38,10 @@ stream = ExtResource( 4 )
 
 [node name="CollectStarPieceSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[node name="InvulnerableTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
