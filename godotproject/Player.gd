@@ -33,7 +33,6 @@ var swing_radius = 0
 var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
 
-
 # Timer used to add delay between hop sound effects
 # This is temporary - in the future, hop sound will be synchronized
 # with the hop animation
@@ -44,11 +43,10 @@ var hop_sound_timer = 0
 # collected in-between levels or in-between deaths.
 var star_piece_count = 0
 
+var health = 3
+
 func is_zero(x):
 	return abs(x) < 0.01
-
-var health = 3
-var isVulnerable = true
 
 func start_swing():
 	# Calculate initial angle and radius
@@ -213,13 +211,12 @@ func _physics_process(delta):
 			emit_signal("tongue_start", get_tongue_direction())
 
 func takeDamage(damageTaken):
-	if isVulnerable:
+	if $InvulnerableTimer.is_stopped():
 		health -= damageTaken
 		if health <= 0:
 			die()
 			
 		#After the player gets hit set the player to invulnerable to damage for 1 second
-		isVulnerable = false
 		$InvulnerableTimer.start()
 
 func die():
@@ -240,7 +237,6 @@ func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	start_swing()
 	pass # Replace with function body.
 
-
+# Keep this for now as a reminder the signal exists
 func _on_InvulnerableTimer_timeout():
-	isVulnerable = true
-
+	pass

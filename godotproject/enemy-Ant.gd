@@ -26,7 +26,7 @@ func dead():
 func _physics_process(delta):
 	if is_dead == false:
 		if attackState == STATE.idle_e:
-			#Play Animation
+			#Play Animation, doesn't exist yet
 			if direction == 1:
 				$Orientation.scale.x = -1
 			else:
@@ -72,4 +72,3 @@ func _on_ActionDelay_timeout():
 		for body in bodiesArr:
 			if body.name == "Player":
 				begin_attack()
-

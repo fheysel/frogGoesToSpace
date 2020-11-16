@@ -22,4 +22,3 @@ func set_direction(dir):
 	if dir != direction:
 		$Sprite.flip_h = true
 	direction = dir
-
