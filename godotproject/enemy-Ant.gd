@@ -63,10 +63,8 @@ func launch_attack():
 		$ActionDelay.start()
 
 func _on_PlayerDetector_body_entered(body):
-	print("Enemy has detected player")
 	if attackState == STATE.idle:
 		attackState = STATE.detected_player
-		print("Started delay Timer")
 		$ActionDelay.start()
 
 func _on_ActionDelay_timeout():
