@@ -13,8 +13,6 @@ enum STATE{
 	attacking_player_e
 }
 
-var GLOBAL_DEBUG = 0
-
 var velocity = Vector2(0, 0)
 var direction = -1
 
@@ -52,9 +50,6 @@ func begin_attack():
 	$ActionDelay.start()
 
 func launch_attack():
-	if GLOBAL_DEBUG == 1:
-		print("attack launched")
-		print(attackState)
 	if attackState == STATE.detected_player_e:
 		attackState = STATE.attacking_player_e
 		var fireball = FIREBALL.instance()
