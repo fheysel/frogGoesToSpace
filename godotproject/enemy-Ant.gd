@@ -21,10 +21,6 @@ var direction = -1
 var attackDamage = 1
 var attackState = STATE.idle_e
 var is_dead = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
 	
 func dead():
 	is_dead = true
@@ -50,10 +46,6 @@ func _physics_process(delta):
 			
 			if is_on_wall():
 				direction *= -1
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func begin_attack():
 	attackState = STATE.detected_player_e

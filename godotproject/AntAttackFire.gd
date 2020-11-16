@@ -1,24 +1,11 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-const FLOOR = Vector2(0, -1)
-
-var idle
 var speed = 5
 var velocity = Vector2()
 var distance_traveled = 0
 var direction = 1
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-#	start_idle()
-	pass
-
 func _physics_process(delta):
-#	if not idle:
 	velocity.x = speed * direction
 	velocity.y = 0 # not needed, it's already 0
 	translate(velocity)

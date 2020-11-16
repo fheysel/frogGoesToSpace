@@ -214,9 +214,7 @@ func _physics_process(delta):
 
 func takeDamage(damageTaken):
 	if isVulnerable:
-		print("Player receiving %d damage" % damageTaken)
 		health -= damageTaken
-		print("Player took damage, has %d health +remaining" % health)
 		if health <= 0:
 			die()
 			
