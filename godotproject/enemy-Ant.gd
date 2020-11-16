@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-signal fireball_start
-
 const GRAVITY = 10
 const SPEED = 100
 const FLOOR = Vector2(0, -1)
@@ -24,9 +22,8 @@ func dead():
 	is_dead = true
 	velocity = 0
 	$AnimatedSprite.play("dead")
-	
+
 func _physics_process(delta):
-	
 	if is_dead == false:
 		if attackState == STATE.idle_e:
 			#Play Animation
