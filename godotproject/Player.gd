@@ -61,8 +61,9 @@ var star_piece_count = 0
 
 var health = 3
 
-func is_zero(x):
-	return abs(x) < 0.01
+func fequal(x, y):
+	# Function to check if two floating point numbers are approximately equal.
+	return abs(x - y) < 0.01
 
 func start_swing():
 	# Calculate initial angle and radius
@@ -162,7 +163,7 @@ func handle_normal_horizontal_movement(delta):
 	
 	if on_floor_last_frame:
 		# Handle ground movement
-		if is_zero(user_direction.x):
+		if fequal(user_direction.x, 0):
 			# If the user isn't inputting a direction, slow them down toward stopped
 			var vs = sign(velocity.x)
 			velocity.x += -vs * walk_horiz_accel * delta * friction_coeff
@@ -192,7 +193,7 @@ func handle_normal_horizontal_movement(delta):
 		# Handle air movement
 		# If the user isn't inputting a direction, don't adjust their velocity
 		# Otherwise...
-		if !is_zero(user_direction.x):
+		if !fequal(user_direction.x, 0):
 			# Make the user move in the direction they're pointing if they're not already
 			# at the speed cap
 			if sign(user_direction.x) * velocity.x < air_speed_limit:
@@ -270,7 +271,7 @@ func do_movement(delta):
 		hop_sound_timer = max(hop_sound_timer - delta, 0)
 		# Play sound effect when timer has expired and frog is walking on floor
 		# (only if user is pointing in the same direction that frog is going)
-		if hop_sound_timer <= 0 && on_floor_last_frame && !is_zero(user_direction.x) && sign(velocity.x) == sign(user_direction.x):
+		if hop_sound_timer <= 0 && on_floor_last_frame && !fequal(user_direction.x, 0) && sign(velocity.x) == sign(user_direction.x):
 			# Calculate new timer value, based on period as well as random variance.
 			# This slight variance will hopefully make it sound more natural.
 			# Let P and V be the period and variance, the minimum timer value will be P and the max will be P*(1+V)
@@ -312,7 +313,7 @@ func update_anim():
 		# If the user is inputting left or right on the stick, face in that
 		# direction - otherwise, we will remain facing the direction that
 		# we were before.
-		if !is_zero(user_direction.x):
+		if !fequal(user_direction.x, 0):
 			facing.x = user_direction.x
 		# At the moment, we only face left or right, no up/down/diagonals.
 		facing.y = 0
