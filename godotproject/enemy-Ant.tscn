@@ -34,15 +34,24 @@ frames = SubResource( 14 )
 animation = "walk"
 
 [node name="PlayerDetector" type="Area2D" parent="Orientation/Sprite"]
-position = Vector2( -96.42, -95.1808 )
+position = Vector2( -89.455, -95.1808 )
 scale = Vector2( 0.464334, 0.471218 )
 collision_layer = 16
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Sprite/PlayerDetector"]
 modulate = Color( 0.027451, 0.0117647, 0.0117647, 1 )
-position = Vector2( -1376.86, 164.121 )
+position = Vector2( -1365.53, 118.815 )
 shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="Orientation"]
+position = Vector2( -93.7871, 141.267 )
+scale = Vector2( 2.576, 430 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( -1000, 0 )
+collision_mask = 3
+collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 203.876, 203.877 )

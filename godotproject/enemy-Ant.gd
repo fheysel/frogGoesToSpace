@@ -43,8 +43,13 @@ func _physics_process(delta):
 				direction *= -1
 
 func begin_attack():
-	attackState = STATE.detected_player_e
-	$ActionDelay.start()
+	var ClosestObject = $Orientation/RayCast2D.get_collider()
+	#Check to see if the player is actually visible
+	print(ClosestObject)
+#	print(ClosestObject.name)
+	if ClosestObject.name != "Tilemap":
+		attackState = STATE.detected_player_e
+		$ActionDelay.start()
 
 func launch_attack():
 	if attackState == STATE.detected_player_e:
@@ -58,8 +63,10 @@ func launch_attack():
 		$ActionDelay.start()
 
 func _on_PlayerDetector_body_entered(body):
-	if attackState == STATE.idle_e:
-		begin_attack()
+#	print(body.name)
+	if body.name == "Player":		
+		if attackState == STATE.idle_e:
+			begin_attack()
 
 func _on_ActionDelay_timeout():
 	if attackState == STATE.detected_player_e:
@@ -70,5 +77,6 @@ func _on_ActionDelay_timeout():
 		#Checks area for player after finishing attack [FGTS-78]
 		var bodiesArr = $Orientation/Sprite/PlayerDetector.get_overlapping_bodies()
 		for body in bodiesArr:
+#			print(body.name)
 			if body.name == "Player":
 				begin_attack()
