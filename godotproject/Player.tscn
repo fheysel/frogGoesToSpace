@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player_frog.png" type="Texture" id=2]
@@ -6,11 +6,10 @@
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/hop.wav" type="AudioStream" id=5]
 [ext_resource path="res://sfx/collectstarpiece.wav" type="AudioStream" id=6]
-[ext_resource path="res://tongue_end_bullet.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 14.5215
-height = 9.11848
+radius = 12.279
+height = 9.74179
 
 [sub_resource type="AudioStreamRandomPitch" id=2]
 audio_stream = ExtResource( 5 )
@@ -134,7 +133,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=10]
 length = 0.55
 loop = true
-step = 0.01
+step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -142,7 +141,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.02, 0.11, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.01, 0.11, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 15, 16, 18, 18, 18, 18, 18 ]
@@ -162,7 +161,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 18, 19, 7, 6, 5 ]
+"values": [ 18, 18, 7, 6, 5 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=12]
@@ -351,7 +350,6 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=52]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=53]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=54]
 
@@ -386,12 +384,12 @@ states/Launch/position = Vector2( 382.562, 326.65 )
 states/swing/node = SubResource( 41 )
 states/swing/position = Vector2( 565.062, 200.243 )
 states/tongue_launch/node = SubResource( 46 )
-states/tongue_launch/position = Vector2( 390.75, 176.5 )
+states/tongue_launch/position = Vector2( 391.875, 176.5 )
 states/tongue_retract/node = SubResource( 51 )
 states/tongue_retract/position = Vector2( 393, 242.75 )
 transitions = [ "Idle", "Hop", SubResource( 52 ), "Hop", "Idle", SubResource( 53 ), "Idle", "tongue_launch", SubResource( 54 ), "tongue_retract", "Idle", SubResource( 55 ), "Idle", "Dead", SubResource( 56 ), "Idle", "Launch", SubResource( 57 ), "Launch", "Land", SubResource( 58 ), "Land", "Idle", SubResource( 59 ), "tongue_launch", "tongue_retract", SubResource( 60 ), "tongue_launch", "swing", SubResource( 61 ), "swing", "tongue_retract", SubResource( 62 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -135.938, -63.3897 )
+graph_offset = Vector2( -135.938, -44.3677 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=64]
 
@@ -400,22 +398,19 @@ collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 2.52992, 6.3 )
+position = Vector2( 2.52992, 6.36629 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 5
 frame = 3
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -2.44023, 16.2278 )
+position = Vector2( -2.01278, 14.4265 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
-position = Vector2( 4.20448, 16.1872 )
-
-[node name="Sprite" type="Sprite" parent="PlayerTongue"]
-texture = ExtResource( 7 )
+position = Vector2( 12.2329, 15.5797 )
 
 [node name="HopSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 2 )
@@ -465,6 +460,19 @@ parameters/Launch/blend_position = Vector2( 0, 0 )
 parameters/swing/blend_position = Vector2( 0, 0 )
 parameters/tongue_launch/blend_position = Vector2( 0, 0 )
 parameters/tongue_retract/blend_position = Vector2( 0, 0 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0.660875, 15.8131 )
+
+[node name="SwingPos" type="Position2D" parent="."]
+position = Vector2( 12.5368, -0.573662 )
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( -23.8093, -2.85048 )
+points = PoolVector2Array( 24.1654, 17.9698, 312.552, 18.1135 )
+width = 2.0
+default_color = Color( 0.301961, 0.133333, 0.133333, 1 )
+end_cap_mode = 2
 
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]

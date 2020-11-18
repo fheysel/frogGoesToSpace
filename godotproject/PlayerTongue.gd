@@ -11,14 +11,16 @@ var idle = true
 var shooting = false
 var swinging = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start_idle()
-
+	
 func start_idle():
 	idle = true
 	shooting = false
 	swinging = false
+	
 	$Sprite.visible = false
 	$TongueCollisionArea/CollisionShape2D.disabled = true
 	# Stop all sound effects
@@ -33,16 +35,17 @@ func start_shoot(dirn):
 	idle = false
 	shooting = true
 	swinging = false
-	$Sprite.visible = true
+	$Sprite.visible = false
 	$TongueCollisionArea/CollisionShape2D.disabled = false
 	shoot_direction = dirn
 	$ShootSoundPlayer.play(0)
-
+	
 func handle_shoot(delta):
 	# Advance tongue in direction 
 	position += shoot_direction * shoot_speed * delta 
+
 	if position.length_squared() >= max_shoot_dist * max_shoot_dist:
-		# We didn't hit anything. Stop shooting.
+		# We didn't hit anything. Stop shooting.1)
 		start_idle()
 
 func start_swing(body):
@@ -82,8 +85,3 @@ func _on_TongueCollisionArea_body_entered(body):
 func _on_Player_tongue_stop():
 	if swinging:
 		start_idle()
-
-#func _draw():
-	#if $PlayerTongue.shooting:
-	#	#frog_pos = get_global_transform().xform(Vector2.ZERO)
-#	draw_line($Player.position, $Player.position + $PlayerTongue.position, Color(1,0,0))

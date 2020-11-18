@@ -222,20 +222,15 @@ func handle_normal_horizontal_movement(delta):
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), air_speed_limit)
 
 func _draw():
-	# THIS IS JUST DEBUG
-	# TODO: Remove
-	# Draw swinging velocity vector
-	#if $PlayerTongue.shooting:
-	#	#frog_pos = get_global_transform().xform(Vector2.ZERO)
-	#	draw_line($Sprite.position, $Sprite.position + $PlayerTongue.globalposition, Color(1,0,0))
-	
+	$Line2D.remove_point(1)
+	if tongue_pressed or tongue_held: #if $PlayerTongue.swinging:
+		if$PlayerTongue.swinging:
+			$Line2D.remove_point(1)
+		else:
+			$Line2D.add_point(transform.xform_inv($Position2D.global_position + facing * 400 ), 1)
 	if $PlayerTongue.swinging:
-		#var frog_pos = get_global_transform().xform(Vector2.ZERO)
-		draw_line(Vector2(0,0), Vector2(0,0) - swing_pivot_position, Color(1,0,0))
-		
-		#print(swing_pivot_position)
-		#var tgt = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * 100
-		#draw_line(Vector2(0,0), tgt, Color(1,0,0))
+		$Line2D.remove_point(1)
+		$Line2D.add_point(transform.xform_inv($SwingPos.global_position  + facing * swing_pivot_position), 1)
 
 
 func do_movement(delta):
@@ -319,20 +314,20 @@ func do_movement(delta):
 			$HopSoundPlayer.play(0)
 		
 		if jump_pressed or jump_held:
-			if velocity.x < 0:
+			if velocity.y < 0:
 				animation_tree.set('parameters/Land/blend_position', velocity.normalized())
 				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
 				animation_mode.travel("Land")
-			if velocity.x > 0:	
+			if velocity.y > 0:	
 				animation_tree.set('parameters/Launch/blend_position', velocity.normalized())
 				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
 				animation_mode.travel("Launch")
 				
-		elif velocity.y == 0:
+		elif is_on_floor() && !is_zero(user_direction.x) && !is_zero(velocity.x): #velocity.y == 0:
 			animation_tree.set('parameters/Hop/blend_position', velocity.normalized())
 			animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
 			animation_mode.travel("Hop")
-		elif velocity.y != 0:
+		elif is_on_floor() && is_zero(user_direction.x) && is_zero(velocity.x):
 			animation_mode.travel("Idle")
 			
 	if tongue_pressed or tongue_held:

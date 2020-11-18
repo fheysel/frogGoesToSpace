@@ -19,15 +19,13 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TongueCollisionArea"]
 shape = SubResource( 1 )
 
-
 [node name="ShootSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 
 [node name="StickSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="TongueCollisionArea/CollisionShape2D"]
-position = Vector2( 1.32855, 1.44529 )
-
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.79713, 0.867174 )
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="TongueCollisionArea" to="." method="_on_TongueCollisionArea_body_entered"]
