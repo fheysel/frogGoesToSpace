@@ -21,7 +21,7 @@ func setup_tiles():
 			SPIKE:
 				create_instance_from_tilemap(cell, Spike, self, Vector2(8, 12))
 			STAR:
-				create_instance_from_tilemap(cell, Star, self, Vector2(20,20))
+				create_instance_from_tilemap(cell, Star, self, Vector2(16,20))
 				
 
 func create_instance_from_tilemap(coord:Vector2, prefab:PackedScene, parent:Node2D, offset:Vector2 = Vector2.ZERO): #, offset:Vector2 = Vector2.ZERO)
