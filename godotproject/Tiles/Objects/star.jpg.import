@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star.jpg-7fd0ffca6bffc40533d4497aa3b816b0.stex"
+path="res://.import/star.jpg-5214267fc0954459156629a0f605cf09.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://star.jpg"
-dest_files=[ "res://.import/star.jpg-7fd0ffca6bffc40533d4497aa3b816b0.stex" ]
+source_file="res://Tiles/Objects/star.jpg"
+dest_files=[ "res://.import/star.jpg-5214267fc0954459156629a0f605cf09.stex" ]
 
 [params]
 

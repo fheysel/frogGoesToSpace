@@ -1,12 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Star.gd" type="Script" id=1]
-[ext_resource path="res://Tiles/Objects/coin.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/Objects/stars.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="Star" type="Area2D"]
-position = Vector2( 3160, 554.051 )
 collision_layer = 32
 collision_mask = 2
 script = ExtResource( 1 )
@@ -20,6 +19,8 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 12, 28, 40, 40 )
 __meta__ = {
 "_edit_lock_": true
 }

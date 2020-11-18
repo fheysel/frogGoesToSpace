@@ -1,2 +1,3 @@
 # frogGoesToSpace
-All code development for teh arcade game frog goes to space!
+All code development for the arcade game frog goes to space!
+Go to froggoestospace.github.io to play the latest beta!
