@@ -24,7 +24,7 @@ func setup_tiles():
 				create_instance_from_tilemap(cell, Star, self, Vector2(16,20))
 				
 
-func create_instance_from_tilemap(coord:Vector2, prefab:PackedScene, parent:Node2D, offset:Vector2 = Vector2.ZERO): #, offset:Vector2 = Vector2.ZERO)
+func create_instance_from_tilemap(coord:Vector2, prefab:PackedScene, parent:Node2D, offset:Vector2 = Vector2.ZERO): 
 	# This is where the actual replacement happens. 
 	
 	$TileMap.set_cell(coord.x, coord.y, -1) # Set the cell to be empty

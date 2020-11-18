@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Webp.net-resizeimage.png-e588aceb684ce52ac9c45bdeefab7c46.stex"
+path="res://.import/tileset.png-29932343e8304130798e44be10509a1e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Harmful/Webp.net-resizeimage.png"
-dest_files=[ "res://.import/Webp.net-resizeimage.png-e588aceb684ce52ac9c45bdeefab7c46.stex" ]
+source_file="res://Tiles/Level0/world/tileset.png"
+dest_files=[ "res://.import/tileset.png-29932343e8304130798e44be10509a1e.stex" ]
 
 [params]
 
