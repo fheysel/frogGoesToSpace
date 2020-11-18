@@ -107,6 +107,6 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="enemy-Ant" parent="." instance=ExtResource( 10 )]
-position = Vector2( 2408.36, 646.92 )
+position = Vector2( 2422.63, 637.406 )
 scale = Vector2( 0.05, 0.05 )
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_DeathPlane_body_entered"]
