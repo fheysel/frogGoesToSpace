@@ -234,7 +234,7 @@ func _draw():
 		#draw_line(Vector2(0,0), Vector2(0,0)+get_global_transform().xform_inv(swing_pivot_position), Color(1,0,0))
 		$Line2D.add_point(transform.xform_inv($SwingPos.global_position)+get_global_transform().xform_inv(swing_pivot_position), 1)
 		#$Line2D.add_point(transform.xform_inv($SwingPos.global_position  + facing * swing_pivot_position), 1)
-	pass
+	
 
 func do_movement(delta):
 	if $PlayerTongue.swinging:
