@@ -3,7 +3,7 @@
 [ext_resource path="res://enemy-Ant.gd" type="Script" id=1]
 [ext_resource path="res://ant.jpg" type="Texture" id=2]
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -29,7 +29,7 @@ position = Vector2( -237.856, 196.326 )
 [node name="Sprite" type="AnimatedSprite" parent="Orientation"]
 position = Vector2( 207.652, 201.989 )
 scale = Vector2( 2.15362, 2.12216 )
-frames = SubResource( 14 )
+frames = SubResource( 1 )
 animation = "walk"
 
 [node name="PlayerDetector" type="Area2D" parent="Orientation/Sprite"]

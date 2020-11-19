@@ -63,8 +63,6 @@ func launch_attack():
 		$ActionDelay.start()
 
 func _on_PlayerDetector_body_entered(body):	
-	print("player detected")
-	print(body)
 	if body.name == "Player":		
 		if attackState == STATE.idle_e:
 			begin_attack()
