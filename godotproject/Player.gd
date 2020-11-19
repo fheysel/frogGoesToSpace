@@ -222,19 +222,15 @@ func handle_normal_horizontal_movement(delta):
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), air_speed_limit)
 
 func _draw():
-	$Line2D.remove_point(1)
-	if tongue_pressed or tongue_held: #if $PlayerTongue.swinging:
-		
-		if$PlayerTongue.swinging:
-			$Line2D.remove_point(1)
-		else:
-			$Line2D.add_point(transform.xform_inv($Position2D.global_position + facing * 400), 1)
-	if $PlayerTongue.swinging:
-		$Line2D.remove_point(1)
-		#draw_line(Vector2(0,0), Vector2(0,0)+get_global_transform().xform_inv(swing_pivot_position), Color(1,0,0))
-		$Line2D.add_point(transform.xform_inv($SwingPos.global_position)+get_global_transform().xform_inv(swing_pivot_position), 1)
-		#$Line2D.add_point(transform.xform_inv($SwingPos.global_position  + facing * swing_pivot_position), 1)
+	var tongue_target_global = null
+	if $PlayerTongue.shooting:
+		tongue_target_global = $PlayerTongue.global_position
+	elif $PlayerTongue.swinging:
+		tongue_target_global = swing_pivot_position
 	
+	$Line2D.remove_point(1)
+	if tongue_target_global != null:
+		$Line2D.add_point(get_global_transform().xform_inv(tongue_target_global), 1)
 
 func do_movement(delta):
 	if $PlayerTongue.swinging:

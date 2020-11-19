@@ -2,9 +2,10 @@ extends Node2D
 
 signal tongue_swing
 
-export (float) var shoot_speed = 1500
-export (float) var max_shoot_dist = 400
-export (float) var max_swing_dist = 100
+# We removed the 0.6 scale on the frog,
+# so we divide by 0.6 here to compensate.
+export (float) var shoot_speed = 1500 * 0.6
+export (float) var max_shoot_dist = 400 * 0.6
 
 var shoot_direction = Vector2.RIGHT
 var idle = true
