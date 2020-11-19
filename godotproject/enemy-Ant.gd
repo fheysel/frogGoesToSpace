@@ -14,6 +14,7 @@ enum STATE{
 var velocity = Vector2(0, 0)
 var direction = -1
 
+var attackDamage = 1
 var attackState = STATE.idle_e
 var is_dead = false
 	
@@ -42,15 +43,13 @@ func _physics_process(delta):
 				direction *= -1
 
 func begin_attack():
-	#Detect if there is a wall in between the player 
 	var RayCastList = [$Orientation/RayCast_Top.get_collider(), $Orientation/RayCast_Middle.get_collider(), $Orientation/RayCast_Bottom.get_collider()]
+	
 	for RC in RayCastList:
 		if is_instance_valid(RC):
-			#Player was the closest for at least one raycast
 			if RC.name == "Player":
 				attackState = STATE.detected_player_e
 				$ActionDelay.start()
-				pass
 
 func launch_attack():
 	if attackState == STATE.detected_player_e:
@@ -64,6 +63,8 @@ func launch_attack():
 		$ActionDelay.start()
 
 func _on_PlayerDetector_body_entered(body):	
+	print("player detected")
+	print(body)
 	if body.name == "Player":		
 		if attackState == STATE.idle_e:
 			begin_attack()

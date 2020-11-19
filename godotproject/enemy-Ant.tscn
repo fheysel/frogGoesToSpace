@@ -12,8 +12,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-
-extents = Vector2( 1999.38, 428.14 )
+extents = Vector2( 1438.94, 320.683 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 370.705, 371.094 )
@@ -34,30 +33,30 @@ frames = SubResource( 14 )
 animation = "walk"
 
 [node name="PlayerDetector" type="Area2D" parent="Orientation/Sprite"]
-position = Vector2( -89.455, -95.1808 )
+position = Vector2( -101.262, -79.2052 )
 scale = Vector2( 0.464334, 0.471218 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Sprite/PlayerDetector"]
 modulate = Color( 0.027451, 0.0117647, 0.0117647, 1 )
-position = Vector2( -1365.53, 118.815 )
+position = Vector2( -1558.19, 137.141 )
 shape = SubResource( 2 )
 
 [node name="RayCast_Top" type="RayCast2D" parent="Orientation"]
-position = Vector2( 129.197, -149.675 )
+position = Vector2( -38.1409, -95.2429 )
 enabled = true
 cast_to = Vector2( -3000, 0 )
 collision_mask = 3
 
 [node name="RayCast_Middle" type="RayCast2D" parent="Orientation"]
-position = Vector2( 125.001, 134.258 )
+position = Vector2( -38.1406, 198.568 )
 enabled = true
 cast_to = Vector2( -3000, 0 )
 collision_mask = 3
 
 [node name="RayCast_Bottom" type="RayCast2D" parent="Orientation"]
-position = Vector2( 164.531, 421.69 )
+position = Vector2( -67.8055, 481.189 )
 enabled = true
 cast_to = Vector2( -3000, 0 )
 collision_mask = 3
