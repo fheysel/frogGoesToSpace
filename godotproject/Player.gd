@@ -224,14 +224,17 @@ func handle_normal_horizontal_movement(delta):
 func _draw():
 	$Line2D.remove_point(1)
 	if tongue_pressed or tongue_held: #if $PlayerTongue.swinging:
+		
 		if$PlayerTongue.swinging:
 			$Line2D.remove_point(1)
 		else:
-			$Line2D.add_point(transform.xform_inv($Position2D.global_position + facing * 400 ), 1)
+			$Line2D.add_point(transform.xform_inv($Position2D.global_position + facing * 400), 1)
 	if $PlayerTongue.swinging:
 		$Line2D.remove_point(1)
-		$Line2D.add_point(transform.xform_inv($SwingPos.global_position  + facing * swing_pivot_position), 1)
-
+		#draw_line(Vector2(0,0), Vector2(0,0)+get_global_transform().xform_inv(swing_pivot_position), Color(1,0,0))
+		$Line2D.add_point(transform.xform_inv($SwingPos.global_position)+get_global_transform().xform_inv(swing_pivot_position), 1)
+		#$Line2D.add_point(transform.xform_inv($SwingPos.global_position  + facing * swing_pivot_position), 1)
+	pass
 
 func do_movement(delta):
 	if $PlayerTongue.swinging:
@@ -323,11 +326,11 @@ func do_movement(delta):
 				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
 				animation_mode.travel("Launch")
 				
-		elif is_on_floor() && !is_zero(user_direction.x) && !is_zero(velocity.x): #velocity.y == 0:
+		elif is_on_floor() && user_direction.x != 0 && velocity.x != 0: #velocity.y == 0:
 			animation_tree.set('parameters/Hop/blend_position', velocity.normalized())
 			animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
 			animation_mode.travel("Hop")
-		elif is_on_floor() && is_zero(user_direction.x) && is_zero(velocity.x):
+		elif is_on_floor() && user_direction.x == 0 && velocity.x == 0:
 			animation_mode.travel("Idle")
 			
 	if tongue_pressed or tongue_held:
@@ -424,7 +427,8 @@ func _physics_process(delta):
 		if tongue_pressed:
 			# Fire out the tongue by signalling the PlayerTongue object
 			emit_signal("tongue_start", get_tongue_direction())
-
+	
+	update() #update input needed to draw tongue
 	update_anim()
 
 func takeDamage(damageTaken):

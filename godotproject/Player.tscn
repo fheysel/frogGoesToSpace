@@ -419,7 +419,6 @@ stream = SubResource( 2 )
 stream = ExtResource( 4 )
 
 [node name="CollectStarPieceSoundPlayer" type="AudioStreamPlayer2D" parent="."]
-
 stream = ExtResource( 6 )
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
@@ -432,9 +431,6 @@ one_shot = true
 [node name="JumpOnGroundLeniencyTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
-
-position = Vector2( 3.25388, 15.6399 )
-stream = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Dead_froggie = SubResource( 3 )
@@ -473,7 +469,6 @@ points = PoolVector2Array( 24.1654, 17.9698, 312.552, 18.1135 )
 width = 2.0
 default_color = Color( 0.301961, 0.133333, 0.133333, 1 )
 end_cap_mode = 2
-
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
