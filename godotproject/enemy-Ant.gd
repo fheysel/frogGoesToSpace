@@ -43,8 +43,13 @@ func _physics_process(delta):
 				direction *= -1
 
 func begin_attack():
-	attackState = STATE.detected_player_e
-	$ActionDelay.start()
+	var RayCastList = [$Orientation/RayCast_Top.get_collider(), $Orientation/RayCast_Middle.get_collider(), $Orientation/RayCast_Bottom.get_collider()]
+	
+	for RC in RayCastList:
+		if is_instance_valid(RC):
+			if RC.name == "Player":
+				attackState = STATE.detected_player_e
+				$ActionDelay.start()
 
 func launch_attack():
 	if attackState == STATE.detected_player_e:
@@ -57,9 +62,10 @@ func launch_attack():
 		
 		$ActionDelay.start()
 
-func _on_PlayerDetector_body_entered(body):
-	if attackState == STATE.idle_e:
-		begin_attack()
+func _on_PlayerDetector_body_entered(body):	
+	if body.name == "Player":		
+		if attackState == STATE.idle_e:
+			begin_attack()
 
 func _on_ActionDelay_timeout():
 	if attackState == STATE.detected_player_e:
