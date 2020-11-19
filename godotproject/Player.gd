@@ -28,7 +28,17 @@ export (float) var hop_sound_timer_period = 0.2
 # in the code below for more detail
 export (float) var hop_sound_timer_period_variance = 0.1
 
-export (float) var tongue_exit_jump_bonus_multiplier = 1.25
+# Variables relating to "jumping" out of tongue
+# Search for "velocity_after_swing" for more information.
+# The swing velocity will be multiplied by this when jumping out
+# of the swing.
+export (float) var tongue_exit_jump_multiplier_in_dirn = 1.1
+# This is the constant velocity that will be added in the direction
+# of the swing when jumping out of the swing.
+export (float) var tongue_exit_jump_bonus_speed_in_dirn = 20
+# This is a constant velocity that will be added in the "up" direction
+# when jumping out of the swing.
+export (float) var tongue_exit_jump_bonus_speed_up = 200
 
 var velocity = Vector2.ZERO
 var jump_frame_countdown = 0
@@ -348,8 +358,12 @@ func _physics_process(delta):
 	if $PlayerTongue.swinging:
 		if jump_pressed:
 			# When we exit swinging using the jump button, give an additional speed boost
+			# in the direction they were swinging.
 			stop_swing()
-			velocity *= tongue_exit_jump_bonus_multiplier
+			var velocity_after_swing = velocity * tongue_exit_jump_multiplier_in_dirn
+			velocity_after_swing += velocity.normalized() * tongue_exit_jump_bonus_speed_in_dirn
+			velocity_after_swing += Vector2.UP * tongue_exit_jump_bonus_speed_up
+			velocity = velocity_after_swing
 		elif tongue_pressed:
 			# When we exit swinging using the tongue button, just drop them out of swinging
 			stop_swing()
