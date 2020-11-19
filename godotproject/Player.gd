@@ -38,7 +38,7 @@ export (float) var tongue_exit_jump_multiplier_in_dirn = 1.1
 export (float) var tongue_exit_jump_bonus_speed_in_dirn = 20
 # This is a constant velocity that will be added in the "up" direction
 # when jumping out of the swing.
-export (float) var tongue_exit_jump_bonus_speed_up = 300
+export (float) var tongue_exit_jump_bonus_speed_up = 200
 
 
 onready var animation_tree = get_node("AnimationTree")
