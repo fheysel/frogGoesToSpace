@@ -40,6 +40,10 @@ export (float) var tongue_exit_jump_bonus_speed_in_dirn = 20
 # when jumping out of the swing.
 export (float) var tongue_exit_jump_bonus_speed_up = 200
 
+
+onready var animation_tree = get_node("AnimationTree")
+onready var animation_mode = animation_tree.get("parameters/playback")
+
 var velocity = Vector2.ZERO
 var jump_frame_countdown = 0
 var jump_shorthop_countdown = 0
@@ -115,6 +119,7 @@ func get_input():
 	jump_held = Input.is_action_pressed("jump")
 	tongue_pressed = Input.is_action_just_pressed("tongue")
 	tongue_held = Input.is_action_pressed("tongue")
+
 
 func handle_normal_horizontal_movement(delta):
 	# We break movement up into two main categories: ground and air
@@ -216,6 +221,21 @@ func handle_normal_horizontal_movement(delta):
 				# Limit horiz. speed to speed cap
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), air_speed_limit)
 
+func _draw():
+	$Line2D.remove_point(1)
+	if tongue_pressed or tongue_held: #if $PlayerTongue.swinging:
+		
+		if$PlayerTongue.swinging:
+			$Line2D.remove_point(1)
+		else:
+			$Line2D.add_point(transform.xform_inv($Position2D.global_position + facing * 400), 1)
+	if $PlayerTongue.swinging:
+		$Line2D.remove_point(1)
+		#draw_line(Vector2(0,0), Vector2(0,0)+get_global_transform().xform_inv(swing_pivot_position), Color(1,0,0))
+		$Line2D.add_point(transform.xform_inv($SwingPos.global_position)+get_global_transform().xform_inv(swing_pivot_position), 1)
+		#$Line2D.add_point(transform.xform_inv($SwingPos.global_position  + facing * swing_pivot_position), 1)
+	
+
 func do_movement(delta):
 	if $PlayerTongue.swinging:
 		# Adjust swinging speed based on user's influence
@@ -232,7 +252,7 @@ func do_movement(delta):
 		# 	var frog_pos = get_global_transform().xform(Vector2.ZERO)
 		# 	var swing_vec = frog_pos - swing_pivot_position
 		# 	swing_radius = swing_vec.length()
-
+		
 
 		swing_angular_speed += 1 / swing_radius * gravity * cos(swing_angle) * delta
 
@@ -246,10 +266,15 @@ func do_movement(delta):
 		# Instead of the direct position calculation, we can set velocity, and use move_and_collide
 		velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
 		var collision_info = move_and_collide(velocity * delta)
+		
 		if collision_info:
 			# We decided that the frog should exit swinging state when they hit a wall or the ground
 			# Let's just make them stop swinging no matter what they collided with
 			stop_swing()
+
+		animation_tree.set('parameters/swing/blend_position', velocity.normalized())
+		animation_mode.travel("swing")
+
 	else:
 		# Adjust X velocity based on user input
 		handle_normal_horizontal_movement(delta)
@@ -274,6 +299,7 @@ func do_movement(delta):
 
 		# Actually move the player along the velocity vector.
 		velocity = move_and_slide(velocity, Vector2.UP)
+
 		# Update our stored floor state.
 		on_floor_last_frame = is_on_floor()
 
@@ -289,6 +315,31 @@ func do_movement(delta):
 			hop_sound_timer = hop_sound_timer_period * (1 + rand_range(0, hop_sound_timer_period_variance))
 			# Play sound effect.
 			$HopSoundPlayer.play(0)
+		
+		if jump_pressed or jump_held:
+			if velocity.y < 0:
+				animation_tree.set('parameters/Land/blend_position', velocity.normalized())
+				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
+				animation_mode.travel("Land")
+			if velocity.y > 0:	
+				animation_tree.set('parameters/Launch/blend_position', velocity.normalized())
+				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
+				animation_mode.travel("Launch")
+				
+		elif is_on_floor() && user_direction.x != 0 && velocity.x != 0: #velocity.y == 0:
+			animation_tree.set('parameters/Hop/blend_position', velocity.normalized())
+			animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
+			animation_mode.travel("Hop")
+		elif is_on_floor() && user_direction.x == 0 && velocity.x == 0:
+			animation_mode.travel("Idle")
+			
+	if tongue_pressed or tongue_held:
+		if $PlayerTongue.swinging:
+			animation_tree.set('parameters/tongue_retract/blend_position', velocity.normalized())
+			animation_mode.travel("tongue_retract")
+		else:
+			animation_tree.set('parameters/tongue_launch/blend_position', velocity.normalized())
+			animation_mode.travel("tongue_launch")#emit_signal("tongue_start", get_tongue_direction())		
 
 func handle_jump_starting():
 	# Adjust jump start related timers used to permit users to jump a short bit
@@ -376,6 +427,8 @@ func _physics_process(delta):
 		if tongue_pressed:
 			# Fire out the tongue by signalling the PlayerTongue object
 			emit_signal("tongue_start", get_tongue_direction())
+	
+	update() #update input needed to draw tongue
 	update_anim()
 
 func takeDamage(damageTaken):

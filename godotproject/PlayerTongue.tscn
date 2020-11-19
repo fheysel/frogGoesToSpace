@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://tongue_end.png" type="Texture" id=1]
+[ext_resource path="res://tongue_end_bullet.png" type="Texture" id=1]
 [ext_resource path="res://PlayerTongue.gd" type="Script" id=2]
 [ext_resource path="res://sfx/tongue.wav" type="AudioStream" id=3]
 [ext_resource path="res://sfx/tonguestick.wav" type="AudioStream" id=4]
@@ -26,7 +26,6 @@ stream = ExtResource( 3 )
 stream = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -1.2, 0 )
-scale = Vector2( 0.6, 0.6 )
+position = Vector2( 0.79713, 0.867174 )
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="TongueCollisionArea" to="." method="_on_TongueCollisionArea_body_entered"]
