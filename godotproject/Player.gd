@@ -74,6 +74,7 @@ var hop_sound_timer = 0
 var star_piece_count = 0
 
 var health = 3
+var is_god = true
 
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
@@ -428,6 +429,8 @@ func _physics_process(delta):
 	update_anim()
 
 func takeDamage(damageTaken):
+	if is_god:
+		return
 	if $InvulnerableTimer.is_stopped():
 		health -= damageTaken
 		if health <= 0:
