@@ -74,7 +74,7 @@ var hop_sound_timer = 0
 var star_piece_count = 0
 
 var health = 3
-var is_god = true
+var is_god = false
 
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
