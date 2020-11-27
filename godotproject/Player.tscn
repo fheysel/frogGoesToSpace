@@ -403,6 +403,8 @@ vframes = 6
 hframes = 5
 frame = 3
 
+
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.54944, 1.15327 )
 rotation = 1.5708
