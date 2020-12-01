@@ -27,18 +27,6 @@ position = Vector2( 110.163, 870.544 )
 collision_layer = 34
 collision_mask = 17
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
-limit_left = 0
-limit_top = 0
-limit_right = 2000
-limit_bottom = 1000
-drag_margin_v_enabled = true
-drag_margin_top = 0.7
-drag_margin_bottom = 0.1
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
 [node name="LevelBoundaries" type="Node2D" parent="."]
 script = ExtResource( 3 )
 right_bound = 10000.0
@@ -146,5 +134,5 @@ rotation = 0.0108005
 scale = Vector2( 0.05, 0.05 )
 
 [node name="EOL" parent="." instance=ExtResource( 13 )]
-position = Vector2( 544, 752 )
+position = Vector2( 9928, 544 )
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_DeathPlane_body_entered"]

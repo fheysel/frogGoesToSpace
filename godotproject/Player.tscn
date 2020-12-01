@@ -403,8 +403,6 @@ vframes = 6
 hframes = 5
 frame = 3
 
-
-
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.54944, 1.15327 )
 rotation = 1.5708
@@ -475,6 +473,10 @@ one_shot = true
 [node name="HopSoundTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+drag_margin_v_enabled = true
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
