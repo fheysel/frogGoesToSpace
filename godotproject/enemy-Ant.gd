@@ -23,7 +23,7 @@ func dead():
 	velocity = 0
 	$AnimatedSprite.play("dead")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_dead == false:
 		if attackState == STATE.idle_e:
 			#Play Animation, doesn't exist yet
