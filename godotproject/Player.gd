@@ -219,6 +219,8 @@ func _draw():
 	elif $PlayerTongue.swinging:
 		tongue_target_global = swing_pivot_position
 	
+	# We need to check if the point is actually there prior to removing it
+	# in order to avoid an error [FGTS-94]
 	if $Line2D.get_point_count() > 1:
 		$Line2D.remove_point(1)
 	if tongue_target_global != null:

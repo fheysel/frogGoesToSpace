@@ -54,6 +54,10 @@ func start_swing(_body):
 	shooting = false
 	swinging = true
 	$Sprite.visible = false
+	# We need to use set_deferred to set this property in order to avoid an
+	# error. I believe it is because we are adjusting this from the
+	# TongueCollisionArea's event, and it doesn't like us adjusting properties
+	# while handling its events. [FGTS-75]
 	$TongueCollisionArea/CollisionShape2D.set_deferred('disabled', true)
 	# Stop playing shoot sound effect once tongue sticks
 	$ShootSoundPlayer.playing = false
