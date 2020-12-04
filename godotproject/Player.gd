@@ -15,9 +15,9 @@ export (float) var air_turn_coefficient = 1.2
 
 export (float) var jump_leniency_time = 5 / 60.0
 export (float) var jump_speed = 500
-export (float) var jump_length = 10 / 60.0
+export (float) var jump_length = (10+1) / 60.0
 export (float) var shorthop_speed = jump_speed * 0.6
-export (float) var shorthop_length = 6 / 60.0
+export (float) var shorthop_length = (6+1) / 60.0
 export (float) var gravity = 1200
 export (float) var terminal_velocity = 400
 export (float) var swing_user_anglespeed_per_s = 1
@@ -45,10 +45,6 @@ onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
 var velocity = Vector2.ZERO
-var jump_frame_countdown = 0
-var jump_shorthop_countdown = 0
-var jump_button_press_leniency_timer = 0
-var jump_on_ground_leniency_timer = 0
 var facing = Vector2.RIGHT
 var on_floor_last_frame = false
 
@@ -62,11 +58,6 @@ var swing_angular_speed = 0
 var swing_radius = 0
 var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
-
-# Timer used to add delay between hop sound effects
-# This is temporary - in the future, hop sound will be synchronized
-# with the hop animation
-var hop_sound_timer = 0
 
 # This counter keeps track of the number of star pieces collected.
 # This may be temporary, depending on if we want to track the number of star pieces
@@ -90,7 +81,6 @@ func start_swing():
 func stop_swing():
 	# Convert swinging angular momentum into player velocity
 	velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
-	print_debug('Stop swing: Velocity=',velocity)
 	emit_signal("tongue_stop")
 
 func update_swing_radius_angle():
@@ -229,7 +219,10 @@ func _draw():
 	elif $PlayerTongue.swinging:
 		tongue_target_global = swing_pivot_position
 	
-	$Line2D.remove_point(1)
+	# We need to check if the point is actually there prior to removing it
+	# in order to avoid an error [FGTS-94]
+	if $Line2D.get_point_count() > 1:
+		$Line2D.remove_point(1)
 	if tongue_target_global != null:
 		$Line2D.add_point(get_global_transform().xform_inv(tongue_target_global), 1)
 
@@ -280,16 +273,14 @@ func do_movement(delta):
 		velocity.y += gravity * delta
 
 		# If we're still in the shorthop section of our jump
-		if jump_shorthop_countdown > 0:
-			jump_shorthop_countdown -= delta
+		if !$ShorthopTimer.is_stopped():
 			# If we're still shorthopping and the user has let go of jump, then abort out of
 			# the main jump by clearing its timer, and use the shorthop speed instead.
-			if jump_shorthop_countdown <= 0 and not jump_held:
-				jump_frame_countdown = 0
+			if not jump_held:
+				$JumpTimer.stop()
 				velocity.y = -shorthop_speed
 		# If we're still jumping, set the user's Y velocity to -jump_speed (-Y is up)
-		if jump_frame_countdown > 0:
-			jump_frame_countdown -= delta
+		if !$JumpTimer.is_stopped():
 			velocity.y = -jump_speed
 		# Prevent the player from falling faster than their terminal velocity
 		velocity.y = min(velocity.y, terminal_velocity)
@@ -300,16 +291,14 @@ func do_movement(delta):
 		# Update our stored floor state.
 		on_floor_last_frame = is_on_floor()
 
-		# Count down the hop sound timer, ensuring it never goes below 0.
-		hop_sound_timer = max(hop_sound_timer - delta, 0)
 		# Play sound effect when timer has expired and frog is walking on floor
 		# (only if user is pointing in the same direction that frog is going)
-		if hop_sound_timer <= 0 && on_floor_last_frame && !fequal(user_direction.x, 0) && sign(velocity.x) == sign(user_direction.x):
+		if $HopSoundTimer.is_stopped() && on_floor_last_frame && !fequal(user_direction.x, 0) && sign(velocity.x) == sign(user_direction.x):
 			# Calculate new timer value, based on period as well as random variance.
 			# This slight variance will hopefully make it sound more natural.
 			# Let P and V be the period and variance, the minimum timer value will be P and the max will be P*(1+V)
 			# In practice, with (P,V) = (0.2,0.1), the min will be 0.2 and the max will be 0.22
-			hop_sound_timer = hop_sound_timer_period * (1 + rand_range(0, hop_sound_timer_period_variance))
+			$HopSoundTimer.start(hop_sound_timer_period * (1 + rand_range(0, hop_sound_timer_period_variance)))
 			# Play sound effect.
 			$HopSoundPlayer.play(0)
 		
@@ -359,8 +348,8 @@ func handle_jump_starting():
 		$JumpOnGroundLeniencyTimer.stop()
 		# Set jump timers to cause frog to jump. The actual jumping motion is handled in do_movement
 		# on the next _physics_process call.
-		jump_frame_countdown = jump_length
-		jump_shorthop_countdown = shorthop_length
+		$JumpTimer.start(jump_length)
+		$ShorthopTimer.start(shorthop_length)
 		$JumpSoundPlayer.play(0)
 
 func update_anim():

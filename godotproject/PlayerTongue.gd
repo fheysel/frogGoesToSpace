@@ -39,7 +39,7 @@ func start_idle():
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.playing = false
 
-func handle_idle(delta):
+func handle_idle(_delta):
 	pass
 
 func start_shoot(dirn):
@@ -65,7 +65,7 @@ func handle_shoot(delta):
 	tongue_length += shoot_speed * delta
 	update_tongue_location()
 
-func start_swing(body, global_point):
+func start_swing(_body, global_point):
 	idle = false
 	shooting = false
 	swinging = true
@@ -78,7 +78,7 @@ func start_swing(body, global_point):
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.play(0)
 
-func handle_swing(delta):
+func handle_swing(_delta):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
