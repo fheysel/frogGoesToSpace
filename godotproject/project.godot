@@ -19,10 +19,6 @@ config/name="Frog Goes To Space - Cooper Prototype"
 run/main_scene="res://Level0.tscn"
 config/icon="res://icon.png"
 
-[audio]
-
-output_latency.web=20
-
 [display]
 
 window/size/width=640

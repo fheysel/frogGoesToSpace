@@ -1,20 +1,81 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://enemy-Ant.gd" type="Script" id=1]
-[ext_resource path="res://ant.jpg" type="Texture" id=2]
+[ext_resource path="res://poison_frog.png" type="Texture" id=2]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 120, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 40, 120, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 120, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 120, 120, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 40, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 120, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 40, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 120, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 80, 40, 40 )
+
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "fireball",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1438.94, 320.683 )
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 1196.58, 37.9655 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 370.705, 371.094 )
 
 [node name="enemy-Ant" type="KinematicBody2D"]
@@ -22,48 +83,52 @@ collision_layer = 2147483652
 script = ExtResource( 1 )
 
 [node name="Orientation" type="Node2D" parent="."]
+position = Vector2( 2.66302, 2.70987 )
 
 [node name="Position2D" type="Position2D" parent="Orientation"]
-position = Vector2( -237.856, 196.326 )
+position = Vector2( -105.564, 237.903 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Orientation"]
 position = Vector2( 207.652, 201.989 )
-scale = Vector2( 2.15362, 2.12216 )
-frames = SubResource( 1 )
-animation = "walk"
+scale = Vector2( 20, 20 )
+frames = SubResource( 15 )
+animation = "fireball"
+frame = 1
+playing = true
+flip_h = true
 
 [node name="PlayerDetector" type="Area2D" parent="Orientation/Sprite"]
-position = Vector2( -101.262, -79.2052 )
+position = Vector2( -10.5063, -6.51458 )
 scale = Vector2( 0.464334, 0.471218 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Sprite/PlayerDetector"]
 modulate = Color( 0.027451, 0.0117647, 0.0117647, 1 )
-position = Vector2( -1558.19, 137.141 )
-shape = SubResource( 2 )
+position = Vector2( -1193.23, 15.0555 )
+shape = SubResource( 16 )
 
 [node name="RayCast_Top" type="RayCast2D" parent="Orientation"]
-position = Vector2( -38.1409, -95.2429 )
+position = Vector2( -55.3124, -75.7606 )
 enabled = true
 cast_to = Vector2( -3000, 0 )
 collision_mask = 3
 
 [node name="RayCast_Middle" type="RayCast2D" parent="Orientation"]
-position = Vector2( -38.1406, 198.568 )
+position = Vector2( -46.432, 232.919 )
 enabled = true
 cast_to = Vector2( -3000, 0 )
 collision_mask = 3
 
 [node name="RayCast_Bottom" type="RayCast2D" parent="Orientation"]
-position = Vector2( -67.8055, 481.189 )
+position = Vector2( -53.402, 544.451 )
 enabled = true
 cast_to = Vector2( -3000, 0 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 203.876, 203.877 )
-shape = SubResource( 3 )
+position = Vector2( 286.77, 231.229 )
+shape = SubResource( 17 )
 
 [node name="ActionDelay" type="Timer" parent="."]
 wait_time = 0.5
