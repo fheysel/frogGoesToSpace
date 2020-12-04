@@ -461,6 +461,18 @@ points = PoolVector2Array( 0, 0, 15, 0 )
 width = 2.0
 default_color = Color( 0.301961, 0.133333, 0.133333, 1 )
 end_cap_mode = 2
+
+[node name="JumpTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="ShorthopTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="HopSoundTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]

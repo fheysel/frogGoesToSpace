@@ -29,7 +29,7 @@ func start_idle():
 	$StickSoundPlayer.playing = false
 	position = Vector2.ZERO
 
-func handle_idle(delta):
+func handle_idle(_delta):
 	pass
 
 func start_shoot(dirn):
@@ -49,18 +49,22 @@ func handle_shoot(delta):
 		# We didn't hit anything. Stop shooting.1)
 		start_idle()
 
-func start_swing(body):
+func start_swing(_body):
 	idle = false
 	shooting = false
 	swinging = true
 	$Sprite.visible = false
-	$TongueCollisionArea/CollisionShape2D.disabled = true
+	# We need to use set_deferred to set this property in order to avoid an
+	# error. I believe it is because we are adjusting this from the
+	# TongueCollisionArea's event, and it doesn't like us adjusting properties
+	# while handling its events. [FGTS-75]
+	$TongueCollisionArea/CollisionShape2D.set_deferred('disabled', true)
 	# Stop playing shoot sound effect once tongue sticks
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.play(0)
 	emit_signal("tongue_swing", get_global_transform().xform(Vector2.ZERO))
 
-func handle_swing(delta):
+func handle_swing(_delta):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

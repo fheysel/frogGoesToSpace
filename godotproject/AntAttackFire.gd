@@ -5,7 +5,7 @@ var velocity = Vector2()
 var distance_traveled = 0
 var direction = 1
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity.x = speed * direction
 	velocity.y = 0 # not needed, it's already 0
 	translate(velocity)
