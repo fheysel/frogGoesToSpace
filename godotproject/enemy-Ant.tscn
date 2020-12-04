@@ -73,10 +73,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 1196.58, 37.9655 )
+extents = Vector2( 178.427, 37.9655 )
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 370.705, 371.094 )
+extents = Vector2( 375.71, 371.094 )
 
 [node name="enemy-Ant" type="KinematicBody2D"]
 collision_layer = 2147483652
@@ -89,8 +89,8 @@ position = Vector2( 2.66302, 2.70987 )
 position = Vector2( -105.564, 237.903 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Orientation"]
-position = Vector2( 207.652, 201.989 )
-scale = Vector2( 20, 20 )
+position = Vector2( 280.802, 224.642 )
+scale = Vector2( 19.2685, 18.8674 )
 frames = SubResource( 15 )
 animation = "fireball"
 frame = 1
@@ -98,14 +98,14 @@ playing = true
 flip_h = true
 
 [node name="PlayerDetector" type="Area2D" parent="Orientation/Sprite"]
-position = Vector2( -10.5063, -6.51458 )
+position = Vector2( -14.4947, -6.55801 )
 scale = Vector2( 0.464334, 0.471218 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Sprite/PlayerDetector"]
 modulate = Color( 0.027451, 0.0117647, 0.0117647, 1 )
-position = Vector2( -1193.23, 15.0555 )
+position = Vector2( -177.412, 16.489 )
 shape = SubResource( 16 )
 
 [node name="RayCast_Top" type="RayCast2D" parent="Orientation"]
@@ -127,7 +127,7 @@ cast_to = Vector2( -3000, 0 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 286.77, 231.229 )
+position = Vector2( 291.489, 231.229 )
 shape = SubResource( 17 )
 
 [node name="ActionDelay" type="Timer" parent="."]
