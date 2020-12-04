@@ -215,7 +215,7 @@ func handle_normal_horizontal_movement(delta):
 func _draw():
 	var tongue_target_global = null
 	if $PlayerTongue.shooting:
-		tongue_target_global = $PlayerTongue.global_position
+		tongue_target_global = $PlayerTongue.get_global_target_position()
 	elif $PlayerTongue.swinging:
 		tongue_target_global = swing_pivot_position
 	

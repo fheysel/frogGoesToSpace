@@ -7,27 +7,37 @@ signal tongue_swing
 export (float) var shoot_speed = 1500 * 0.6
 export (float) var max_shoot_dist = 400 * 0.6
 
-var shoot_direction = Vector2.RIGHT
 var idle = true
 var shooting = false
 var swinging = false
 
+var shoot_direction = Vector2.RIGHT
+var tongue_length = 0
+
+func get_tongue_vector():
+	return shoot_direction * tongue_length
+
+func get_global_target_position():
+	return get_global_transform().xform(get_tongue_vector())
+
+func update_tongue_location():
+	var loc = get_tongue_vector()
+	$TongueRaycast.cast_to = loc
+	$Sprite.position = loc
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start_idle()
-	
+
 func start_idle():
 	idle = true
 	shooting = false
 	swinging = false
-	
+
 	$Sprite.visible = false
-	$TongueCollisionArea/CollisionShape2D.disabled = true
 	# Stop all sound effects
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.playing = false
-	position = Vector2.ZERO
 
 func handle_idle(_delta):
 	pass
@@ -36,33 +46,37 @@ func start_shoot(dirn):
 	idle = false
 	shooting = true
 	swinging = false
-	$Sprite.visible = false
-	$TongueCollisionArea/CollisionShape2D.disabled = false
+
 	shoot_direction = dirn
+	tongue_length = 0
+	update_tongue_location()
+	$TongueRaycast.enabled = true
+
+	$Sprite.visible = true
 	$ShootSoundPlayer.play(0)
-	
+
 func handle_shoot(delta):
-	# Advance tongue in direction 
-	position += shoot_direction * shoot_speed * delta 
-
-	if position.length_squared() >= max_shoot_dist * max_shoot_dist:
-		# We didn't hit anything. Stop shooting.1)
+	# Check if the raycast hit something
+	if $TongueRaycast.is_colliding():
+		start_swing($TongueRaycast.get_collider(), $TongueRaycast.get_collision_point())
+	if tongue_length >= max_shoot_dist:
+		# We didn't hit anything. Stop shooting.
 		start_idle()
+	tongue_length += shoot_speed * delta
+	update_tongue_location()
 
-func start_swing(_body):
+func start_swing(_body, global_point):
 	idle = false
 	shooting = false
 	swinging = true
+
+	$TongueRaycast.enabled = false
+	emit_signal("tongue_swing", global_point)
+
 	$Sprite.visible = false
-	# We need to use set_deferred to set this property in order to avoid an
-	# error. I believe it is because we are adjusting this from the
-	# TongueCollisionArea's event, and it doesn't like us adjusting properties
-	# while handling its events. [FGTS-75]
-	$TongueCollisionArea/CollisionShape2D.set_deferred('disabled', true)
 	# Stop playing shoot sound effect once tongue sticks
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.play(0)
-	emit_signal("tongue_swing", get_global_transform().xform(Vector2.ZERO))
 
 func handle_swing(_delta):
 	pass
@@ -82,10 +96,6 @@ func _process(delta):
 func _on_Player_tongue_start(facing):
 	if idle:
 		start_shoot(facing)
-
-func _on_TongueCollisionArea_body_entered(body):
-	if shooting:
-		start_swing(body)
 
 func _on_Player_tongue_stop():
 	if swinging:
