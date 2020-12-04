@@ -1,0 +1,341 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
+[ext_resource path="res://Menus/InGameMenu/InGameMenu.gd" type="Script" id=3]
+[ext_resource path="res://Menus/InGameMenu/PauseSubmenu.gd" type="Script" id=4]
+[ext_resource path="res://Menus/InGameMenu/QuitVerifySubmenu.gd" type="Script" id=5]
+[ext_resource path="res://Menus/InGameMenu/HelpSubmenu.gd" type="Script" id=6]
+[ext_resource path="res://Menus/InGameMenu/SwitchMenuButton.gd" type="Script" id=7]
+[ext_resource path="res://Menus/InGameMenu/QuitGameButton.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FadeToBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:pause_child")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FadeToBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:pause_child")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "unfade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FadeToBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:pause_child")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="InGameMenuLayer" type="CanvasLayer"]
+
+[node name="InGameMenu" type="MarginContainer" parent="."]
+pause_mode = 2
+margin_right = 640.0
+margin_bottom = 512.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+default_screen_path = NodePath("PauseSubmenu")
+
+[node name="TransparentBG" type="ColorRect" parent="InGameMenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0, 0, 0, 0.705882 )
+
+[node name="PauseSubmenu" type="MarginContainer" parent="InGameMenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+script = ExtResource( 4 )
+first_focus_path = NodePath("CenterContainer/VBoxContainer/ReturnToGameButton")
+
+[node name="CenterContainer" type="CenterContainer" parent="InGameMenu/PauseSubmenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+rect_pivot_offset = Vector2( -425.13, 56.991 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu/PauseSubmenu/CenterContainer"]
+margin_left = 266.0
+margin_top = 204.0
+margin_right = 374.0
+margin_bottom = 307.0
+
+[node name="Label" type="Label" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
+margin_right = 108.0
+margin_bottom = 28.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "PAUSE"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReturnToGameButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 108.0
+margin_bottom = 53.0
+theme = ExtResource( 2 )
+text = "Return To Game"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+menu_control_path = NodePath("../../../..")
+
+[node name="HelpButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
+margin_top = 57.0
+margin_right = 108.0
+margin_bottom = 78.0
+theme = ExtResource( 2 )
+text = "Help"
+script = ExtResource( 7 )
+menu_control_path = NodePath("../../../..")
+target_path = NodePath("../../../../HelpSubmenu")
+
+[node name="QuitButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 108.0
+margin_bottom = 103.0
+theme = ExtResource( 2 )
+text = "Quit"
+script = ExtResource( 7 )
+menu_control_path = NodePath("../../../..")
+target_path = NodePath("../../../../QuitVerifySubmenu")
+
+[node name="HelpSubmenu" type="MarginContainer" parent="InGameMenu"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+script = ExtResource( 6 )
+first_focus_path = NodePath("MarginContainer/BackButton")
+menu_parent_path = NodePath("../PauseSubmenu")
+
+[node name="ColorRect" type="ColorRect" parent="InGameMenu/HelpSubmenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="InGameMenu/HelpSubmenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+rect_pivot_offset = Vector2( -425.13, 56.991 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu/HelpSubmenu/CenterContainer"]
+margin_left = 260.0
+margin_top = 226.0
+margin_right = 379.0
+margin_bottom = 285.0
+
+[node name="Label" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
+margin_right = 119.0
+margin_bottom = 59.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "Help menu
+TODO..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="InGameMenu/HelpSubmenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="BackButton" type="Button" parent="InGameMenu/HelpSubmenu/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 61.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+text = "Back"
+script = ExtResource( 7 )
+menu_control_path = NodePath("../../..")
+target_path = NodePath("../../../PauseSubmenu")
+
+[node name="QuitVerifySubmenu" type="MarginContainer" parent="InGameMenu"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+script = ExtResource( 5 )
+first_focus_path = NodePath("CenterContainer/VBoxContainer/HBoxContainer/NoButton")
+menu_parent_path = NodePath("../PauseSubmenu")
+
+[node name="CenterContainer" type="CenterContainer" parent="InGameMenu/QuitVerifySubmenu"]
+margin_right = 640.0
+margin_bottom = 512.0
+rect_pivot_offset = Vector2( -425.13, 56.991 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu/QuitVerifySubmenu/CenterContainer"]
+margin_left = 225.0
+margin_top = 236.0
+margin_right = 414.0
+margin_bottom = 276.0
+
+[node name="Label" type="Label" parent="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer"]
+margin_right = 189.0
+margin_bottom = 15.0
+theme = ExtResource( 2 )
+text = "Are you sure you want to quit?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer"]
+margin_top = 19.0
+margin_right = 189.0
+margin_bottom = 39.0
+alignment = 1
+
+[node name="QuitGameButton" type="Button" parent="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 60.0
+margin_right = 94.0
+margin_bottom = 20.0
+theme = ExtResource( 2 )
+text = "Yes"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoButton" type="Button" parent="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 98.0
+margin_right = 128.0
+margin_bottom = 20.0
+theme = ExtResource( 2 )
+text = "No"
+script = ExtResource( 7 )
+menu_control_path = NodePath("../../../../..")
+target_path = NodePath("../../../../../PauseSubmenu")
+
+[node name="FadeToBlack" type="ColorRect" parent="InGameMenu"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InGameMenu"]
+anims/fade = SubResource( 2 )
+anims/idle = SubResource( 4 )
+anims/unfade = SubResource( 3 )
+[connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/ReturnToGameButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/ReturnToGameButton" method="_on_pressed"]
+[connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/HelpButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/HelpButton" method="_on_pressed"]
+[connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/QuitButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="InGameMenu/HelpSubmenu/MarginContainer/BackButton" to="InGameMenu/HelpSubmenu/MarginContainer/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer/HBoxContainer/QuitGameButton" to="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer/HBoxContainer/QuitGameButton" method="_on_QuitGameButton_pressed"]
+[connection signal="pressed" from="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer/HBoxContainer/NoButton" to="InGameMenu/QuitVerifySubmenu/CenterContainer/VBoxContainer/HBoxContainer/NoButton" method="_on_pressed"]
+[connection signal="animation_finished" from="InGameMenu/AnimationPlayer" to="InGameMenu" method="_on_AnimationPlayer_animation_finished"]
