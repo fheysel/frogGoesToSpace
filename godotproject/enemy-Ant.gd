@@ -45,6 +45,8 @@ func _physics_process(_delta):
 func begin_attack():
 	var RayCastList = [$Orientation/RayCast_Top.get_collider(), $Orientation/RayCast_Middle.get_collider(), $Orientation/RayCast_Bottom.get_collider()]
 	
+	$Orientation/Sprite.play("fireball")
+	
 	for RC in RayCastList:
 		if is_instance_valid(RC):
 			if RC.name == "Player":
