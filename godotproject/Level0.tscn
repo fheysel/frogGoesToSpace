@@ -136,5 +136,6 @@ scale = Vector2( 0.05, 0.05 )
 
 [node name="EOL" parent="." instance=ExtResource( 13 )]
 position = Vector2( 9928, 544 )
+
 [node name="InGameMenuLayer" parent="." instance=ExtResource( 14 )]
 [connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_DeathPlane_body_entered"]

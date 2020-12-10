@@ -53,7 +53,7 @@ tracks/2/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "idle"
 length = 0.1
 tracks/0/type = "value"
@@ -93,8 +93,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "unfade"
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("FadeToBlack:color")
@@ -330,8 +329,8 @@ color = Color( 0, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="InGameMenu"]
 anims/fade = SubResource( 2 )
-anims/idle = SubResource( 4 )
-anims/unfade = SubResource( 3 )
+anims/idle = SubResource( 3 )
+anims/unfade = SubResource( 4 )
 [connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/ReturnToGameButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/ReturnToGameButton" method="_on_pressed"]
 [connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/HelpButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/HelpButton" method="_on_pressed"]
 [connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/QuitButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/QuitButton" method="_on_pressed"]
