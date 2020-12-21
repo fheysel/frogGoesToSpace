@@ -2,9 +2,11 @@ extends Node2D
 
 const SPIKE := 3
 const STAR := 12
+const ENEMYFROG := 24
 
 export (PackedScene) var Spike
 export (PackedScene) var Star
+export (PackedScene) var EnemyFrog
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +24,8 @@ func setup_tiles():
 				create_instance_from_tilemap(cell, Spike, self, Vector2(8, 12))
 			STAR:
 				create_instance_from_tilemap(cell, Star, self, Vector2(16,20))
+			ENEMYFROG:
+				create_instance_from_tilemap(cell, EnemyFrog, self, Vector2(1,1))
 				
 
 func create_instance_from_tilemap(coord:Vector2, prefab:PackedScene, parent:Node2D, offset:Vector2 = Vector2.ZERO): 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_castle.png-ce7e11f3f091000cc239f6cc60e44dfc.stex"
+path="res://.import/single_poison_frog.png-771e560eded8dc619369e0ea65ed42f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Level1/tile_castle.png"
-dest_files=[ "res://.import/tile_castle.png-ce7e11f3f091000cc239f6cc60e44dfc.stex" ]
+source_file="res://Tiles/Enemies/single_poison_frog.png"
+dest_files=[ "res://.import/single_poison_frog.png-771e560eded8dc619369e0ea65ed42f6.stex" ]
 
 [params]
 
