@@ -1,10 +1,13 @@
 [gd_resource type="TileSet" load_steps=28 format=2]
+[gd_resource type="TileSet" load_steps=31 format=2]
 
 [ext_resource path="res://Tiles/Level0/world/level0_mvp_tiles.png" type="Texture" id=1]
 [ext_resource path="res://3d5d108a0b5c6a24a22e82e7e8980573.png" type="Texture" id=2]
 [ext_resource path="res://Tiles/Objects/tileset.png" type="Texture" id=3]
 [ext_resource path="res://Tiles/Level0/objects/mushrooms.png" type="Texture" id=4]
 [ext_resource path="res://Tiles/Level0/objects/objects.png" type="Texture" id=5]
+[ext_resource path="res://Tiles/Objects/stars.png" type="Texture" id=6]
+[ext_resource path="res://poison_frog.png" type="Texture" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -489,3 +492,17 @@ resource_local_to_scene = true
 23/shape_one_way_margin = 0.0
 23/shapes = [  ]
 23/z_index = -1
+24/name = "poison_frog.png 24"
+24/texture = ExtResource( 7 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 0, 8, 32, 32 )
+24/tile_mode = 0
+24/occluder_offset = Vector2( 0, 0 )
+24/navigation_offset = Vector2( 0, 0 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
+24/shapes = [  ]
+24/z_index = 0
