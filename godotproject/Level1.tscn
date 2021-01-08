@@ -1,18 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Level1/16x16 Steel Tileset.png" type="Texture" id=2]
 [ext_resource path="res://Tiles/Level1/tile_castle_grey.png" type="Texture" id=3]
-[ext_resource path="res://Tiles/Level1/ParallaxBackground/sky.png" type="Texture" id=4]
-[ext_resource path="res://Tiles/Level1/ParallaxBackground/City_Layer_2.png" type="Texture" id=5]
-[ext_resource path="res://Tiles/Level1/ParallaxBackground/City_Layer_3.png" type="Texture" id=6]
-[ext_resource path="res://Tiles/Level1/ParallaxBackground/clouds.png" type="Texture" id=7]
-[ext_resource path="res://Tiles/Level1/ParallaxBackground/City_Layer_1.png" type="Texture" id=8]
+[ext_resource path="res://Tiles/Level1/ParallaxBackground/skyline-b.png" type="Texture" id=4]
+[ext_resource path="res://Tiles/Level1/ParallaxBackground/skyline-a.png" type="Texture" id=6]
 [ext_resource path="res://DeathPlane.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Tiles/Objects/stars.png" type="Texture" id=10]
 [ext_resource path="res://Level1.gd" type="Script" id=11]
 [ext_resource path="res://Star.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Spike.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Fan.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -142,45 +140,24 @@ tile_data = PoolIntArray( -2097070, 2, 0, -2097069, 0, 0, -2097068, 0, 0, -20970
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxLayerSky" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1024, 0 )
+[node name="ParallaxLayerCitySkylineB" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2560, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( 776, -4392 )
-scale = Vector2( 19.1, 56.5227 )
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineB"]
+position = Vector2( 1728, -680 )
+scale = Vector2( 10, 10 )
 texture = ExtResource( 4 )
 
-[node name="ParallaxLayerClouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1024, 0 )
+[node name="ParallaxLayerCitySkylineA" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2560, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerClouds"]
-position = Vector2( 544, -1024 )
-scale = Vector2( 14.05, 18.2102 )
-texture = ExtResource( 7 )
-
-[node name="ParallaxLayerCity3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1024, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCity3"]
-position = Vector2( 280, -600 )
-scale = Vector2( 7.55, 13.4545 )
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineA"]
+position = Vector2( 448, -680 )
+scale = Vector2( 10, 10 )
 texture = ExtResource( 6 )
-
-[node name="ParallaxLayerCity2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 768, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCity2"]
-position = Vector2( 381.5, -380 )
-scale = Vector2( 9.6625, 10.5 )
-texture = ExtResource( 5 )
-
-[node name="ParallaxLayerCity1" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 640, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCity1"]
-position = Vector2( 315, -384 )
-scale = Vector2( 8.125, 10.3636 )
-texture = ExtResource( 8 )
 
 [node name="DeathPlane" parent="." instance=ExtResource( 9 )]
 position = Vector2( -56, -680 )
+
+[node name="Fan" parent="." instance=ExtResource( 14 )]
+position = Vector2( 448, -56 )
