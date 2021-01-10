@@ -29,7 +29,7 @@ func update_active_screen():
 		# Set pause on SceneTree - this will pause the game logic
 		# (except for us, because we have our pause mode set to Process, not Inherit)
 		get_tree().paused = true
-		# Show ourselves
+		# Show ourselves (the in-game menu)
 		visible = true
 		# Set specific screen to be displayed and run
 		screen_current.visible = true
