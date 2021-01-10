@@ -21,6 +21,8 @@ config/icon="res://icon.png"
 
 [audio]
 
+mix_rate=48000
+output_latency=20
 output_latency.web=20
 
 [display]
