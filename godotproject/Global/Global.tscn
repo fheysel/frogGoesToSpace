@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Global/Global.gd" type="Script" id=1]
+[ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
+[ext_resource path="res://Menus/InGameMenu/InGameMenu.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -14,6 +16,253 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LoadingText:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SideSwipeAnimationPoly:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 740, 0, 640, 512, 800, 512, 800, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../InGameMenuLayer:pause_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "loading_fadein_out"
+length = 1.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("LoadingText:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75, 1.5 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_process_loading"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "swipe_in"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SideSwipeAnimationPoly:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.65 ),
+"transitions": PoolRealArray( 3, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 740, 0, 640, 512, 800, 512, 800, 0 ), PoolVector2Array( 0, 0, -100, 512, 800, 512, 800, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.65 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_process_loading"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../InGameMenuLayer:pause_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "swipe_out"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SideSwipeAnimationPoly:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.65 ),
+"transitions": PoolRealArray( 3, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( -200, 0, -200, 512, 640, 512, 740, 0 ), PoolVector2Array( -200, 0, -200, 512, -100, 512, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.65 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_unpause_new_scene"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../InGameMenuLayer:pause_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.65 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "wait_a_bit"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "loading_fadein_out"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "swipe_in"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "swipe_out"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "wait_a_bit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachine" id=20]
+states/idle/node = SubResource( 7 )
+states/idle/position = Vector2( 75, 128 )
+states/loading_fadein_out/node = SubResource( 8 )
+states/loading_fadein_out/position = Vector2( 562, 128 )
+states/swipe_in/node = SubResource( 9 )
+states/swipe_in/position = Vector2( 221, 55 )
+states/swipe_out/node = SubResource( 10 )
+states/swipe_out/position = Vector2( 221, 202 )
+states/wait_a_bit/node = SubResource( 11 )
+states/wait_a_bit/position = Vector2( 327, 128 )
+transitions = [ "loading_fadein_out", "swipe_out", SubResource( 12 ), "idle", "swipe_in", SubResource( 13 ), "swipe_out", "idle", SubResource( 14 ), "swipe_in", "swipe_out", SubResource( 15 ), "swipe_in", "wait_a_bit", SubResource( 16 ), "wait_a_bit", "loading_fadein_out", SubResource( 17 ), "loading_fadein_out", "wait_a_bit", SubResource( 18 ), "wait_a_bit", "swipe_out", SubResource( 19 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
+
 [node name="Node" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -22,6 +271,7 @@ script = ExtResource( 1 )
 layer = 100
 
 [node name="DebugModeText" type="Label" parent="DebugModeTextLayer"]
+visible = false
 margin_left = 485.0
 margin_top = 480.0
 margin_right = 627.0
@@ -31,3 +281,38 @@ text = "DEBUG MODE ACTIVE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SideSwipeAnimationLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="SideSwipeAnimationPoly" type="Polygon2D" parent="SideSwipeAnimationLayer"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 740, 0, 640, 512, 800, 512, 800, 0 )
+
+[node name="LoadingText" type="Label" parent="SideSwipeAnimationLayer"]
+self_modulate = Color( 0, 0, 0, 0 )
+margin_left = 519.523
+margin_top = 439.07
+margin_right = 571.523
+margin_bottom = 454.07
+theme = ExtResource( 2 )
+text = "Loading..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SideSwipeAnimationLayer"]
+anims/idle = SubResource( 2 )
+anims/loading_fadein_out = SubResource( 3 )
+anims/swipe_in = SubResource( 4 )
+anims/swipe_out = SubResource( 5 )
+anims/wait_a_bit = SubResource( 6 )
+
+[node name="AnimationTree" type="AnimationTree" parent="SideSwipeAnimationLayer"]
+tree_root = SubResource( 20 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 21 )
+
+[node name="InGameMenuLayer" parent="." instance=ExtResource( 3 )]
+pause_mode = 1

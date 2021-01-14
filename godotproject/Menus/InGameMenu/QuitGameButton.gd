@@ -1,4 +1,4 @@
 extends Button
 
 func _on_QuitGameButton_pressed():
-	get_tree().quit()
+	Global.fade_to_scene('res://Menus/MainMenu/MainMenu.tscn')

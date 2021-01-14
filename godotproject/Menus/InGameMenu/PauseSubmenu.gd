@@ -1,9 +1,9 @@
 extends MarginContainer
 
 export (NodePath) var first_focus_path
-onready var first_focus = get_node(first_focus_path)
+onready var first_focus = get_node(first_focus_path) if first_focus_path else null
 export (NodePath) var menu_parent_path
-onready var menu_parent = get_node(menu_parent_path)
+onready var menu_parent = get_node(menu_parent_path) if menu_parent_path else null
 
 const fade_transition = false
 
