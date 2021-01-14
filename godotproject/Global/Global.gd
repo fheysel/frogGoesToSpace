@@ -4,6 +4,7 @@ export (bool) var debug_mode = false
 export (bool) var player_is_god = false
 
 func _process(_delta_unused):
+	$DebugModeTextLayer/DebugModeText.visible = debug_mode
 	# Handle debug mode button combinations
 	if debug_mode:
 		if Input.is_action_pressed("menu") && Input.is_action_pressed("ui_accept"):
