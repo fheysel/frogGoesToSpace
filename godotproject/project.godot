@@ -25,6 +25,10 @@ mix_rate=48000
 output_latency=20
 output_latency.web=20
 
+[autoload]
+
+Global="*res://Global/Global.tscn"
+
 [display]
 
 window/size/width=640

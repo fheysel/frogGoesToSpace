@@ -8,11 +8,11 @@ onready var menu_parent = get_node(menu_parent_path)
 const fade_transition = false
 
 const debug_mode_inputs = [
-	2, 1, 3, 0,
-	2, 3, 0, 1,
-	1, 0, 2, 3,
-	0, 1, 2, 3,
-	2, 0, 1, 3
+	2, 1, 3, 0, # D L R U
+	2, 3, 0, 1, # D R U L
+	1, 0, 2, 3, # L U D R
+	0, 1, 2, 3, # U L D R
+	2, 0, 1, 3  # D U L R
 ]
 var debug_mode_input_index = 0
 
@@ -20,7 +20,8 @@ func set_initial_focus():
 	first_focus.grab_focus()
 
 func activate_debug_mode():
-	print("Debug mode would be activated")
+	print("Debug mode has been activated")
+	Global.debug_mode = true
 
 func _process(_delta):
 	if Input.is_action_pressed("ui_cancel"):
