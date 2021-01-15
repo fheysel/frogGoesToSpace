@@ -65,7 +65,6 @@ var swing_pivot_position = Vector2.ZERO
 var star_piece_count = 0
 
 var health = 3
-var is_god = false
 
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
@@ -418,7 +417,7 @@ func _physics_process(delta):
 	update_anim()
 
 func takeDamage(damageTaken):
-	if is_god:
+	if Global.player_is_god:
 		return
 	if $InvulnerableTimer.is_stopped():
 		health -= damageTaken
