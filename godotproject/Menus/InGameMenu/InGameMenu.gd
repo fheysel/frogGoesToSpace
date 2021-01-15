@@ -90,7 +90,8 @@ func _ready():
 
 func _process(_delta):
 	var menu_pressed = Input.is_action_just_pressed("menu")
-	# We use whether this node is visible to track whether the menu is open.
+	# We set the screen_current variable to null to indicate that the menu is closed.
+	# We also need to check whether the current scene prevents us from pausing the game (main menu, high score)
 	var inhibit_pause = "inhibit_pause" in get_tree().current_scene && get_tree().current_scene.inhibit_pause
 	if !inhibit_pause && menu_pressed && screen_current == null:
 		open_menu()
