@@ -37,5 +37,5 @@ func _ready():
 		cs.transform = Transform2D(0, Vector2(extent[0], extent[1]))
 		sb.add_child(cs)
 		$".".add_child(sb)
-	pass # Replace with function body.
+
 
