@@ -260,7 +260,8 @@ func do_movement(delta):
 			# We decided that the frog should exit swinging state when they hit a wall or the ground
 			# Let's just make them stop swinging no matter what they collided with
 			stop_swing()
-			
+		
+		#Set sprite offset while swinging so that mouth lines up with tongue	
 		if facing.x < 0: #facing left
 			$Sprite.set_offset(Vector2(11,16))
 		elif facing.x > 0:
