@@ -260,7 +260,12 @@ func do_movement(delta):
 			# We decided that the frog should exit swinging state when they hit a wall or the ground
 			# Let's just make them stop swinging no matter what they collided with
 			stop_swing()
-
+			
+		if facing.x < 0: #facing left
+			$Sprite.set_offset(Vector2(11,16))
+		elif facing.x > 0:
+			$Sprite.set_offset(Vector2(-11,16))
+		
 		animation_tree.set('parameters/swing/blend_position', velocity.normalized())
 		animation_mode.travel("swing")
 
