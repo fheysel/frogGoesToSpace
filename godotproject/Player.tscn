@@ -46,6 +46,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 3, 1, 0, 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 0.45
@@ -388,7 +400,7 @@ states/tongue_retract/node = SubResource( 51 )
 states/tongue_retract/position = Vector2( 393, 242.75 )
 transitions = [ "Idle", "Hop", SubResource( 52 ), "Hop", "Idle", SubResource( 53 ), "Idle", "tongue_launch", SubResource( 54 ), "tongue_retract", "Idle", SubResource( 55 ), "Idle", "Dead", SubResource( 56 ), "Idle", "Launch", SubResource( 57 ), "Launch", "Land", SubResource( 58 ), "Land", "Idle", SubResource( 59 ), "tongue_launch", "tongue_retract", SubResource( 60 ), "tongue_launch", "swing", SubResource( 61 ), "swing", "tongue_retract", SubResource( 62 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -135.938, -44.3677 )
+graph_offset = Vector2( -135.938, 138.243 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=64]
 
@@ -452,7 +464,7 @@ parameters/Hop/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Land/blend_position = Vector2( 0, 0 )
 parameters/Launch/blend_position = Vector2( 0, 0 )
-parameters/swing/blend_position = Vector2( 0, 0 )
+parameters/swing/blend_position = Vector2( -1, 0.0128756 )
 parameters/tongue_launch/blend_position = Vector2( 0, 0 )
 parameters/tongue_retract/blend_position = Vector2( 0, 0 )
 
