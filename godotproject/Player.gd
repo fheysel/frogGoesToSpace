@@ -41,6 +41,7 @@ export (float) var tongue_exit_jump_bonus_speed_in_dirn = 20
 export (float) var tongue_exit_jump_bonus_speed_up = 200
 
 
+onready var player_tongue_node = get_node("PlayerTongue")
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
@@ -407,8 +408,19 @@ func _physics_process(delta):
 			velocity_after_swing += Vector2.UP * tongue_exit_jump_bonus_speed_up
 			velocity = velocity_after_swing
 		elif tongue_pressed:
-			# When we exit swinging using the tongue button, just drop them out of swinging
+			# When we exit swinging using the tongue button, shoot player in direction of tongue
+			# with small upwards boost
 			stop_swing()
+			var velocity_after_swing = Vector2(velocity.y, -1*velocity.x) 
+			# Make sure this always launches the player in the upwards direction of the tongue
+			# not downwards
+			if velocity_after_swing.y > 0:
+				velocity_after_swing = velocity_after_swing * -1
+				
+			
+			
+			velocity_after_swing += Vector2.UP * tongue_exit_jump_bonus_speed_up
+			velocity = velocity_after_swing
 	else:
 		# If we aren't swinging, then we may be able to jump.
 		# Check if we should jump
