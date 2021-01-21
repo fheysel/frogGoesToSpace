@@ -60,7 +60,7 @@ func _screen_should_fade(screen):
 	return screen != null && screen.fade_transition
 
 func navigate_to_new_screen(new_screen):
-	if _screen_should_fade(screen_current) || _screen_should_fade(new_screen):
+	if new_screen != null && (_screen_should_fade(screen_current) || _screen_should_fade(new_screen)):
 		_fade_to_new_screen(new_screen)
 	else:
 		_switch_screen(new_screen)
@@ -90,15 +90,17 @@ func _ready():
 
 func _process(_delta):
 	var menu_pressed = Input.is_action_just_pressed("menu")
-	# We use whether this node is visible to track whether the menu is open.
-	if menu_pressed && screen_current == null:
+	# We set the screen_current variable to null to indicate that the menu is closed.
+	# We also need to check whether the current scene prevents us from pausing the game (main menu, high score)
+	var inhibit_pause = "inhibit_pause" in get_tree().current_scene && get_tree().current_scene.inhibit_pause
+	if !inhibit_pause && menu_pressed && screen_current == null:
 		open_menu()
 	elif visible:
 		global_main()
 	
 	# Apply our variable pause_child - it will be animated during screen fades
 	if screen_current != null:
-		screen_current.pause_mode = PAUSE_MODE_STOP if pause_child else PAUSE_MODE_PROCESS
+		screen_current.pause_mode = PAUSE_MODE_STOP if pause_child else PAUSE_MODE_INHERIT
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "fade":
