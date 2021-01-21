@@ -41,7 +41,6 @@ export (float) var tongue_exit_jump_bonus_speed_in_dirn = 20
 export (float) var tongue_exit_jump_bonus_speed_up = 200
 
 
-onready var player_tongue_node = get_node("PlayerTongue")
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
@@ -411,14 +410,19 @@ func _physics_process(delta):
 			# When we exit swinging using the tongue button, shoot player in direction of tongue
 			# with small upwards boost
 			stop_swing()
-			var velocity_after_swing = Vector2(velocity.y, -1*velocity.x) 
-			# Make sure this always launches the player in the upwards direction of the tongue
-			# not downwards
-			if velocity_after_swing.y > 0:
-				velocity_after_swing = velocity_after_swing * -1
+			
+			# A unit vector in the direction of the mouth to the tip of tongue.
+			# It will be used to calculate the launch direction.
+			# The direction is calculated as the vector perpendicular to the current velocity,
+			# we divide by the magnitude to make it a unit vecotr. This helps to normalize it.
+			var tongue_direction = Vector2(velocity.y, -1*velocity.x) 
+			tongue_direction = tongue_direction / sqrt(pow(velocity.x,2.0) + pow(velocity.y, 2.0))
+			
+			# Make sure this always launches the player in the upwards direction
+			if tongue_direction.y > 0:
+				tongue_direction = tongue_direction * -1
 				
-			
-			
+			var velocity_after_swing = tongue_direction * 500
 			velocity_after_swing += Vector2.UP * tongue_exit_jump_bonus_speed_up
 			velocity = velocity_after_swing
 	else:
