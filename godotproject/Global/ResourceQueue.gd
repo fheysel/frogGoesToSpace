@@ -1,3 +1,8 @@
+# This file was obtained from https://docs.godotengine.org/en/stable/tutorials/io/background_loading.html#doc-background-loading
+# The Godot documentation folks provide no warranty/guarantee of functionality or endorsement of our game.
+# "Note: this code, in its current form, is not tested in real world scenarios. If you run into any issues, ask for help in one of Godot's community channels."
+# The Godot documentation is under the CC-BY 3.0 license: https://creativecommons.org/licenses/by/3.0/
+# 2020-01-14: File included verbatim from https://docs.godotengine.org/en/stable/_downloads/db6ccb8924e9f1d36c1319e2813e4808/resource_queue.gd except for this header.
 var thread
 var mutex
 var sem
