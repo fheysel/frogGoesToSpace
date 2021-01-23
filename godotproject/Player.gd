@@ -418,15 +418,13 @@ func _physics_process(delta):
 			# The direction is calculated as the vector perpendicular to the current velocity,
 			# we divide by the magnitude to make it a unit vecotr. This helps to normalize it.
 			var tongue_direction = Vector2(velocity.y, -1*velocity.x).normalized()
-			print(tongue_direction)
-			# tongue_direction = tongue_direction / sqrt(pow(velocity.x,2.0) + pow(velocity.y, 2.0))
 			
 			# Make sure this always launches the player in the upwards direction
 			if tongue_direction.y > 0:
 				tongue_direction = tongue_direction * -1
 			
 			# Set velocity
-			var velocity_after_swing = tongue_direction * (200 + swing_radius)
+			var velocity_after_swing = tongue_direction * (200 + 1 	* swing_radius) #TODO make these variables
 			velocity_after_swing += Vector2.UP * tongue_exit_launch_bonus_speed_up # gives it a little oomf
 			velocity = velocity_after_swing
 	else:
