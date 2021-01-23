@@ -1,0 +1,263 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Global/HUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Tiles/Objects/star_new.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/Objects/heart.png" type="Texture" id=3]
+[ext_resource path="res://Global/HUDLayer.gd" type="Script" id=4]
+[ext_resource path="res://Global/HUDLayer_inmenu.tres" type="StyleBox" id=5]
+[ext_resource path="res://Global/HUDLayer_ingame.tres" type="StyleBox" id=6]
+
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+
+[sub_resource type="Animation" id=6]
+resource_name = "move_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanelContainer:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -62 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "move_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanelContainer:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -62 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "ingame"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanelContainer:custom_styles/panel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "inmenu"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanelContainer:custom_styles/panel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "move_in"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "move_out"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachine" id=3]
+states/in/node = SubResource( 9 )
+states/in/position = Vector2( 531, 124 )
+states/move_in/node = SubResource( 10 )
+states/move_in/position = Vector2( 377, 80 )
+states/move_out/node = SubResource( 11 )
+states/move_out/position = Vector2( 377, 167 )
+states/out/node = SubResource( 8 )
+states/out/position = Vector2( 218, 124 )
+transitions = [ "move_in", "in", SubResource( 12 ), "in", "move_out", SubResource( 13 ), "move_out", "out", SubResource( 14 ), "out", "move_in", SubResource( 15 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[node name="HUDLayer" type="CanvasLayer"]
+layer = 7
+script = ExtResource( 4 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+margin_top = -62.0
+custom_styles/panel = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_right = 640.0
+margin_bottom = 52.0
+custom_constants/margin_top = 5
+custom_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_top = 5.0
+margin_right = 640.0
+margin_bottom = 47.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 12.0
+margin_right = 92.0
+margin_bottom = 42.0
+
+[node name="LifeIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/LifeContainer"]
+margin_right = 40.0
+margin_bottom = 42.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeTimes" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/LifeContainer"]
+margin_left = 44.0
+margin_top = 3.0
+margin_right = 59.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "×"
+
+[node name="LifeCountLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/LifeContainer"]
+margin_left = 63.0
+margin_top = 3.0
+margin_right = 80.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="StarContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 112.0
+margin_right = 192.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/StarContainer"]
+margin_right = 40.0
+margin_bottom = 42.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarTimesLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/StarContainer"]
+margin_left = 44.0
+margin_top = 3.0
+margin_right = 59.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "×"
+
+[node name="StarCountLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/StarContainer"]
+margin_left = 63.0
+margin_top = 3.0
+margin_right = 80.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 212.0
+margin_right = 244.0
+margin_bottom = 42.0
+custom_constants/margin_right = 32
+
+[node name="ScoreContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 264.0
+margin_right = 467.0
+margin_bottom = 42.0
+
+[node name="ScoreTextLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/ScoreContainer"]
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "Score: "
+
+[node name="ScoreCountLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/ScoreContainer"]
+margin_left = 101.0
+margin_top = 3.0
+margin_right = 203.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "000000"
+
+[node name="TimeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 487.0
+margin_right = 628.0
+margin_bottom = 42.0
+
+[node name="TimeTextLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/TimeContainer"]
+margin_top = 3.0
+margin_right = 80.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "Time: "
+
+[node name="TimeCountLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/TimeContainer"]
+margin_left = 84.0
+margin_top = 3.0
+margin_right = 141.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "0:00"
+
+[node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 5 )
+anims/move_in = SubResource( 6 )
+anims/move_out = SubResource( 7 )
+
+[node name="StyleAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ingame = SubResource( 1 )
+anims/inmenu = SubResource( 2 )
+
+[node name="MovementAnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 3 )
+anim_player = NodePath("../MovementAnimationPlayer")
+active = true
+parameters/playback = SubResource( 4 )
