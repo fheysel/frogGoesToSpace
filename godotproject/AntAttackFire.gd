@@ -16,7 +16,9 @@ func _physics_process(_delta):
 
 func _on_PlayerCollisionArea_body_entered(body):
 	if "Player" in body.name:
-		body.takeDamage(3)
+		$FireballExplodeSoundPlayer.play(0)
+		body.takeDamage(1)
+		
 
 func set_direction(dir):
 	if dir != direction:
