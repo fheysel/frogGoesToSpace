@@ -40,6 +40,7 @@ export (float) var tongue_exit_jump_bonus_speed_in_dirn = 20
 # when jumping out of the swing.
 export (float) var tongue_exit_jump_bonus_speed_up = 200
 
+export (float) var tongue_exit_launch_bonus_speed_up = 400
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
@@ -78,8 +79,6 @@ func start_swing():
 	swing_angular_speed = sign(dotprod) * pow(abs(dotprod), 0.5) / max(1, swing_radius)
 
 func stop_swing():
-	# Convert swinging angular momentum into player velocity
-	velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
 	emit_signal("tongue_stop")
 
 func update_swing_radius_angle():
@@ -405,10 +404,26 @@ func _physics_process(delta):
 			var velocity_after_swing = velocity * tongue_exit_jump_multiplier_in_dirn
 			velocity_after_swing += velocity.normalized() * tongue_exit_jump_bonus_speed_in_dirn
 			velocity_after_swing += Vector2.UP * tongue_exit_jump_bonus_speed_up
-			velocity = velocity_after_swing
+			velocity = velocity_after_swing		
 		elif tongue_pressed:
-			# When we exit swinging using the tongue button, just drop them out of swinging
+			# When we exit swinging using the tongue button, shoot player in direction of tongue
+			# with small upwards boost
 			stop_swing()
+			
+			# A unit vector in the direction of the mouth to the tip of tongue.
+			# It will be used to calculate the launch direction.
+			# The direction is calculated as the vector perpendicular to the current velocity,
+			# we divide by the magnitude to make it a unit vecotr. This helps to normalize it.
+			var tongue_direction = Vector2(velocity.y, -1*velocity.x).normalized()
+			
+			# Make sure this always launches the player in the upwards direction
+			if tongue_direction.y > 0:
+				tongue_direction = tongue_direction * -1
+			
+			# Set velocity
+			var velocity_after_swing = tongue_direction * (tongue_exit_launch_bonus_speed_up / 2 + swing_radius) #TODO make these variables
+			velocity_after_swing += Vector2.UP * tongue_exit_launch_bonus_speed_up # gives it a little oomf
+			velocity = velocity_after_swing
 	else:
 		# If we aren't swinging, then we may be able to jump.
 		# Check if we should jump
