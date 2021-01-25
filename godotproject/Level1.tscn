@@ -164,6 +164,7 @@ tile_data = PoolIntArray( -1703847, 6, 0, -327630, 1, 0, 458765, 4, 0, 589838, 5
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayerCitySkylineB" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 2560, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineB"]
@@ -172,6 +173,7 @@ scale = Vector2( 10, 10 )
 texture = ExtResource( 4 )
 
 [node name="ParallaxLayerCitySkylineA" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 2560, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineA"]
@@ -180,7 +182,6 @@ scale = Vector2( 10, 10 )
 texture = ExtResource( 6 )
 
 [node name="ParallaxLayerFarBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 1.1, 1.1 )
 motion_mirroring = Vector2( 2560, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerFarBuildings"]
