@@ -79,8 +79,6 @@ func start_swing():
 	swing_angular_speed = sign(dotprod) * pow(abs(dotprod), 0.5) / max(1, swing_radius)
 
 func stop_swing():
-	# Convert swinging angular momentum into player velocity
-	#velocity = Vector2.DOWN.rotated(swing_angle) * swing_angular_speed * swing_radius
 	emit_signal("tongue_stop")
 
 func update_swing_radius_angle():
@@ -406,9 +404,8 @@ func _physics_process(delta):
 			var velocity_after_swing = velocity * tongue_exit_jump_multiplier_in_dirn
 			velocity_after_swing += velocity.normalized() * tongue_exit_jump_bonus_speed_in_dirn
 			velocity_after_swing += Vector2.UP * tongue_exit_jump_bonus_speed_up
-			velocity = velocity_after_swing
-		
-		if tongue_pressed:
+			velocity = velocity_after_swing		
+		elif tongue_pressed:
 			# When we exit swinging using the tongue button, shoot player in direction of tongue
 			# with small upwards boost
 			stop_swing()
@@ -424,7 +421,7 @@ func _physics_process(delta):
 				tongue_direction = tongue_direction * -1
 			
 			# Set velocity
-			var velocity_after_swing = tongue_direction * (200 + 1 	* swing_radius) #TODO make these variables
+			var velocity_after_swing = tongue_direction * (tongue_exit_launch_bonus_speed_up / 2 + swing_radius) #TODO make these variables
 			velocity_after_swing += Vector2.UP * tongue_exit_launch_bonus_speed_up # gives it a little oomf
 			velocity = velocity_after_swing
 	else:
