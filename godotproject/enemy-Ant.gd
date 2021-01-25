@@ -52,8 +52,8 @@ func begin_attack():
 			if RC.name == "Player":
 				attackState = STATE.detected_player_e
 				$ActionDelay.start()
+				$AttackSoundPlayer.play(0)
 	
-	$AttackSoundPlayer.play(0)
 
 func launch_attack():
 	if attackState == STATE.detected_player_e:

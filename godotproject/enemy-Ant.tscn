@@ -94,6 +94,7 @@ position = Vector2( 280.802, 224.642 )
 scale = Vector2( 19.2685, 18.8674 )
 frames = SubResource( 15 )
 animation = "fireball"
+frame = 2
 playing = true
 flip_h = true
 
