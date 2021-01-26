@@ -3,17 +3,30 @@ extends Control
 onready var lb_life = $LeftPanel/HBoxContainer/LifeContainer/LifeCountLabel
 onready var lb_star = $LeftPanel/HBoxContainer/StarContainer/StarCountLabel
 onready var lb_time = $RightPanel/TimeCountLabel
+onready var menu = $"/root/Global/InGameMenuLayer/InGameMenu"
 
 var player = null
 var countup_timer = null
 
+func _hud_is_hidden():
+	# Hide HUD if:
+	# - current scene says No HUD (title screen)
+	# - menu is open and current menu screen hides HUD
+	return \
+		Global.current_scene_has_property_set('inhibit_hud') || \
+		menu.should_hide_hud()
+
 func _process(_delta):
-	if Global.current_scene_has_property_set('inhibit_hud'):
+	# Check if we should hide the HUD
+	if _hud_is_hidden():
 		hide()
 		return
 	else:
 		show()
-	if $"/root/Global/InGameMenuLayer/InGameMenu".active():
+
+	# Check if we should show or hide the transparent backing to the HUD elements
+	# based on if the pause menu is open
+	if menu.active():
 		$StyleAnimationPlayer.play("inmenu")
 	else:
 		$StyleAnimationPlayer.play("ingame")
