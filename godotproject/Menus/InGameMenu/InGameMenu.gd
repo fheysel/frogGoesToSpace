@@ -14,6 +14,9 @@ var screens = []
 var screen_current = null
 var screen_after_fade = null
 
+func active():
+	return screen_current != null
+
 func update_active_screen():
 	# Pause and hide all of our child screens
 	for screen in screens:
@@ -92,7 +95,7 @@ func _process(_delta):
 	var menu_pressed = Input.is_action_just_pressed("menu")
 	# We set the screen_current variable to null to indicate that the menu is closed.
 	# We also need to check whether the current scene prevents us from pausing the game (main menu, high score)
-	var inhibit_pause = "inhibit_pause" in get_tree().current_scene && get_tree().current_scene.inhibit_pause
+	var inhibit_pause = Global.current_scene_has_property_set("inhibit_pause")
 	if !inhibit_pause && menu_pressed && screen_current == null:
 		open_menu()
 	elif visible:
