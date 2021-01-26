@@ -65,7 +65,7 @@ var swing_pivot_position = Vector2.ZERO
 # collected in-between levels or in-between deaths.
 var star_piece_count = 0
 
-var health = 3
+var health = 5
 
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
@@ -449,9 +449,8 @@ func takeDamage(damageTaken):
 		$InvulnerableTimer.start()
 
 func die():
-	print_debug("ded")
-	# The "var _unused" is needed to remove a warning about the return value being unused
-	var _unused = get_tree().reload_current_scene()
+	# This will need to be modified to do the death animation once that is implemented.
+	Global.fade_to_scene(Global.main_menu_path)
 
 func collect_star_piece(star_piece):
 	# Increment star piece counter

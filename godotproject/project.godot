@@ -28,6 +28,7 @@ output_latency.web=20
 [autoload]
 
 Global="*res://Global/Global.tscn"
+CountupTimer="*res://Global/CountupTimer.gd"
 
 [display]
 

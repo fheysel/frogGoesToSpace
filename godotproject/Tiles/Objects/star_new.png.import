@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stars.png-215c997b5209045fc5ca8708cdc935da.stex"
+path="res://.import/star_new.png-ba1ca5876b1a93cade3bd2e2cb20c665.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Objects/stars.png"
-dest_files=[ "res://.import/stars.png-215c997b5209045fc5ca8708cdc935da.stex" ]
+source_file="res://Tiles/Objects/star_new.png"
+dest_files=[ "res://.import/star_new.png-ba1ca5876b1a93cade3bd2e2cb20c665.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

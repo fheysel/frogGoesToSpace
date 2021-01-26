@@ -3,6 +3,8 @@ extends Node
 export (bool) var debug_mode = false
 export (bool) var player_is_god = false
 
+const main_menu_path = "res://Menus/MainMenu/MainMenu.tscn"
+
 var resource_queue = preload("res://Global/ResourceQueue.gd").new()
 var loading = null
 var swipe_anim_state_machine = null
@@ -38,7 +40,6 @@ func fade_to_scene(scene_path):
 		# Once processing is done, fade to the new scene
 		call_deferred('_fade_to_scene_deferred')
 
-
 func _fade_to_scene_deferred():
 	# Disable the current scene
 	get_tree().get_current_scene().pause_mode = PAUSE_MODE_STOP
@@ -61,6 +62,9 @@ func _process_loading():
 		# Make sure we unpause once we fade in
 		unpause_scene_upon_idle = true
 
+		# Reset the global timer
+		$"/root/CountupTimer".reset()
+
 		# Close the pause menu, if it was open
 		$InGameMenuLayer/InGameMenu.navigate_to_new_screen(null)
 
@@ -77,3 +81,14 @@ func _unpause_new_scene():
 	if unpause_scene_upon_idle:
 		get_tree().paused = false
 		unpause_scene_upon_idle = false
+
+### Helper functions
+# Check if the current scene (as marked during the transition)
+# has a given property set to true. Used to check if we are allowed
+# to pause or if we should show the HUD.
+func current_scene_has_property_set(property):
+	var scene = get_tree().current_scene
+	if !scene:
+		return false
+	return property in scene and scene[property]
+

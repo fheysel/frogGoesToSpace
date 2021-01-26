@@ -17,7 +17,7 @@ font_data = ExtResource( 1 )
 resource_name = "fade"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/path = NodePath("FadeToBlackLayer/FadeToBlack:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -29,7 +29,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("FadeToBlack:visible")
+tracks/1/path = NodePath("FadeToBlackLayer/FadeToBlack:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -57,7 +57,7 @@ tracks/2/keys = {
 resource_name = "idle"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/path = NodePath("FadeToBlackLayer/FadeToBlack:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -69,7 +69,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("FadeToBlack:visible")
+tracks/1/path = NodePath("FadeToBlackLayer/FadeToBlack:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -96,7 +96,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/path = NodePath("FadeToBlackLayer/FadeToBlack:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -108,7 +108,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("FadeToBlack:visible")
+tracks/1/path = NodePath("FadeToBlackLayer/FadeToBlack:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -133,6 +133,7 @@ tracks/2/keys = {
 }
 
 [node name="InGameMenuLayer" type="CanvasLayer"]
+layer = 5
 
 [node name="InGameMenu" type="MarginContainer" parent="."]
 margin_right = 640.0
@@ -320,11 +321,16 @@ script = ExtResource( 7 )
 menu_control_path = NodePath("../../../../..")
 target_path = NodePath("../../../../../PauseSubmenu")
 
-[node name="FadeToBlack" type="ColorRect" parent="InGameMenu"]
-visible = false
+[node name="FadeToBlackLayer" type="CanvasLayer" parent="InGameMenu"]
+layer = 8
+
+[node name="FadeToBlack" type="ColorRect" parent="InGameMenu/FadeToBlackLayer"]
 margin_right = 640.0
 margin_bottom = 512.0
 color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="InGameMenu"]
 anims/fade = SubResource( 2 )

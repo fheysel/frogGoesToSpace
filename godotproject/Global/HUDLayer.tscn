@@ -1,0 +1,175 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Global/HUDFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Tiles/Objects/star_new.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/Objects/heart.png" type="Texture" id=3]
+[ext_resource path="res://Global/HUDRoot.gd" type="Script" id=4]
+[ext_resource path="res://Global/HUDLayer_inmenu.tres" type="StyleBox" id=5]
+[ext_resource path="res://Global/HUDLayer_ingame.tres" type="StyleBox" id=6]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LeftPanel:custom_styles/panel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RightPanel:custom_styles/panel")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LeftPanel:custom_styles/panel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RightPanel:custom_styles/panel")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[node name="HUDLayer" type="CanvasLayer"]
+layer = 7
+
+[node name="HUDRoot" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftPanel" type="PanelContainer" parent="HUDRoot"]
+anchor_right = 1.0
+margin_right = 160.0
+margin_bottom = 47.0
+custom_styles/panel = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDRoot/LeftPanel"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 190.0
+margin_bottom = 42.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeContainer" type="HBoxContainer" parent="HUDRoot/LeftPanel/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 40.0
+
+[node name="LifeIcon" type="TextureRect" parent="HUDRoot/LeftPanel/HBoxContainer/LifeContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeTimes" type="Label" parent="HUDRoot/LeftPanel/HBoxContainer/LifeContainer"]
+margin_left = 44.0
+margin_top = 2.0
+margin_right = 59.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 1 )
+text = "×"
+
+[node name="LifeCountLabel" type="Label" parent="HUDRoot/LeftPanel/HBoxContainer/LifeContainer"]
+margin_left = 63.0
+margin_top = 2.0
+margin_right = 80.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="StarContainer" type="HBoxContainer" parent="HUDRoot/LeftPanel/HBoxContainer"]
+margin_left = 100.0
+margin_right = 180.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarIcon" type="TextureRect" parent="HUDRoot/LeftPanel/HBoxContainer/StarContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarTimesLabel" type="Label" parent="HUDRoot/LeftPanel/HBoxContainer/StarContainer"]
+margin_left = 44.0
+margin_top = 2.0
+margin_right = 59.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 1 )
+text = "×"
+
+[node name="StarCountLabel" type="Label" parent="HUDRoot/LeftPanel/HBoxContainer/StarContainer"]
+margin_left = 63.0
+margin_top = 2.0
+margin_right = 80.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="RightPanel" type="PanelContainer" parent="HUDRoot"]
+margin_left = 523.0
+margin_right = 640.0
+margin_bottom = 47.0
+custom_styles/panel = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeCountLabel" type="Label" parent="HUDRoot/RightPanel"]
+margin_left = 10.0
+margin_top = 4.0
+margin_right = 107.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+text = "0:00:00"
+align = 1
+
+[node name="StyleAnimationPlayer" type="AnimationPlayer" parent="HUDRoot"]
+anims/ingame = SubResource( 1 )
+anims/inmenu = SubResource( 2 )
