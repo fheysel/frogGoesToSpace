@@ -32,7 +32,7 @@ script = ExtResource( 3 )
 right_bound = 10000.0
 bottom_bound = 1000.0
 margin = 10.0
-camera_nodepath = NodePath("../../Level_0/Player/Camera2D")
+player_nodepath = NodePath("../Player")
 
 [node name="DeathPlane" type="Area2D" parent="."]
 script = ExtResource( 4 )
