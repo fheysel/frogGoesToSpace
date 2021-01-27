@@ -449,6 +449,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=69]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=70]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=71]
 
@@ -469,9 +470,9 @@ priority = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=78]
 priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+[sub_resource type="AnimationNodeStateMachineTransition" id=79]
 
-[sub_resource type="AnimationNodeStateMachine" id=79]
+[sub_resource type="AnimationNodeStateMachine" id=80]
 states/Dead/node = SubResource( 18 )
 states/Dead/position = Vector2( 111.5, 404.976 )
 states/Hop/node = SubResource( 23 )
@@ -492,11 +493,11 @@ states/tongue_launch/node = SubResource( 58 )
 states/tongue_launch/position = Vector2( 391.875, 176.5 )
 states/tongue_retract/node = SubResource( 63 )
 states/tongue_retract/position = Vector2( 393, 242.75 )
-transitions = [ "Idle", "Hop", SubResource( 64 ), "Hop", "Idle", SubResource( 65 ), "Idle", "tongue_launch", SubResource( 66 ), "tongue_retract", "Idle", SubResource( 67 ), "Idle", "Dead", SubResource( 68 ), "Idle", "Launch", SubResource( 69 ), "Launch", "Land", SubResource( 70 ), "Land", "Idle", SubResource( 71 ), "tongue_launch", "tongue_retract", SubResource( 72 ), "Launch", "jump_tongue_launch", SubResource( 73 ), "jump_tongue_launch", "jump_tongue_retract", SubResource( 74 ), "jump_tongue_launch", "swing", SubResource( 75 ), "swing", "jump_tongue_retract", SubResource( 76 ), "jump_tongue_retract", "Land", SubResource( 77 ), "Hop", "tongue_launch", SubResource( 78 ), "Land", "jump_tongue_launch", SubResource( 81 ) ]
+transitions = [ "Idle", "Hop", SubResource( 64 ), "Hop", "Idle", SubResource( 65 ), "Idle", "tongue_launch", SubResource( 66 ), "tongue_retract", "Idle", SubResource( 67 ), "Idle", "Dead", SubResource( 68 ), "Idle", "Launch", SubResource( 69 ), "Launch", "Land", SubResource( 70 ), "Land", "Idle", SubResource( 71 ), "tongue_launch", "tongue_retract", SubResource( 72 ), "Launch", "jump_tongue_launch", SubResource( 73 ), "jump_tongue_launch", "jump_tongue_retract", SubResource( 74 ), "jump_tongue_launch", "swing", SubResource( 75 ), "swing", "jump_tongue_retract", SubResource( 76 ), "jump_tongue_retract", "Land", SubResource( 77 ), "Hop", "tongue_launch", SubResource( 78 ), "Land", "jump_tongue_launch", SubResource( 79 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 23.1922, 154.432 )
+graph_offset = Vector2( 23.1922, 141.198 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=80]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=81]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -508,7 +509,6 @@ texture = ExtResource( 2 )
 flip_h = true
 vframes = 6
 hframes = 5
-frame = 20
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.54944, 1.15327 )
@@ -516,6 +516,7 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 2.73517, 0.182755 )
 
 [node name="HopSoundPlayer" type="AudioStreamPlayer2D" parent="."]
@@ -552,10 +553,10 @@ anims/tongue_right = SubResource( 11 )
 "anims/tongue_right _retract" = SubResource( 13 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 79 )
+tree_root = SubResource( 80 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 80 )
+parameters/playback = SubResource( 81 )
 parameters/Dead/blend_position = Vector2( 0, 0 )
 parameters/Hop/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )

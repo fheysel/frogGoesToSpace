@@ -332,18 +332,15 @@ func do_movement(delta):
 			
 	if tongue_pressed: # or tongue_held:
 		if $PlayerTongue.swinging:
-			animation_tree.set('parameters/tongue_retract/blend_position', velocity.normalized())
-			animation_mode.travel("tongue_retract")
+			animation_tree.set('parameters/Launch/blend_position', velocity.normalized())
+			animation_mode.travel("Launch")
 		elif !is_on_floor():
 			if facing.x < 0: #facing left
 				$Sprite.set_offset(Vector2(11,16))
 			elif facing.x > 0:
 				$Sprite.set_offset(Vector2(-11,16))
-				
 			animation_tree.set('parameters/jump_tongue_launch/blend_position', velocity.normalized())
 			animation_mode.travel("jump_tongue_launch")
-			#print($PlayerTongue/Sprite.get_offset())
-			
 		else:
 			animation_tree.set('parameters/tongue_launch/blend_position', velocity.normalized())
 			animation_mode.travel("tongue_launch")#emit_signal("tongue_start", get_tongue_direction())		
