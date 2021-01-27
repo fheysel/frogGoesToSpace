@@ -30,6 +30,7 @@ right_bound = 10000.0
 bottom_bound = 1000.0
 margin = 10.0
 player_nodepath = NodePath("../Player")
+camera_nodepath = NodePath("../../Level_0/Player/Camera2D")
 
 [node name="DeathPlane" parent="." instance=ExtResource( 4 )]
 
