@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/StartScreen-Theme.ogg-eb704807a071256f852213c917789e35.oggstr"
+
+[deps]
+
+source_file="res://sfx/StartScreen-Theme.ogg"
+dest_files=[ "res://.import/StartScreen-Theme.ogg-eb704807a071256f852213c917789e35.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
