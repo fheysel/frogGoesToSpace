@@ -260,14 +260,15 @@ func do_movement(delta):
 			# Let's just make them stop swinging no matter what they collided with
 			stop_swing()
 		
-		#Set sprite offset while swinging so that mouth lines up with tongue	
-		if facing.x < 0: #facing left
-			$Sprite.set_offset(Vector2(11,16))
-		elif facing.x > 0:
-			$Sprite.set_offset(Vector2(-11,16))
+		#Set sprite offset while swinging so that mouth lines up with tongue
+		if !is_on_floor():	
+			if facing.x < 0: #facing left
+				$Sprite.set_offset(Vector2(11,16))
+			elif facing.x > 0:
+				$Sprite.set_offset(Vector2(-11,16))
 		
-		animation_tree.set('parameters/swing/blend_position', velocity.normalized())
-		animation_mode.travel("swing")
+			animation_tree.set('parameters/swing/blend_position', velocity.normalized())
+			animation_mode.travel("swing")
 
 	else:
 		# Adjust X velocity based on user input
@@ -315,6 +316,12 @@ func do_movement(delta):
 				animation_tree.set('parameters/Launch/blend_position', velocity.normalized())
 				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
 				animation_mode.travel("Launch")
+			if is_on_floor() && user_direction.x != 0 && velocity.x != 0: #velocity.y == 0:
+				animation_tree.set('parameters/Hop/blend_position', velocity.normalized())
+				animation_tree.set('parameters/Idle/blend_position', velocity.normalized())
+				animation_mode.travel("Hop")
+			if is_on_floor() && user_direction.x == 0 && velocity.x == 0:
+				animation_mode.travel("Idle")
 				
 		elif is_on_floor() && user_direction.x != 0 && velocity.x != 0: #velocity.y == 0:
 			animation_tree.set('parameters/Hop/blend_position', velocity.normalized())
@@ -323,10 +330,17 @@ func do_movement(delta):
 		elif is_on_floor() && user_direction.x == 0 && velocity.x == 0:
 			animation_mode.travel("Idle")
 			
-	if tongue_pressed or tongue_held:
+	if tongue_pressed: # or tongue_held:
 		if $PlayerTongue.swinging:
-			animation_tree.set('parameters/tongue_retract/blend_position', velocity.normalized())
-			animation_mode.travel("tongue_retract")
+			animation_tree.set('parameters/Launch/blend_position', velocity.normalized())
+			animation_mode.travel("Launch")
+		elif !is_on_floor():
+			if facing.x < 0: #facing left
+				$Sprite.set_offset(Vector2(11,16))
+			elif facing.x > 0:
+				$Sprite.set_offset(Vector2(-11,16))
+			animation_tree.set('parameters/jump_tongue_launch/blend_position', velocity.normalized())
+			animation_mode.travel("jump_tongue_launch")
 		else:
 			animation_tree.set('parameters/tongue_launch/blend_position', velocity.normalized())
 			animation_mode.travel("tongue_launch")#emit_signal("tongue_start", get_tongue_direction())		
