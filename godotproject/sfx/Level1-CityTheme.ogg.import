@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Level1-CityTheme.ogg-f248e646ad656c4355aab05fb982dc1f.oggstr"
+
+[deps]
+
+source_file="res://sfx/Level1-CityTheme.ogg"
+dest_files=[ "res://.import/Level1-CityTheme.ogg-f248e646ad656c4355aab05fb982dc1f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
