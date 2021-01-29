@@ -1,7 +1,7 @@
 extends Node2D
 
-const SPIKE := 3
-const STAR := 4
+const SPIKE := 22
+const STAR := 23
 
 export (PackedScene) var Spike
 export (PackedScene) var Star
