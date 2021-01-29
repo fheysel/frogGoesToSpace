@@ -60,6 +60,8 @@ var swing_radius = 0
 var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
 
+var dead := false
+
 # This counter keeps track of the number of star pieces collected.
 # This may be temporary, depending on if we want to track the number of star pieces
 # collected in-between levels or in-between deaths.
@@ -406,6 +408,11 @@ func _physics_process(delta):
 	# Update our input-related variables
 	get_input()
 
+	# Special case for when we're ded
+	if dead:
+		# Don't do anything.
+		return
+
 	# Move the frog based on current state and inputs
 	do_movement(delta)
 
@@ -463,7 +470,22 @@ func takeDamage(damageTaken):
 		$InvulnerableTimer.start()
 
 func die():
-	# This will need to be modified to do the death animation once that is implemented.
+	# We've died!
+	dead = true
+	# Mark us as always executing
+	pause_mode = PAUSE_MODE_PROCESS
+	# Inhibit opening the menu
+	# TODO
+	# Pause everything else
+	get_tree().paused = true
+	# Play our death sound effect
+	$DeathSoundPlayer.play()
+	# Start our death animation
+	animation_mode.travel("Dead")
+	# The animation will take care of all other effects by calling functions and setting variables
+
+func death_animation_over():
+	# Go back to title screen
 	Global.fade_to_scene(Global.main_menu_path)
 
 func collect_star_piece(star_piece):
