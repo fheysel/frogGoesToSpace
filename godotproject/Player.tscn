@@ -523,6 +523,7 @@ texture = ExtResource( 2 )
 flip_h = true
 vframes = 6
 hframes = 5
+frame = 1
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.54944, 1.15327 )

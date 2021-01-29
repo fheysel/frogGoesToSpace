@@ -3,7 +3,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Level0/Level0_ground_auto.tres" type="TileSet" id=2]
 [ext_resource path="res://LevelBoundaries.gd" type="Script" id=3]
-[ext_resource path="res://DeathPlane.gd" type="Script" id=4]
+[ext_resource path="res://DeathPlane.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tiles/Level0/background/3.png" type="Texture" id=5]
 [ext_resource path="res://Tiles/Level0/background/1.png" type="Texture" id=6]
 [ext_resource path="res://Tiles/Level0/background/2.png" type="Texture" id=7]
@@ -14,9 +14,6 @@
 [ext_resource path="res://Level0.gd" type="Script" id=12]
 [ext_resource path="res://EOL.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sfx/Level0-Theme.ogg" type="AudioStream" id=14]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6585.7, 100 )
 
 [node name="Level_0" type="Node2D"]
 script = ExtResource( 12 )
@@ -35,12 +32,7 @@ bottom_bound = 1000.0
 margin = 10.0
 player_nodepath = NodePath("../Player")
 
-[node name="DeathPlane" type="Area2D" parent="."]
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
-position = Vector2( 6576, 1088 )
-shape = SubResource( 1 )
+[node name="DeathPlane" parent="." instance=ExtResource( 4 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

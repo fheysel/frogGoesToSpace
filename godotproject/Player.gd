@@ -45,6 +45,8 @@ export (float) var tongue_exit_launch_bonus_speed_up = 400
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
+var wind_speed = Vector2.ONE
+
 var velocity = Vector2.ZERO
 var facing = Vector2.RIGHT
 var on_floor_last_frame = false
@@ -277,7 +279,7 @@ func do_movement(delta):
 		handle_normal_horizontal_movement(delta)
 		
 		# Adjust Y velocity based on gravity and jump
-		velocity.y += gravity * delta
+		velocity.y += gravity * delta * wind_speed.y
 
 		# If we're still in the shorthop section of our jump
 		if !$ShorthopTimer.is_stopped():
