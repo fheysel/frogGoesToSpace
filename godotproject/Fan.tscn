@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fan.gd" type="Script" id=1]
 [ext_resource path="res://sfx/fan.ogg" type="AudioStream" id=2]
+[ext_resource path="res://fanParticles.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 64 )
@@ -22,5 +23,8 @@ volume_db = -1.0
 autoplay = true
 max_distance = 800.0
 attenuation = 4.0
+
+[node name="Node2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 64 )
 [connection signal="body_entered" from="." to="." method="_on_Fan_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Fan_body_exited"]
