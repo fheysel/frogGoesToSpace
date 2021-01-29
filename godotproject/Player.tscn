@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player_frog.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/hop.wav" type="AudioStream" id=5]
 [ext_resource path="res://sfx/collectstarpiece.wav" type="AudioStream" id=6]
+[ext_resource path="res://sfx/death.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.696, 15 )
@@ -16,8 +17,7 @@ random_pitch = 1.4
 
 [sub_resource type="Animation" id=3]
 resource_name = "Dead_froggie"
-length = 0.4
-loop = true
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -25,10 +25,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.0021699, 0.104155, 0.20614, 0.305955 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.104155, 0.20614, 0.305955, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 25, 26, 27, 28 ]
+"values": [ 25, 26, 27, 28, 25, 26, 27, 28, 25, 26, 27, 28 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "death_animation_over"
+} ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -590,6 +604,10 @@ one_shot = true
 pause_mode = 2
 current = true
 drag_margin_v_enabled = true
+
+[node name="DeathSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -6.0
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]
