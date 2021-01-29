@@ -8,7 +8,36 @@ const main_menu_path = "res://Menus/MainMenu/MainMenu.tscn"
 var resource_queue = preload("res://Global/ResourceQueue.gd").new()
 var loading = null
 var swipe_anim_state_machine = null
-var unpause_scene_upon_idle = false
+var pause_during_transition = false
+var cutscene_pauses_game = false
+var cutscene_inhibits_pause = false
+
+onready var HighScoreScreen := $HighScoreScreenLayer/HighScoreScreen
+onready var InGameMenu := $InGameMenuLayer/InGameMenu
+
+# This pause is applied in Global.gd (this script)
+# This refers to setting get_tree().paused
+func should_pause_game():
+	return \
+		loading != null || \
+		cutscene_pauses_game || \
+		pause_during_transition || \
+		InGameMenu.active() || \
+		HighScoreScreen.active()
+
+# This hiding is applied in HUDRoot.gd
+func should_hide_hud():
+	return \
+		current_scene_has_property_set('inhibit_hud') || \
+		InGameMenu.should_hide_hud() || \
+		HighScoreScreen.active()
+
+# This inhibiting is checked in the InGameMenu.gd
+func should_inhibit_pause_menu():
+	return \
+		cutscene_inhibits_pause ||\
+		current_scene_has_property_set("inhibit_pause") || \
+		HighScoreScreen.active()
 
 func _ready():
 	resource_queue.start()
@@ -16,6 +45,8 @@ func _ready():
 	swipe_anim_state_machine.start('idle')
 
 func _process(_delta_unused):
+	var pause_game_logic = should_pause_game()
+	get_tree().paused = pause_game_logic
 	$DebugModeTextLayer/DebugModeText.visible = debug_mode
 	# Handle debug mode button combinations
 	if debug_mode:
@@ -33,34 +64,23 @@ func _load_bg(scene_path):
 	loading = scene_path
 
 func fade_to_scene(scene_path):
+	if scene_path == null:
+		# Uh oh. An error has occurred. Go to title screen.
+		scene_path = main_menu_path
 	if loading == null:
 		# Load the next scene in the background ASAP
 		_load_bg(scene_path)
 
-		# Once processing is done, fade to the new scene
-		call_deferred('_fade_to_scene_deferred')
+		# Fade to loading screen
+		swipe_anim_state_machine.travel('swipe_in')
 
-func _fade_to_scene_deferred():
-	# Disable the current scene
-	get_tree().get_current_scene().pause_mode = PAUSE_MODE_STOP
-
-	# Fade to loading screen
-	swipe_anim_state_machine.travel('swipe_in')
+		# Pause the game while we transition
+		pause_during_transition = true
 
 func _process_loading():
 	if resource_queue.is_ready(loading):
 		# We've finished loading the resource!
-
-		# Change to the new scene
-		if get_tree().change_scene_to(resource_queue.get_resource(loading)) != OK:
-			# If we couldn't go to the new level, exit :(
-			push_error("Unable to load level")
-			get_tree().quit(1)
-
-		# Set it paused while we fade in
-		call_deferred('_pause_new_scene_deferred')
-		# Make sure we unpause once we fade in
-		unpause_scene_upon_idle = true
+		# Prepare all the misc. other objects to be ready for this new scene.
 
 		# Reset the global timer
 		$"/root/CountupTimer".reset()
@@ -68,19 +88,30 @@ func _process_loading():
 		# Close the pause menu, if it was open
 		$InGameMenuLayer/InGameMenu.navigate_to_new_screen(null)
 
+		# Close the high-score screen, if it was open
+		HighScoreScreen.close()
+		
+		# Any cutscene that was playing is now over, or will be taken over by the new object.
+		# If you need to adjust these values, make sure you do it in the _enter_tree function.
+		cutscene_pauses_game = false
+		cutscene_inhibits_pause = false
+
+		# Change to the new scene
+		if get_tree().change_scene_to(resource_queue.get_resource(loading)) != OK:
+			# If we couldn't go to the new level, exit :(
+			push_error("Unable to load level")
+			get_tree().quit(1)
+
 		# Fade in
 		swipe_anim_state_machine.travel('swipe_out')
 
 		# Mark that we're done loading
 		loading = null
 
-func _pause_new_scene_deferred():
-	get_tree().paused = true
 
 func _unpause_new_scene():
-	if unpause_scene_upon_idle:
-		get_tree().paused = false
-		unpause_scene_upon_idle = false
+	# We're now in the new scene. Unpause :)
+	pause_during_transition = false
 
 ### Helper functions
 # Check if the current scene (as marked during the transition)
@@ -92,3 +123,17 @@ func current_scene_has_property_set(property):
 		return false
 	return property in scene and scene[property]
 
+# Similar to the above, get the property value.
+func get_current_scene_property(property):
+	var scene = get_tree().current_scene
+	if !scene or !(property in scene):
+		return null
+	return scene[property]
+
+# Format a number of seconds (with possible floating point parts)
+# into a string.
+func format_time(time):
+	var minutes = int(time / 60)
+	var seconds = int(time) % 60
+	var subseconds = int(time * 60) % 60
+	return "%01d:%02d:%02d" % [minutes, seconds, subseconds]

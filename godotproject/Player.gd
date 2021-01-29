@@ -475,9 +475,9 @@ func die():
 	# Mark us as always executing
 	pause_mode = PAUSE_MODE_PROCESS
 	# Inhibit opening the menu
-	# TODO
+	Global.cutscene_inhibits_pause = true
 	# Pause everything else
-	get_tree().paused = true
+	Global.cutscene_pauses_game = true
 	# Play our death sound effect
 	$DeathSoundPlayer.play()
 	# Start our death animation

@@ -1,5 +1,8 @@
 extends Node2D
 
+# Each level has to have a name in it now, this will be displayed on the high score screen
+const level_name := "Level 0"
+
 const SPIKE := 3
 const STAR := 12
 
