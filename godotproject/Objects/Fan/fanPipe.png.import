@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wind_animation.png-cd93d7c237eb3831ae112e76a264f716.stex"
+path="res://.import/fanPipe.png-3983ae54baf9dce9d5162515fa85bf33.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Objects/Fan/wind_animation.png"
-dest_files=[ "res://.import/wind_animation.png-cd93d7c237eb3831ae112e76a264f716.stex" ]
+source_file="res://Objects/Fan/fanPipe.png"
+dest_files=[ "res://.import/fanPipe.png-3983ae54baf9dce9d5162515fa85bf33.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
