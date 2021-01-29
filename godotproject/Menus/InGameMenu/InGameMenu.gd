@@ -34,12 +34,7 @@ func update_active_screen():
 	if screen_current == null:
 		# Hide ourselves
 		visible = false
-		# Unpause the other game logic
-		get_tree().paused = false
 	else:
-		# Set pause on SceneTree - this will pause the game logic
-		# (except for us, because we have our pause mode set to Process, not Inherit)
-		get_tree().paused = true
 		# Show ourselves (the in-game menu)
 		visible = true
 		# Set specific screen to be displayed and run
@@ -102,8 +97,8 @@ func _ready():
 func _process(_delta):
 	var menu_pressed = Input.is_action_just_pressed("menu")
 	# We set the screen_current variable to null to indicate that the menu is closed.
-	# We also need to check whether the current scene prevents us from pausing the game (main menu, high score)
-	var inhibit_pause = Global.current_scene_has_property_set("inhibit_pause")
+	# We need to check if we're allowed to pause the game at this time.
+	var inhibit_pause = Global.should_inhibit_pause_menu()
 	if !inhibit_pause && menu_pressed && screen_current == null:
 		open_menu()
 	elif visible:

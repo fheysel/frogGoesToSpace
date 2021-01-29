@@ -8,17 +8,9 @@ onready var menu = $"/root/Global/InGameMenuLayer/InGameMenu"
 var player = null
 var countup_timer = null
 
-func _hud_is_hidden():
-	# Hide HUD if:
-	# - current scene says No HUD (title screen)
-	# - menu is open and current menu screen hides HUD
-	return \
-		Global.current_scene_has_property_set('inhibit_hud') || \
-		menu.should_hide_hud()
-
 func _process(_delta):
 	# Check if we should hide the HUD
-	if _hud_is_hidden():
+	if Global.should_hide_hud():
 		hide()
 		return
 	else:
@@ -45,7 +37,4 @@ func _process(_delta):
 		countup_timer = $"/root/CountupTimer"
 	if countup_timer:
 		var time = countup_timer.time
-		var minutes = int(time / 60)
-		var seconds = int(time) % 60
-		var subseconds = int(time * 60) % 60
-		lb_time.text = "%01d:%02d:%02d" % [minutes, seconds, subseconds]
+		lb_time.text = Global.format_time(time)
