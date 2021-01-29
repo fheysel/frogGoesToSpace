@@ -3,6 +3,8 @@ extends Node
 export (bool) var debug_mode = false
 export (bool) var player_is_god = false
 
+export (float) var game_audio_volume_fadeout = 1
+
 const main_menu_path = "res://Menus/MainMenu/MainMenu.tscn"
 
 var resource_queue = preload("res://Global/ResourceQueue.gd").new()
@@ -47,6 +49,16 @@ func _ready():
 func _process(_delta_unused):
 	var pause_game_logic = should_pause_game()
 	get_tree().paused = pause_game_logic
+	# Get game audio object for current scene
+	var scene = get_tree().current_scene
+	if scene and 'BGMPlayer' in scene:
+		var music : AudioStreamPlayer = scene.BGMPlayer
+		if music:
+			# Only calculate and update volume if it's not going to cause a
+			# division by zero
+			if game_audio_volume_fadeout > 0.001:
+				var db = 1 - 6 - 1/pow(game_audio_volume_fadeout,2)
+				music.volume_db = db
 	$DebugModeTextLayer/DebugModeText.visible = debug_mode
 	# Handle debug mode button combinations
 	if debug_mode:
