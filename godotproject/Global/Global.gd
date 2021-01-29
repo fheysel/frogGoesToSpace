@@ -9,6 +9,8 @@ var resource_queue = preload("res://Global/ResourceQueue.gd").new()
 var loading = null
 var swipe_anim_state_machine = null
 var pause_during_transition = false
+var cutscene_pauses_game = false
+var cutscene_inhibits_pause = false
 
 onready var HighScoreScreen := $HighScoreScreenLayer/HighScoreScreen
 onready var InGameMenu := $InGameMenuLayer/InGameMenu
@@ -18,6 +20,7 @@ onready var InGameMenu := $InGameMenuLayer/InGameMenu
 func should_pause_game():
 	return \
 		loading != null || \
+		cutscene_pauses_game || \
 		pause_during_transition || \
 		InGameMenu.active() || \
 		HighScoreScreen.active()
@@ -32,6 +35,7 @@ func should_hide_hud():
 # This inhibiting is checked in the InGameMenu.gd
 func should_inhibit_pause_menu():
 	return \
+		cutscene_inhibits_pause ||\
 		current_scene_has_property_set("inhibit_pause") || \
 		HighScoreScreen.active()
 
@@ -76,20 +80,27 @@ func fade_to_scene(scene_path):
 func _process_loading():
 	if resource_queue.is_ready(loading):
 		# We've finished loading the resource!
-
-		# Change to the new scene
-		if get_tree().change_scene_to(resource_queue.get_resource(loading)) != OK:
-			# If we couldn't go to the new level, exit :(
-			push_error("Unable to load level")
-			get_tree().quit(1)
+		# Prepare all the misc. other objects to be ready for this new scene.
 
 		# Reset the global timer
 		$"/root/CountupTimer".reset()
 
 		# Close the pause menu, if it was open
 		$InGameMenuLayer/InGameMenu.navigate_to_new_screen(null)
+
 		# Close the high-score screen, if it was open
 		HighScoreScreen.close()
+		
+		# Any cutscene that was playing is now over, or will be taken over by the new object.
+		# If you need to adjust these values, make sure you do it in the _enter_tree function.
+		cutscene_pauses_game = false
+		cutscene_inhibits_pause = false
+
+		# Change to the new scene
+		if get_tree().change_scene_to(resource_queue.get_resource(loading)) != OK:
+			# If we couldn't go to the new level, exit :(
+			push_error("Unable to load level")
+			get_tree().quit(1)
 
 		# Fade in
 		swipe_anim_state_machine.travel('swipe_out')
