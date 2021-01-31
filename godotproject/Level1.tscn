@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1.tres" type="TileSet" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Objects/Fan/Fan.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sfx/Level1-CityTheme.ogg" type="AudioStream" id=15]
 [ext_resource path="res://Level1Boundaries.gd" type="Script" id=16]
+[ext_resource path="res://EOL.tscn" type="PackedScene" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "toxic_waste"
@@ -295,7 +296,7 @@ texture = ExtResource( 7 )
 script = ExtResource( 16 )
 left_bound = -206.0
 top_bound = -2104.0
-right_bound = 10944.0
+right_bound = 10050.0
 bottom_bound = 512.0
 margin = 10.0
 player_nodepath = NodePath("../Player")
@@ -337,3 +338,7 @@ position = Vector2( 5992, -296 )
 [node name="Level1BacktrackPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
 autoplay = true
+
+[node name="EOL" parent="." instance=ExtResource( 17 )]
+position = Vector2( 10050, 0 )
+next_path = "res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.tscn"

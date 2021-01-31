@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
+[ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
+
+[node name="ThanksForPlayingScreen" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.137255, 0.105882, 0.105882, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 640.0
+margin_bottom = 512.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 124.0
+margin_top = 176.0
+margin_right = 515.0
+margin_bottom = 335.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 391.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+custom_fonts/font = SubResource( 1 )
+text = "Thank you for playing!"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 391.0
+margin_bottom = 115.0
+text = "Please fill out the survey linked above in the page.
+We hope you enjoyed our demo!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 119.0
+margin_right = 391.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 0, 40 )
+theme = ExtResource( 1 )
+text = "Press Z to play again!"
+align = 1
+valign = 1
