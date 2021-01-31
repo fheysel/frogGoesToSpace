@@ -42,6 +42,8 @@ export (float) var tongue_exit_jump_bonus_speed_up = 200
 
 export (float) var tongue_exit_launch_bonus_speed_up = 400
 
+export (Vector2) var knockback_velocity = Vector2(-100, -300)
+
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
@@ -461,15 +463,29 @@ func _physics_process(delta):
 	update_anim()
 
 func takeDamage(damageTaken):
-	if Global.player_is_god:
+	if Global.player_is_god or dead:
 		return
 	if $InvulnerableTimer.is_stopped():
 		health -= damageTaken
 		if health <= 0:
 			die()
+		else:
+			# After the player gets hit set the player to invulnerable to damage for 1 second
+			$InvulnerableTimer.start()
+			$InvulnerableFlashTimer.start()
 			
-		#After the player gets hit set the player to invulnerable to damage for 1 second
-		$InvulnerableTimer.start()
+			# Apply knockback to player
+			velocity = knockback_velocity * Vector2(-1 if $Sprite.flip_h else 1, 1)
+			
+			# Make player sprite transparency toggle between 0.3 and 0.7
+			# (in conjunction with InvulnerableFlashTimer)
+			$Sprite.modulate.a = 0.3
+			
+			# Play Hurt animation
+			animation_mode.travel("Hurt")
+			
+			# Play Ouch sound effect
+			$OuchSoundPlayer.play()
 
 func die():
 	# We've died!
@@ -506,4 +522,15 @@ func _on_PlayerTongue_tongue_swing(global_tongue_position):
 
 # Keep this for now as a reminder the signal exists
 func _on_InvulnerableTimer_timeout():
-	pass
+	# Set player to visible
+	$Sprite.modulate.a = 1
+
+func _on_InvulnerableFlashTimer_timeout():
+	if $InvulnerableTimer.is_stopped():
+		# Player isn't vulnerable anymore! Stop this timer until next hit
+		$InvulnerableFlashTimer.stop()
+	else:
+		# Toggle between alpha of 0 and 1
+		
+		$Sprite.modulate.a = 1 - $Sprite.modulate.a
+	
