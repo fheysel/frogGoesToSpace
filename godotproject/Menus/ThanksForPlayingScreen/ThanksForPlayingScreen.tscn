@@ -1,15 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Menus/MainMenu/MainMenu.gd" type="Script" id=3]
-[ext_resource path="res://sfx/StartScreen-Theme.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 2 )
 
-[node name="MainMenu" type="MarginContainer"]
+[node name="ThanksForPlayingScreen" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -27,43 +26,37 @@ margin_right = 640.0
 margin_bottom = 512.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 139.0
-margin_top = 159.0
-margin_right = 501.0
-margin_bottom = 352.0
+margin_left = 124.0
+margin_top = 176.0
+margin_right = 515.0
+margin_bottom = 335.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 362.0
+margin_right = 391.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 custom_fonts/font = SubResource( 1 )
-text = "Frog Goes To Space!"
+text = "Thank you for playing!"
+align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_top = 84.0
-margin_right = 362.0
-margin_bottom = 149.0
-text = "Arrow Keys - Move / Adjust Tongue Direction
-Z - Jump / Accept
-X - Tongue
-C - Menu"
+margin_right = 391.0
+margin_bottom = 115.0
+text = "Please fill out the survey linked above in the page.
+We hope you enjoyed our demo!"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 153.0
-margin_right = 362.0
-margin_bottom = 193.0
+margin_top = 119.0
+margin_right = 391.0
+margin_bottom = 159.0
 rect_min_size = Vector2( 0, 40 )
 theme = ExtResource( 1 )
-text = "Press Z to begin!"
+text = "Press Z to play again!"
 align = 1
 valign = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -6.0
-autoplay = true

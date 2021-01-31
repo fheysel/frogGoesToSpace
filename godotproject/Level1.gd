@@ -1,11 +1,14 @@
 extends Node2D
-const level_name := "Level 1"
+
+const level_name := "The Big City"
 
 const SPIKE := 22
 const STAR := 23
 
 export (PackedScene) var Spike
 export (PackedScene) var Star
+
+onready var BGMPlayer := $Level1BacktrackPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

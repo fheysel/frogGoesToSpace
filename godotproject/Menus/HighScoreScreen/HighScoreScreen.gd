@@ -102,7 +102,7 @@ func _play_final_sound():
 
 # This function is unit testable
 func _compare_scores(new, old):
-	return new['stars'] > old['stars'] or (new['stars'] == old['stars'] and new['time'] < old['time'])
+	return new['score'] > old['score']
 
 # This function is unit testable
 func _add_score_to_current_level(dict):
@@ -140,9 +140,7 @@ func _change_level(name):
 		for i in range(5):
 			# Make some fake high scores
 			var stars = max(0, 2-i)
-			stars *= stars
-			stars = min(3, stars)
-			var time = 30*i+30
+			var time = 15*i+90
 			var score = _calculate_score(stars,time)
 			current_level_data.append({'stars':stars, 'time':time, 'score':score})
 	level_label.text = name
