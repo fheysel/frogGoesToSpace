@@ -20,10 +20,11 @@ func _physics_process(_delta):
 
 func _on_PlayerCollisionArea_body_entered(body):
 	if "Player" in body.name:
-		$FireballExplodeSoundPlayer.play(0)
 		body.takeDamage(attackDamage)
-		
+		dead()
+
 func dead():
+	$FireballExplodeSoundPlayer.play(0)
 	queue_free()
 
 func set_direction(dir):
