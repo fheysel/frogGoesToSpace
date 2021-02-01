@@ -17,11 +17,15 @@ var direction = -1
 var attackDamage = 1
 var attackState = STATE.idle_e
 var is_dead = false
+
+var tongue_can_damage = true
+var health = 100
 	
 func dead():
 	is_dead = true
 	velocity = 0
-	$AnimatedSprite.play("dead")
+#	$AnimatedSprite.play("dead")
+	queue_free()
 
 func _physics_process(_delta):
 	if is_dead == false:
@@ -41,6 +45,13 @@ func _physics_process(_delta):
 			
 			if is_on_wall():
 				direction *= -1
+
+func take_damage(attack_damage):
+	print("Ant is taking damage")
+	health = health - attack_damage
+	print("Ant took damage")
+	if health <= 0:
+		dead()
 
 func begin_attack():
 	var RayCastList = [$Orientation/RayCast_Top.get_collider(), $Orientation/RayCast_Middle.get_collider(), $Orientation/RayCast_Bottom.get_collider()]

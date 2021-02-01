@@ -7,12 +7,17 @@ signal tongue_swing
 export (float) var shoot_speed = 1500 * 0.6
 export (float) var max_shoot_dist = 400 * 0.6
 
+const COLLISION_LAYER_TONGUEABLE 		= 0x3
+const COLLISION_LAYER_TONGUE_CAN_DAMAGE = 0x6
+
 var idle = true
 var shooting = false
 var swinging = false
 
 var shoot_direction = Vector2.RIGHT
 var tongue_length = 0
+
+var tongue_damage = 50
 
 func get_tongue_vector():
 	return shoot_direction * tongue_length
@@ -58,10 +63,22 @@ func start_shoot(dirn):
 func handle_shoot(delta):
 	# Check if the raycast hit something
 	if $TongueRaycast.is_colliding():
-		start_swing($TongueRaycast.get_collider(), $TongueRaycast.get_collision_point())
+		
+		# FGTS-81 experimentation 
+		# print($TongueRaycast.get_collider().get_property_list())
+		var colliding = $TongueRaycast.get_collider()
+		
+		if colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUE_CAN_DAMAGE):
+			colliding.take_damage(tongue_damage)
+			start_idle()
+		
+		elif colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUEABLE):
+			start_swing($TongueRaycast.get_collider(), $TongueRaycast.get_collision_point())
+		
 	if tongue_length >= max_shoot_dist:
 		# We didn't hit anything. Stop shooting.
 		start_idle()
+	
 	tongue_length += shoot_speed * delta
 	update_tongue_location()
 
