@@ -1,7 +1,9 @@
 extends Area2D
 
-const level0_start_postion :=  Vector2(121, 896)
-const level1_start_postion := Vector2(121, 256)
+export (Vector2) var level0_start_postion
+export (Vector2) var level1_start_postion
+#const level0_start_postion :=  Vector2(121, 896)
+#const level1_start_postion := Vector2(121, 256)
 
 var level_name = null
 
@@ -14,4 +16,4 @@ func _on_DeathPlane_body_entered(body):
 			Global.fade_set_body_to_position(body, level1_start_postion)
 		
 		body.takeDamage(1)
-		# Global.fade_to_scene("res://Level" + str(int(get_tree().current_scene.name)) + ".tscn")
+

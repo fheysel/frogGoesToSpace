@@ -352,6 +352,8 @@ player_nodepath = NodePath("../Player")
 
 [node name="DeathPlane" parent="." instance=ExtResource( 9 )]
 position = Vector2( -56, -680 )
+level0_start_postion = Vector2( 121, 896 )
+level1_start_postion = Vector2( 121, 256 )
 
 [node name="Fan" parent="." instance=ExtResource( 14 )]
 position = Vector2( 800, 216 )
