@@ -7,6 +7,12 @@ export (float) var game_audio_volume_fadeout = 1
 
 const main_menu_path = "res://Menus/MainMenu/MainMenu.tscn"
 
+enum FadeAction { LOAD_SCENE, MOVE_POSITION }
+
+var fade_action = null
+var fade_action_body = null
+var fade_action_position = null
+
 var resource_queue = preload("res://Global/ResourceQueue.gd").new()
 var loading = null
 var swipe_anim_state_machine = null
@@ -80,6 +86,9 @@ func fade_to_scene(scene_path):
 		# Uh oh. An error has occurred. Go to title screen.
 		scene_path = main_menu_path
 	if loading == null:
+		# Set fade action so that it's kept track of properly
+		fade_action = FadeAction.LOAD_SCENE
+
 		# Load the next scene in the background ASAP
 		_load_bg(scene_path)
 
@@ -89,8 +98,25 @@ func fade_to_scene(scene_path):
 		# Pause the game while we transition
 		pause_during_transition = true
 
+func fade_set_body_to_position(body, position):
+	# Set up variables to move body properly
+	fade_action = FadeAction.MOVE_POSITION
+	fade_action_body = body
+	fade_action_position = position
+	
+	# Fade to loading screen
+	swipe_anim_state_machine.travel('swipe_in')
+
+	# Pause the game while we transition
+	pause_during_transition = true
+
 func _process_loading():
-	if resource_queue.is_ready(loading):
+	if loading == null and fade_action == FadeAction.MOVE_POSITION:
+		# Move body's position to the specified location
+		fade_action_body.position = fade_action_position
+		# Fade in
+		swipe_anim_state_machine.travel('swipe_out')
+	elif resource_queue.is_ready(loading):
 		# We've finished loading the resource!
 		# Prepare all the misc. other objects to be ready for this new scene.
 

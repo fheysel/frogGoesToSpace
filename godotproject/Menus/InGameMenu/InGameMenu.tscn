@@ -237,10 +237,49 @@ margin_bottom = 285.0
 [node name="Label" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
 margin_right = 119.0
 margin_bottom = 59.0
+rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
-text = "Help menu
-TODO..."
+text = "                                 Helpful Hints
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
+margin_right = 119.0
+margin_bottom = 59.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "1. Hold the Up and Side arrow to shoot the
+ tongue on a diagonal.
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
+margin_right = 119.0
+margin_bottom = 59.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "2. While swinging press Z to launch your self
+ in the direction of your swing. Great for 
+horizontal motion!
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
+margin_right = 119.0
+margin_bottom = 59.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 1 )
+text = "3. While swinging press X to launch your self
+ in the direction of your tongue. Great for
+ verticle motion!
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
