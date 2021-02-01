@@ -548,6 +548,7 @@ position = Vector2( 0.446458, -7.12662 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 5
+frame = 1
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.54944, 1.15327 )
@@ -630,7 +631,6 @@ process_mode = 0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-pause_mode = 2
 current = true
 drag_margin_v_enabled = true
 
