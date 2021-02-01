@@ -47,9 +47,7 @@ func _physics_process(_delta):
 				direction *= -1
 
 func take_damage(attack_damage):
-	print("Ant is taking damage")
 	health = health - attack_damage
-	print("Ant took damage")
 	if health <= 0:
 		dead()
 
