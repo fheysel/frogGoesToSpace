@@ -18,13 +18,9 @@ var attackDamage = 1
 var attackState = STATE.idle_e
 var is_dead = false
 
-var tongue_can_damage = true
-var health = 100
-	
 func dead():
 	is_dead = true
 	velocity = 0
-	queue_free()
 
 func _physics_process(_delta):
 	if is_dead == false:
