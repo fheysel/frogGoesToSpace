@@ -1,31 +1,24 @@
-extends KinematicBody2D
+extends Node2D
 
-const FLOOR = Vector2(0, -1)
-const SPEED = 250
-
-var velocity = Vector2(0, 0)
+var speed = 5
+var velocity = Vector2()
 var distance_traveled = 0
 var direction = 1
-var attackDamage = 1
 
 func _physics_process(_delta):
-
-	velocity.x = SPEED * direction
+	velocity.x = speed * direction
 	velocity.y = 0 # not needed, it's already 0
-	velocity = move_and_slide(velocity, FLOOR)
-	distance_traveled += SPEED * _delta
+	translate(velocity)
+	distance_traveled += speed
 	
-	if distance_traveled > 200 || is_on_wall():
-		dead()
+	if distance_traveled > 200:
+		queue_free()
 
 func _on_PlayerCollisionArea_body_entered(body):
 	if "Player" in body.name:
-		body.takeDamage(attackDamage)
-		dead()
-
-func dead():
-	$FireballExplodeSoundPlayer.play(0)
-	queue_free()
+		$FireballExplodeSoundPlayer.play(0)
+		body.takeDamage(1)
+		
 
 func set_direction(dir):
 	if dir != direction:

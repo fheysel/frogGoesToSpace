@@ -17,14 +17,16 @@ var direction = -1
 var attackDamage = 1
 var attackState = STATE.idle_e
 var is_dead = false
-
+	
 func dead():
 	is_dead = true
 	velocity = 0
+	$AnimatedSprite.play("dead")
 
 func _physics_process(_delta):
 	if is_dead == false:
 		if attackState == STATE.idle_e:
+			#Play Animation, doesn't exist yet
 			if direction == 1:
 				$Orientation.scale.x = -1
 			else:
