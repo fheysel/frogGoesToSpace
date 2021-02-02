@@ -90,42 +90,34 @@ centered = false
 
 [node name="enemy-Ant" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2422.63, 637.406 )
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant2" parent="." instance=ExtResource( 10 )]
 position = Vector2( 4320, 880 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant3" parent="." instance=ExtResource( 10 )]
 position = Vector2( 3856, 880 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant4" parent="." instance=ExtResource( 10 )]
 position = Vector2( 3896, 544 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant5" parent="." instance=ExtResource( 10 )]
 position = Vector2( 7072, 544 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant6" parent="." instance=ExtResource( 10 )]
 position = Vector2( 7680, 544 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant7" parent="." instance=ExtResource( 10 )]
 position = Vector2( 6928, 544 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="enemy-Ant8" parent="." instance=ExtResource( 10 )]
 position = Vector2( 7496, 544 )
 rotation = 0.0108005
-scale = Vector2( 0.05, 0.05 )
 
 [node name="EOL" parent="." instance=ExtResource( 13 )]
 position = Vector2( 10150, 0 )
