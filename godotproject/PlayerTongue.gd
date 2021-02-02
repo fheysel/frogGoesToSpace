@@ -7,7 +7,7 @@ signal tongue_swing
 export (float) var shoot_speed = 1500 * 0.6
 export (float) var max_shoot_dist = 400 * 0.6
 
-const COLLISION_LAYER_TONGUEABLE 		= 0x3
+const COLLISION_LAYER_TONGUEABLE        = 0x3
 const COLLISION_LAYER_TONGUE_CAN_DAMAGE = 0x6
 
 var idle = true
