@@ -55,14 +55,18 @@ func start_shoot(dirn):
 	shoot_direction = dirn
 	tongue_length = 0
 	update_tongue_location()
-	$TongueRaycast.enabled = true
+
+	# Disable the raycast for the first frame that we're shooting,
+	# to prevent collision with the previous tongue position
+	$TongueRaycast.enabled = false
 
 	$Sprite.visible = true
 	$ShootSoundPlayer.play(0)
 
 func handle_shoot(delta):
-	# Check if the raycast hit something
-	if $TongueRaycast.is_colliding():
+
+	# Check if the raycast is enabled and hit something
+	if $TongueRaycast.enabled and $TongueRaycast.is_colliding():
 		var colliding = $TongueRaycast.get_collider()
 
 		if colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUE_CAN_DAMAGE):
@@ -71,6 +75,10 @@ func handle_shoot(delta):
 
 		elif colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUEABLE):
 			start_swing($TongueRaycast.get_collider(), $TongueRaycast.get_collision_point())
+
+	# If the raycast isn't enabled, enable it for next frame.
+	if !$TongueRaycast.enabled:
+		$TongueRaycast.enabled = true
 
 	if tongue_length >= max_shoot_dist:
 		# We didn't hit anything. Stop shooting.
