@@ -80,6 +80,7 @@ extents = Vector2( 178.427, 37.9655 )
 extents = Vector2( 375.71, 371.094 )
 
 [node name="enemy-Ant" type="KinematicBody2D"]
+scale = Vector2( 0.05, 0.05 )
 collision_layer = 2147483716
 script = ExtResource( 1 )
 
