@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fireball.png" type="Texture" id=1]
 [ext_resource path="res://AntAttackFire.gd" type="Script" id=2]
@@ -8,8 +8,12 @@
 radius = 118.919
 height = 0.0
 
-[node name="EnemyFireball" type="Node2D"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 96.2581
+
+[node name="EnemyFireball" type="KinematicBody2D"]
 scale = Vector2( 0.05, 0.05 )
+collision_layer = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -24,4 +28,8 @@ shape = SubResource( 1 )
 
 [node name="FireballExplodeSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 10.9375, -21.5625 )
+shape = SubResource( 2 )
 [connection signal="body_entered" from="PlayerCollisionArea" to="." method="_on_PlayerCollisionArea_body_entered"]
