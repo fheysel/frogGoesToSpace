@@ -17,7 +17,7 @@ var swinging = false
 var shoot_direction = Vector2.RIGHT
 var tongue_length = 0
 
-var tongue_damage = 50
+var tongue_damage = 1
 
 func get_tongue_vector():
 	return shoot_direction * tongue_length
