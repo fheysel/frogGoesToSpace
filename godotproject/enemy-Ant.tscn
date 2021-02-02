@@ -99,32 +99,33 @@ playing = true
 flip_h = true
 
 [node name="PlayerDetector" type="Area2D" parent="Orientation/Sprite"]
-position = Vector2( -14.4947, -6.55801 )
+position = Vector2( -30, -6.558 )
 scale = Vector2( 0.464334, 0.471218 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Sprite/PlayerDetector"]
 modulate = Color( 0.027451, 0.0117647, 0.0117647, 1 )
-position = Vector2( -177.412, 16.489 )
+position = Vector2( -141.343, 16.489 )
 shape = SubResource( 16 )
 
 [node name="RayCast_Top" type="RayCast2D" parent="Orientation"]
-position = Vector2( -55.3124, -75.7606 )
+position = Vector2( 35, -90 )
 enabled = true
-cast_to = Vector2( -3000, 0 )
+cast_to = Vector2( -3300, 0 )
 collision_mask = 3
 
 [node name="RayCast_Middle" type="RayCast2D" parent="Orientation"]
-position = Vector2( -46.432, 232.919 )
+position = Vector2( 35, 245 )
 enabled = true
-cast_to = Vector2( -3000, 0 )
+exclude_parent = false
+cast_to = Vector2( -3300, 0 )
 collision_mask = 3
 
 [node name="RayCast_Bottom" type="RayCast2D" parent="Orientation"]
-position = Vector2( -53.402, 544.451 )
+position = Vector2( 35, 585 )
 enabled = true
-cast_to = Vector2( -3000, 0 )
+cast_to = Vector2( -3300, 0 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
