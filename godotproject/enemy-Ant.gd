@@ -19,7 +19,7 @@ var attackState = STATE.idle_e
 var is_dead = false
 
 var tongue_can_damage = true
-var health = 100
+var health = 2
 	
 func dead():
 	is_dead = true
