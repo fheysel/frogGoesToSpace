@@ -7,8 +7,9 @@ signal tongue_swing
 export (float) var shoot_speed = 1500 * 0.6
 export (float) var max_shoot_dist = 400 * 0.6
 
-const COLLISION_LAYER_TONGUEABLE        = 0x3
-const COLLISION_LAYER_TONGUE_CAN_DAMAGE = 0x6
+const COLLISION_LAYER_TONGUEABLE         = 0x3
+const COLLISION_LAYER_TONGUE_CAN_DAMAGE  = 0x6
+const COLLISION_LAYER_TONGUE_CAN_COLLECT = 0x7
 
 var idle = true
 var shooting = false
@@ -72,6 +73,10 @@ func handle_shoot(delta):
 		if colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUE_CAN_DAMAGE):
 			colliding.take_damage(tongue_damage)
 			start_idle()
+			
+		elif colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUE_CAN_COLLECT):
+			get_parent().collect_star_piece(colliding)
+
 
 		elif colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUEABLE):
 			start_swing($TongueRaycast.get_collider(), $TongueRaycast.get_collision_point())
