@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
@@ -10,11 +10,14 @@
 [ext_resource path="res://Menus/InGameMenu/QuitGameButton.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 20
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "fade"
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("FadeToBlackLayer/FadeToBlack:color")
@@ -53,8 +56,7 @@ tracks/2/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("FadeToBlackLayer/FadeToBlack:color")
@@ -93,7 +95,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("FadeToBlackLayer/FadeToBlack:color")
@@ -162,13 +164,13 @@ rect_pivot_offset = Vector2( -425.13, 56.991 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu/PauseSubmenu/CenterContainer"]
 margin_left = 266.0
-margin_top = 204.0
+margin_top = 209.0
 margin_right = 374.0
-margin_bottom = 307.0
+margin_bottom = 302.0
 
 [node name="Label" type="Label" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
 margin_right = 108.0
-margin_bottom = 28.0
+margin_bottom = 18.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = "PAUSE"
@@ -179,9 +181,9 @@ __meta__ = {
 }
 
 [node name="ReturnToGameButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 32.0
+margin_top = 22.0
 margin_right = 108.0
-margin_bottom = 53.0
+margin_bottom = 43.0
 theme = ExtResource( 2 )
 text = "Return To Game"
 script = ExtResource( 7 )
@@ -191,9 +193,9 @@ __meta__ = {
 menu_control_path = NodePath("../../../..")
 
 [node name="HelpButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 57.0
+margin_top = 47.0
 margin_right = 108.0
-margin_bottom = 78.0
+margin_bottom = 68.0
 theme = ExtResource( 2 )
 text = "Help"
 script = ExtResource( 7 )
@@ -201,9 +203,9 @@ menu_control_path = NodePath("../../../..")
 target_path = NodePath("../../../../HelpSubmenu")
 
 [node name="QuitButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 82.0
+margin_top = 72.0
 margin_right = 108.0
-margin_bottom = 103.0
+margin_bottom = 93.0
 theme = ExtResource( 2 )
 text = "Quit"
 script = ExtResource( 7 )
@@ -211,7 +213,6 @@ menu_control_path = NodePath("../../../..")
 target_path = NodePath("../../../../QuitVerifySubmenu")
 
 [node name="HelpSubmenu" type="MarginContainer" parent="InGameMenu"]
-visible = false
 margin_right = 640.0
 margin_bottom = 512.0
 script = ExtResource( 6 )
@@ -229,26 +230,54 @@ margin_bottom = 512.0
 rect_pivot_offset = Vector2( -425.13, 56.991 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu/HelpSubmenu/CenterContainer"]
-margin_left = 260.0
-margin_top = 226.0
-margin_right = 379.0
-margin_bottom = 285.0
+margin_left = 147.0
+margin_top = 51.0
+margin_right = 493.0
+margin_bottom = 461.0
+
+[node name="Label5" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
+margin_right = 346.0
+margin_bottom = 35.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 2 )
+text = "Controls:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
-margin_right = 119.0
-margin_bottom = 59.0
-rect_scale = Vector2( 2, 2 )
+margin_top = 39.0
+margin_right = 346.0
+margin_bottom = 120.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
-text = "                                 Helpful Hints
-"
+text = "Arrow Keys - Move / Adjust Tongue Direction
+Z - Jump / Accept
+X - Tongue
+C - Menu"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
+margin_top = 124.0
+margin_right = 346.0
+margin_bottom = 197.0
+theme = ExtResource( 2 )
+custom_fonts/font = SubResource( 2 )
+text = "
+Helpful Hints:"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label2" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
-margin_right = 119.0
-margin_bottom = 59.0
+margin_top = 201.0
+margin_right = 346.0
+margin_bottom = 261.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = "1. Hold the Up and Side arrow to shoot the
@@ -259,11 +288,12 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
-margin_right = 119.0
-margin_bottom = 59.0
+margin_top = 265.0
+margin_right = 346.0
+margin_bottom = 346.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
-text = "2. While swinging press Z to launch your self
+text = "2. While swinging, press Z to launch yourself
  in the direction of your swing. Great for 
 horizontal motion!
 "
@@ -272,14 +302,14 @@ __meta__ = {
 }
 
 [node name="Label4" type="Label" parent="InGameMenu/HelpSubmenu/CenterContainer/VBoxContainer"]
-margin_right = 119.0
-margin_bottom = 59.0
+margin_top = 350.0
+margin_right = 346.0
+margin_bottom = 410.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
-text = "3. While swinging press X to launch your self
+text = "3. While swinging, press X to launch yourself
  in the direction of your tongue. Great for
- verticle motion!
-"
+ vertical motion!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -372,9 +402,9 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="InGameMenu"]
-anims/fade = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/unfade = SubResource( 4 )
+anims/fade = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/unfade = SubResource( 5 )
 [connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/ReturnToGameButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/ReturnToGameButton" method="_on_pressed"]
 [connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/HelpButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/HelpButton" method="_on_pressed"]
 [connection signal="pressed" from="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/QuitButton" to="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer/QuitButton" method="_on_pressed"]
