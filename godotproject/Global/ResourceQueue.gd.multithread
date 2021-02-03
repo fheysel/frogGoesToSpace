@@ -3,9 +3,11 @@
 # "Note: this code, in its current form, is not tested in real world scenarios. If you run into any issues, ask for help in one of Godot's community channels."
 # The Godot documentation is under the CC-BY 3.0 license: https://creativecommons.org/licenses/by/3.0/
 # 2020-01-14: File included verbatim from https://docs.godotengine.org/en/stable/_downloads/db6ccb8924e9f1d36c1319e2813e4808/resource_queue.gd except for this header.
-# 2020-02-02: Modified to be single-threaded
-
+var thread
 var mutex
+var sem
+
+var time_max = 100 # Milliseconds.
 
 var queue = []
 var pending = {}
@@ -13,8 +15,18 @@ var pending = {}
 func _lock(_caller):
 	mutex.lock()
 
+
 func _unlock(_caller):
 	mutex.unlock()
+
+
+func _post(_caller):
+	sem.post()
+
+
+func _wait(_caller):
+	sem.wait()
+
 
 func queue_resource(path, p_in_front = false):
 	_lock("queue_resource")
@@ -34,6 +46,7 @@ func queue_resource(path, p_in_front = false):
 		else:
 			queue.push_back(res)
 		pending[path] = res
+		_post("queue_resource")
 		_unlock("queue_resource")
 		return
 
@@ -58,23 +71,8 @@ func get_progress(path):
 	_unlock("get_progress")
 	return ret
 
-func _step():
-	_lock("step")
-	if queue.size() > 0:
-		var res = queue[0]
-		var ret = res.poll()
-		if ret == ERR_FILE_EOF || ret != OK:
-			var path = res.get_meta("path")
-			if path in pending: # Else, it was already retrieved.
-				pending[res.get_meta("path")] = res.get_resource()
-			# Something might have been put at the front of the queue while
-			# we polled, so use erase instead of remove.
-			queue.erase(res)
-	_unlock("step")
 
 func is_ready(path):
-	# Step our loading
-	_step()
 	var ret
 	_lock("is_ready")
 	if path in pending:
@@ -86,9 +84,15 @@ func is_ready(path):
 
 
 func _wait_for_resource(res, path):
-	while !is_ready(path):
-		_step()
-	return pending[path]
+	_unlock("wait_for_resource")
+	while true:
+		VisualServer.sync()
+		OS.delay_usec(16000) # Wait approximately 1 frame.
+		_lock("wait_for_resource")
+		if queue.size() == 0 || queue[0] != res:
+			return pending[path]
+		_unlock("wait_for_resource")
+
 
 func get_resource(path):
 	_lock("get_resource")
@@ -113,5 +117,34 @@ func get_resource(path):
 		_unlock("return")
 		return ResourceLoader.load(path)
 
+
+func thread_process():
+	_wait("thread_process")
+	_lock("process")
+
+	while queue.size() > 0:
+		var res = queue[0]
+		_unlock("process_poll")
+		var ret = res.poll()
+		_lock("process_check_queue")
+
+		if ret == ERR_FILE_EOF || ret != OK:
+			var path = res.get_meta("path")
+			if path in pending: # Else, it was already retrieved.
+				pending[res.get_meta("path")] = res.get_resource()
+			# Something might have been put at the front of the queue while
+			# we polled, so use erase instead of remove.
+			queue.erase(res)
+	_unlock("process")
+
+
+func thread_func(_u):
+	while true:
+		thread_process()
+
+
 func start():
 	mutex = Mutex.new()
+	sem = Semaphore.new()
+	thread = Thread.new()
+	thread.start(self, "thread_func", 0)
