@@ -222,9 +222,54 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325, 0.35, 0.375, 0.4, 0.425, 0.45, 0.475, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
+"args": [  ],
+"method": "_process_loading"
+}, {
 "args": [  ],
 "method": "_process_loading"
 }, {
@@ -304,7 +349,7 @@ transitions = [ "loading_fadein_out", "swipe_out", SubResource( 12 ), "idle", "s
 [node name="Node" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
-game_audio_volume_fadeout = 0.0
+game_audio_volume_fadeout = 1.0
 
 [node name="DebugModeTextLayer" type="CanvasLayer" parent="."]
 layer = 100
@@ -326,7 +371,7 @@ layer = 10
 
 [node name="SideSwipeAnimationPoly" type="Polygon2D" parent="SideSwipeAnimationLayer"]
 color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 0, 0, -100, 512, 800, 512, 800, 0 )
+polygon = PoolVector2Array( 740, 0, 640, 512, 800, 512, 800, 0 )
 
 [node name="LoadingText" type="Label" parent="SideSwipeAnimationLayer"]
 self_modulate = Color( 0, 0, 0, 0 )
