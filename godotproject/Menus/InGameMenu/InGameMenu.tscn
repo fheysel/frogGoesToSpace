@@ -213,6 +213,7 @@ menu_control_path = NodePath("../../../..")
 target_path = NodePath("../../../../QuitVerifySubmenu")
 
 [node name="HelpSubmenu" type="MarginContainer" parent="InGameMenu"]
+visible = false
 margin_right = 640.0
 margin_bottom = 512.0
 script = ExtResource( 6 )
