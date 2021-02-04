@@ -3,12 +3,11 @@
 [ext_resource path="res://Star.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Objects/star_new.png" type="Texture" id=2]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
 
 [node name="Star" type="Area2D"]
-collision_layer = 32
+collision_layer = 2147483808
 collision_mask = 2
 script = ExtResource( 1 )
 
