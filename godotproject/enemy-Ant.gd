@@ -28,13 +28,7 @@ func dead():
 
 func _physics_process(_delta):
 	if is_dead == false:
-		if attackState == STATE.idle_e:
-			#Play Animation, doesn't exist yet
-			if direction == 1:
-				$Orientation.scale.x = -1
-			else:
-				$Orientation.scale.x = 1
-				
+		if attackState == STATE.idle_e:				
 			$Orientation/Sprite.play("walk")
 				
 			#Movement for the ant
@@ -44,6 +38,12 @@ func _physics_process(_delta):
 			
 			if is_on_wall():
 				direction *= -1
+				$Orientation.scale.x *= -1
+				
+				#.1 second delay to gived RayCasts time to switch directions
+				$ActionDelay.start(.1)
+				# Set the wait time to a normal amount again
+				$ActionDelay.wait_time = 0.5
 
 func take_damage(attack_damage):
 	health = health - attack_damage
@@ -82,7 +82,7 @@ func _on_PlayerDetector_body_entered(body):
 func _on_ActionDelay_timeout():
 	if attackState == STATE.detected_player_e:
 		launch_attack()
-	elif attackState == STATE.attacking_player_e:
+	elif attackState == STATE.attacking_player_e || attackState == STATE.idle_e:
 		attackState = STATE.idle_e
 		
 		#Checks area for player after finishing attack [FGTS-78]
