@@ -126,3 +126,4 @@ next_path = "res://Level1.tscn"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 autoplay = true
+bus = "Music"

@@ -28,6 +28,7 @@ shape = SubResource( 1 )
 
 [node name="FireballExplodeSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "Sfx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 10.9375, -21.5625 )

@@ -138,5 +138,6 @@ one_shot = true
 
 [node name="AttackSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "Sfx"
 [connection signal="body_entered" from="Orientation/Sprite/PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="ActionDelay" to="." method="_on_ActionDelay_timeout"]

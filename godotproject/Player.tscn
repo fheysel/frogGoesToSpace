@@ -637,9 +637,11 @@ drag_margin_v_enabled = true
 [node name="DeathSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -6.0
+bus = "Sfx"
 
 [node name="OuchSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+bus = "Sfx"
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
 [connection signal="tongue_stop" from="." to="PlayerTongue" method="_on_Player_tongue_stop"]
 [connection signal="tongue_swing" from="PlayerTongue" to="." method="_on_PlayerTongue_tongue_swing"]

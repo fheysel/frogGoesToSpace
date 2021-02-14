@@ -390,6 +390,7 @@ position = Vector2( 5992, -296 )
 [node name="Level1BacktrackPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
 autoplay = true
+bus = "Music"
 
 [node name="EOL" parent="." instance=ExtResource( 17 )]
 position = Vector2( 10800, -160 )

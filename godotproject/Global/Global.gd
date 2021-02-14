@@ -23,6 +23,13 @@ var cutscene_inhibits_pause = false
 onready var HighScoreScreen := $HighScoreScreenLayer/HighScoreScreen
 onready var InGameMenu := $InGameMenuLayer/InGameMenu
 
+onready var music_bus_idx := AudioServer.get_bus_index("Music")
+onready var sfx_bus_idx := AudioServer.get_bus_index("Sfx")
+# Music volume, from 0 (silent) to 1 (loud)
+var music_volume = 0
+# Sound effect volume, from 0 (silent) to 1 (loud)
+var sfx_volume = 0
+
 # This pause is applied in Global.gd (this script)
 # This refers to setting get_tree().paused
 func should_pause_game():
@@ -47,6 +54,13 @@ func should_inhibit_pause_menu():
 		current_scene_has_property_set("inhibit_pause") || \
 		HighScoreScreen.active()
 
+# Calculate the volume in dB for a bus, given the base volume and
+# any fading volume.
+func _calc_bus_db(base_volume : float, fade_volume : float):
+	var combined := base_volume * pow(fade_volume, 2)
+	var db := linear2db(combined)
+	return db
+
 func _ready():
 	resource_queue.start()
 	swipe_anim_state_machine = $SideSwipeAnimationLayer/AnimationTree['parameters/playback']
@@ -55,16 +69,12 @@ func _ready():
 func _process(_delta_unused):
 	var pause_game_logic = should_pause_game()
 	get_tree().paused = pause_game_logic
-	# Get game audio object for current scene
-	var scene = get_tree().current_scene
-	if scene and 'BGMPlayer' in scene:
-		var music : AudioStreamPlayer = scene.BGMPlayer
-		if music:
-			# Only calculate and update volume if it's not going to cause a
-			# division by zero
-			if game_audio_volume_fadeout > 0.001:
-				var db = 1 - 6 - 1/pow(game_audio_volume_fadeout,2)
-				music.volume_db = db
+	# Adjust music bus volume
+	# Only calculate and update volume if it's not going to cause a
+	# division by zero
+	AudioServer.set_bus_volume_db(music_bus_idx, _calc_bus_db(music_volume, game_audio_volume_fadeout))
+	AudioServer.set_bus_volume_db(sfx_bus_idx, _calc_bus_db(sfx_volume, 1))
+	# Show debug mode text if we're in debug mode
 	$DebugModeTextLayer/DebugModeText.visible = debug_mode
 	# Handle debug mode button combinations
 	if debug_mode:
