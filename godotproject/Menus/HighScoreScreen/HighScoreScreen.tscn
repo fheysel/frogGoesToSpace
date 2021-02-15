@@ -115,10 +115,12 @@ wait_time = 2.0
 
 [node name="ThonkBigSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
 stream = ExtResource( 4 )
+bus = "Sfx"
 
 [node name="ThonkSmallSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
 stream = ExtResource( 5 )
 volume_db = -3.0
+bus = "Sfx"
 [connection signal="timeout" from="HighScoreScreen/ThonkTimer" to="HighScoreScreen" method="_on_ThonkTimer_timeout"]
 [connection signal="timeout" from="HighScoreScreen/InitialTimer" to="HighScoreScreen" method="_on_InitialTimer_timeout"]
 [connection signal="timeout" from="HighScoreScreen/FinalSoundTimer" to="HighScoreScreen" method="_on_FinalSoundTimer_timeout"]

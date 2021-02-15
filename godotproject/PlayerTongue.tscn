@@ -10,9 +10,11 @@ script = ExtResource( 2 )
 
 [node name="ShootSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "Sfx"
 
 [node name="StickSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+bus = "Sfx"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.79713, 0.867174 )

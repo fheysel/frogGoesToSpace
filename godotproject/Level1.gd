@@ -8,8 +8,6 @@ const STAR := 23
 export (PackedScene) var Spike
 export (PackedScene) var Star
 
-onready var BGMPlayer := $Level1BacktrackPlayer
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("setup_tiles")

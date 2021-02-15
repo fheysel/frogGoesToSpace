@@ -9,8 +9,6 @@ const STAR := 12
 export (PackedScene) var Spike
 export (PackedScene) var Star
 
-onready var BGMPlayer := $AudioStreamPlayer
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("setup_tiles")
