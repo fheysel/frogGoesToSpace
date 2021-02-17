@@ -435,20 +435,19 @@ func _physics_process(delta):
 			# with small upwards boost
 			stop_swing()
 			
-			# A unit vector in the direction of the mouth to the tip of tongue.
-			# It will be used to calculate the launch direction.
-			# The direction is calculated as the vector perpendicular to the current velocity,
-			# we divide by the magnitude to make it a unit vecotr. This helps to normalize it.
-			var tongue_direction = Vector2(velocity.y, -1*velocity.x).normalized()
+			var frog_pos = get_global_transform().xform(Vector2.ZERO)
+			var tongue_vec = swing_pivot_position - frog_pos 
+			var tongue_vec_norm = tongue_vec.normalized()
 			
-			# Make sure this always launches the player in the upwards direction
-			if tongue_direction.y > 0:
-				tongue_direction = tongue_direction * -1
+			var velocity_after_swing = tongue_vec_norm * (tongue_exit_launch_bonus_speed_up / 2 + tongue_vec.length())
 			
-			# Set velocity
-			var velocity_after_swing = tongue_direction * (tongue_exit_launch_bonus_speed_up / 2 + swing_radius) #TODO make these variables
-			velocity_after_swing += Vector2.UP * tongue_exit_launch_bonus_speed_up # gives it a little oomf
+			# If tongue is shooting up 
+			# This is to prevent the upwards boost when shooting down
+			if tongue_vec.y < 0: 
+				velocity_after_swing += Vector2.UP * tongue_exit_launch_bonus_speed_up # gives it a little oomf
+			
 			velocity = velocity_after_swing
+			
 	else:
 		# If we aren't swinging, then we may be able to jump.
 		# Check if we should jump
