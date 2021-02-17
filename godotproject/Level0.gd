@@ -3,8 +3,8 @@ extends Node2D
 # Each level has to have a name in it now, this will be displayed on the high score screen
 const level_name := "Morning Meadow"
 
-const SPIKE := 3
-const STAR := 12
+const SPIKE := -1
+const STAR := -1
 
 export (PackedScene) var Spike
 export (PackedScene) var Star
