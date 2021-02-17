@@ -436,14 +436,14 @@ func _physics_process(delta):
 			stop_swing()
 			
 			var frog_pos = get_global_transform().xform(Vector2.ZERO)
-			var swing_vec = swing_pivot_position - frog_pos 
-			var swing_vec_norm = swing_vec.normalized()
+			var tongue_vec = swing_pivot_position - frog_pos 
+			var tongue_vec_norm = tongue_vec.normalized()
 			
-			var velocity_after_swing = swing_vec_norm * (tongue_exit_launch_bonus_speed_up / 2 + swing_vec.length())
+			var velocity_after_swing = tongue_vec_norm * (tongue_exit_launch_bonus_speed_up / 2 + tongue_vec.length())
 			
 			# If tongue is shooting up 
 			# This is to prevent the upwards boost when shooting down
-			if swing_vec.y < 0: 
+			if tongue_vec.y < 0: 
 				velocity_after_swing += Vector2.UP * tongue_exit_launch_bonus_speed_up # gives it a little oomf
 			
 			velocity = velocity_after_swing
