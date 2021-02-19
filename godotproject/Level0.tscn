@@ -15,6 +15,7 @@
 [ext_resource path="res://EOL.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sfx/Level0-Theme.ogg" type="AudioStream" id=14]
 [ext_resource path="res://TextTip.tscn" type="PackedScene" id=17]
+[ext_resource path="res://RespawnPositionArea.tscn" type="PackedScene" id=15]
 
 [node name="Level_0" type="Node2D"]
 script = ExtResource( 12 )
@@ -34,7 +35,6 @@ margin = 10.0
 player_nodepath = NodePath("../Player")
 
 [node name="DeathPlane" parent="." instance=ExtResource( 4 )]
-start_postion = Vector2( 121, 896 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -144,3 +144,10 @@ text = "[center] press shift/x while swinging to [wave] launch [/wave] yourself 
 [node name="TextTip4" parent="." instance=ExtResource( 17 )]
 position = Vector2( 2587.93, 661.872 )
 text = "[center] you can control the direction of your tongue: try shooting [wave] diagonally"
+[node name="RespawnPositionArea" parent="." instance=ExtResource( 15 )]
+position = Vector2( 276, 884 )
+scale = Vector2( 2.52, 1 )
+
+[node name="RespawnPositionArea2" parent="." instance=ExtResource( 15 )]
+position = Vector2( 8752, 520 )
+scale = Vector2( 3, 1 )

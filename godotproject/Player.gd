@@ -66,6 +66,8 @@ var swing_pivot_position = Vector2.ZERO
 
 var dead := false
 
+var respawn_location_data = null
+
 # This counter keeps track of the number of star pieces collected.
 # This may be temporary, depending on if we want to track the number of star pieces
 # collected in-between levels or in-between deaths.
@@ -474,7 +476,7 @@ func takeDamage(damageTaken):
 			$InvulnerableFlashTimer.start()
 			
 			# Apply knockback to player
-			velocity = knockback_velocity * Vector2(-1 if $Sprite.flip_h else 1, 1)
+			velocity = knockback_velocity * Vector2(facing.x, 1)
 			
 			# Make player sprite transparency toggle between 0.3 and 0.7
 			# (in conjunction with InvulnerableFlashTimer)
@@ -533,3 +535,30 @@ func _on_InvulnerableFlashTimer_timeout():
 		
 		$Sprite.modulate.a = 1 - $Sprite.modulate.a
 	
+func update_respawn_position():
+	if !on_floor_last_frame:
+		return
+	var frog_pos = get_global_transform().xform(Vector2.ZERO)
+	# We use a dictionary since we need to keep track of multiple
+	# pieces of data.
+	respawn_location_data = {}
+	respawn_location_data['position'] = frog_pos
+	respawn_location_data['facing'] = facing
+
+func hit_death_plane():
+	# Subtract 1 health independent of invulnerability timer.
+	# Don't do it if we're god or dead though.
+	if !(Global.player_is_god or dead):
+		health -= 1
+		if health <= 0:
+			die()
+	
+	# Check if the player's dead after they take damage
+	# If not, play the animation of them being moved to safe ground
+	if !dead:
+		Global.fade_set_body_to_position(self, respawn_location_data['position'])
+		facing = respawn_location_data['facing']
+		# Call takeDamage to handle the rest of the hurt stuff (animation, sound)
+		# This needs to be done after we reset the "facing" value in order to restore them properly.
+		# Since we already gave the player their damage, call with 0 damage
+		takeDamage(0)

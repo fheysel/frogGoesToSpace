@@ -85,7 +85,7 @@ func is_ready(path):
 	return ret
 
 
-func _wait_for_resource(res, path):
+func _wait_for_resource(_res, path):
 	while !is_ready(path):
 		_step()
 	return pending[path]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1.tres" type="TileSet" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Tiles/Objects/nasaSign.png" type="Texture" id=19]
 [ext_resource path="res://Bird.tscn" type="PackedScene" id=20]
 [ext_resource path="res://enemy-Ant.tscn" type="PackedScene" id=21]
+[ext_resource path="res://RespawnPositionArea.tscn" type="PackedScene" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "toxic_waste"
@@ -354,7 +355,6 @@ player_nodepath = NodePath("../Player")
 
 [node name="DeathPlane" parent="." instance=ExtResource( 9 )]
 position = Vector2( -56, -680 )
-start_postion = Vector2( 121, 264 )
 
 [node name="Fan" parent="." instance=ExtResource( 14 )]
 position = Vector2( 800, 216 )
@@ -489,3 +489,46 @@ position = Vector2( 8248, -1440 )
 
 [node name="enemy-Ant13" parent="." instance=ExtResource( 21 )]
 position = Vector2( 6504, -1328 )
+
+[node name="RespawnPositionArea" parent="." instance=ExtResource( 22 )]
+position = Vector2( 1136, -136 )
+
+[node name="RespawnPositionArea2" parent="." instance=ExtResource( 22 )]
+position = Vector2( 1240, 232 )
+
+[node name="RespawnPositionArea3" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2264, -336 )
+
+[node name="RespawnPositionArea4" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2352, -688 )
+
+[node name="RespawnPositionArea5" parent="." instance=ExtResource( 22 )]
+position = Vector2( 1520, -272 )
+
+[node name="RespawnPositionArea6" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2984, -696 )
+
+[node name="RespawnPositionArea7" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3352, -696 )
+
+[node name="RespawnPositionArea8" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2816, -232 )
+
+[node name="RespawnPositionArea9" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3232, -232 )
+
+[node name="RespawnPositionArea10" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3984, -632 )
+scale = Vector2( 1.2, 1 )
+
+[node name="RespawnPositionArea11" parent="." instance=ExtResource( 22 )]
+position = Vector2( 4376, -408 )
+
+[node name="RespawnPositionArea12" parent="." instance=ExtResource( 22 )]
+position = Vector2( 4968, -1280 )
+
+[node name="RespawnPositionArea13" parent="." instance=ExtResource( 22 )]
+position = Vector2( 6520, -400 )
+
+[node name="RespawnPositionArea14" parent="." instance=ExtResource( 22 )]
+position = Vector2( 7152, -376 )
