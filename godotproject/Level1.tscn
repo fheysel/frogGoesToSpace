@@ -493,9 +493,6 @@ position = Vector2( 6504, -1328 )
 [node name="RespawnPositionArea" parent="." instance=ExtResource( 22 )]
 position = Vector2( 1136, -136 )
 
-[node name="RespawnPositionArea2" parent="." instance=ExtResource( 22 )]
-position = Vector2( 1240, 232 )
-
 [node name="RespawnPositionArea3" parent="." instance=ExtResource( 22 )]
 position = Vector2( 2264, -336 )
 
@@ -532,3 +529,30 @@ position = Vector2( 6520, -400 )
 
 [node name="RespawnPositionArea14" parent="." instance=ExtResource( 22 )]
 position = Vector2( 7152, -376 )
+
+[node name="RespawnPositionArea15" parent="." instance=ExtResource( 22 )]
+position = Vector2( 7784, -384 )
+
+[node name="RespawnPositionArea19" parent="." instance=ExtResource( 22 )]
+position = Vector2( 7176, -1296 )
+
+[node name="RespawnPositionArea20" parent="." instance=ExtResource( 22 )]
+position = Vector2( 7784, -1288 )
+
+[node name="RespawnPositionArea21" parent="." instance=ExtResource( 22 )]
+position = Vector2( 8984, -1296 )
+
+[node name="RespawnPositionArea22" parent="." instance=ExtResource( 22 )]
+position = Vector2( 9728, -1296 )
+
+[node name="RespawnPositionArea17" parent="." instance=ExtResource( 22 )]
+position = Vector2( 7784, -1008 )
+scale = Vector2( 0.4, 1 )
+
+[node name="RespawnPositionArea18" parent="." instance=ExtResource( 22 )]
+position = Vector2( 7144, -1000 )
+scale = Vector2( 0.4, 1 )
+
+[node name="RespawnPositionArea16" parent="." instance=ExtResource( 22 )]
+position = Vector2( 8464, -392 )
+scale = Vector2( 1.5, 1 )
