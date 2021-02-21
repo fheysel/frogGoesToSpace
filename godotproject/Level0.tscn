@@ -35,6 +35,7 @@ margin = 10.0
 player_nodepath = NodePath("../Player")
 
 [node name="DeathPlane" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 48 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -149,5 +150,9 @@ position = Vector2( 276, 884 )
 scale = Vector2( 2.52, 1 )
 
 [node name="RespawnPositionArea2" parent="." instance=ExtResource( 15 )]
-position = Vector2( 8752, 520 )
+position = Vector2( 9112, 560 )
 scale = Vector2( 3, 1 )
+
+[node name="RespawnPositionArea3" parent="." instance=ExtResource( 15 )]
+position = Vector2( 9832, 560 )
+scale = Vector2( 2, 1 )

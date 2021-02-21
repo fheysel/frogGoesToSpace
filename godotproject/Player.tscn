@@ -560,12 +560,15 @@ position = Vector2( 2.73517, 0.182755 )
 
 [node name="HopSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 2 )
+bus = "Sfx"
 
 [node name="JumpSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+bus = "Sfx"
 
 [node name="CollectStarPieceSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+bus = "Sfx"
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
 one_shot = true

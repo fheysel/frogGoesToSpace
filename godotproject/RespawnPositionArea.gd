@@ -12,7 +12,8 @@ func _process(_delta):
 	# We use the overlaps_body function to double-check
 	# that the player is still inside of us.
 	if player and overlaps_body(player):
-		player.update_respawn_position()
+		# Tell the player where the center of this respawn marker is
+		player.update_respawn_position(get_global_transform().xform(Vector2.ZERO))
 	else:
 		# If the player somehow exited without the event,
 		# then we mark them as not inside.
