@@ -32,9 +32,9 @@ margin_bottom = 512.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 139.0
-margin_top = 115.0
+margin_top = 124.0
 margin_right = 501.0
-margin_bottom = 396.0
+margin_bottom = 388.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_right = 362.0
@@ -47,12 +47,11 @@ valign = 1
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_top = 84.0
 margin_right = 362.0
-margin_bottom = 217.0
-text = "Arrow Keys - Move / Adjust Tongue Direction
-
-Z - Jump / Accept
-X - Tongue
-C - Menu
+margin_bottom = 200.0
+text = "Arrow Keys / WASD --- Move / Adjust Tongue Direction
+Z / Space / Enter --- Jump / Accept
+X / Shift --- Tongue
+C / Escape --- Menu
 
 Please see the help section in the menu in-game
 for more details."
@@ -62,9 +61,9 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 221.0
+margin_top = 204.0
 margin_right = 362.0
-margin_bottom = 281.0
+margin_bottom = 264.0
 rect_min_size = Vector2( 0, 60 )
 theme = ExtResource( 1 )
 custom_fonts/font = SubResource( 2 )
