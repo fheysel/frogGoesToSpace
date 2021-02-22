@@ -185,3 +185,8 @@ func format_time(time):
 	var seconds = int(time) % 60
 	var subseconds = int(time * 60) % 60
 	return "%01d:%02d:%02d" % [minutes, seconds, subseconds]
+
+# Check if a given body is the player. Useful for scripts where
+# we only want to interact with the player.
+func is_player(body):
+	return body.name == "Player"

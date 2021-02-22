@@ -66,6 +66,8 @@ var swing_pivot_position = Vector2.ZERO
 
 var dead := false
 
+var respawn_location := Vector2.ZERO
+
 # This counter keeps track of the number of star pieces collected.
 # This may be temporary, depending on if we want to track the number of star pieces
 # collected in-between levels or in-between deaths.
@@ -469,22 +471,30 @@ func takeDamage(damageTaken):
 		if health <= 0:
 			die()
 		else:
-			# After the player gets hit set the player to invulnerable to damage for 1 second
-			$InvulnerableTimer.start()
-			$InvulnerableFlashTimer.start()
-			
-			# Apply knockback to player
-			velocity = knockback_velocity * Vector2(-1 if $Sprite.flip_h else 1, 1)
-			
-			# Make player sprite transparency toggle between 0.3 and 0.7
-			# (in conjunction with InvulnerableFlashTimer)
-			$Sprite.modulate.a = 0.3
-			
-			# Play Hurt animation
-			animation_mode.travel("Hurt")
-			
-			# Play Ouch sound effect
-			$OuchSoundPlayer.play()
+			apply_knockback()
+
+func apply_knockback(knockback_up_only := false):
+	# After the player gets hit set the player to invulnerable to damage for 1 second
+	$InvulnerableTimer.start()
+	$InvulnerableFlashTimer.start()
+	
+	# Apply knockback to player
+	var knockback_dir
+	if knockback_up_only:
+		knockback_dir = Vector2(0, 1)
+	else:
+		knockback_dir = Vector2(facing.x, 1)
+	velocity = knockback_velocity * knockback_dir
+	
+	# Make player sprite transparency toggle between 0.3 and 0.7
+	# (in conjunction with InvulnerableFlashTimer)
+	$Sprite.modulate.a = 0.3
+	
+	# Play Hurt animation
+	animation_mode.travel("Hurt")
+	
+	# Play Ouch sound effect
+	$OuchSoundPlayer.play()
 
 func die():
 	# We've died!
@@ -533,3 +543,30 @@ func _on_InvulnerableFlashTimer_timeout():
 		
 		$Sprite.modulate.a = 1 - $Sprite.modulate.a
 	
+func update_respawn_position(position):
+	if !on_floor_last_frame:
+		return
+	respawn_location = position
+
+func hit_death_plane():
+	# Subtract 1 health independent of invulnerability timer.
+	# Don't do it if we're god or dead though.
+	if !(Global.player_is_god or dead):
+		health -= 1
+		if health <= 0:
+			die()
+	
+	# Check if the player's dead after they take damage
+	# If not, play the animation of them being moved to safe ground
+	if !dead:
+		# Set facing variable so that the frog will always be looking toward
+		# where they fell down.
+		var target_pos = respawn_location
+		var current_pos = get_global_transform().xform(Vector2.ZERO)
+		facing = Vector2.RIGHT if current_pos.x > target_pos.x else Vector2.LEFT
+		# Do the screen wipe to go to the new position.
+		Global.fade_set_body_to_position(self, target_pos)
+		# We use a `call_deferred` here because otherwise, the knockback sound effect
+		# starts playing before the transition happens, and it cuts off in a bad way.
+		# true = Apply knockback in the vertical direction only
+		call_deferred('apply_knockback', true)
