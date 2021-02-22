@@ -27,8 +27,3 @@ func _on_PlayerDetector_body_exited(body):
 		#text tip fade out
 		tween.start()
 		tween.interpolate_property($TextPos, 'scale', Vector2(1,1), Vector2(0.1,0.1), 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-
-
-#func _on_Tween_tween_all_completed():
-#	self.queue_free()
-
