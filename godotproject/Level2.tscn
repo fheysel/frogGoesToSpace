@@ -681,4 +681,4 @@ stream = ExtResource( 1 )
 bus = "Music"
 
 [node name="ConveyorBelt" parent="." instance=ExtResource( 8 )]
-position = Vector2( 560, 868.55 )
+position = Vector2( 576, 832 )
