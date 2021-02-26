@@ -3,6 +3,9 @@ extends KinematicBody2D
 signal tongue_start
 signal tongue_stop
 
+# Enum types
+enum HorizMoveType { STOPPED, STOPPING, MOVING, TURN_AROUND }
+
 # Constants relating to horizontal movement
 export (float) var walk_horiz_accel = 1200
 export (float) var walk_speed_limit = 225
@@ -118,11 +121,11 @@ func get_input():
 	tongue_held = Input.is_action_pressed("tongue")
 
 
-func handle_normal_horizontal_movement(delta):
+func handle_normal_horizontal_movement(delta) -> int:
 	# We break movement up into two main categories: ground and air
 	###############################################################################################
 	# If the frog is on the ground, then there are a few possible movement options:
-	#   - user is not inputting a direction:
+	#   - user is not inputting a direction (or is using the tongue):
 	#     => frog experiences friction (walk_horiz_accel * friction_coeff) slowing them down
 	#        until they are stopped
 	# 
@@ -172,18 +175,21 @@ func handle_normal_horizontal_movement(delta):
 	# They can keep the full momentum if they can jump as soon as they touch the ground.
 	# 
 	###############################################################################################
-	
+	var ret_value : int = HorizMoveType.STOPPED
 	if on_floor_last_frame:
 		# Handle ground movement
-		if fequal(user_direction.x, 0):
+		if fequal(user_direction.x, 0) or !$PlayerTongue.idle:
 			# If the user isn't inputting a direction, slow them down toward stopped
 			var vs = sign(velocity.x)
 			velocity.x += -vs * walk_horiz_accel * delta * friction_coeff
-			if sign(velocity.x) * vs < 0:
+			ret_value = HorizMoveType.STOPPING
+			if sign(velocity.x) * vs < 0 or fequal(velocity.x, 0):
 				# User is going in opposite dir'n then they were originally.
 				# Make them come to a stop.
 				velocity.x = 0
+				ret_value = HorizMoveType.STOPPED
 		else:
+			ret_value = HorizMoveType.MOVING
 			# Make the user move in the direction they're pointing if they're not already
 			# at the speed cap
 			if sign(user_direction.x) * velocity.x < walk_speed_limit:
@@ -192,6 +198,7 @@ func handle_normal_horizontal_movement(delta):
 				# (dir'n of user_direction.x doesn't match dir'n of velocity.x)
 				if sign(user_direction.x) * sign(velocity.x) < 0:
 					turning_bonus = ground_turn_coefficient
+					ret_value = HorizMoveType.TURN_AROUND
 				velocity.x += user_direction.x * walk_horiz_accel * delta * turning_bonus
 				# Limit horiz. speed to speed cap
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), walk_speed_limit)
@@ -206,6 +213,7 @@ func handle_normal_horizontal_movement(delta):
 		# If the user isn't inputting a direction, don't adjust their velocity
 		# Otherwise...
 		if !fequal(user_direction.x, 0):
+			ret_value = HorizMoveType.MOVING
 			# Make the user move in the direction they're pointing if they're not already
 			# at the speed cap
 			if sign(user_direction.x) * velocity.x < air_speed_limit:
@@ -214,9 +222,11 @@ func handle_normal_horizontal_movement(delta):
 				# (dir'n of user_direction.x doesn't match dir'n of velocity.x)
 				if sign(user_direction.x) * sign(velocity.x) < 0:
 					turning_bonus = air_turn_coefficient
+					ret_value = HorizMoveType.TURN_AROUND
 				velocity.x += user_direction.x * air_horiz_accel * delta * turning_bonus
 				# Limit horiz. speed to speed cap
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), air_speed_limit)
+	return ret_value
 
 func _draw():
 	var tongue_target_global = null
@@ -280,7 +290,7 @@ func do_movement(delta):
 
 	else:
 		# Adjust X velocity based on user input
-		handle_normal_horizontal_movement(delta)
+		var horiz_move_type = handle_normal_horizontal_movement(delta)
 		
 		# Adjust Y velocity based on gravity and jump
 		velocity.y += gravity * delta * wind_speed.y
@@ -306,7 +316,7 @@ func do_movement(delta):
 
 		# Play sound effect when timer has expired and frog is walking on floor
 		# (only if user is pointing in the same direction that frog is going)
-		if $HopSoundTimer.is_stopped() && on_floor_last_frame && !fequal(user_direction.x, 0) && sign(velocity.x) == sign(user_direction.x):
+		if $HopSoundTimer.is_stopped() && on_floor_last_frame && horiz_move_type == HorizMoveType.MOVING && sign(velocity.x) == sign(user_direction.x):
 			# Calculate new timer value, based on period as well as random variance.
 			# This slight variance will hopefully make it sound more natural.
 			# Let P and V be the period and variance, the minimum timer value will be P and the max will be P*(1+V)
@@ -314,7 +324,7 @@ func do_movement(delta):
 			$HopSoundTimer.start(hop_sound_timer_period * (1 + rand_range(0, hop_sound_timer_period_variance)))
 			# Play sound effect.
 			$HopSoundPlayer.play(0)
-		
+
 		if jump_pressed or jump_held:
 			if velocity.y < 0:
 				animation_tree.set('parameters/Land/blend_position', velocity.normalized())
