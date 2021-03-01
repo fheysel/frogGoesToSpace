@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shitty-rocket.jpg" type="Texture" id=1]
+[ext_resource path="res://RocketEnemy.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 50.5304
+height = 156.851
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 51.2133
+height = 154.232
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+position = Vector2( -0.111359, 0 )
+scale = Vector2( 0.1, 0.1 )
+collision_layer = 0
+script = ExtResource( 2 )
+
+[node name="Orientation" type="Node2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Orientation"]
+rotation = 1.5708
+frames = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Orientation"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Area2D"]
+position = Vector2( 13.9203, -0.835218 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="RayCast2D" type="RayCast2D" parent="Orientation"]
+position = Vector2( 140.992, 0 )
+enabled = true
+cast_to = Vector2( 2000, 0 )
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 14.1193, -0.594604 )
+rotation = 1.5708
+shape = SubResource( 2 )
+disabled = true
+[connection signal="body_entered" from="Orientation/Area2D" to="." method="_on_Area2D_body_entered"]
