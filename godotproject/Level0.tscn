@@ -160,4 +160,4 @@ position = Vector2( 9832, 560 )
 scale = Vector2( 2, 1 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 16 )]
-position = Vector2( 115.817, 858.826 )
+position = Vector2( 124.726, 611.156 )

@@ -20,9 +20,9 @@ var attackState = STATE.idle_e
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Orientation/Area2D/CollisionShape2D.disabled = true
-	direction.x = acos(rotation_degrees)
-	direction.y = asin(rotation_degrees)
-	print(direction)
+	direction.x = 1
+	direction.y = 0
+	print(direction.x)
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -67,4 +67,4 @@ func _physics_process(delta):
 func _on_Area2D_body_entered(body):
 	if(body.name) == "Player":
 		body.takeDamage(attackDamage)
-	queue_free()
+#	queue_free()

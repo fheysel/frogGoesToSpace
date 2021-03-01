@@ -21,6 +21,7 @@ height = 154.232
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( -0.111359, 0 )
+rotation = 1.5708
 scale = Vector2( 0.1, 0.1 )
 collision_layer = 0
 script = ExtResource( 2 )
