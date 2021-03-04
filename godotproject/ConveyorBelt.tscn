@@ -8,6 +8,7 @@ extents = Vector2( 96, 16 )
 
 [node name="ConveyorBelt" type="StaticBody2D"]
 collision_layer = 11
+collision_mask = 9
 constant_linear_velocity = Vector2( 100, 0 )
 script = ExtResource( 2 )
 speed = 100
