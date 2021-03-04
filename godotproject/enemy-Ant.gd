@@ -28,7 +28,7 @@ func dead():
 
 func _physics_process(_delta):
 	if is_dead == false:
-		if attackState == STATE.idle_e:				
+		if attackState == STATE.idle_e:
 			$Orientation/Sprite.play("walk")
 				
 			#Movement for the ant
@@ -46,9 +46,13 @@ func _physics_process(_delta):
 				$ActionDelay.wait_time = 0.5
 
 func take_damage(attack_damage):
-	health = health - attack_damage
-	if health <= 0:
-		dead()
+	if !is_dead and $InvulnerableTimer.is_stopped():
+		$InvulnerableTimer.start()
+		$InvulnerableFlashTimer.start()
+		$Orientation/Sprite.modulate.a = 0.3
+		health = health - attack_damage
+		if health <= 0:
+			dead()
 
 func begin_attack():
 	var RayCastList = [$Orientation/RayCast_Top.get_collider(), $Orientation/RayCast_Middle.get_collider(), $Orientation/RayCast_Bottom.get_collider()]
@@ -90,3 +94,15 @@ func _on_ActionDelay_timeout():
 		for body in bodiesArr:
 			if body.name == "Player":
 				begin_attack()
+
+func _on_InvulnerableTimer_timeout():
+	# Set player to visible
+	$Orientation/Sprite.modulate.a = 1
+
+func _on_InvulnerableFlashTimer_timeout():
+	if $InvulnerableTimer.is_stopped():
+		# Player isn't vulnerable anymore! Stop this timer until next hit
+		$InvulnerableFlashTimer.stop()
+	else:
+		# Flash between transparencies
+		$Orientation/Sprite.modulate.a = 1 - $Orientation/Sprite.modulate.a
