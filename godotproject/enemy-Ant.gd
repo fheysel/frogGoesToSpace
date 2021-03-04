@@ -8,7 +8,8 @@ const FIREBALL = preload("res://AntAttackFire.tscn")
 enum STATE{
 	idle_e,
 	detected_player_e,
-	attacking_player_e
+	attacking_player_e,
+	taking_damage_e
 }
 
 var velocity = Vector2(0, 0)
@@ -26,6 +27,12 @@ func dead():
 	velocity = 0
 	queue_free()
 
+func trigger_raycast():
+	# .1 second delay to gived RayCasts time to switch directions
+	$ActionDelay.start(.1)
+	# Set the wait time to a normal amount again
+	$ActionDelay.wait_time = 0.5
+
 func _physics_process(_delta):
 	if is_dead == false:
 		if attackState == STATE.idle_e:
@@ -37,19 +44,24 @@ func _physics_process(_delta):
 			velocity = move_and_slide(velocity, FLOOR)
 			
 			if is_on_wall():
+				# Change direction
 				direction *= -1
 				$Orientation.scale.x *= -1
-				
-				#.1 second delay to gived RayCasts time to switch directions
-				$ActionDelay.start(.1)
-				# Set the wait time to a normal amount again
-				$ActionDelay.wait_time = 0.5
+			
+				# Send out the raycast again after changing direction
+				trigger_raycast()
 
 func take_damage(attack_damage):
 	if !is_dead and $InvulnerableTimer.is_stopped():
+		# Set the enemy in the invulnerable state
 		$InvulnerableTimer.start()
+		attackState = STATE.taking_damage_e
+		# Handle enemy flashing after taking damage
 		$InvulnerableFlashTimer.start()
 		$Orientation/Sprite.modulate.a = 0.3
+		# Set sprite animation
+		$Orientation/Sprite.play("hurt")
+		# Handle enemy health
 		health = health - attack_damage
 		if health <= 0:
 			dead()
@@ -98,6 +110,11 @@ func _on_ActionDelay_timeout():
 func _on_InvulnerableTimer_timeout():
 	# Set player to visible
 	$Orientation/Sprite.modulate.a = 1
+	# Re-enable their logic
+	attackState = STATE.idle_e
+	# Trigger the raycast so they will shoot at the player
+	trigger_raycast()
+
 
 func _on_InvulnerableFlashTimer_timeout():
 	if $InvulnerableTimer.is_stopped():
