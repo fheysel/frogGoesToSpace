@@ -60,9 +60,9 @@ region = Rect2( 80, 120, 40, 40 )
 atlas = ExtResource( 2 )
 region = Rect2( 120, 120, 40, 40 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 160, 80, 40, 40 )
+region = Rect2( 40, 120, 40, 40 )
 
 [sub_resource type="SpriteFrames" id=16]
 animations = [ {
@@ -76,7 +76,7 @@ animations = [ {
 "name": "fireball",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 15 ) ],
+"frames": [ SubResource( 19 ) ],
 "loop": true,
 "name": "hurt",
 "speed": 5.0
