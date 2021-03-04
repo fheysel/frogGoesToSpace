@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://enemy-Ant.gd" type="Script" id=1]
 [ext_resource path="res://poison_frog.png" type="Texture" id=2]
@@ -60,7 +60,11 @@ region = Rect2( 80, 120, 40, 40 )
 atlas = ExtResource( 2 )
 region = Rect2( 120, 120, 40, 40 )
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 40, 120, 40, 40 )
+
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
@@ -71,12 +75,17 @@ animations = [ {
 "loop": true,
 "name": "fireball",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 19 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 178.427, 37.9655 )
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 375.71, 371.094 )
 
 [node name="enemy-Ant" type="KinematicBody2D"]
@@ -93,8 +102,8 @@ position = Vector2( -105.564, 237.903 )
 [node name="Sprite" type="AnimatedSprite" parent="Orientation"]
 position = Vector2( 280.802, 224.642 )
 scale = Vector2( 19.2685, 18.8674 )
-frames = SubResource( 15 )
-animation = "fireball"
+frames = SubResource( 16 )
+animation = "hurt"
 playing = true
 flip_h = true
 
@@ -107,7 +116,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Sprite/PlayerDetector"]
 modulate = Color( 0.027451, 0.0117647, 0.0117647, 1 )
 position = Vector2( -141.343, 16.489 )
-shape = SubResource( 16 )
+shape = SubResource( 17 )
 
 [node name="RayCast_Top" type="RayCast2D" parent="Orientation"]
 position = Vector2( 35, -90 )
@@ -130,7 +139,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 291.489, 231.229 )
-shape = SubResource( 17 )
+shape = SubResource( 18 )
 
 [node name="ActionDelay" type="Timer" parent="."]
 wait_time = 0.5
@@ -139,5 +148,13 @@ one_shot = true
 [node name="AttackSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 bus = "Sfx"
+
+[node name="InvulnerableTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="InvulnerableFlashTimer" type="Timer" parent="."]
+wait_time = 0.2
 [connection signal="body_entered" from="Orientation/Sprite/PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="ActionDelay" to="." method="_on_ActionDelay_timeout"]
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
+[connection signal="timeout" from="InvulnerableFlashTimer" to="." method="_on_InvulnerableFlashTimer_timeout"]
