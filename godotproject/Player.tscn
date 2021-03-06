@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player_frog.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://sfx/collectstarpiece.wav" type="AudioStream" id=6]
 [ext_resource path="res://sfx/death.wav" type="AudioStream" id=7]
 [ext_resource path="res://sfx/ouch.wav" type="AudioStream" id=8]
+[ext_resource path="res://Camera2D.gd" type="Script" id=9]
+[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.696, 15 )
@@ -635,6 +637,9 @@ one_shot = true
 pause_mode = 2
 current = true
 drag_margin_v_enabled = true
+script = ExtResource( 9 )
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 10 )]
 
 [node name="DeathSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -642,6 +647,7 @@ volume_db = -6.0
 bus = "Sfx"
 
 [node name="OuchSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+visible = false
 stream = ExtResource( 8 )
 bus = "Sfx"
 [connection signal="tongue_start" from="." to="PlayerTongue" method="_on_Player_tongue_start"]
