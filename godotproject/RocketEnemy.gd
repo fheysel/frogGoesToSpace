@@ -1,13 +1,15 @@
 extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
-const SPEED = 9000
-const SPEED_INC = 50
+const SPEED = 11000
+const SPEED_INC = 100
 
 var velocity = Vector2(0, 0)
 var direction = Vector2(1, 0)
 
 var attackDamage = 1
+
+var timer
 
 enum STATE{
 	idle_e,
@@ -22,7 +24,12 @@ func _ready():
 	$Orientation/Area2D/CollisionShape2D.disabled = true
 	direction.x = 1
 	direction.y = 0
-	print(direction.x)
+	#print(direction.x)
+	
+	timer = get_node("Timer")
+	timer.set_wait_time(0.4)
+	timer.connect("timeout", self, "_on_timer_timeout")
+	
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -58,13 +65,23 @@ func _physics_process(delta):
 		if velocity.length() < SPEED * delta:
 			velocity.x += (SPEED_INC * direction.x * delta)
 			velocity.y += (SPEED_INC * direction.y * delta)
-			print(velocity)
+			#print(velocity)
 			velocity = move_and_slide(velocity, FLOOR)
 		else:
 			attackState = STATE.attacking_player_e
 		
-
 func _on_Area2D_body_entered(body):
 	if(body.name) == "Player":
 		body.takeDamage(attackDamage)
-#	queue_free()
+	
+	timer.start()
+	$Orientation/AnimatedSprite.set_visible(false)
+	set_physics_process(false)
+	velocity = Vector2(0,0)
+	$BoomParticlesOrange.set_emitting(true)
+	$BoomParticlesRed.set_emitting(true)
+
+func _on_timer_timeout():
+	queue_free()
+	
+
