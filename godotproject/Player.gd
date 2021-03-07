@@ -534,7 +534,7 @@ func collect_star_piece(star_piece):
 	
 
 func trigger_screen_shake():
-	$Camera2D/ScreenShake.start(2.0, 30, 16, 0)
+	$Camera2D/ScreenShake.start(0.8, 30, 8, 0)
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position

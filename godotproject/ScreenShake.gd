@@ -30,7 +30,7 @@ func _new_shake():
 	$ShakeTween.start()
 
 func _reset():
-	$ShakeTween.interpolate_property(camera, "offset", camera.offset, Vector2(), $Frequency.wait_time, TRANS, EASE)
+	$ShakeTween.interpolate_property(camera, "offset", camera.offset, Vector2(), $Frequency.wait_time, TRANS, Tween.EASE_OUT)
 	$ShakeTween.start()
 
 	priority = 0
