@@ -555,7 +555,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="PlayerTongue" parent="." instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 2.73517, 0.182755 )
 
 [node name="HopSoundPlayer" type="AudioStreamPlayer2D" parent="."]

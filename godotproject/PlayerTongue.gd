@@ -19,9 +19,13 @@ var swinging = false
 var shoot_direction = Vector2.RIGHT
 var tongue_length = 0
 
+var global_anchor_position = Vector2.ZERO
+
 var tongue_damage = 1
 
 func get_tongue_vector():
+	if swinging:
+		return get_global_transform().xform_inv(global_anchor_position)
 	return shoot_direction * tongue_length
 
 func get_global_target_position():
@@ -31,6 +35,7 @@ func update_tongue_location():
 	var loc = get_tongue_vector()
 	$TongueRaycast.cast_to = loc
 	$Sprite.position = loc
+	$Area2D/CollisionShape2D.position = loc
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,6 +50,8 @@ func start_idle():
 	# Stop all sound effects
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.playing = false
+	
+	$Area2D/CollisionShape2D.disabled = true
 
 func handle_idle(_delta):
 	pass
@@ -101,16 +108,29 @@ func start_swing(_body, global_point):
 	$TongueRaycast.enabled = false
 	emit_signal("tongue_swing", global_point)
 
-	$Sprite.visible = false
+	$Sprite.visible = true
 	# Stop playing shoot sound effect once tongue sticks
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.play(0)
+	
+	$Area2D/CollisionShape2D.disabled = false
 
-func handle_swing(_delta):
-	pass
+	global_anchor_position = global_point
+	update_tongue_location()
+
+func handle_swing(delta):
+	var bodies = $Area2D.get_overlapping_bodies()
+	if len(bodies) == 0:
+		start_idle()
+		return
+	var stuck_to = bodies[0]
+	if "tongue_stick_velocity" in stuck_to:
+		global_anchor_position += stuck_to.tongue_stick_velocity * delta
+
+	update_tongue_location()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if idle:
 		handle_idle(delta)
 	elif shooting:
