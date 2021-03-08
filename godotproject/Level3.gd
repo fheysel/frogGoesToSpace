@@ -12,6 +12,7 @@ export (PackedScene) var Star
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("setup_tiles")
+	$Player.trigger_screen_shake()
 	
 func setup_tiles():
 	# This function takes the level and replaces all the "active tiles" ie 

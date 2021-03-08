@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Level0/Level0_ground_auto.tres" type="TileSet" id=2]
 [ext_resource path="res://Level0Boundaries.gd" type="Script" id=3]
 [ext_resource path="res://Objects/Rocket/Rocket.tscn" type="PackedScene" id=4]
-[ext_resource path="res://TraumaBlock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tiles/Level0/background/1.png" type="Texture" id=6]
 [ext_resource path="res://Tiles/Level0/background/2.png" type="Texture" id=7]
 [ext_resource path="res://Tiles/Level0/background/4.png" type="Texture" id=8]
@@ -72,19 +71,13 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="EOL" parent="." instance=ExtResource( 13 )]
-position = Vector2( 1512, -3408 )
+position = Vector2( 1510, -2801 )
 scale = Vector2( 0.35, 0.009 )
 next_path = "res://Level1.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 bus = "Music"
-
-[node name="TraumaBlock" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1072, 871.758 )
-
-[node name="TraumaBlock2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2224, 887.435 )
 
 [node name="Rocket" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1512, -1896 )
