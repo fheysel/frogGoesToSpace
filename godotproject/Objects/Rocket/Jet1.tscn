@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.00874636, 0.918182 ), 0.0, 0.0, 0, 0, Vector2( 0.997085, 0.318182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.976563, 0.561118, 0.19455, 1, 0.847059, 0, 0, 0.415686 )
+
+[node name="Jet1" type="CPUParticles2D"]
+show_behind_parent = true
+rotation = 1.5708
+scale = Vector2( 0.4, 0.4 )
+z_index = 2
+amount = 2000
+speed_scale = 2.0
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 100 )
+spread = 15.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+angular_velocity = 350.0
+angular_velocity_random = 1.0
+linear_accel = 25.0
+angle = 45.0
+scale_amount = 5.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
