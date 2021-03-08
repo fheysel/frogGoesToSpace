@@ -5,6 +5,9 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
+var path = "res://data/MonitorData.csv"
+var frame_count = 0;
+
 enum MONITOR {
 	TIME_FPS ,
 	TIME_PROCESS ,
@@ -75,15 +78,41 @@ var MONITOR_NAMES = [
 	"MONITOR_MAX",
 ]
 
+enum WriteType {
+	new,
+	append,
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	#gets printed once
+	var row =  "FRAME_NUMBER,"
+	for monitor in range(MONITOR.MONITOR_MAX):
+		row += MONITOR_NAMES[monitor]
+		row += ","
+	WriteLine(row, WriteType.new)
+	print(row)
+	#To be printed each frame
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	var row = "%d," % frame_count
 	for monitor in range(MONITOR.MONITOR_MAX):
-		var format_string = MONITOR_NAMES[monitor] + ",%d"
-		print(format_string % Performance.get_monitor(monitor))
+		row += "%d"
+		row = row % (Performance.get_monitor(monitor))
+		row += ","
+	WriteLine(row, WriteType.append)
+	frame_count += 1	
 
-	
+func WriteLine(line, writeType):
+	var file = File.new()
+
+	if (writeType == WriteType.new):
+		file.open(path, file.WRITE)
+	else:
+		file.open(path, file.READ_WRITE)
+
+	file.seek_end(0) # Write at the end of the file
+	file.store_line(line)
+	file.close()
