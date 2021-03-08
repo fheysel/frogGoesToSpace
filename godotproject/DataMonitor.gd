@@ -83,7 +83,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	for monitor in range(MONITOR.MONITOR_MAX):
-		var format_string = MONITOR_NAMES[monitor] + ", %d"
+		var format_string = MONITOR_NAMES[monitor] + ",%d"
 		print(format_string % Performance.get_monitor(monitor))
 
 	
