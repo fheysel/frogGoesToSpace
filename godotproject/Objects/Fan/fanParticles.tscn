@@ -5,7 +5,7 @@ offsets = PoolRealArray( 0.0359477, 0.996732 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.658824, 0.619608, 0.619608, 1 )
 
 [node name="Node2D" type="CPUParticles2D"]
-z_index = -3
+z_index = 1
 emission_shape = 2
 emission_rect_extents = Vector2( 16, 1 )
 gravity = Vector2( 0, -400 )

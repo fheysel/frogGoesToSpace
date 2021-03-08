@@ -8,7 +8,7 @@ var priority = 0
 
 onready var camera = get_parent()
 
-func start(duration = 0.2, frequency = 15, _amplitude = 16, _priority = 0):
+func start(duration = 0.5, frequency = 15, _amplitude = 16, _priority = 1):
 	if (priority >= self.priority):
 		priority = _priority
 		amplitude = _amplitude
