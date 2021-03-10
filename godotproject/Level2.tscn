@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://sfx/Level2-NasaHQTheme.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Tiles/Level2/LaboratoryTilesUnsliced.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Tiles/Objects/star_new.png" type="Texture" id=11]
 [ext_resource path="res://Spike.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Star.tscn" type="PackedScene" id=13]
+[ext_resource path="res://EOL.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -723,6 +724,10 @@ right_bound = 12288.0
 bottom_bound = 1040.0
 margin = 10.0
 player_nodepath = NodePath("../../Level_2/Player")
+
+[node name="EOL" parent="." instance=ExtResource( 14 )]
+position = Vector2( 12400, -248 )
+next_path = "res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )

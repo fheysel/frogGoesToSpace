@@ -394,7 +394,7 @@ bus = "Music"
 
 [node name="EOL" parent="." instance=ExtResource( 17 )]
 position = Vector2( 10800, -160 )
-next_path = "res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.tscn"
+next_path = "res://Level2.tscn"
 
 [node name="EnemyBird" parent="." instance=ExtResource( 20 )]
 position = Vector2( 1648, -384 )
