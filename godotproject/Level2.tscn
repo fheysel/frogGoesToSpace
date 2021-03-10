@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://sfx/Level0-Theme.ogg" type="AudioStream" id=1]
+[ext_resource path="res://sfx/Level2-NasaHQTheme.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Tiles/Level2/LaboratoryTilesUnsliced.png" type="Texture" id=2]
 [ext_resource path="res://Tiles/Level1/Tiles/FactoryTileset.png" type="Texture" id=3]
 [ext_resource path="res://Tiles/Level2/LaboratoryObjectsUnsliced.png" type="Texture" id=4]
@@ -726,20 +726,23 @@ player_nodepath = NodePath("../../Level_2/Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+autoplay = true
 bus = "Music"
 
 [node name="ConveyorBelt" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1088, 880 )
 constant_linear_velocity = Vector2( 0, 0 )
+speed = 200
 
 [node name="ConveyorBelt2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 2168, 880 )
+position = Vector2( 2168, 882 )
 constant_linear_velocity = Vector2( 0, 0 )
-speed = -100
+speed = -200
 
 [node name="ConveyorBelt3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1784, 880.183 )
 constant_linear_velocity = Vector2( 0, 0 )
+speed = 200
 
 [node name="ConveyorBelt4" parent="." instance=ExtResource( 8 )]
 position = Vector2( 4304, 856 )
@@ -759,7 +762,7 @@ speed = -100
 [node name="ConveyorBelt7" parent="." instance=ExtResource( 8 )]
 position = Vector2( 7816, 888 )
 constant_linear_velocity = Vector2( 0, 0 )
-speed = -100
+speed = 200
 
 [node name="ConveyorBelt8" parent="." instance=ExtResource( 8 )]
 position = Vector2( 8184, 824 )
@@ -767,17 +770,20 @@ constant_linear_velocity = Vector2( 0, 0 )
 speed = -100
 
 [node name="ConveyorBelt9" parent="." instance=ExtResource( 8 )]
-position = Vector2( 8528, 760 )
+position = Vector2( 8480, 544 )
 constant_linear_velocity = Vector2( 0, 0 )
-speed = -100
 
 [node name="ConveyorBelt10" parent="." instance=ExtResource( 8 )]
-position = Vector2( 8840, 696 )
+position = Vector2( 8792, 808 )
 constant_linear_velocity = Vector2( 0, 0 )
 speed = -100
 
+[node name="ConveyorBelt21" parent="." instance=ExtResource( 8 )]
+position = Vector2( 9104, 704 )
+constant_linear_velocity = Vector2( 0, 0 )
+
 [node name="ConveyorBelt11" parent="." instance=ExtResource( 8 )]
-position = Vector2( 9672, 464 )
+position = Vector2( 9664, 464 )
 constant_linear_velocity = Vector2( 0, 0 )
 
 [node name="ConveyorBelt12" parent="." instance=ExtResource( 8 )]
@@ -804,14 +810,10 @@ constant_linear_velocity = Vector2( 0, 0 )
 position = Vector2( 10816, 464 )
 constant_linear_velocity = Vector2( 0, 0 )
 
-[node name="ConveyorBelt14" parent="." instance=ExtResource( 8 )]
-position = Vector2( 9104, 464 )
-constant_linear_velocity = Vector2( 0, 0 )
-
-[node name="ConveyorBelt15" parent="." instance=ExtResource( 8 )]
-position = Vector2( 9296, 464 )
+[node name="ConveyorBelt22" parent="." instance=ExtResource( 8 )]
+position = Vector2( 11008, 464 )
 constant_linear_velocity = Vector2( 0, 0 )
 
 [node name="ConveyorBelt16" parent="." instance=ExtResource( 8 )]
-position = Vector2( 9480, 464 )
+position = Vector2( 9472, 464 )
 constant_linear_velocity = Vector2( 0, 0 )
