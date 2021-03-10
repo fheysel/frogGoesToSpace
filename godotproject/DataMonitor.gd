@@ -99,12 +99,11 @@ func _process(_delta):
 	frame_count += 1
 	if frame_count % 5 != 0:
 		return
-	var row = "%d," % frame_count
+	var parts = PoolStringArray()
+	parts.append("%d" % frame_count)
 	for monitor in range(MONITOR.MONITOR_MAX):
-		row += "%d"
-		row = row % (Performance.get_monitor(monitor))
-		row += ","
-	WriteLine(row, WriteType.append)
+		parts.append("%f" % (Performance.get_monitor(monitor)))
+	WriteLine(parts.join(","), WriteType.append)
 
 var file = null
 func WriteLine(line, writeType):
