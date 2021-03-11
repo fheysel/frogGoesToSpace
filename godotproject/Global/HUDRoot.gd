@@ -5,7 +5,6 @@ onready var lb_star = $LeftPanel/HBoxContainer/StarContainer/StarCountLabel
 onready var lb_time = $RightPanel/TimeCountLabel
 onready var menu = $"/root/Global/InGameMenuLayer/InGameMenu"
 
-var player = null
 var countup_timer = null
 
 func _process(_delta):
@@ -22,18 +21,17 @@ func _process(_delta):
 		$StyleAnimationPlayer.play("inmenu")
 	else:
 		$StyleAnimationPlayer.play("ingame")
-	if !player:
-		# Get player
-		var scene = get_tree().current_scene
-		if !scene:
-			return
-		player = scene.find_node("Player", false, true)
-	if player:
-		var health = player.health
-		lb_life.text = str(health)
-		var star = player.star_piece_count
-		lb_star.text = str(star)
-	if !countup_timer:
+
+	# Get player from current scene
+	var scene = get_tree().current_scene
+	if scene:
+		var player = scene.find_node("Player", false, true)
+		if player:
+			var health = player.health
+			lb_life.text = str(health)
+			var star = player.star_piece_count
+			lb_star.text = str(star)
+	if !Global.node_exists_in_tree(countup_timer):
 		countup_timer = $"/root/CountupTimer"
 	if countup_timer:
 		var time = countup_timer.time
