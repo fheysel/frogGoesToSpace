@@ -83,9 +83,17 @@ func _process(_delta_unused):
 				# Enable god mode on the player
 				player_is_god = !player_is_god
 				print("Player is god: ", player_is_god)
+			if Input.is_action_just_pressed("ui_left"):
+				# Exit game - used to exit to desktop for troubleshooting
+				get_tree().quit(0)
 			if Input.is_action_just_pressed("ui_down"):
 				# Exit game - used to power off arcade machine
 				get_tree().quit(2)
+			if Input.is_action_just_pressed("ui_right"):
+				# Clear high scores
+				var dir = Directory.new()
+				dir.remove("user://scores.json")
+				print("High scores deleted.")
 
 func _load_bg(scene_path):
 	resource_queue.queue_resource(scene_path, true)

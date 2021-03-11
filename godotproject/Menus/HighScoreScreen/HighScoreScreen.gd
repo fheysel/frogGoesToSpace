@@ -212,15 +212,40 @@ func _process(_delta):
 		or Input.is_action_pressed("tongue"):
 			Global.fade_to_scene(load_scene_after_high_score)
 
-# Saving to disk is defeatured for Demo 2
+func _get_save_path():
+	return "user://scores.json"
+
 func _save_to_disk():
 	# Put data from current_level_data into all_level_data
 	if current_level and current_level_data:
 		all_level_data[current_level] = current_level_data
 	pass
+	# Convert scores to JSON
+	var json_data = JSON.print(all_level_data)
+	# Save to disk
+	var file = File.new()
+	file.open(_get_save_path(), File.WRITE)
+	if !file.is_open():
+		printerr("Unable to open save file " + _get_save_path())
+		return
+	file.store_string(json_data)
+	file.close()
 
 func _load_from_disk():
-	pass
+	# Load from disk
+	var file = File.new()
+	file.open(_get_save_path(), File.READ)
+	if !file.is_open():
+		printerr("Unable to open save file " + _get_save_path())
+		return
+	var json_data = file.get_as_text()
+	file.close()
+	# Convert scores from JSON
+	var json_result = JSON.parse(json_data)
+	if json_result.error != OK or typeof(json_result.result) != TYPE_DICTIONARY:
+		printerr("Error loading scores from file")
+		return
+	all_level_data = json_result.result
 
 func _on_ThonkTimer_timeout():
 	if current_state == State.THONK:

@@ -20,4 +20,6 @@ in the given direction for the specified effect.
 | Hold | Press | Effect |
 |-|-|-|
 | Menu + Jump | Up | Toggle "God Mode" on the player |
+| Menu + Jump | Left | Quit the game to desktop |
 | Menu + Jump | Down | Quit the game, powering off the arcade machine |
+| Menu + Jump | Right | Delete high scores |
