@@ -113,7 +113,7 @@ func fade_set_body_to_position(body, position):
 	fade_action = FadeAction.MOVE_POSITION
 	fade_action_body = body
 	fade_action_position = position
-	
+
 	# Fade to loading screen
 	swipe_anim_state_machine.travel('swipe_in')
 
@@ -138,7 +138,7 @@ func _process_loading():
 
 		# Close the high-score screen, if it was open
 		HighScoreScreen.close()
-		
+
 		# Any cutscene that was playing is now over, or will be taken over by the new object.
 		# If you need to adjust these values, make sure you do it in the _enter_tree function.
 		cutscene_pauses_game = false
@@ -190,3 +190,11 @@ func format_time(time):
 # we only want to interact with the player.
 func is_player(body):
 	return body.name == "Player"
+
+# Check if a node exists and is inside the tree. Used to track if we have
+# Based on: https://godotengine.org/qa/37579/need-an-easy-way-to-check-which-ones-are-still-in-the-scene-tree
+func node_exists_in_tree(node):
+	return node != null and \
+		is_instance_valid(node) and \
+		node is Node and \
+		node.is_inside_tree()
