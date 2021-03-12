@@ -89,7 +89,7 @@ _data = [ Vector2( 0.0144092, 0.978516 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.145182 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( -0.111359, 0 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.0997817, 0.1 )
 collision_layer = 0
 script = ExtResource( 2 )
 
@@ -99,7 +99,6 @@ script = ExtResource( 2 )
 position = Vector2( -88.9169, -3.50735 )
 rotation = 1.5708
 frames = SubResource( 13 )
-frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]

@@ -21,6 +21,7 @@ var attackState = STATE.idle_e
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("Rocket Enemey created")
 	$Orientation/Area2D/CollisionShape2D.disabled = true
 	direction.x = 1
 	direction.y = 0
@@ -29,13 +30,16 @@ func _ready():
 	timer = get_node("Timer")
 	timer.set_wait_time(0.4)
 	timer.connect("timeout", self, "_on_timer_timeout")
+
+	attackState = STATE.detected_player_e
 	
 	pass # Replace with function body.
 
 func _physics_process(delta):
 	#GetPlayerNode
+	# print(global_position)
 	if (attackState == STATE.attacking_player_e):
-		var level = get_parent().name;
+		var level = get_parent().get_parent().name;
 		var playerPath = "/root/%s/Player" % level
 		var playerNode = get_node(playerPath)
 		
@@ -59,8 +63,6 @@ func _physics_process(delta):
 
 				attackState = STATE.detected_player_e
 	elif (attackState == STATE.detected_player_e):
-		
-		$Orientation/Area2D/CollisionShape2D.disabled = false
 		#ramp up to full speed before chasing after player
 		if velocity.length() < SPEED * delta:
 			velocity.x += (SPEED_INC * direction.x * delta)
@@ -69,19 +71,21 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity, FLOOR)
 		else:
 			attackState = STATE.attacking_player_e
+			$Orientation/Area2D/CollisionShape2D.disabled = false
 		
 func _on_Area2D_body_entered(body):
 	if(body.name) == "Player":
 		body.takeDamage(attackDamage)
-	
-	timer.start()
-	$Orientation/AnimatedSprite.set_visible(false)
-	set_physics_process(false)
-	velocity = Vector2(0,0)
-	$BoomParticlesOrange.set_emitting(true)
-	$BoomParticlesRed.set_emitting(true)
+
+		timer.start()
+		$Orientation/AnimatedSprite.set_visible(false)
+		set_physics_process(false)
+		velocity = Vector2(0,0)
+		$BoomParticlesOrange.set_emitting(true)
+		$BoomParticlesRed.set_emitting(true)
 
 func _on_timer_timeout():
+	get_parent()._on_rocket_explode()
 	queue_free()
 	
 
