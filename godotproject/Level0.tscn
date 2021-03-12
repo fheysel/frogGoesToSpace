@@ -15,7 +15,7 @@
 [ext_resource path="res://EOL.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sfx/Level0-Theme.ogg" type="AudioStream" id=14]
 [ext_resource path="res://RespawnPositionArea.tscn" type="PackedScene" id=15]
-[ext_resource path="res://RocketEnemy.tscn" type="PackedScene" id=16]
+[ext_resource path="res://RocketSpawnArea.tscn" type="PackedScene" id=16]
 [ext_resource path="res://TextTip.tscn" type="PackedScene" id=17]
 
 [node name="Level_0" type="Node2D"]
@@ -159,5 +159,5 @@ scale = Vector2( 3, 1 )
 position = Vector2( 9832, 560 )
 scale = Vector2( 2, 1 )
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 16 )]
-position = Vector2( 109.17, 854.754 )
+[node name="RocketSpawn1" parent="." instance=ExtResource( 16 )]
+position = Vector2( 881.17, 684.464 )
