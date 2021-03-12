@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
-const SPEED = 11000
+const SPEED = 15000
 const SPEED_INC = 100
 
 var velocity = Vector2(0, 0)
@@ -10,6 +10,7 @@ var direction = Vector2(1, 0)
 var pastDirection = Vector2(1, 0)
 
 var attackDamage = 1
+var alpha = 0.1
 
 var timer
 
@@ -34,7 +35,6 @@ func _ready():
 	timer.connect("timeout", self, "_on_timer_timeout")
 
 	attackState = STATE.detected_player_e
-	pastDirection = direction;
 
 func _physics_process(delta):
 	#GetPlayerNode
@@ -46,19 +46,24 @@ func _physics_process(delta):
 		
 		#Compare Player position with rocket position
 		direction = (playerNode.global_position - global_position).normalized();
-		direction.x = (direction.x + pastDirection.x) / 2;
-		direction.y = (direction.y + pastDirection.y) / 2;
+		
+		direction.x = pastDirection.x + (direction.x - pastDirection.x) * alpha;
+		direction.y = pastDirection.y + (direction.y - pastDirection.y) * alpha;
+		
 		direction = direction.normalized();
 		pastDirection = direction;
-		
-		#Set the rocket to face the player
-		var rocketRotation = direction.angle()
-		$Orientation.rotation_degrees = rocketRotation * (180 / 3.14)
 		
 		#Move the rocket torwards the player
 		velocity.x = SPEED * delta * direction.x
 		velocity.y = SPEED * delta * direction.y
+		
+		#Set the rocket to face the player
+		var rocketRotation = direction.angle()
+		$Orientation.rotation_degrees = rocketRotation * (180 / 3.14)
+
 		velocity = move_and_slide(velocity, FLOOR)
+
+
 	elif (attackState == STATE.idle_e):
 		#Waiting to detect player
 
@@ -74,7 +79,8 @@ func _physics_process(delta):
 			velocity.y += (SPEED_INC * direction.y * delta)
 			#print(velocity)
 			velocity = move_and_slide(velocity, FLOOR)
-		else:
+		else:			
+			pastDirection = direction;
 			attackState = STATE.attacking_player_e
 			$Orientation/Area2D/CollisionShape2D.disabled = false
 		
