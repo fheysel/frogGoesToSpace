@@ -10,7 +10,6 @@ export (float) var max_shoot_dist = 400 * 0.6
 const COLLISION_LAYER_TONGUEABLE         = 0x3
 const COLLISION_LAYER_TONGUE_CAN_DAMAGE  = 0x6
 const COLLISION_LAYER_TONGUE_CAN_COLLECT = 0x7
-const COLLISION_LAYER_TONGUE_CAN_SLIDE   = 0x9
 
 var idle = true
 var shooting = false
