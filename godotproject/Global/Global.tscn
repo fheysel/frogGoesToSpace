@@ -349,7 +349,6 @@ transitions = [ "loading_fadein_out", "swipe_out", SubResource( 12 ), "idle", "s
 [node name="Node" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
-game_audio_volume_fadeout = 1.0
 
 [node name="DebugModeTextLayer" type="CanvasLayer" parent="."]
 layer = 100

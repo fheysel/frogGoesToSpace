@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Global/HUDFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Tiles/Objects/star_new.png" type="Texture" id=2]
@@ -7,7 +7,15 @@
 [ext_resource path="res://Global/HUDLayer_inmenu.tres" type="StyleBox" id=5]
 [ext_resource path="res://Global/HUDLayer_ingame.tres" type="StyleBox" id=6]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("LeftPanel:custom_styles/panel")
@@ -34,7 +42,7 @@ tracks/1/keys = {
 "values": [ ExtResource( 6 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("LeftPanel:custom_styles/panel")
@@ -74,8 +82,6 @@ __meta__ = {
 
 [node name="LeftPanel" type="PanelContainer" parent="HUDRoot"]
 anchor_right = 1.0
-margin_right = 160.0
-margin_bottom = 47.0
 custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,7 +105,7 @@ margin_bottom = 40.0
 [node name="LifeIcon" type="TextureRect" parent="HUDRoot/LeftPanel/HBoxContainer/LifeContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = ExtResource( 3 )
+texture = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -131,7 +137,7 @@ __meta__ = {
 [node name="StarIcon" type="TextureRect" parent="HUDRoot/LeftPanel/HBoxContainer/StarContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = ExtResource( 2 )
+texture = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -171,5 +177,5 @@ text = "0:00:00"
 align = 1
 
 [node name="StyleAnimationPlayer" type="AnimationPlayer" parent="HUDRoot"]
-anims/ingame = SubResource( 1 )
-anims/inmenu = SubResource( 2 )
+anims/ingame = SubResource( 3 )
+anims/inmenu = SubResource( 4 )

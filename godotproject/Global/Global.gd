@@ -1,6 +1,6 @@
 extends Node
 
-export (bool) var debug_mode = false
+export (bool) var debug_mode = true
 export (bool) var player_is_god = false
 
 export (float) var game_audio_volume_fadeout = 1
