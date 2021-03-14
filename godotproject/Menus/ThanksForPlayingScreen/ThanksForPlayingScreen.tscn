@@ -25,12 +25,12 @@ bus = "Music"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 640.0
-margin_bottom = 668.0
+margin_bottom = 600.0
 color = Color( 0.137255, 0.105882, 0.105882, 1 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 margin_right = 640.0
-margin_bottom = 668.0
+margin_bottom = 600.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 margin_right = 640.0
@@ -44,10 +44,8 @@ valign = 1
 [node name="Label2" type="Label" parent="VBoxContainer2"]
 margin_top = 84.0
 margin_right = 640.0
-margin_bottom = 523.0
+margin_bottom = 438.0
 text = "
-
-
 
 
 Creators:
@@ -58,16 +56,13 @@ Fiona Heysel
 Sci' 20 <3
 
 
-
-
 Music:
 Start Menue ~ Frog Shop by Louie Zong
 Morning Meadow ~ Melody Meadow by Louie Zong
 The Big City ~ Winter Melon Way by Louie Zong
 NASA HQ ~ Reconfiguration by Le Brick
 Get to Ze Rocket! ~ Boss Battle by Adam Haynes
-Credits ~ Aurora Kingdom
-
+Credits ~ Aurora Kingdom by Louie Zong
 
 
 Created Using the Godot Editor"
@@ -77,9 +72,9 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="VBoxContainer2"]
-margin_top = 527.0
+margin_top = 442.0
 margin_right = 640.0
-margin_bottom = 668.0
+margin_bottom = 583.0
 rect_min_size = Vector2( 0, 40 )
 theme = ExtResource( 1 )
 text = "
