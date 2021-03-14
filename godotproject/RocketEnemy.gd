@@ -12,8 +12,6 @@ var pastDirection = Vector2(1, 0)
 var attackDamage = 1
 var alpha = 0.1
 
-var timer
-
 enum STATE{
 	detected_player_e
 	attacking_player_e
@@ -26,10 +24,6 @@ func _ready():
 	$Orientation/Area2D/CollisionShape2D.disabled = true
 	direction.x = 1
 	direction.y = 0
-	
-	timer = get_node("Timer")
-	timer.set_wait_time(0.4)
-	timer.connect("timeout", self, "_on_timer_timeout")
 	attackState = STATE.detected_player_e
 
 func _physics_process(delta):
@@ -74,16 +68,14 @@ func _on_Area2D_body_entered(body):
 		pass
 	else :
 		return
-	timer.start()
+	$Timer.start()
 	$Orientation/AnimatedSprite.set_visible(false)
 	set_physics_process(false)
 	velocity = Vector2(0,0)
 	$BoomParticlesOrange.set_emitting(true)
 	$BoomParticlesRed.set_emitting(true)
 	
-
-func _on_timer_timeout():
+func _on_Timer_timeout():
 	get_parent()._on_rocket_explode()
 	queue_free()
-	
-
+	pass # Replace with function body.
