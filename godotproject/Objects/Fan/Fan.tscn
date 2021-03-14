@@ -27,6 +27,7 @@ volume_db = 10.0
 autoplay = true
 max_distance = 800.0
 attenuation = 4.0
+bus = "Sfx"
 
 [node name="FanParticles" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 64 )
