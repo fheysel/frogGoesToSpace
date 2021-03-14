@@ -27,11 +27,8 @@ func _ready():
 	attackState = STATE.detected_player_e
 
 func _physics_process(delta):
-	#GetPlayerNode
 	if (attackState == STATE.attacking_player_e):
-		var level = get_parent().get_parent().name;
-		var playerPath = "/root/%s/Player" % level
-		var playerNode = get_node(playerPath)
+		var playerNode = get_node("../../Player")
 		
 		#Compare Player position with rocket position
 		direction = (playerNode.global_position - global_position).normalized();
