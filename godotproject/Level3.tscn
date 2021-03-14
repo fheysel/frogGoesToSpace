@@ -78,6 +78,7 @@ next_path = "res://Level1.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+volume_db = -10.0
 autoplay = true
 bus = "Music"
 
@@ -85,7 +86,6 @@ bus = "Music"
 position = Vector2( 1512, -1896 )
 scale = Vector2( 4.5, 4.5 )
 z_index = -1
-speed = -100
 
 [node name="Fan" parent="." instance=ExtResource( 5 )]
 position = Vector2( 936, 376 )

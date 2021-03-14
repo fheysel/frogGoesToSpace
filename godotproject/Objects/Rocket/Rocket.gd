@@ -11,6 +11,8 @@ func activateJet():
 	if trauma_level == 0:
 		trauma_level += 1
 		$Jet1.emitting = true
+		$JetBoom.play(0)
 	elif trauma_level == 1:
 		trauma_level += 1
 		$Jet2.emitting = true
+		$JetBoom.play(0)
