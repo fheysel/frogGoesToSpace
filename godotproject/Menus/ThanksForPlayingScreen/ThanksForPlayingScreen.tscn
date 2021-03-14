@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.gd" type="Script" id=3]
+[ext_resource path="res://sfx/CreditsTheme.ogg" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -17,14 +18,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Music"
+
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 640.0
-margin_bottom = 600.0
+margin_bottom = 668.0
 color = Color( 0.137255, 0.105882, 0.105882, 1 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 margin_right = 640.0
-margin_bottom = 600.0
+margin_bottom = 668.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 margin_right = 640.0
@@ -38,7 +44,7 @@ valign = 1
 [node name="Label2" type="Label" parent="VBoxContainer2"]
 margin_top = 84.0
 margin_right = 640.0
-margin_bottom = 455.0
+margin_bottom = 523.0
 text = "
 
 
@@ -49,6 +55,7 @@ Allison Christensen
 Jacob Denyes
 Cooper Harasyn
 Fiona Heysel
+Sci' 20 <3
 
 
 
@@ -59,6 +66,9 @@ Morning Meadow ~ Melody Meadow by Louie Zong
 The Big City ~ Winter Melon Way by Louie Zong
 NASA HQ ~ Reconfiguration by Le Brick
 Get to Ze Rocket! ~ Boss Battle by Adam Haynes
+Credits ~ Aurora Kingdom
+
+
 
 Created Using the Godot Editor"
 align = 1
@@ -67,9 +77,9 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="VBoxContainer2"]
-margin_top = 459.0
+margin_top = 527.0
 margin_right = 640.0
-margin_bottom = 600.0
+margin_bottom = 668.0
 rect_min_size = Vector2( 0, 40 )
 theme = ExtResource( 1 )
 text = "
