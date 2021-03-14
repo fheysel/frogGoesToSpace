@@ -74,7 +74,7 @@ centered = false
 [node name="EOL" parent="." instance=ExtResource( 13 )]
 position = Vector2( 1510, -2801 )
 scale = Vector2( 0.35, 0.009 )
-next_path = "res://Level1.tscn"
+next_path = "res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
