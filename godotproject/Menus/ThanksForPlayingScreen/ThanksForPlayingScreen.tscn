@@ -1,13 +1,186 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.gd" type="Script" id=3]
 [ext_resource path="res://sfx/CreditsTheme.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Tiles/starryNight/starrynight-0.png" type="Texture" id=5]
+[ext_resource path="res://Tiles/starryNight/starrynight-2.png" type="Texture" id=6]
+[ext_resource path="res://Tiles/starryNight/starrynight-1.png" type="Texture" id=7]
+[ext_resource path="res://Tiles/starryNight/starrynight-5.png" type="Texture" id=8]
+[ext_resource path="res://Tiles/starryNight/starrynight-3.png" type="Texture" id=9]
+[ext_resource path="res://Tiles/starryNight/starrynight-4.png" type="Texture" id=10]
+[ext_resource path="res://Tiles/starryNight/starrynight-30.png" type="Texture" id=11]
+[ext_resource path="res://Tiles/starryNight/starrynight-14.png" type="Texture" id=12]
+[ext_resource path="res://Tiles/starryNight/starrynight-23.png" type="Texture" id=13]
+[ext_resource path="res://Tiles/starryNight/starrynight-28.png" type="Texture" id=14]
+[ext_resource path="res://Tiles/starryNight/starrynight-7.png" type="Texture" id=15]
+[ext_resource path="res://Tiles/starryNight/starrynight-22.png" type="Texture" id=16]
+[ext_resource path="res://Tiles/starryNight/starrynight-32.png" type="Texture" id=17]
+[ext_resource path="res://Tiles/starryNight/starrynight-29.png" type="Texture" id=18]
+[ext_resource path="res://Tiles/starryNight/starrynight-6.png" type="Texture" id=19]
+[ext_resource path="res://Tiles/starryNight/starrynight-27.png" type="Texture" id=20]
+[ext_resource path="res://Tiles/starryNight/starrynight-10.png" type="Texture" id=21]
+[ext_resource path="res://Tiles/starryNight/starrynight-11.png" type="Texture" id=22]
+[ext_resource path="res://Tiles/starryNight/starrynight-26.png" type="Texture" id=23]
+[ext_resource path="res://Tiles/starryNight/starrynight-12.png" type="Texture" id=24]
+[ext_resource path="res://Tiles/starryNight/starrynight-15.png" type="Texture" id=25]
+[ext_resource path="res://Tiles/starryNight/starrynight-17.png" type="Texture" id=26]
+[ext_resource path="res://Tiles/starryNight/starrynight-16.png" type="Texture" id=27]
+[ext_resource path="res://Tiles/starryNight/starrynight-20.png" type="Texture" id=28]
+[ext_resource path="res://Tiles/starryNight/starrynight-24.png" type="Texture" id=29]
+[ext_resource path="res://Tiles/starryNight/starrynight-8.png" type="Texture" id=30]
+[ext_resource path="res://Tiles/starryNight/starrynight-9.png" type="Texture" id=31]
+[ext_resource path="res://Tiles/starryNight/starrynight-25.png" type="Texture" id=32]
+[ext_resource path="res://Tiles/starryNight/starrynight-21.png" type="Texture" id=33]
+[ext_resource path="res://Tiles/starryNight/starrynight-31.png" type="Texture" id=34]
+[ext_resource path="res://Tiles/starryNight/starrynight-13.png" type="Texture" id=35]
+[ext_resource path="res://Tiles/starryNight/starrynight-18.png" type="Texture" id=36]
+[ext_resource path="res://Tiles/starryNight/starrynight-19.png" type="Texture" id=37]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 2 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 30 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 31 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 35 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 25 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 27 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 26 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 36 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 37 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 33 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 29 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 32 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 34 )
+region = Rect2( 0, 0, 540, 357 )
+
+[sub_resource type="SpriteFrames" id=35]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 34 ), SubResource( 34 ), SubResource( 34 ), SubResource( 34 ), SubResource( 34 ), SubResource( 25 ), SubResource( 34 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 34 ), SubResource( 34 ), SubResource( 34 ), SubResource( 34 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
 
 [node name="ThanksForPlayingScreen" type="MarginContainer"]
 anchor_right = 1.0
@@ -22,11 +195,6 @@ __meta__ = {
 stream = ExtResource( 4 )
 autoplay = true
 bus = "Music"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 640.0
-margin_bottom = 600.0
-color = Color( 0.137255, 0.105882, 0.105882, 1 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 margin_right = 640.0
@@ -44,7 +212,7 @@ valign = 1
 [node name="Label2" type="Label" parent="VBoxContainer2"]
 margin_top = 84.0
 margin_right = 640.0
-margin_bottom = 438.0
+margin_bottom = 472.0
 text = "
 
 
@@ -53,8 +221,9 @@ Allison Christensen
 Jacob Denyes
 Cooper Harasyn
 Fiona Heysel
-Sci' 20 <3
+From Sci' 20 With Love
 
+A Special Thank You to All Our Beta Testers
 
 Music:
 Start Menu ~ Frog Shop by Louie Zong
@@ -65,25 +234,34 @@ Get to Ze Rocket! ~ Boss Battle by Adam Haynes
 Credits ~ Aurora Kingdom by Louie Zong
 
 
-Created Using the Godot Editor"
+Created Using the Godot Editor
+Under MIT License"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="VBoxContainer2"]
-margin_top = 442.0
+margin_top = 476.0
 margin_right = 640.0
-margin_bottom = 583.0
+margin_bottom = 563.0
 rect_min_size = Vector2( 0, 40 )
 theme = ExtResource( 1 )
 text = "
 
 
 
-
-
-
 Press Z to play again!"
 align = 1
 valign = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 320.5, 255.688 )
+scale = Vector2( 1.18333, 1.43592 )
+z_index = -1
+frames = SubResource( 35 )
+frame = 7
+playing = true
+__meta__ = {
+"_editor_description_": ""
+}
