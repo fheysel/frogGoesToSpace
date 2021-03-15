@@ -19,7 +19,7 @@ radius = 28.9879
 radius = 29.0454
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 184.073, 36.0542 )
+extents = Vector2( 144.238, 36.0542 )
 
 [node name="SawBladeArea" type="Area2D"]
 collision_layer = 0
@@ -27,7 +27,7 @@ collision_mask = 256
 script = ExtResource( 2 )
 
 [node name="SawBlade" type="KinematicBody2D" parent="."]
-collision_layer = 0
+collision_layer = 64
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SawBlade"]
@@ -44,7 +44,12 @@ shape = SubResource( 2 )
 [node name="KineticBodyShape" type="CollisionShape2D" parent="SawBlade"]
 shape = SubResource( 3 )
 
+[node name="Timer" type="Timer" parent="SawBlade"]
+wait_time = 0.5
+one_shot = true
+
 [node name="ExitShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
 [connection signal="area_exited" from="." to="SawBlade" method="_on_SawBladeArea_area_exited"]
 [connection signal="body_entered" from="SawBlade/PlayerCollision" to="SawBlade" method="_on_PlayerCollision_body_entered"]
+[connection signal="timeout" from="SawBlade/Timer" to="SawBlade" method="_on_Timer_timeout"]
