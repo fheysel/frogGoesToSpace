@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LASERBEAM.png-3987eae1e27b55591517810df8592654.stex"
+path="res://.import/laser_base.png-e7e62131f16c095e1d7ec632c21ce381.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LASERBEAM.png"
-dest_files=[ "res://.import/LASERBEAM.png-3987eae1e27b55591517810df8592654.stex" ]
+source_file="res://laser_base.png"
+dest_files=[ "res://.import/laser_base.png-e7e62131f16c095e1d7ec632c21ce381.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

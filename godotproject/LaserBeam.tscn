@@ -1,7 +1,10 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://laser_attack.png" type="Texture" id=1]
 [ext_resource path="res://LaserBeam.gd" type="Script" id=2]
+[ext_resource path="res://sfx/laser_idle_sfx.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/laser_attack_sfx.wav" type="AudioStream" id=4]
+[ext_resource path="res://laser_base.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.00462, 10.9612 )
@@ -165,7 +168,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 11.2988, -11.1963 )
 rotation = -1.5708
-scale = Vector2( 1.27344, 1 )
 frames = SubResource( 35 )
 animation = "Attacking"
 frame = 22
@@ -175,6 +177,23 @@ flip_h = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="LaserAttackAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 10.0
+max_distance = 900.0
+bus = "Sfx"
+
+[node name="LaserIdleAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 10.0
+max_distance = 900.0
+bus = "Sfx"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 11.7462, -9.32457 )
+scale = Vector2( 5, 7.09409 )
+texture = ExtResource( 5 )
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

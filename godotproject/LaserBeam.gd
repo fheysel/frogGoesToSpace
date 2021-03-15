@@ -21,7 +21,7 @@ func _ready():
 func _process(_delta):
 	if inside == true and AnimationState == ANIMATIONS.ATTACKING:
 		player.takeDamage(attackDamage)
-
+		
 # If we're in an attack state do damage
 func _on_Area2D_body_entered(body):
 	inside = true
@@ -35,6 +35,12 @@ func _on_Timer_timeout():
 	print("Timer done")
 	AnimationState = (AnimationState + 1) % ANIMATIONS.MAX_ANIMATIONS
 	$AnimatedSprite.play(AnimationStates[AnimationState])
+	
+	if AnimationState == ANIMATIONS.ATTACKING:
+		$LaserAttackAudio.play()
+	elif AnimationState == ANIMATIONS.IDLE:
+		$LaserIdleAudio.play()
+		
 	$Timer.start()
 
 
