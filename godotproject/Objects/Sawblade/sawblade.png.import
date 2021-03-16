@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sawblade.png-d169e8e197b5d8a5e27e03910168d6d3.stex"
+path="res://.import/sawblade.png-1467cf76ce7ed0873772230d17a95bbf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sawblade.png"
-dest_files=[ "res://.import/sawblade.png-d169e8e197b5d8a5e27e03910168d6d3.stex" ]
+source_file="res://Objects/Sawblade/sawblade.png"
+dest_files=[ "res://.import/sawblade.png-1467cf76ce7ed0873772230d17a95bbf.stex" ]
 
 [params]
 
