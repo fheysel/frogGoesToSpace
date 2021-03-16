@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Circular_saw_blade.png-1fd3b03d936669b7786f430c9e7f55e9.stex"
+path="res://.import/sawblade.png-d169e8e197b5d8a5e27e03910168d6d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Circular_saw_blade.png"
-dest_files=[ "res://.import/Circular_saw_blade.png-1fd3b03d936669b7786f430c9e7f55e9.stex" ]
+source_file="res://sawblade.png"
+dest_files=[ "res://.import/sawblade.png-d169e8e197b5d8a5e27e03910168d6d3.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
