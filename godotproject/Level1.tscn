@@ -581,11 +581,11 @@ position = Vector2( 8312, -368 )
 position = Vector2( 8640, -368 )
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 23 )]
-position = Vector2( 264, 232 )
+position = Vector2( 256, 24 )
 move_to = Vector2( 0, -160 )
 speed = 2.0
 
 [node name="MovingPlatform2" parent="." instance=ExtResource( 23 )]
-position = Vector2( 360, 232 )
+position = Vector2( -40, 32 )
 move_to = Vector2( 160, 0 )
 speed = 2.0
