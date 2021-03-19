@@ -503,7 +503,6 @@ func apply_knockback(knockback_up_only := false):
 	
 	# Play Ouch sound effect
 	$OuchSoundPlayer.play()
-	
 	# Detach tongue (fixes FGTS-179)
 	stop_swing()
 
