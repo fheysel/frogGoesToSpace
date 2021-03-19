@@ -228,12 +228,10 @@ func handle_normal_horizontal_movement(delta) -> int:
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), air_speed_limit)
 	return ret_value
 
-func _draw():
-	var tongue_target_global = null
-	if $PlayerTongue.shooting:
-		tongue_target_global = $PlayerTongue.get_global_target_position()
-	elif $PlayerTongue.swinging:
-		tongue_target_global = swing_pivot_position
+	func _draw():
+		var tongue_target_global = null
+		if !$PlayerTongue.idle:
+			tongue_target_global = $PlayerTongue.get_global_target_position()
 	
 	# We need to check if the point is actually there prior to removing it
 	# in order to avoid an error [FGTS-94]
@@ -246,18 +244,18 @@ func do_movement(delta):
 	if $PlayerTongue.swinging:
 		# Adjust swinging speed based on user's influence
 		swing_angular_speed += swing_user_anglespeed_per_s * -user_direction.x * delta
-		# TODO: Fix this and uncomment
-		# # We don't directly compute the position. We need to use move_and_collide
-		# var change_in_swing_radius = swing_user_radius_per_s * user_direction.y * delta
-		# if abs(change_in_swing_radius) > 0.01:
-		# 	var proposed_movement = Vector2.RIGHT.rotated(swing_angle) * change_in_swing_radius
-		# 	collision_info = move_and_collide(proposed_movement)
 
-		# 	# Update swing radius based on what's shown on-screen
-		# 	update_swing_radius()
-		# 	var frog_pos = get_global_transform().xform(Vector2.ZERO)
-		# 	var swing_vec = frog_pos - swing_pivot_position
-		# 	swing_radius = swing_vec.length()
+		# Check if the tongue's connection point has moved, and move the player to compensate
+		var new_swing_pivot_position = $PlayerTongue.get_global_target_position()
+		if swing_pivot_position != new_swing_pivot_position:
+			var proposed_movement = new_swing_pivot_position - swing_pivot_position
+			var collision_info = move_and_collide(proposed_movement)
+			if collision_info:
+				# We decided that the frog should exit swinging state when they hit a wall or the ground
+				# Let's just make them stop swinging no matter what they collided with
+				stop_swing()
+				return
+			swing_pivot_position = new_swing_pivot_position
 		
 
 		swing_angular_speed += 1 / swing_radius * gravity * cos(swing_angle) * delta
@@ -505,6 +503,9 @@ func apply_knockback(knockback_up_only := false):
 	
 	# Play Ouch sound effect
 	$OuchSoundPlayer.play()
+	
+	# Detach tongue (fixes FGTS-179)
+	stop_swing()
 
 func die():
 	# We've died!
