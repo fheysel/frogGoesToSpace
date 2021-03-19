@@ -228,10 +228,10 @@ func handle_normal_horizontal_movement(delta) -> int:
 				velocity.x = sign(velocity.x) * min(abs(velocity.x), air_speed_limit)
 	return ret_value
 
-	func _draw():
-		var tongue_target_global = null
-		if !$PlayerTongue.idle:
-			tongue_target_global = $PlayerTongue.get_global_target_position()
+func _draw():
+	var tongue_target_global = null
+	if !$PlayerTongue.idle:
+		tongue_target_global = $PlayerTongue.get_global_target_position()
 	
 	# We need to check if the point is actually there prior to removing it
 	# in order to avoid an error [FGTS-94]
@@ -503,7 +503,6 @@ func apply_knockback(knockback_up_only := false):
 	
 	# Play Ouch sound effect
 	$OuchSoundPlayer.play()
-	
 	# Detach tongue (fixes FGTS-179)
 	stop_swing()
 
