@@ -230,8 +230,10 @@ func handle_normal_horizontal_movement(delta) -> int:
 
 func _draw():
 	var tongue_target_global = null
-	if !$PlayerTongue.idle:
+	if $PlayerTongue.shooting:
 		tongue_target_global = $PlayerTongue.get_global_target_position()
+	elif $PlayerTongue.swinging:
+		tongue_target_global = swing_pivot_position
 	
 	# We need to check if the point is actually there prior to removing it
 	# in order to avoid an error [FGTS-94]
@@ -244,18 +246,18 @@ func do_movement(delta):
 	if $PlayerTongue.swinging:
 		# Adjust swinging speed based on user's influence
 		swing_angular_speed += swing_user_anglespeed_per_s * -user_direction.x * delta
+		# TODO: Fix this and uncomment
+		# # We don't directly compute the position. We need to use move_and_collide
+		# var change_in_swing_radius = swing_user_radius_per_s * user_direction.y * delta
+		# if abs(change_in_swing_radius) > 0.01:
+		# 	var proposed_movement = Vector2.RIGHT.rotated(swing_angle) * change_in_swing_radius
+		# 	collision_info = move_and_collide(proposed_movement)
 
-		# Check if the tongue's connection point has moved, and move the player to compensate
-		var new_swing_pivot_position = $PlayerTongue.get_global_target_position()
-		if swing_pivot_position != new_swing_pivot_position:
-			var proposed_movement = new_swing_pivot_position - swing_pivot_position
-			var collision_info = move_and_collide(proposed_movement)
-			if collision_info:
-				# We decided that the frog should exit swinging state when they hit a wall or the ground
-				# Let's just make them stop swinging no matter what they collided with
-				stop_swing()
-				return
-			swing_pivot_position = new_swing_pivot_position
+		# 	# Update swing radius based on what's shown on-screen
+		# 	update_swing_radius()
+		# 	var frog_pos = get_global_transform().xform(Vector2.ZERO)
+		# 	var swing_vec = frog_pos - swing_pivot_position
+		# 	swing_radius = swing_vec.length()
 		
 
 		swing_angular_speed += 1 / swing_radius * gravity * cos(swing_angle) * delta
@@ -504,9 +506,6 @@ func apply_knockback(knockback_up_only := false):
 	# Play Ouch sound effect
 	$OuchSoundPlayer.play()
 
-	# Detach tongue (fixes FGTS-179)
-	stop_swing()
-
 func die():
 	# We've died!
 	dead = true
@@ -526,14 +525,25 @@ func death_animation_over():
 	# Go back to title screen
 	Global.fade_to_scene(Global.main_menu_path)
 
+func collect(item):
+	var CollectFunctions = ['collect_star_piece', 'collect_health_bug']
+	if (item.COLLECT_ID < CollectFunctions.size()):
+		call(CollectFunctions[item.COLLECT_ID], item)
+
 func collect_star_piece(star_piece):
 	# Increment star piece counter
 	star_piece_count += 1
-	print("Star piece count: ", star_piece_count)
 	# Play sound
 	$CollectStarPieceSoundPlayer.play(0)
 	# Delete star piece
 	star_piece.queue_free()
+	
+func collect_health_bug(health_bug):
+	if (health < 5):
+		health += 1
+	# Play Sound : Temporary sound waiting for Health Bug Sound
+	$CollectStarPieceSoundPlayer.play(0)
+	health_bug.queue_free()
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
