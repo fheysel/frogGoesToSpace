@@ -3,6 +3,8 @@ extends KinematicBody2D
 signal tongue_start
 signal tongue_stop
 
+const MAX_HEALTH = 5
+
 # Enum types
 enum HorizMoveType { STOPPED, STOPPING, MOVING, TURN_AROUND }
 
@@ -76,7 +78,7 @@ var respawn_location := Vector2.ZERO
 # collected in-between levels or in-between deaths.
 var star_piece_count = 0
 
-var health = 5
+var health = MAX_HEALTH
 
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
@@ -503,7 +505,6 @@ func apply_knockback(knockback_up_only := false):
 	
 	# Play Ouch sound effect
 	$OuchSoundPlayer.play()
-
 	# Detach tongue (fixes FGTS-179)
 	stop_swing()
 
@@ -526,14 +527,25 @@ func death_animation_over():
 	# Go back to title screen
 	Global.fade_to_scene(Global.main_menu_path)
 
+func collect(item):
+	var CollectFunctions = ['collect_star_piece', 'collect_health_bug']
+	if (item.COLLECT_ID < CollectFunctions.size()):
+		call(CollectFunctions[item.COLLECT_ID], item)
+
 func collect_star_piece(star_piece):
 	# Increment star piece counter
 	star_piece_count += 1
-	print("Star piece count: ", star_piece_count)
 	# Play sound
 	$CollectStarPieceSoundPlayer.play(0)
 	# Delete star piece
 	star_piece.queue_free()
+	
+func collect_health_bug(health_bug):
+	if (health < MAX_HEALTH):
+		health += 1
+	# Play Sound : Temporary sound waiting for Health Bug Sound
+	$GulpSoundPlayer.play(0)
+	health_bug.queue_free()
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position
