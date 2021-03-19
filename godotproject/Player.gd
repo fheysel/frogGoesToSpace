@@ -3,6 +3,8 @@ extends KinematicBody2D
 signal tongue_start
 signal tongue_stop
 
+const MAX_HEALTH = 5
+
 # Enum types
 enum HorizMoveType { STOPPED, STOPPING, MOVING, TURN_AROUND }
 
@@ -76,7 +78,7 @@ var respawn_location := Vector2.ZERO
 # collected in-between levels or in-between deaths.
 var star_piece_count = 0
 
-var health = 5
+var health = MAX_HEALTH
 
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
@@ -540,10 +542,10 @@ func collect_star_piece(star_piece):
 	star_piece.queue_free()
 	
 func collect_health_bug(health_bug):
-	if (health < 5):
+	if (health < MAX_HEALTH):
 		health += 1
 	# Play Sound : Temporary sound waiting for Health Bug Sound
-	$CollectStarPieceSoundPlayer.play(0)
+	$GulpSoundPlayer.play(0)
 	health_bug.queue_free()
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
