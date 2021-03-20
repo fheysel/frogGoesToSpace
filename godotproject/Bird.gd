@@ -83,6 +83,7 @@ func take_damage(damage):
 		$Orientation/Sprite.play("hurt")
 		# Handle enemy health
 		health = health - damage
+		attackState == STATE.idle_e
 		if health <= 0:
 			dead()
 	
