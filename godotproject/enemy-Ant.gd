@@ -22,6 +22,11 @@ var is_dead = false
 var tongue_can_damage = true
 var health = 3
 	
+func _ready():
+	# If set to hard diffictult enable collisions from hitting enemies	
+	if($"/root/Global".difficulty == $"/root/Global".DIFFICULTY.HARD_MODE_e):
+		$Orientation/PlayerCollision.set_collision_mask_bit(1,1)
+	
 func dead():
 	is_dead = true
 	velocity = 0
@@ -123,3 +128,8 @@ func _on_InvulnerableFlashTimer_timeout():
 	else:
 		# Flash between transparencies
 		$Orientation/Sprite.modulate.a = 1 - $Orientation/Sprite.modulate.a
+
+
+func _on_Area2D_body_entered(body):
+	if(body.name == "Player"):
+		body.takeDamage(attackDamage)
