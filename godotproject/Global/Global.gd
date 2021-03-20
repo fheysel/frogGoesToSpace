@@ -30,6 +30,16 @@ var music_volume = 0
 # Sound effect volume, from 0 (silent) to 1 (loud)
 var sfx_volume = 0
 
+#Game Difficulty Level:
+#Easy: Colliding with enemies does not do any damage to the player unless they are attacking
+
+enum DIFFICULTY {
+	EASY_MODE_e,
+	HARD_MODE_e,
+}
+
+var difficulty = DIFFICULTY.EASY_MODE_e
+
 # This pause is applied in Global.gd (this script)
 # This refers to setting get_tree().paused
 func should_pause_game():
