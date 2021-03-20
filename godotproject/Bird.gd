@@ -98,7 +98,7 @@ func _on_ActionDelay_timeout():
 
 func _on_PlayerHitBoxArea_body_entered(body):
 	if attackState == STATE.attacking_player_e:
-		if body.name == "Player":
+		if Global.is_player(body):
 			body.takeDamage(1)
 
 func _on_PlayerDetection_body_entered(body):
