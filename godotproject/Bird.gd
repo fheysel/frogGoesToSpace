@@ -29,7 +29,7 @@ var max_vertical_directional_distance = VERTICAL_TRAVEL
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# If set to hard diffictult enable collisions from hitting enemies	
-	if($"/root/Global".difficulty == $"/root/Global".DIFFICULTY.HARD_MODE_e):
+	if(Global.difficulty == Global.DIFFICULTY.HARD_MODE_e):
 		$Orientation/PlayerCollision.set_collision_mask_bit(1,1)
 
 func _physics_process(delta):
