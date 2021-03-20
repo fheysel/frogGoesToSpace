@@ -6,69 +6,69 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 160, 160 )
+region = Rect2( 0, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 160, 160 )
+region = Rect2( 160, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 160, 0, 160, 160 )
+region = Rect2( 320, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 160, 160 )
+region = Rect2( 480, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 480, 0, 160, 160 )
+region = Rect2( 640, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 640, 0, 160, 160 )
+region = Rect2( 800, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 800, 0, 160, 160 )
+region = Rect2( 960, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 960, 0, 160, 160 )
+region = Rect2( 1120, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1120, 0, 160, 160 )
+region = Rect2( 320, 0, 160, 160 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": false,
-"name": "Swoop",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "Fly",
 "speed": 14.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": false,
+"name": "Swoop",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 32.0308
 
-[sub_resource type="CapsuleShape2D" id=13]
+[sub_resource type="CapsuleShape2D" id=12]
 radius = 32.8817
 height = 70.8082
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 71.2915, 35.9177 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -83,7 +83,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, 36.6667 )
 frames = SubResource( 10 )
 animation = "Fly"
-frame = 1
+frame = 2
 playing = true
 flip_h = true
 
@@ -108,7 +108,7 @@ collision_mask = 2147483648
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/PlayerCollision"]
 position = Vector2( -7.92806, 41.1267 )
 rotation = 1.5708
-shape = SubResource( 13 )
+shape = SubResource( 12 )
 
 [node name="ActionDelay" type="Timer" parent="."]
 wait_time = 0.5
@@ -116,7 +116,7 @@ one_shot = true
 
 [node name="SwingCollisionArea" type="CollisionShape2D" parent="."]
 position = Vector2( -3.50121, 41.5468 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
 one_shot = true
