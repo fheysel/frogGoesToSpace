@@ -26,9 +26,12 @@ enum MOVE_STATE {
 }
 
 func _ready():
+	init()
+
+func init():
 	radius = $PlayerCollision/CollisionShape2D.shape.radius
 	moveState = MOVE_STATE.accelerating_e
-	position = $StartPos.position;	
+	position = $StartPos.position;
 	ideal_velocity = 10
 	totalLength = ($EndPos.position - $StartPos.position).length()
 
