@@ -11,6 +11,7 @@ func _on_Timer_timeout():
 	if (rocketMutex <= 0):
 		rocketMutex += 1
 		var rocket = ROCKET.instance()
+		rocket.scale /= scale
 		add_child(rocket)
 		rocket.set_position($Position2D.get_position())
 
