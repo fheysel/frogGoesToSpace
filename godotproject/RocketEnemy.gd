@@ -1,16 +1,16 @@
 extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
-const SPEED = 15000
-const SPEED_INC = 125
+const SPEED = 22500
+const SPEED_INC = SPEED / 40
 
 var velocity = Vector2(0, 0)
 
 var direction = Vector2(1, 0)
-var pastDirection = Vector2(1, 0)
+var pastDirection = Vector2(0, 1)
 
 var attackDamage = 1
-var alpha = 0.1
+var alpha = 0.08
 
 enum STATE{
 	detected_player_e
@@ -22,8 +22,8 @@ var attackState = STATE.detected_player_e
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Orientation/Area2D/CollisionShape2D.disabled = true
-	direction.x = 1
-	direction.y = 0
+	direction.x = 0
+	direction.y = -1
 	attackState = STATE.detected_player_e
 
 func _physics_process(delta):
@@ -45,7 +45,7 @@ func _physics_process(delta):
 		
 		#Set the rocket to face the player
 		var rocketRotation = direction.angle()
-		$Orientation.rotation_degrees = rocketRotation * (180 / 3.14)
+		$Orientation.rotation_degrees = (rocketRotation * (180 / 3.14)) + 90
 		velocity = move_and_slide(velocity, FLOOR)
 	elif (attackState == STATE.detected_player_e):
 		#ramp up to full speed before chasing after player
@@ -63,7 +63,7 @@ func _on_Area2D_body_entered(body):
 		body.takeDamage(attackDamage)
 	elif (body.name == "TileMap"):
 		pass
-	else :
+	else:
 		return
 	$Timer.start()
 	$Orientation/AnimatedSprite.set_visible(false)
