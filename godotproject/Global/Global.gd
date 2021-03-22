@@ -128,6 +128,10 @@ func fade_set_body_to_position(body, position):
 	# Pause the game while we transition
 	pause_during_transition = true
 
+func _step_loading():
+	# We don't actually care if it's ready, we just want to load a piece.
+	var _ready = resource_queue.is_ready(loading)
+
 func _process_loading():
 	if loading == null and fade_action == FadeAction.MOVE_POSITION:
 		# Move body's position to the specified location
