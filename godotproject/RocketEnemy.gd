@@ -62,16 +62,13 @@ func _physics_process(delta):
 func _on_Area2D_body_entered(body):
 	if(body.name) == "Player":
 		body.takeDamage(attackDamage)
-#	elif (body.name == "TileMap"):
-#		pass
-#	else:
-#		return
+
 	explode()
 	
 func _on_Timer_timeout():
 	get_parent()._on_rocket_explode()
 	queue_free()
-	pass # Replace with function body.
+
 
 
 func _on_Area2D_area_entered(area):
