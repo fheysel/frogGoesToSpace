@@ -886,7 +886,7 @@ speed = 2.0
 
 [node name="MovingPlatform4" parent="." instance=ExtResource( 16 )]
 position = Vector2( 5520, 659.156 )
-move_to = Vector2( 300, 0 )
+move_to = Vector2( 400, 0 )
 speed = 2.0
 
 [node name="MovingPlatform5" parent="." instance=ExtResource( 16 )]
@@ -942,12 +942,12 @@ Start = Vector2( -220, 0 )
 End = Vector2( 200, 0 )
 
 [node name="SawBladeArea5" parent="." instance=ExtResource( 18 )]
-position = Vector2( 4504, 776 )
+position = Vector2( 4511.07, 736.402 )
 Start = Vector2( 0, -150 )
 End = Vector2( 0, 150 )
 
 [node name="SawBladeArea6" parent="." instance=ExtResource( 18 )]
-position = Vector2( 4907.05, 776 )
+position = Vector2( 4909.17, 736.402 )
 Start = Vector2( 0, 150 )
 End = Vector2( 0, -150 )
 
@@ -962,7 +962,7 @@ Start = Vector2( 0, -100 )
 End = Vector2( 0, 100 )
 
 [node name="SawBladeArea10" parent="." instance=ExtResource( 18 )]
-position = Vector2( 7997.81, 814.681 )
+position = Vector2( 8000.05, 752.946 )
 Start = Vector2( 0, -100 )
 End = Vector2( 0, 100 )
 
