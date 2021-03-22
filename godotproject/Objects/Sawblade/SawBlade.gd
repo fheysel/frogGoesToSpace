@@ -45,13 +45,13 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
 	
 	#rotating the sprite
-	var rotation = velocity.length() / radius * direction
+	var rotation = 5 * (velocity.length() / radius * direction)
 	rotation_degrees = int(rotation_degrees + rotation) % 360
 
 func _calculate_ideal_velocity():
 	# Setting originating and ending positions
-	var original_position = $StartPos.position;
-	var target_position = $EndPos.position;
+	var original_position = $StartPos.position
+	var target_position = $EndPos.position
 	if (direction == -1):
 		original_position = $EndPos.position
 		target_position = $StartPos.position
