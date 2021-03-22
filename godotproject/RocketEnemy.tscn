@@ -7,64 +7,52 @@
 [ext_resource path="res://kaboom.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 215, 469 )
+region = Rect2( 0, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 215, 0, 215, 469 )
+region = Rect2( 107, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 430, 0, 215, 469 )
+region = Rect2( 214, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 645, 0, 215, 469 )
+region = Rect2( 321, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 860, 0, 215, 469 )
+region = Rect2( 428, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1075, 0, 215, 469 )
+region = Rect2( 535, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1290, 0, 215, 469 )
+region = Rect2( 642, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1505, 0, 215, 469 )
+region = Rect2( 749, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=9]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1720, 0, 215, 469 )
+region = Rect2( 856, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1935, 0, 215, 469 )
+region = Rect2( 963, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 2150, 0, 215, 469 )
+region = Rect2( 1070, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 2365, 0, 215, 469 )
+region = Rect2( 1177, 0, 107, 235 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -140,9 +128,12 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Orientation"]
 position = Vector2( -88.9169, -3.50735 )
+
 z_index = -2
 frames = SubResource( 13 )
 frame = 3
+scale = Vector2( 2, 2 )
+
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]
