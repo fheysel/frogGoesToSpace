@@ -3,6 +3,9 @@ extends Area2D
 const ROCKET = preload("res://RocketEnemy.tscn")
 var rocketMutex = 0
 
+func _ready():
+	$RocketLauncher.scale /= scale
+
 func _on_Area2D_body_entered(body):
 	if(body.name == "Player" && rocketMutex <= 0):
 		$Timer.start()
@@ -11,6 +14,7 @@ func _on_Timer_timeout():
 	if (rocketMutex <= 0):
 		rocketMutex += 1
 		var rocket = ROCKET.instance()
+		rocket.scale /= scale
 		add_child(rocket)
 		rocket.set_position($Position2D.get_position())
 
