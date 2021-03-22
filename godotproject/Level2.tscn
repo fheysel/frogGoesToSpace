@@ -767,15 +767,20 @@ tile_data = PoolIntArray( 1048939, 0, 0, 1179678, 0, 0 )
 tile_set = SubResource( 18 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 1769880, 1, 0, 2032218, 1, 0, 2097602, 1, 0, 2097804, 1, 0, 2162892, 1, 0, 2228580, 1, 0, 2622063, 1, 0, 2622116, 1, 0, 2752632, 1, 0 )
+tile_data = PoolIntArray( 1769880, 1, 0, 2032218, 1, 0, 2097602, 1, 0, 2097804, 1, 0, 2162892, 1, 0, 2228580, 1, 0, 2622063, 1, 0, 2622116, 1, 0, 2752624, 1, 0, 2752643, 1, 0 )
 
 [node name="ConveyorBelt14" parent="." instance=ExtResource( 8 )]
-position = Vector2( 2112, 880 )
+position = Vector2( 1967.16, 848.089 )
+constant_linear_velocity = Vector2( 0, 0 )
+speed = -150
+
+[node name="ConveyorBelt15" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2267.27, 846.722 )
 constant_linear_velocity = Vector2( 0, 0 )
 speed = 200
 
 [node name="ConveyorBelt3" parent="." instance=ExtResource( 8 )]
-position = Vector2( 1728, 880 )
+position = Vector2( 1664.54, 847.964 )
 constant_linear_velocity = Vector2( 0, 0 )
 speed = -150
 
@@ -875,7 +880,7 @@ position = Vector2( 6120, 788.216 )
 position = Vector2( 6954.33, 792 )
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 16 )]
-position = Vector2( 904.439, 871.595 )
+position = Vector2( 896.43, 846.233 )
 move_to = Vector2( 375, 0 )
 speed = 2.0
 
@@ -976,7 +981,7 @@ position = Vector2( 1088.42, 1024.71 )
 position = Vector2( 1472.49, 1023.53 )
 
 [node name="VatOfAcid4" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1730.04, 1023.53 )
+position = Vector2( 1730.04, 1023.81 )
 
 [node name="VatOfAcid5" parent="." instance=ExtResource( 19 )]
 position = Vector2( 1986.33, 1023.53 )
