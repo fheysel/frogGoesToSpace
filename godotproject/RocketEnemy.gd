@@ -25,6 +25,7 @@ func _ready():
 	direction.x = 0
 	direction.y = -1
 	attackState = STATE.detected_player_e
+	$RocketLaunchSfx.play()
 
 func _physics_process(delta):
 	if (attackState == STATE.attacking_player_e):
@@ -69,8 +70,8 @@ func _on_Area2D_body_entered(body):
 	$Orientation/AnimatedSprite.set_visible(false)
 	set_physics_process(false)
 	velocity = Vector2(0,0)
-	$BoomParticlesOrange.set_emitting(true)
-	$BoomParticlesRed.set_emitting(true)
+	$Orientation/BoomSprite.play("default")
+	$RocketExplodeSfx.play()
 	
 func _on_Timer_timeout():
 	get_parent()._on_rocket_explode()

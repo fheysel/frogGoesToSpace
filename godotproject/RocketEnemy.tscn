@@ -1,69 +1,58 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://rocket_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://RocketEnemy.gd" type="Script" id=2]
-[ext_resource path="res://BoomParticlesRed.tscn" type="PackedScene" id=3]
-[ext_resource path="res://BoomParticlesOrange.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sfx/rocket_launch_sfx.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/explosion_sfx.wav" type="AudioStream" id=4]
+[ext_resource path="res://kaboom.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 215, 469 )
+region = Rect2( 0, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 215, 0, 215, 469 )
+region = Rect2( 107, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 430, 0, 215, 469 )
+region = Rect2( 214, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 645, 0, 215, 469 )
+region = Rect2( 321, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 860, 0, 215, 469 )
+region = Rect2( 428, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1075, 0, 215, 469 )
+region = Rect2( 535, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1290, 0, 215, 469 )
+region = Rect2( 642, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1505, 0, 215, 469 )
+region = Rect2( 749, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=9]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1720, 0, 215, 469 )
+region = Rect2( 856, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1935, 0, 215, 469 )
+region = Rect2( 963, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 2150, 0, 215, 469 )
+region = Rect2( 1070, 0, 107, 235 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 2365, 0, 215, 469 )
+region = Rect2( 1177, 0, 107, 235 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -77,15 +66,57 @@ animations = [ {
 radius = 50.5304
 height = 156.851
 
-[sub_resource type="CapsuleShape2D" id=15]
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 5 )
+region = Rect2( 1200, 300, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 5 )
+region = Rect2( 1600, 300, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 5 )
+region = Rect2( 400, 0, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 800, 0, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 1200, 0, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 1600, 0, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 300, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 400, 300, 400, 300 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 800, 300, 400, 300 )
+
+[sub_resource type="SpriteFrames" id=25]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": false,
+"name": "default",
+"speed": 45.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=26]
 radius = 51.2133
 height = 154.232
-
-[sub_resource type="Curve" id=16]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.962536, 0.000279903 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=17]
-_data = [ Vector2( 0.0144092, 0.978516 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.145182 ), 0.0, 0.0, 0, 0 ]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( -0.111359, 0 )
@@ -97,9 +128,10 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Orientation"]
 position = Vector2( -88.9169, -3.50735 )
+scale = Vector2( 2, 2 )
 z_index = -2
 frames = SubResource( 13 )
-frame = 3
+frame = 11
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]
@@ -115,29 +147,32 @@ enabled = true
 cast_to = Vector2( 2000, 0 )
 collision_mask = 2
 
+[node name="BoomSprite" type="AnimatedSprite" parent="Orientation"]
+position = Vector2( -32.7128, -8.14661 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+frames = SubResource( 25 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 14.1193, -0.594604 )
 rotation = 1.5708
-shape = SubResource( 15 )
+shape = SubResource( 26 )
 disabled = true
-
-[node name="BoomParticlesOrange" parent="." instance=ExtResource( 4 )]
-scale = Vector2( 10, 10 )
-emitting = false
-amount = 100
-angular_velocity = 720.0
-angular_velocity_random = 1.0
-scale_amount_curve = SubResource( 16 )
-
-[node name="BoomParticlesRed" parent="." instance=ExtResource( 3 )]
-scale = Vector2( 10, 10 )
-emitting = false
-amount = 100
-angular_velocity = 720.0
-angular_velocity_random = 1.0
-scale_amount_curve = SubResource( 17 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
+
+[node name="RocketLaunchSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 2.0
+max_distance = 900.0
+attenuation = 3.13834
+bus = "Sfx"
+
+[node name="RocketExplodeSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+max_distance = 900.0
+attenuation = 2.0
+bus = "Sfx"
 [connection signal="body_entered" from="Orientation/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

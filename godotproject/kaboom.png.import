@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rocket_spritesheet.png-3afb6370b398ba3760b69e2ff1b1f381.stex"
+path="res://.import/kaboom.png-b475e625cbcb035f6eed0247a3407027.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rocket_spritesheet.png"
-dest_files=[ "res://.import/rocket_spritesheet.png-3afb6370b398ba3760b69e2ff1b1f381.stex" ]
+source_file="res://kaboom.png"
+dest_files=[ "res://.import/kaboom.png-b475e625cbcb035f6eed0247a3407027.stex" ]
 
 [params]
 
