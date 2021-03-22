@@ -1,7 +1,7 @@
 extends Node2D
 
 const IDLE_DURATION = 1.0
-const PLATFORM_WIDTH = 80
+const PLATFORM_WIDTH = 128
 
 export var move_to = Vector2.RIGHT * PLATFORM_WIDTH # equivalent to 2 tile widths to the right
 export var speed = 3.0
