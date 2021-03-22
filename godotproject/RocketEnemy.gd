@@ -62,10 +62,10 @@ func _physics_process(delta):
 func _on_Area2D_body_entered(body):
 	if(body.name) == "Player":
 		body.takeDamage(attackDamage)
-	elif (body.name == "TileMap"):
-		pass
-	else:
-		return
+#	elif (body.name == "TileMap"):
+#		pass
+#	else:
+#		return
 	explode()
 	
 func _on_Timer_timeout():
@@ -75,9 +75,8 @@ func _on_Timer_timeout():
 
 
 func _on_Area2D_area_entered(area):
-	print(area.name)
-	print(area.AnimationState)
-	if ("LaserWall" in area.name && area.AnimationState == 1): # if the laser is in attack state
+	# if the laser is in attack state, make rocket explode
+	if ("LaserWall" in area.name && area.AnimationState == 1): 
 		explode()
 
 		

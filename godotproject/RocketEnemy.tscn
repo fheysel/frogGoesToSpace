@@ -132,7 +132,6 @@ scale = Vector2( 2, 2 )
 z_index = -2
 frames = SubResource( 13 )
 frame = 11
-rocket explode on collision with laser wall
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]
