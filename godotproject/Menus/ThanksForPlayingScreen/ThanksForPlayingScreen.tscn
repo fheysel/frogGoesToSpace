@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.gd" type="Script" id=3]
 [ext_resource path="res://sfx/CreditsTheme.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Tiles/starryNight/starryNight.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menus/ThanksForPlayingScreen/SpaceFrogScene.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -26,6 +27,8 @@ autoplay = true
 bus = "Music"
 
 [node name="StarryNightScene" parent="." instance=ExtResource( 5 )]
+
+[node name="SpaceFrogScene" parent="." instance=ExtResource( 6 )]
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 margin_top = 512.0
