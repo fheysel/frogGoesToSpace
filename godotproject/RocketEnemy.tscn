@@ -62,9 +62,9 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=14]
-radius = 50.5304
-height = 156.851
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 97.3174, 16.5505 )
+
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 5 )
@@ -118,7 +118,7 @@ animations = [ {
 radius = 51.2133
 height = 154.232
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="RocketEnemy" type="KinematicBody2D"]
 position = Vector2( -0.111359, 0 )
 scale = Vector2( 0.0997817, 0.1 )
 collision_layer = 0
@@ -132,14 +132,17 @@ scale = Vector2( 2, 2 )
 z_index = -2
 frames = SubResource( 13 )
 frame = 11
+rocket explode on collision with laser wall
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]
+collision_layer = 4
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Area2D"]
-position = Vector2( 13.9203, -0.835218 )
+position = Vector2( 0, -108.284 )
 rotation = 1.5708
-shape = SubResource( 14 )
+shape = SubResource( 19 )
 
 [node name="RayCast2D" type="RayCast2D" parent="Orientation"]
 position = Vector2( 140.992, 0 )
@@ -154,13 +157,14 @@ scale = Vector2( 2, 2 )
 frames = SubResource( 25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 14.1193, -0.594604 )
+position = Vector2( 0, -98.0228 )
 rotation = 1.5708
 shape = SubResource( 26 )
 disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
+<<<<<<< HEAD
 
 [node name="RocketLaunchSfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -169,10 +173,6 @@ max_distance = 900.0
 attenuation = 3.13834
 bus = "Sfx"
 
-[node name="RocketExplodeSfx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
-max_distance = 900.0
-attenuation = 2.0
-bus = "Sfx"
+[connection signal="area_entered" from="Orientation/Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Orientation/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

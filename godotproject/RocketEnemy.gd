@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
 const SPEED = 22500
-const SPEED_INC = SPEED / 40
+const SPEED_INC = SPEED / 30
 
 var velocity = Vector2(0, 0)
 
@@ -66,6 +66,22 @@ func _on_Area2D_body_entered(body):
 		pass
 	else:
 		return
+	explode()
+	
+func _on_Timer_timeout():
+	get_parent()._on_rocket_explode()
+	queue_free()
+	pass # Replace with function body.
+
+
+func _on_Area2D_area_entered(area):
+	print(area.name)
+	print(area.AnimationState)
+	if ("LaserWall" in area.name && area.AnimationState == 1): # if the laser is in attack state
+		explode()
+
+		
+func explode():
 	$Timer.start()
 	$Orientation/AnimatedSprite.set_visible(false)
 	set_physics_process(false)
@@ -73,7 +89,3 @@ func _on_Area2D_body_entered(body):
 	$Orientation/BoomSprite.play("default")
 	$RocketExplodeSfx.play()
 	
-func _on_Timer_timeout():
-	get_parent()._on_rocket_explode()
-	queue_free()
-	pass # Replace with function body.

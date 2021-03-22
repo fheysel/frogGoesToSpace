@@ -26,6 +26,7 @@ func _on_Area2D_body_entered(body):
 		inside = true
 		player = body
 		
+		
 func _on_Area2D_body_exited(body):
 	if Global.is_player(body):
 		inside = false
