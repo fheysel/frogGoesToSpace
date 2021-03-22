@@ -5,13 +5,13 @@ var inhibit_hud = true
 var start = true
 var scroll_speed = 0.5
 
-
 func _process(_delta):
 	if(start == true):
 		start = false
 		$VBoxContainer2.rect_position.y = 500
+		self.margin_top = 0
 		
-	if($VBoxContainer2.rect_position.y == -120):
+	if($VBoxContainer2.rect_position.y <= -120):
 		scroll_speed = 0
 		
 	$VBoxContainer2.rect_position.y -= scroll_speed
