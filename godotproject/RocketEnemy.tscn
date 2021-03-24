@@ -122,11 +122,11 @@ script = ExtResource( 2 )
 [node name="Orientation" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Orientation"]
-position = Vector2( -88.9169, -3.50735 )
+position = Vector2( -8.00779, 0 )
 scale = Vector2( 2, 2 )
 z_index = -2
 frames = SubResource( 13 )
-frame = 2
+frame = 9
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]
