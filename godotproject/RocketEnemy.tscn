@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://rocket_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://RocketEnemy.gd" type="Script" id=2]
@@ -62,9 +62,8 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=14]
-radius = 50.5304
-height = 156.851
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 97.3174, 16.5505 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 5 )
@@ -84,41 +83,37 @@ region = Rect2( 400, 0, 400, 300 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 5 )
-region = Rect2( 800, 0, 400, 300 )
+region = Rect2( 1200, 0, 400, 300 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 5 )
-region = Rect2( 1200, 0, 400, 300 )
+region = Rect2( 1600, 0, 400, 300 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 5 )
-region = Rect2( 1600, 0, 400, 300 )
+region = Rect2( 0, 300, 400, 300 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 5 )
-region = Rect2( 0, 300, 400, 300 )
+region = Rect2( 400, 300, 400, 300 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 5 )
-region = Rect2( 400, 300, 400, 300 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 5 )
 region = Rect2( 800, 300, 400, 300 )
 
-[sub_resource type="SpriteFrames" id=25]
+[sub_resource type="SpriteFrames" id=24]
 animations = [ {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), null, SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
 "loop": false,
 "name": "default",
 "speed": 45.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=26]
+[sub_resource type="CapsuleShape2D" id=25]
 radius = 51.2133
 height = 154.232
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="RocketEnemy" type="KinematicBody2D"]
 position = Vector2( -0.111359, 0 )
 scale = Vector2( 0.0997817, 0.1 )
 collision_layer = 0
@@ -127,17 +122,19 @@ script = ExtResource( 2 )
 [node name="Orientation" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Orientation"]
-position = Vector2( -88.9169, -3.50735 )
+position = Vector2( -8.00779, 0 )
 scale = Vector2( 2, 2 )
 z_index = -2
 frames = SubResource( 13 )
-frame = 11
+frame = 9
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Orientation"]
+collision_layer = 4
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Area2D"]
-position = Vector2( 13.9203, -0.835218 )
+position = Vector2( 0, -108.284 )
 rotation = 1.5708
 shape = SubResource( 14 )
 
@@ -151,28 +148,22 @@ collision_mask = 2
 position = Vector2( -32.7128, -8.14661 )
 rotation = -1.5708
 scale = Vector2( 2, 2 )
-frames = SubResource( 25 )
+frames = SubResource( 24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 14.1193, -0.594604 )
+position = Vector2( 0, -98.0228 )
 rotation = 1.5708
-shape = SubResource( 26 )
+shape = SubResource( 25 )
 disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
 
-[node name="RocketLaunchSfx" type="AudioStreamPlayer2D" parent="."]
+[node name="RocketLaunchSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = 2.0
-max_distance = 900.0
-attenuation = 3.13834
-bus = "Sfx"
 
-[node name="RocketExplodeSfx" type="AudioStreamPlayer2D" parent="."]
+[node name="RocketExplodeSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-max_distance = 900.0
-attenuation = 2.0
-bus = "Sfx"
+[connection signal="area_entered" from="Orientation/Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Orientation/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

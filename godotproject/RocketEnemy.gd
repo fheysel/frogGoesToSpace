@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
 const SPEED = 22500
-const SPEED_INC = SPEED / 40
+const SPEED_INC = SPEED / 30
 
 var velocity = Vector2(0, 0)
 
@@ -25,7 +25,7 @@ func _ready():
 	direction.x = 0
 	direction.y = -1
 	attackState = STATE.detected_player_e
-	$RocketLaunchSfx.play()
+	$RocketLaunchSFX.play()
 
 func _physics_process(delta):
 	if (attackState == STATE.attacking_player_e):
@@ -60,20 +60,28 @@ func _physics_process(delta):
 			$Orientation/Area2D/CollisionShape2D.disabled = false
 		
 func _on_Area2D_body_entered(body):
-	if(body.name) == "Player":
+	if Global.is_player(body):
 		body.takeDamage(attackDamage)
-	elif (body.name == "TileMap"):
-		pass
-	else:
-		return
+
+	explode()
+	
+func _on_Timer_timeout():
+	get_parent()._on_rocket_explode()
+	queue_free()
+
+
+
+func _on_Area2D_area_entered(area):
+	# if the laser is in attack state, make rocket explode
+	if ("LaserWall" in area.name && area.AnimationState == 1): 
+		explode()
+
+		
+func explode():
 	$Timer.start()
 	$Orientation/AnimatedSprite.set_visible(false)
 	set_physics_process(false)
 	velocity = Vector2(0,0)
 	$Orientation/BoomSprite.play("default")
-	$RocketExplodeSfx.play()
+	$RocketExplodeSFX.play()
 	
-func _on_Timer_timeout():
-	get_parent()._on_rocket_explode()
-	queue_free()
-	pass # Replace with function body.

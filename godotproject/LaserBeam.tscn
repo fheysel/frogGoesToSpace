@@ -146,9 +146,9 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[node name="Area2D" type="Area2D"]
+[node name="LaserBeam" type="Area2D"]
 scale = Vector2( 0.5, 0.5 )
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 script = ExtResource( 2 )
 

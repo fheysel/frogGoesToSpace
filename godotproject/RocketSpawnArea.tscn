@@ -18,7 +18,7 @@ shape = SubResource( 1 )
 one_shot = true
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( -200.68, 198.901 )
+position = Vector2( -208, 200 )
 
 [node name="RocketLauncher" type="Sprite" parent="."]
 position = Vector2( -210.488, 195.887 )
