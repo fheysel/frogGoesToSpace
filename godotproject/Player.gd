@@ -522,6 +522,8 @@ func die():
 	# Start our death animation
 	animation_mode.travel("Dead")
 	# The animation will take care of all other effects by calling functions and setting variables
+	# Detach tongue (fixes FGTS-192)
+	stop_swing()
 
 func death_animation_over():
 	# Go back to title screen
