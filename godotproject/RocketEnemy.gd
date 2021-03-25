@@ -60,7 +60,7 @@ func _physics_process(delta):
 			$Orientation/Area2D/CollisionShape2D.disabled = false
 		
 func _on_Area2D_body_entered(body):
-	if(body.name) == "Player":
+	if Global.is_player(body):
 		body.takeDamage(attackDamage)
 
 	explode()
