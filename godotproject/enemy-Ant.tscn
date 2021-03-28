@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://enemy-Ant.gd" type="Script" id=1]
 [ext_resource path="res://poison_frog.png" type="Texture" id=2]
@@ -85,9 +85,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 178.427, 37.9655 )
 
-[sub_resource type="CircleShape2D" id=19]
-radius = 238.509
-
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 375.71, 371.094 )
 
@@ -140,16 +137,6 @@ enabled = true
 cast_to = Vector2( -3300, 0 )
 collision_mask = 3
 
-[node name="PlayerCollision" type="Area2D" parent="Orientation"]
-position = Vector2( -2.66302, -2.70987 )
-scale = Vector2( 1, 1 )
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/PlayerCollision"]
-position = Vector2( 358.203, 419.126 )
-shape = SubResource( 19 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 291.489, 231.229 )
 shape = SubResource( 18 )
@@ -168,7 +155,6 @@ one_shot = true
 [node name="InvulnerableFlashTimer" type="Timer" parent="."]
 wait_time = 0.2
 [connection signal="body_entered" from="Orientation/Sprite/PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="body_entered" from="Orientation/PlayerCollision" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="ActionDelay" to="." method="_on_ActionDelay_timeout"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
 [connection signal="timeout" from="InvulnerableFlashTimer" to="." method="_on_InvulnerableFlashTimer_timeout"]

@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="Frog Goes To Space - Cooper Prototype"
 run/main_scene="res://Menus/MainMenu/MainMenu.tscn"
+config/icon="res://icon.png"
 config/use_custom_user_dir.Pi=true
 config/custom_user_dir_name.Pi="/boot/fgts-pi/gamedata"
 
