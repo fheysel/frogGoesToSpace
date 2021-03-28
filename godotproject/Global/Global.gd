@@ -30,16 +30,6 @@ var music_volume = 0
 # Sound effect volume, from 0 (silent) to 1 (loud)
 var sfx_volume = 0
 
-#Game Difficulty Level:
-#Easy: Colliding with enemies does not do any damage to the player unless they are attacking
-
-enum DIFFICULTY {
-	EASY_MODE_e,
-	HARD_MODE_e,
-}
-
-var difficulty = DIFFICULTY.EASY_MODE_e
-
 # This pause is applied in Global.gd (this script)
 # This refers to setting get_tree().paused
 func should_pause_game():
@@ -137,6 +127,10 @@ func fade_set_body_to_position(body, position):
 
 	# Pause the game while we transition
 	pause_during_transition = true
+
+func _step_loading():
+	# We don't actually care if it's ready, we just want to load a piece.
+	var _ready = resource_queue.is_ready(loading)
 
 func _process_loading():
 	if loading == null and fade_action == FadeAction.MOVE_POSITION:

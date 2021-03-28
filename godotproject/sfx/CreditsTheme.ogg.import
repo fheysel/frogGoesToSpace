@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/CreditsTheme.ogg-634a2780669f2c81a226f971c13f5634.oggstr"
+
+[deps]
+
+source_file="res://sfx/CreditsTheme.ogg"
+dest_files=[ "res://.import/CreditsTheme.ogg-634a2780669f2c81a226f971c13f5634.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Level3-BossBattle.ogg-3fc1f8407bb9a4c1c2949a9f9111fb61.oggstr"
+
+[deps]
+
+source_file="res://sfx/Level3-BossBattle.ogg"
+dest_files=[ "res://.import/Level3-BossBattle.ogg-3fc1f8407bb9a4c1c2949a9f9111fb61.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
