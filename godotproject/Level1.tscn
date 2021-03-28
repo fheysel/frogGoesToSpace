@@ -318,35 +318,45 @@ tile_data = PoolIntArray( -3407545, 0, 0 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxLayerCitySkylineB" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.9, 0.9 )
-motion_mirroring = Vector2( 3000, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineB"]
-position = Vector2( 2032, -664 )
-scale = Vector2( 12, 12 )
-texture = ExtResource( 4 )
-
 [node name="ParallaxLayerCitySkylineA" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.9, 0.9 )
-motion_mirroring = Vector2( 3000, 0 )
+position = Vector2( 0, -300 )
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 1536, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineA"]
-position = Vector2( 496, -664 )
-scale = Vector2( 12, 12 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, -128, 128, 512 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayerCitySkylineA"]
+position = Vector2( 768, 0 )
+scale = Vector2( 6, 6 )
 texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, -128, 128, 512 )
 
 [node name="ParallaxLayerFarBuildings" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 2560, 0 )
+position = Vector2( 0, 200 )
+motion_scale = Vector2( 0.8, 0.8 )
+motion_mirroring = Vector2( 1152, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerFarBuildings"]
-position = Vector2( 1359, -224 )
-scale = Vector2( 11.3611, 15.7258 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 144, 256 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayerFarBuildings"]
+position = Vector2( 576, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 144, 256 )
 
 [node name="Level1Boundaries" type="Node2D" parent="."]
 script = ExtResource( 16 )
-left_bound = -206.0
+left_bound = -200.0
 top_bound = -2104.0
 right_bound = 10944.0
 bottom_bound = 384.0
