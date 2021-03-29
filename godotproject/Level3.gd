@@ -4,7 +4,7 @@ extends Node2D
 const level_name := "Get to the Rocket!"
 
 const SPIKE := -1
-const STAR := -1
+const STAR := 10
 
 export (PackedScene) var Spike
 export (PackedScene) var Star
