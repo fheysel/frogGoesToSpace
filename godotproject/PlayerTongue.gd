@@ -82,8 +82,7 @@ func handle_shoot(delta):
 			start_idle()
 			
 		elif colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUE_CAN_COLLECT):
-			get_parent().collect_star_piece(colliding)
-
+			get_parent().collect(colliding);
 
 		elif colliding.get_collision_layer_bit(COLLISION_LAYER_TONGUEABLE):
 			start_swing($TongueRaycast.get_collider(), $TongueRaycast.get_collision_point())
