@@ -7,16 +7,25 @@
 [ext_resource path="res://sfx/rocket_boom.wav" type="AudioStream" id=5]
 [ext_resource path="res://EOL.tscn" type="PackedScene" id=6]
 
-[node name="Rocket" type="Node2D"]
+[node name="Rocket" type="KinematicBody2D"]
+z_index = -1
+collision_layer = 8
+collision_mask = 0
 script = ExtResource( 4 )
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -236.5, 341.5 )
+scale = Vector2( 24.0625, 104.375 )
+polygon = PoolVector2Array( 2.6308, 2.33653, 2.63261, 2.09813, 2.12702, 2.09885, 1.89613, 2.10265, 1.87964, 1.91064, 6.05709, 2.09984, 6.04835, 2.22169, 6.25694, 2.22173, 6.25665, 2.33807, 5.75982, 2.33759, 5.75813, 2.39408, 3.17167, 2.39648, 3.17167, 2.33813 )
+
 [node name="Sprite" type="Sprite" parent="."]
+z_index = -1
 texture = ExtResource( 1 )
 
 [node name="Jet1" parent="." instance=ExtResource( 2 )]
 position = Vector2( -128, 584 )
 scale = Vector2( 0.3, 0.25 )
-z_index = 0
+z_index = -1
 emitting = false
 amount = 5000
 lifetime = 0.5
@@ -27,7 +36,7 @@ initial_velocity = 370.05
 [node name="Jet2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 128, 584 )
 scale = Vector2( 0.3, 0.25 )
-z_index = 0
+z_index = -1
 emitting = false
 amount = 5000
 lifetime = 0.5

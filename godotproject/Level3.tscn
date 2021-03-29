@@ -693,7 +693,6 @@ bus = "Music"
 [node name="Rocket" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1512, -1896 )
 scale = Vector2( 4.5, 4.5 )
-z_index = -1
 
 [node name="Fan" parent="." instance=ExtResource( 5 )]
 position = Vector2( 936, 376 )

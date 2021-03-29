@@ -1,7 +1,7 @@
 extends Node2D
 
 var blastOff = false
-var speed = 25
+var speed = 20
 
 var trauma_level = 0 # counter to see how many jets are on
 
