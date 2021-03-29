@@ -8,8 +8,12 @@ const VERTICAL_TRAVEL = 8000
 enum STATE{
 	idle_e,
 	detected_player_e,
-	attacking_player_e
+	attacking_player_e,
+	taking_damage_e,
 }
+
+var health = 2
+var is_dead = false
 
 var attackState = STATE.idle_e
 var velocity = Vector2(0, 0)
@@ -24,7 +28,9 @@ var max_vertical_directional_distance = VERTICAL_TRAVEL
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# If set to hard diffictult enable collisions from hitting enemies	
+	if(Global.difficulty == Global.DIFFICULTY.HARD_MODE_e):
+		$Orientation/PlayerCollision.set_collision_mask_bit(1,1)
 
 func _physics_process(delta):
 	if attackState == STATE.idle_e:
@@ -65,12 +71,53 @@ func _physics_process(delta):
 				max_vertical_directional_distance = VERTICAL_TRAVEL
 				velocity.y = 0
 
+func take_damage(damage):
+	if !is_dead and $InvulnerableTimer.is_stopped():
+		# Set the enemy in the invulnerable state
+		$InvulnerableTimer.start()
+		attackState = STATE.taking_damage_e
+		# Handle enemy flashing after taking damage
+		$InvulnerableFlashTimer.start()
+		$Orientation/Sprite.modulate.a = 0.3
+		# Set sprite animation
+		$Orientation/Sprite.play("hurt")
+		# Handle enemy health
+		health = health - damage
+		attackState == STATE.idle_e
+		if health <= 0:
+			dead()
+	
+func dead():
+	is_dead = true
+	velocity = 0
+	queue_free()
+
 func _on_ActionDelay_timeout():
 	if attackState == STATE.detected_player_e:
-
 		attackState = STATE.attacking_player_e
 
 func _on_PlayerHitBoxArea_body_entered(body):
+	if attackState == STATE.attacking_player_e:
+		if Global.is_player(body):
+			body.takeDamage(1)
+
+func _on_PlayerDetection_body_entered(body):
 	if body.name == "Player":
 		body.takeDamage(1)
+	pass # Replace with function body.
 
+func _on_InvulnerableTimer_timeout():
+	# Set player to visible
+	$Orientation/Sprite.modulate.a = 1
+	# Re-enable their logic
+	attackState = STATE.idle_e
+	# Trigger the raycast so they will shoot at the player
+#	trigger_raycast()
+
+func _on_InvulnerableFlashTimer_timeout():
+	if $InvulnerableTimer.is_stopped():
+		# Player isn't vulnerable anymore! Stop this timer until next hit
+		$InvulnerableFlashTimer.stop()
+	else:
+		# Flash between transparencies
+		$Orientation/Sprite.modulate.a = 1 - $Orientation/Sprite.modulate.a
