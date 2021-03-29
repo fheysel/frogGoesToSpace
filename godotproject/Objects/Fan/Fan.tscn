@@ -159,9 +159,9 @@ bus = "Sfx"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 2.77904, -37.1014 )
-z_index = -3
+z_index = -1
 frames = SubResource( 32 )
-frame = 5
+frame = 17
 playing = true
 [connection signal="body_entered" from="." to="." method="_on_Fan_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Fan_body_exited"]
