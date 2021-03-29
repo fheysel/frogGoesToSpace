@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rocket_launch_sfx.wav-598bb6df1c45933f8ac73f9f64b8b11a.sample"
+
+[deps]
+
+source_file="res://sfx/rocket_launch_sfx.wav"
+dest_files=[ "res://.import/rocket_launch_sfx.wav-598bb6df1c45933f8ac73f9f64b8b11a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
