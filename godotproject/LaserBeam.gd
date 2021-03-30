@@ -38,6 +38,7 @@ func _on_Timer_timeout():
 	
 	if AnimationState == ANIMATIONS.ATTACKING:
 		$LaserAttackAudio.play()
+		
 	elif AnimationState == ANIMATIONS.IDLE:
 		$LaserIdleAudio.play()
 		

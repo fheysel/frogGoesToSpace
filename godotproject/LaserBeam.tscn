@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://LaserBeam.gd" type="Script" id=2]
 [ext_resource path="res://sfx/laser_idle_sfx.wav" type="AudioStream" id=3]
@@ -117,14 +117,6 @@ region = Rect2( 0, 720, 40, 30 )
 atlas = ExtResource( 6 )
 region = Rect2( 0, 750, 40, 30 )
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 840, 40, 30 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 870, 40, 30 )
-
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 930, 40, 30 )
@@ -140,7 +132,7 @@ animations = [ {
 "name": "Idle",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ) ],
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ), SubResource( 32 ) ],
 "loop": false,
 "name": "Attacking",
 "speed": 20.0
@@ -163,7 +155,7 @@ rotation = -1.5708
 scale = Vector2( 10, 2 )
 frames = SubResource( 33 )
 animation = "Attacking"
-frame = 22
+frame = 20
 playing = true
 flip_h = true
 
