@@ -404,17 +404,9 @@ func update_anim():
 		facing.y = 0
 		
 		# If we're facing left, flip the frog.
-		# $Sprite.flip_h = facing.x < 0
-		
 		# Flip based on scale property of root node;
 		# Ensures collision layer flips properly with sprite
-		if velocity.x > 0:
-			scale.x = initial_scale.x * sign(scale.y)
-		elif velocity.x < 0:
-			scale.x = -initial_scale.x * sign(scale.y)
-		
-		
-		
+		scale.x = sign(facing.x) * initial_scale.x * sign(scale.y)
 
 # This function is used when the player shoots out their tongue
 # to determine what direction it should travel in.
