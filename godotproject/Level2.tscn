@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=39 format=2]
-=======
 [gd_scene load_steps=40 format=2]
->>>>>>> Fix level 2 to match main
 
 [ext_resource path="res://sfx/Level2-NasaHQTheme.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Tiles/Level2/LaboratoryTilesUnsliced.png" type="Texture" id=2]
@@ -706,7 +702,7 @@ Spike = ExtResource( 12 )
 Star = ExtResource( 13 )
 
 [node name="Player" parent="." instance=ExtResource( 10 )]
-position = Vector2( 33.3345, 881.463 )
+position = Vector2( 32, 880 )
 collision_layer = 34
 collision_mask = 17
 
@@ -727,7 +723,7 @@ bus = "Music"
 
 [node name="EOL" parent="." instance=ExtResource( 14 )]
 position = Vector2( 12009.8, -234.546 )
-next_path = "res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.tscn"
+next_path = "res://Level3.tscn"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -2
@@ -1132,6 +1128,7 @@ scale = Vector2( 0.5, 1 )
 [node name="BlinkingComputer" parent="." instance=ExtResource( 24 )]
 position = Vector2( 593.788, 815.941 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 frame = 15
 
 [node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
@@ -1146,3 +1143,10 @@ frame = 17
 position = Vector2( 3080, 736 )
 frame = 17
 >>>>>>> Fix level 2 to match main
+=======
+frame = 0
+
+[node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
+position = Vector2( 3080, 736 )
+frame = 0
+>>>>>>> Updated level0 signs and level3 background
