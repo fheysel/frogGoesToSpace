@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Level0/Level0_ground_auto.tres" type="TileSet" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://Level0.gd" type="Script" id=12]
 [ext_resource path="res://EOL.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sfx/Level0-Theme.ogg" type="AudioStream" id=14]
-[ext_resource path="res://TextTip.tscn" type="PackedScene" id=17]
 [ext_resource path="res://RespawnPositionArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Bird.tscn" type="PackedScene" id=16]
+[ext_resource path="res://TextTip.tscn" type="PackedScene" id=17]
 
 [node name="Level_0" type="Node2D"]
 script = ExtResource( 12 )
@@ -23,7 +24,7 @@ Spike = ExtResource( 11 )
 Star = ExtResource( 9 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 118.904, 898.885 )
+position = Vector2( 6896, 464 )
 collision_layer = 34
 collision_mask = 17
 
@@ -105,20 +106,8 @@ rotation = 0.0108005
 position = Vector2( 3896, 544 )
 rotation = 0.0108005
 
-[node name="enemy-Ant5" parent="." instance=ExtResource( 10 )]
-position = Vector2( 7072, 544 )
-rotation = 0.0108005
-
-[node name="enemy-Ant6" parent="." instance=ExtResource( 10 )]
-position = Vector2( 7680, 544 )
-rotation = 0.0108005
-
 [node name="enemy-Ant7" parent="." instance=ExtResource( 10 )]
-position = Vector2( 6928, 544 )
-rotation = 0.0108005
-
-[node name="enemy-Ant8" parent="." instance=ExtResource( 10 )]
-position = Vector2( 7496, 544 )
+position = Vector2( 7328, 536 )
 rotation = 0.0108005
 
 [node name="EOL" parent="." instance=ExtResource( 13 )]
@@ -132,19 +121,20 @@ bus = "Music"
 
 [node name="TextTip1" parent="." instance=ExtResource( 17 )]
 position = Vector2( 296.648, 885.363 )
-text = "[center] press enter/space/z to  [wave amp=35]jump"
+text = "[center] Press Left Button to  [wave amp=35]jump[/wave] and Right Button to [wave amp=35] shoot[/wave]"
 
 [node name="TextTip2" parent="." instance=ExtResource( 17 )]
 position = Vector2( 806.767, 629.771 )
-text = "[center] jump and launch tongue at a block to [wave]swing [/wave] using shift/x"
+text = "[center] jump and launch tongue at a block to [wave]swing [/wave] "
 
 [node name="TextTip3" parent="." instance=ExtResource( 17 )]
 position = Vector2( 6828, 453.701 )
-text = "[center] press shift/x while swinging to [wave] launch [/wave] yourself up"
+text = "[center] press Right Button while swinging to [wave] launch [/wave] yourself up"
 
 [node name="TextTip4" parent="." instance=ExtResource( 17 )]
 position = Vector2( 2587.93, 661.872 )
-text = "[center] you can control the direction of your tongue: try shooting [wave] diagonally"
+text = "[center] You can control the direction of your tongue: try shooting [wave] diagonally"
+
 [node name="RespawnPositionArea" parent="." instance=ExtResource( 15 )]
 position = Vector2( 276, 884 )
 scale = Vector2( 2.52, 1 )
@@ -156,3 +146,9 @@ scale = Vector2( 3, 1 )
 [node name="RespawnPositionArea3" parent="." instance=ExtResource( 15 )]
 position = Vector2( 9832, 560 )
 scale = Vector2( 2, 1 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 16 )]
+position = Vector2( 7080, 408 )
+
+[node name="KinematicBody2D2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 7423.62, 404.548 )
