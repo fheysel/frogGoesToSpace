@@ -17,8 +17,8 @@ _global_script_class_icons={
 
 config/name="Frog Goes To Space - Cooper Prototype"
 run/main_scene="res://Menus/MainMenu/MainMenu.tscn"
-config/use_custom_user_dir.Pi=true
-config/custom_user_dir_name.Pi="/boot/fgts-pi/gamedata"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="fgts-data"
 
 [audio]
 
@@ -179,6 +179,10 @@ menu={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+batching/precision/uv_contract=true
 environment/default_environment="res://default_env.tres"
+batching/options/single_rect_fallback.Pi=true
+batching/parameters/max_join_item_commands.Pi=64
