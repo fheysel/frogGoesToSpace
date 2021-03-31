@@ -73,8 +73,6 @@ var dead := false
 
 var respawn_location := Vector2.ZERO
 
-onready var initial_scale = scale
-
 # This counter keeps track of the number of star pieces collected.
 # This may be temporary, depending on if we want to track the number of star pieces
 # collected in-between levels or in-between deaths.
@@ -402,11 +400,8 @@ func update_anim():
 			facing.x = user_direction.x
 		# At the moment, we only face left or right, no up/down/diagonals.
 		facing.y = 0
-		
 		# If we're facing left, flip the frog.
-		# Flip based on scale property of root node;
-		# Ensures collision layer flips properly with sprite
-		scale.x = sign(facing.x) * initial_scale.x * sign(scale.y)
+		$Sprite.flip_h = facing.x < 0
 
 # This function is used when the player shoots out their tongue
 # to determine what direction it should travel in.
