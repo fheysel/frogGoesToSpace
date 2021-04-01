@@ -35,6 +35,7 @@ margin = 10.0
 player_nodepath = NodePath("../Player")
 
 [node name="DeathPlane" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 0, 48 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -52,43 +53,49 @@ __meta__ = {
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayerSky" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 625, 0 )
+motion_mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( -7.97656, -344.008 )
-scale = Vector2( 7.98327, 7.99421 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 240, 200 )
 
 [node name="ParallaxLayerClouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.7, 0.7 )
-motion_mirroring = Vector2( 625, 0 )
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerClouds"]
-position = Vector2( -8, -224 )
-scale = Vector2( 7.98327, 5.75558 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 7 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 240, 200 )
 
 [node name="ParallaxLayerHills" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.8, 0.8 )
-motion_mirroring = Vector2( 625, 0 )
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 640, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerHills"]
-position = Vector2( 0, 35.9188 )
-scale = Vector2( 7.98327, 5.5515 )
+position = Vector2( 0, 400 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 240, 200 )
 
 [node name="ParallaxLayerGrass" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.9, 0.9 )
-motion_mirroring = Vector2( 630, 0 )
+motion_mirroring = Vector2( 640, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerGrass"]
-position = Vector2( 0, 211.172 )
-scale = Vector2( 7.98327, 4.26907 )
+position = Vector2( 0, 640 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 8 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 240, 200 )
 
 [node name="enemy-Ant" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2422.63, 637.406 )

@@ -50,7 +50,7 @@ func start_idle():
 	$ShootSoundPlayer.playing = false
 	$StickSoundPlayer.playing = false
 	
-	$Area2D/CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
 
 func handle_idle(_delta):
 	pass
