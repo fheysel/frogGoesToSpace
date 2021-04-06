@@ -1,7 +1,7 @@
 extends Node2D
 
 var blastOff = false
-var speed = 20
+var speed = 15 
 
 var trauma_level = 0 # counter to see how many jets are on
 
@@ -31,3 +31,5 @@ func activateJet():
 
 func _on_Timer_timeout():
 	speed = 80
+	$JetBoom.play()
+	

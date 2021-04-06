@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Tiles/Level3/BossLevel_SpaceShip.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Rocket/Jet1.tscn" type="PackedScene" id=2]
@@ -6,21 +6,86 @@
 [ext_resource path="res://Objects/Rocket/Rocket.gd" type="Script" id=4]
 [ext_resource path="res://sfx/rocket_boom.wav" type="AudioStream" id=5]
 [ext_resource path="res://EOL.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Rocket/rocketDoor.png" type="Texture" id=7]
+[ext_resource path="res://sfx/rocketDoor.wav" type="AudioStream" id=8]
 
-[node name="Rocket" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 13.5388, 25.3029 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 300, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 7 )
+region = Rect2( 234, 300, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 400, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 7 )
+region = Rect2( 117, 400, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 234, 400, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 351, 400, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 468, 400, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 500, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 117, 500, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 7 )
+region = Rect2( 234, 500, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 7 )
+region = Rect2( 351, 500, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 7 )
+region = Rect2( 468, 500, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 600, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 7 )
+region = Rect2( 117, 600, 117, 100 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[node name="Rocket" type="Node2D"]
 z_index = -1
-collision_layer = 8
-collision_mask = 0
 script = ExtResource( 4 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -236.5, 341.5 )
-scale = Vector2( 24.0625, 104.375 )
-polygon = PoolVector2Array( 2.6308, 2.33653, 2.63261, 2.09813, 2.12702, 2.09885, 1.89613, 2.10265, 1.87964, 1.91064, 6.05709, 2.09984, 6.04835, 2.22169, 6.25694, 2.22173, 6.25665, 2.33807, 5.75982, 2.33759, 5.75813, 2.39408, 3.17167, 2.39648, 3.17167, 2.33813 )
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -1
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Jet1" parent="." instance=ExtResource( 2 )]
 position = Vector2( -128, 584 )
@@ -58,10 +123,35 @@ max_distance = 1e+06
 bus = "Sfx"
 
 [node name="EOL" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, 104 )
+position = Vector2( -40.3136, 294.249 )
 scale = Vector2( 0.1, 0.003 )
 next_path = "res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.tscn"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Door" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2( 2.23096, 342.563 )
+shape = SubResource( 16 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Door"]
+position = Vector2( 1.81018, 340.226 )
+scale = Vector2( 0.8, 1.2 )
+frames = SubResource( 15 )
+frame = 17
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="Door"]
+position = Vector2( 1.81018, 340.226 )
+scale = Vector2( 0.8, 1.2 )
+frames = SubResource( 15 )
+frame = 17
+playing = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Door"]
+position = Vector2( 1.7525, 341.276 )
+scale = Vector2( 0.1, 0.003 )
+stream = ExtResource( 8 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
