@@ -131,9 +131,13 @@ func _change_level(name):
 		# We need to do this now because this will properly deal with the
 		# "current_level_data".
 		_save_to_disk()
-	current_level = name
-	if name in all_level_data:
-		current_level_data = all_level_data[name]
+	# Now we can adjust current_level and current_level_data as we need.
+	var difficulty_str = "Hard"
+	if Global.difficulty == Global.DIFFICULTY.EASY_MODE_e:
+		difficulty_str = "Easy"
+	current_level = "%s - %s" % [name, difficulty_str]
+	if current_level in all_level_data:
+		current_level_data = all_level_data[current_level]
 	else:
 		# We have to create a new set of level data for this level.
 		current_level_data = []
@@ -143,7 +147,7 @@ func _change_level(name):
 			var time = 15*i+90
 			var score = _calculate_score(stars,time)
 			current_level_data.append({'stars':stars, 'time':time, 'score':score})
-	level_label.text = name
+	level_label.text = current_level
 	_display_score_data(current_level_data)
 
 func _display_score_data(score_data, user_i = -1):
@@ -219,7 +223,6 @@ func _save_to_disk():
 	# Put data from current_level_data into all_level_data
 	if current_level and current_level_data:
 		all_level_data[current_level] = current_level_data
-	pass
 	# Convert scores to JSON
 	var json_data = JSON.print(all_level_data)
 	# Save to disk
