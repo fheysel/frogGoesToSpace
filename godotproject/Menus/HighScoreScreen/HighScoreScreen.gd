@@ -144,7 +144,7 @@ func _change_level(name, countdown):
 		for i in range(5):
 			# Make some fake high scores
 			var stars = max(0, 2-i)
-			var time = (3*60 - 15 * i) if countdown else (90 + 15 * i)
+			var time = (8 - 2 * i) if countdown else (90 + 15 * i)
 			var score = _calculate_score(stars,time,countdown)
 			current_level_data.append({'stars':stars, 'time':time, 'score':score})
 	level_label.text = current_level
@@ -214,6 +214,7 @@ func _process(_delta):
 		if Input.is_action_pressed("jump") \
 		or Input.is_action_pressed("menu") \
 		or Input.is_action_pressed("tongue"):
+			_save_to_disk()
 			Global.fade_to_scene(load_scene_after_high_score)
 
 func _get_save_path():

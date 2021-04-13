@@ -2,12 +2,13 @@ extends Node
 
 var time : float = 0
 var max_time : float = 9 * 60 + 59 + (59/60)
+var counting_down := false
 
 func _ready():
-	reset()
+	reset(false)
 
 func _process(delta):
-	if Global.level_uses_countdown_timer():
+	if counting_down:
 		time -= delta
 		time = max(time, 0)
 		# If the player has run out of time, kill them.
@@ -23,9 +24,10 @@ func _process(delta):
 		# Cap timer at whatever the max_time is (9:59:59)
 		time = min(time, max_time)
 
-func reset():
-	if Global.level_uses_countdown_timer():
-		time = Global.get_current_scene_property("countdown_timer_initial_count")
+func reset(should_count_down, count_down_value = 1):
+	counting_down = should_count_down
+	if counting_down:
+		time = count_down_value
 		if time == null:
 			push_error("Level is countdown but doesn't define initial time - using 1s")
 			time = 1
