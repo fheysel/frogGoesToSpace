@@ -65,6 +65,11 @@ func should_inhibit_pause_menu():
 		current_scene_has_property_set("inhibit_pause") || \
 		HighScoreScreen.active()
 
+# This is checked in the CountUpDownTimer module
+func level_uses_countdown_timer():
+	return \
+		current_scene_has_property_set("use_countdown_timer")
+
 # Calculate the volume in dB for a bus, given the base volume and
 # any fading volume.
 func _calc_bus_db(base_volume : float, fade_volume : float):
@@ -153,9 +158,6 @@ func _process_loading():
 		# We've finished loading the resource!
 		# Prepare all the misc. other objects to be ready for this new scene.
 
-		# Reset the global timer
-		$"/root/CountupTimer".reset()
-
 		# Close the pause menu, if it was open
 		$InGameMenuLayer/InGameMenu.navigate_to_new_screen(null)
 
@@ -172,6 +174,9 @@ func _process_loading():
 			# If we couldn't go to the new level, exit :(
 			push_error("Unable to load level")
 			get_tree().quit(1)
+
+		# Reset the global timer - must be after changing to scene to set counting up/down
+		$"/root/CountUpDownTimer".reset()
 
 		# Fade in
 		swipe_anim_state_machine.travel('swipe_out')
@@ -213,6 +218,11 @@ func format_time(time):
 # we only want to interact with the player.
 func is_player(body):
 	return body.name == "Player"
+
+# Get player object. Used by countdown timer to kill the player when they run out of time.
+# Returns null if player couldn't be found.
+func get_player():
+	return get_tree().current_scene.get_node_or_null("Player")
 
 # Check if a node exists and is inside the tree. Used to track if we have
 # Based on: https://godotengine.org/qa/37579/need-an-easy-way-to-check-which-ones-are-still-in-the-scene-tree
