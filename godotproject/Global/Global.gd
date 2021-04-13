@@ -175,14 +175,21 @@ func _process_loading():
 			push_error("Unable to load level")
 			get_tree().quit(1)
 
-		# Reset the global timer - must be after changing to scene to set counting up/down
-		$"/root/CountUpDownTimer".reset()
+		# Handle events that must be processed after we have switched to the new scene
+		call_deferred("_after_loading_new_scene")
 
 		# Fade in
 		swipe_anim_state_machine.travel('swipe_out')
 
 		# Mark that we're done loading
 		loading = null
+
+func _after_loading_new_scene():
+	# Reset the global timer after switching scene
+	# Must be after changing to scene to set counting up/down!
+	var new_scene_countdown = current_scene_has_property_set('use_countdown_timer')
+	var new_scene_countdown_val = get_current_scene_property('countdown_timer_initial_count')
+	$"/root/CountUpDownTimer".reset(new_scene_countdown, new_scene_countdown_val)
 
 
 func _unpause_new_scene():
