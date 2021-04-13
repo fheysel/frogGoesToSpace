@@ -33,23 +33,23 @@ func close():
 	$ThonkBigSFX.stop()
 	$ThonkSmallSFX.stop()
 
-func show_level(level_name, next_scene_path = null):
+func show_level(level_name, countdown, next_scene_path = null):
 	# Load this level's data
-	_change_level(level_name)
+	_change_level(level_name, countdown)
 	# Set our next scene properly. If nothing was provided, go to title screen next.
 	self.load_scene_after_high_score = next_scene_path
 	# Wait for user to close high score screen.
 	_change_state(State.WAIT_FOR_PRESS)
 
-func end_of_level(level_name, stars, time, next_scene_path):
+func end_of_level(level_name, stars, time, countdown, next_scene_path):
 	# Set up everything needed to proceed properly
 	load_scene_after_high_score = next_scene_path
 	# Load this level's data
-	_change_level(level_name)
+	_change_level(level_name, countdown)
 	# Create 'display_level_data' array - do a deep copy so we can do whatever we want to it
 	# We will use it for animating.
 	display_level_data = current_level_data.duplicate(true)
-	var score = _calculate_score(stars, time)
+	var score = _calculate_score(stars, time, countdown)
 	var dict = {'stars':stars, 'time':time, 'score':score}
 	# Adjust current_level_data to have the current high score added to it
 	final_idx = _add_score_to_current_level(dict)
@@ -120,11 +120,11 @@ func _add_score_to_current_level(dict):
 	return target_i
 
 # This function is unit testable
-func _calculate_score(stars, time):
-	var time_inv = max(150 - time, 0)
+func _calculate_score(stars, time, countdown):
+	var time_inv = time if countdown else max(2*60+30 - time, 0)
 	return stars * 1000 + (floor(time_inv * 60) * 1000 / 1800)
 
-func _change_level(name):
+func _change_level(name, countdown):
 	if current_level and current_level_data:
 		# Make sure we've saved our current level data to disk.
 		# (In case we updated it and didn't persist it before).
@@ -140,8 +140,8 @@ func _change_level(name):
 		for i in range(5):
 			# Make some fake high scores
 			var stars = max(0, 2-i)
-			var time = 15*i+90
-			var score = _calculate_score(stars,time)
+			var time = (3*60 - 15 * i) if countdown else (90 + 15 * i)
+			var score = _calculate_score(stars,time,countdown)
 			current_level_data.append({'stars':stars, 'time':time, 'score':score})
 	level_label.text = name
 	_display_score_data(current_level_data)

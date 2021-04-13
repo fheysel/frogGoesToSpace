@@ -3,6 +3,11 @@ extends Node2D
 # Each level has to have a name in it now, this will be displayed on the high score screen
 const level_name := "Get to the Rocket!"
 
+# Indicate that we use the count-down timer
+const use_countdown_timer := true
+# Start countdown at 1 minute
+const countdown_timer_initial_count := 1 * 60 + 0
+
 const SPIKE := -1
 const STAR := 10
 

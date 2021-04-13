@@ -32,7 +32,7 @@ func _process(_delta):
 			var star = player.star_piece_count
 			lb_star.text = str(star)
 	if !Global.node_exists_in_tree(countup_timer):
-		countup_timer = $"/root/CountupTimer"
+		countup_timer = $"/root/CountUpDownTimer"
 	if countup_timer:
 		var time = countup_timer.time
 		lb_time.text = Global.format_time(time)
