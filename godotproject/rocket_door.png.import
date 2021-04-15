@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rocketDoor.png-b9dab5784e15b05d4719a4512e290d9e.stex"
+path="res://.import/rocket_door.png-fc8788872874a6d7c9fc8a93929379c6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Objects/Rocket/rocketDoor.png"
-dest_files=[ "res://.import/rocketDoor.png-b9dab5784e15b05d4719a4512e290d9e.stex" ]
+source_file="res://rocket_door.png"
+dest_files=[ "res://.import/rocket_door.png-fc8788872874a6d7c9fc8a93929379c6.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
