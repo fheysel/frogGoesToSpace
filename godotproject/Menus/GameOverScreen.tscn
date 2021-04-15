@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
 [ext_resource path="res://Menus/GameOverScreen.gd" type="Script" id=3]
+[ext_resource path="res://sfx/game_over_sfx.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -52,3 +53,8 @@ theme = ExtResource( 2 )
 text = "Press Z to play again!"
 align = 1
 valign = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Sfx"

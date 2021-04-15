@@ -526,8 +526,8 @@ func die():
 	stop_swing()
 
 func death_animation_over():
-	# Go back to title screen
-	Global.fade_to_scene(Global.main_menu_path)
+	# Go back to game over screen
+	Global.fade_to_scene('res://Menus/GameOverScreen.tscn')
 
 func collect(item):
 	var CollectFunctions = ['collect_star_piece', 'collect_health_bug']
