@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/game_over_sfx.wav-ba84032e9bef5efd9c943864bab4094c.sample"
+path="res://.import/you_croaked_sfx.wav-dc77e5fb2840f50f71ad6b69cb4bf8de.sample"
 
 [deps]
 
-source_file="res://sfx/game_over_sfx.wav"
-dest_files=[ "res://.import/game_over_sfx.wav-ba84032e9bef5efd9c943864bab4094c.sample" ]
+source_file="res://sfx/you_croaked_sfx.wav"
+dest_files=[ "res://.import/you_croaked_sfx.wav-dc77e5fb2840f50f71ad6b69cb4bf8de.sample" ]
 
 [params]
 
