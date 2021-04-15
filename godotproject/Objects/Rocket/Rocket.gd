@@ -9,9 +9,14 @@ var trauma_level = 0 # counter to see how many jets are on
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+#func _process(delta):
+#	if(blastOff):
+#		self.position.y -= speed * delta
+		
+func _physics_process(delta):
 	if(blastOff):
 		self.position.y -= speed * delta
+		$Door.tongue_stick_velocity = Vector2(0, -15)
 
 func activateJet():
 	if trauma_level == 0:
@@ -33,4 +38,5 @@ func _on_Timer_timeout():
 	
 
 func _on_door_close_animation_finished():
-	$EOL._on_EOL_body_entered(Global.get_player())
+	print('EOL')
+	#$EOL._on_EOL_body_entered(Global.get_player())

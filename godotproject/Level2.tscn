@@ -259,14 +259,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 2.91692, 43.382, 3.25182, 2.85941, 47.4583, 2.85941, 47.4583, 43.7169 )
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 [sub_resource type="TileSet" id=15]
-=======
-[sub_resource type="TileSet" id=12]
-=======
-[sub_resource type="TileSet" id=15]
->>>>>>> Fix level 2 to match main
 0/name = "walls"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -309,7 +302,6 @@ points = PoolVector2Array( 2.91692, 43.382, 3.25182, 2.85941, 47.4583, 2.85941, 
 1/shape_one_way_margin = 0.0
 1/shapes = [  ]
 1/z_index = 0
->>>>>>> Squashing all commits into one in the hopes of getting rid of the auto.tres conflict
 2/name = "desk"
 2/texture = ExtResource( 4 )
 2/tex_offset = Vector2( 0, 0 )
@@ -843,10 +835,7 @@ speed = 150
 [node name="ConveyorBelt16" parent="." instance=ExtResource( 8 )]
 position = Vector2( 9472, 464 )
 constant_linear_velocity = Vector2( 0, 0 )
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Fix level 2 to match main
+
 speed = 150
 
 [node name="LaserWall" parent="." instance=ExtResource( 15 )]
@@ -957,7 +946,6 @@ Start = Vector2( -100, 0 )
 End = Vector2( 100, 0 )
 
 [node name="VatOfAcid" parent="." instance=ExtResource( 19 )]
-<<<<<<< HEAD
 position = Vector2( 832, 1024 )
 
 [node name="VatOfAcid2" parent="." instance=ExtResource( 19 )]
@@ -1028,78 +1016,6 @@ position = Vector2( 10592, 1024 )
 
 [node name="VatOfAcid21" parent="." instance=ExtResource( 19 )]
 position = Vector2( 9568, 1024 )
-=======
-position = Vector2( 832.852, 1024.71 )
-
-[node name="VatOfAcid2" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1088.42, 1024.71 )
-
-[node name="VatOfAcid3" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1472.49, 1023.53 )
-
-[node name="VatOfAcid4" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1730.04, 1023.81 )
-
-[node name="VatOfAcid5" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1986.33, 1023.53 )
-
-[node name="VatOfAcid6" parent="." instance=ExtResource( 19 )]
-position = Vector2( 2239.75, 1023.2 )
-
-[node name="VatOfAcid7" parent="." instance=ExtResource( 19 )]
-position = Vector2( 4064.69, 1023.83 )
-
-[node name="VatOfAcid8" parent="." instance=ExtResource( 19 )]
-position = Vector2( 4322.08, 1023.83 )
-
-[node name="VatOfAcid9" parent="." instance=ExtResource( 19 )]
-position = Vector2( 4579.4, 1023.93 )
-
-[node name="VatOfAcid11" parent="." instance=ExtResource( 19 )]
-position = Vector2( 5088.69, 1024.99 )
-
-[node name="VatOfAcid10" parent="." instance=ExtResource( 19 )]
-position = Vector2( 4835.31, 1023.8 )
-
-[node name="VatOfAcid12" parent="." instance=ExtResource( 19 )]
-position = Vector2( 7520.69, 1022.41 )
-
-[node name="VatOfAcid13" parent="." instance=ExtResource( 19 )]
-position = Vector2( 7778.08, 1022.41 )
-
-[node name="VatOfAcid14" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8035.4, 1022.51 )
-
-[node name="VatOfAcid15" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8544.69, 1023.57 )
-
-[node name="VatOfAcid16" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8292.81, 1022.38 )
-
-[node name="VatOfAcid17" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8800.7, 1024.79 )
-
-[node name="VatOfAcid18" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9058.08, 1024.79 )
-
-[node name="VatOfAcid19" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9315.4, 1024.89 )
-
-[node name="VatOfAcid20" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9824.69, 1025.95 )
-
-[node name="VatOfAcid22" parent="." instance=ExtResource( 19 )]
-position = Vector2( 10079.3, 1025.94 )
-
-[node name="VatOfAcid23" parent="." instance=ExtResource( 19 )]
-position = Vector2( 10335.3, 1025.94 )
-
-[node name="VatOfAcid24" parent="." instance=ExtResource( 19 )]
-position = Vector2( 10591.3, 1025.95 )
-
-[node name="VatOfAcid21" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9571.32, 1024.76 )
->>>>>>> Fix level 2 to match main
 
 [node name="RespawnPositionArea" parent="." instance=ExtResource( 20 )]
 position = Vector2( 746.325, 832.121 )
@@ -1127,26 +1043,8 @@ scale = Vector2( 0.5, 1 )
 
 [node name="BlinkingComputer" parent="." instance=ExtResource( 24 )]
 position = Vector2( 593.788, 815.941 )
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 frame = 15
 
 [node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
 position = Vector2( 3080, 736 )
-frame = 15
-=======
->>>>>>> Squashing all commits into one in the hopes of getting rid of the auto.tres conflict
-=======
-frame = 17
-
-[node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
-position = Vector2( 3080, 736 )
-frame = 17
->>>>>>> Fix level 2 to match main
-=======
-frame = 0
-
-[node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
-position = Vector2( 3080, 736 )
-frame = 0
->>>>>>> Updated level0 signs and level3 background

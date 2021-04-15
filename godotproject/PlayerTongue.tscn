@@ -6,7 +6,7 @@
 [ext_resource path="res://sfx/tonguestick.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 5.0
+radius = 11.5602
 
 [node name="PlayerTongue" type="Node2D"]
 script = ExtResource( 2 )
