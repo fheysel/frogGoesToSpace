@@ -144,6 +144,7 @@ layer = 5
 [node name="InGameMenu" type="MarginContainer" parent="."]
 margin_right = 640.0
 margin_bottom = 512.0
+theme = ExtResource( 2 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -167,13 +168,13 @@ margin_bottom = 512.0
 rect_pivot_offset = Vector2( -425.13, 56.991 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu/PauseSubmenu/CenterContainer"]
-margin_left = 252.0
-margin_top = 169.0
-margin_right = 387.0
-margin_bottom = 342.0
+margin_left = 256.0
+margin_top = 168.0
+margin_right = 384.0
+margin_bottom = 343.0
 
 [node name="Label" type="Label" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_right = 135.0
+margin_right = 128.0
 margin_bottom = 22.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
@@ -186,9 +187,8 @@ __meta__ = {
 
 [node name="ReturnToGameButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
 margin_top = 26.0
-margin_right = 135.0
+margin_right = 128.0
 margin_bottom = 47.0
-theme = ExtResource( 2 )
 text = "Return To Game"
 script = ExtResource( 7 )
 __meta__ = {
@@ -198,9 +198,8 @@ menu_control_path = NodePath("../../../..")
 
 [node name="HelpButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
 margin_top = 51.0
-margin_right = 135.0
+margin_right = 128.0
 margin_bottom = 72.0
-theme = ExtResource( 2 )
 text = "Help"
 script = ExtResource( 7 )
 menu_control_path = NodePath("../../../..")
@@ -208,15 +207,15 @@ target_path = NodePath("../../../../HelpSubmenu")
 
 [node name="MusicVolumeLabel" type="Label" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
 margin_top = 76.0
-margin_right = 135.0
-margin_bottom = 90.0
+margin_right = 128.0
+margin_bottom = 91.0
 text = "Music Volume:"
 align = 1
 
 [node name="MusicVolumeSlider" type="HSlider" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 94.0
-margin_right = 135.0
-margin_bottom = 110.0
+margin_top = 95.0
+margin_right = 128.0
+margin_bottom = 111.0
 max_value = 1.0
 step = 0.1
 value = 0.8
@@ -229,16 +228,16 @@ stream = ExtResource( 11 )
 bus = "Music"
 
 [node name="SfxVolumeLabel" type="Label" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 114.0
-margin_right = 135.0
-margin_bottom = 128.0
+margin_top = 115.0
+margin_right = 128.0
+margin_bottom = 130.0
 text = "Sound Effect Volume:"
 align = 1
 
 [node name="SfxVolumeSlider" type="HSlider" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 132.0
-margin_right = 135.0
-margin_bottom = 148.0
+margin_top = 134.0
+margin_right = 128.0
+margin_bottom = 150.0
 max_value = 1.0
 step = 0.1
 value = 0.8
@@ -251,10 +250,9 @@ stream = ExtResource( 12 )
 bus = "Sfx"
 
 [node name="QuitButton" type="Button" parent="InGameMenu/PauseSubmenu/CenterContainer/VBoxContainer"]
-margin_top = 152.0
-margin_right = 135.0
-margin_bottom = 173.0
-theme = ExtResource( 2 )
+margin_top = 154.0
+margin_right = 128.0
+margin_bottom = 175.0
 text = "Quit"
 script = ExtResource( 7 )
 menu_control_path = NodePath("../../../..")
@@ -381,7 +379,6 @@ margin_right = 70.0
 margin_bottom = 51.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource( 2 )
 text = "Back"
 script = ExtResource( 7 )
 menu_control_path = NodePath("../../..")
@@ -425,7 +422,6 @@ alignment = 1
 margin_left = 60.0
 margin_right = 94.0
 margin_bottom = 20.0
-theme = ExtResource( 2 )
 text = "Yes"
 script = ExtResource( 8 )
 __meta__ = {
@@ -436,7 +432,6 @@ __meta__ = {
 margin_left = 98.0
 margin_right = 128.0
 margin_bottom = 20.0
-theme = ExtResource( 2 )
 text = "No"
 script = ExtResource( 7 )
 menu_control_path = NodePath("../../../../..")
