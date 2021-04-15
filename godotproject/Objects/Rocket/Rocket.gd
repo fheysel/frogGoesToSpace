@@ -11,24 +11,22 @@ func _ready():
 
 func _process(delta):
 	if(blastOff):
-#		$Sprite.position.y -= speed * delta
-#		$Jet1.position.y -= speed * delta
 		self.position.y -= speed * delta
 
 func activateJet():
 	if trauma_level == 0:
 		trauma_level += 1
-		$Jet1.emitting = true
+		$Jet1.visible = true
+		$Jet1.play("launch_jetstream")
 		$JetBoom.play(0)
 	elif trauma_level == 1:
 		trauma_level += 1
-		$Jet2.emitting = true
+		$Jet2.visible = true
+		$Jet2.play("launch_jetstream")
 		$JetBoom.play(0)
 		blastOff = true
 		$Timer.start()
-		
-
-
+			
 func _on_Timer_timeout():
 	speed = 80
 	$JetBoom.play()
