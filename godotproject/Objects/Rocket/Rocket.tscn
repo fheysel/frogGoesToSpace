@@ -9,68 +9,68 @@
 [ext_resource path="res://Objects/Rocket/rocketDoor.png" type="Texture" id=7]
 [ext_resource path="res://sfx/rocketDoor.wav" type="AudioStream" id=8]
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5388, 25.3029 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 300, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 7 )
-region = Rect2( 234, 300, 117, 100 )
+region = Rect2( 0, 300, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 400, 117, 100 )
+region = Rect2( 234, 300, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 7 )
-region = Rect2( 117, 400, 117, 100 )
+region = Rect2( 0, 400, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 7 )
-region = Rect2( 234, 400, 117, 100 )
+region = Rect2( 117, 400, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 7 )
-region = Rect2( 351, 400, 117, 100 )
+region = Rect2( 234, 400, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 7 )
-region = Rect2( 468, 400, 117, 100 )
+region = Rect2( 351, 400, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 500, 117, 100 )
+region = Rect2( 468, 400, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 7 )
-region = Rect2( 117, 500, 117, 100 )
+region = Rect2( 0, 500, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 7 )
-region = Rect2( 234, 500, 117, 100 )
+region = Rect2( 117, 500, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 7 )
-region = Rect2( 351, 500, 117, 100 )
+region = Rect2( 234, 500, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 7 )
-region = Rect2( 468, 500, 117, 100 )
+region = Rect2( 351, 500, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 600, 117, 100 )
+region = Rect2( 468, 500, 117, 100 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 7 )
+region = Rect2( 0, 600, 117, 100 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 7 )
 region = Rect2( 117, 600, 117, 100 )
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ), SubResource( 1 ) ],
+"frames": [ SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
@@ -88,26 +88,16 @@ __meta__ = {
 }
 
 [node name="Jet1" parent="." instance=ExtResource( 2 )]
-position = Vector2( -128, 584 )
-scale = Vector2( 0.3, 0.25 )
+position = Vector2( -130, 622.094 )
+scale = Vector2( 0.11, 0.139571 )
 z_index = -1
-emitting = false
-amount = 5000
-lifetime = 0.5
-speed_scale = 1.0
-lifetime_randomness = 0.64
-initial_velocity = 370.05
+frame = 6
 
 [node name="Jet2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 584 )
-scale = Vector2( 0.3, 0.25 )
+position = Vector2( 130, 622.094 )
+scale = Vector2( 0.11, 0.14 )
 z_index = -1
-emitting = false
-amount = 5000
-lifetime = 0.5
-speed_scale = 1.0
-lifetime_randomness = 0.64
-initial_velocity = 370.05
+frame = 6
 
 [node name="TraumaBlock" parent="." instance=ExtResource( 3 )]
 position = Vector2( -128, 624 )
@@ -134,20 +124,20 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2( 2.23096, 342.563 )
-shape = SubResource( 16 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Door"]
 position = Vector2( 1.81018, 340.226 )
 scale = Vector2( 0.8, 1.2 )
-frames = SubResource( 15 )
-frame = 17
+frames = SubResource( 16 )
+frame = 16
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="Door"]
 position = Vector2( 1.81018, 340.226 )
 scale = Vector2( 0.8, 1.2 )
-frames = SubResource( 15 )
-frame = 17
+frames = SubResource( 16 )
+frame = 16
 playing = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Door"]
