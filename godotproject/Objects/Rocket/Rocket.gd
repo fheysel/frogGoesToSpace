@@ -31,3 +31,6 @@ func _on_Timer_timeout():
 	speed = 80
 	$JetBoom.play()
 	
+
+func _on_door_close_animation_finished():
+	$EOL._on_EOL_body_entered(Global.get_player())
