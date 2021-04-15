@@ -1,78 +1,242 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
-[ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Menus/MainMenu/DancingLetterContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menus/MainMenu/FrogWalking.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Menus/MainMenu/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://sfx/StartScreen-Theme.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Menus/MainMenu/StarryBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Menus/MainMenu/oops.ogv" type="VideoStream" id=7]
 
-[sub_resource type="DynamicFont" id=1]
-size = 48
-font_data = ExtResource( 2 )
+[sub_resource type="Animation" id=1]
+resource_name = "difficulty"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/CenterContainer/StartText:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/CenterContainer/DifficultySelector:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("MarginContainer/CenterContainer/DifficultySelector/Easy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
 
-[sub_resource type="DynamicFont" id=2]
-size = 24
-font_data = ExtResource( 2 )
+[sub_resource type="Animation" id=2]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/CenterContainer/StartText:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/CenterContainer/DifficultySelector:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[node name="MainMenu" type="MarginContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="DynamicFont" id=3]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "transition"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_fade_complete"
+} ]
+}
+
+[node name="MainMenuRootNode" type="Node"]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.137255, 0.105882, 0.105882, 1 )
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-margin_right = 640.0
-margin_bottom = 512.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 139.0
-margin_top = 124.0
-margin_right = 501.0
-margin_bottom = 388.0
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 362.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
-custom_fonts/font = SubResource( 1 )
-text = "Frog Goes To Space!"
-valign = 1
-
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 84.0
-margin_right = 362.0
-margin_bottom = 200.0
-text = "Arrow Keys / WASD --- Move / Adjust Tongue Direction
-Z / Space / Enter --- Jump / Accept
-X / Shift --- Tongue
-C / Escape --- Menu
-
-Please see the help section in the menu in-game
-for more details."
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 204.0
-margin_right = 362.0
-margin_bottom = 264.0
-rect_min_size = Vector2( 0, 60 )
-theme = ExtResource( 1 )
-custom_fonts/font = SubResource( 2 )
-text = "Press Z to begin!"
-align = 1
-valign = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -6.0
 autoplay = true
 bus = "Music"
+
+[node name="StarryBackground" parent="." instance=ExtResource( 5 )]
+
+[node name="FrogWalking" parent="." instance=ExtResource( 2 )]
+
+[node name="DancingTextLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="DancingTextLayer"]
+margin_right = 640.0
+margin_bottom = 512.0
+custom_constants/margin_top = 70
+custom_constants/margin_bottom = 242
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="DancingTextLayer/MarginContainer"]
+margin_top = 70.0
+margin_right = 640.0
+margin_bottom = 270.0
+
+[node name="DancingLetterContainer" parent="DancingTextLayer/MarginContainer/CenterContainer" instance=ExtResource( 1 )]
+margin_left = 320.0
+margin_right = 320.0
+
+[node name="MainMenuLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuLayer"]
+anims/difficulty = SubResource( 1 )
+anims/start_text = SubResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 200
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 96
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenuLayer/MarginContainer"]
+margin_left = 32.0
+margin_top = 200.0
+margin_right = 608.0
+margin_bottom = 416.0
+
+[node name="StartText" type="Label" parent="MainMenuLayer/MarginContainer/CenterContainer"]
+margin_left = 120.0
+margin_top = 95.0
+margin_right = 456.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 3 )
+text = "Press the Jump button to start!"
+
+[node name="DifficultySelector" type="VBoxContainer" parent="MainMenuLayer/MarginContainer/CenterContainer"]
+visible = false
+margin_left = 214.0
+margin_top = 78.0
+margin_right = 362.0
+margin_bottom = 138.0
+
+[node name="Label" type="Label" parent="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector"]
+margin_right = 40.0
+margin_bottom = 16.0
+text = "Select your difficulty:"
+
+[node name="Easy" type="Button" parent="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector"]
+margin_right = 45.0
+margin_bottom = 22.0
+text = "Easy"
+
+[node name="Hard" type="Button" parent="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector"]
+margin_top = 30.0
+margin_right = 45.0
+margin_bottom = 52.0
+text = "Hard"
+
+[node name="FadeToBlackLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="FadeToBlackLayer"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlackLayer"]
+anims/transition = SubResource( 4 )
+
+[node name="VideoLayer" type="CanvasLayer" parent="."]
+
+[node name="VideoPlayer" type="VideoPlayer" parent="VideoLayer"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+stream = ExtResource( 7 )
+bus = "Sfx"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="done_walking" from="FrogWalking" to="." method="_on_FrogWalking_done_walking"]
+[connection signal="pressed" from="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector/Easy" to="." method="_on_Easy_pressed"]
+[connection signal="pressed" from="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector/Hard" to="." method="_on_Hard_pressed"]
+[connection signal="finished" from="VideoLayer/VideoPlayer" to="." method="_on_VideoPlayer_finished"]
