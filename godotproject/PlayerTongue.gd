@@ -123,7 +123,6 @@ func handle_swing(delta):
 		return
 	var stuck_to = bodies[0]
 	if "tongue_stick_velocity" in stuck_to:
-		print(stuck_to.tongue_stick_velocity)
 		global_anchor_position += stuck_to.tongue_stick_velocity * delta
 
 	update_tongue_location()

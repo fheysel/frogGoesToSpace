@@ -551,6 +551,9 @@ func collect_health_bug(health_bug):
 	
 func trigger_screen_shake(duration = 0.8, frequency = 30, amplitude = 8, priority = 1):	
 		$Camera2D/ScreenShake.start(duration, frequency, amplitude, priority)
+		
+func zoom_out(x):
+	$Camera2D.target_zoom = x
 
 func _on_PlayerTongue_tongue_swing(global_tongue_position):
 	swing_pivot_position = global_tongue_position

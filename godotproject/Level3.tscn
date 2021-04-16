@@ -634,7 +634,7 @@ script = ExtResource( 9 )
 Star = ExtResource( 16 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 408, 910 )
+position = Vector2( 328, 904 )
 collision_layer = 34
 collision_mask = 17
 
@@ -658,7 +658,13 @@ player_nodepath = NodePath("../../Level3/Player")
 [node name="ParallaxLayerSky" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( -488, -5904 )
+position = Vector2( 1464, -6352 )
+scale = Vector2( 49.2, 33.0909 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
+position = Vector2( -2464, -6352 )
 scale = Vector2( 49.2, 33.0909 )
 texture = ExtResource( 7 )
 centered = false
