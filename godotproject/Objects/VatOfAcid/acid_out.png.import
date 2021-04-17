@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vatOfAcid.png-e642b13a235582e65230d53a7db065fb.stex"
+path="res://.import/acid_out.png-ea2ebe20c046f32a053f5986736d55fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Objects/VatOfAcid/vatOfAcid.png"
-dest_files=[ "res://.import/vatOfAcid.png-e642b13a235582e65230d53a7db065fb.stex" ]
+source_file="res://Objects/VatOfAcid/acid_out.png"
+dest_files=[ "res://.import/acid_out.png-ea2ebe20c046f32a053f5986736d55fa.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
