@@ -191,9 +191,9 @@ text = "Press the Jump button to start!"
 [node name="DifficultySelector" type="VBoxContainer" parent="MainMenuLayer/MarginContainer/CenterContainer"]
 visible = false
 margin_left = 214.0
-margin_top = 78.0
+margin_top = 74.0
 margin_right = 362.0
-margin_bottom = 138.0
+margin_bottom = 142.0
 
 [node name="Label" type="Label" parent="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector"]
 margin_right = 40.0
@@ -211,20 +211,6 @@ margin_right = 45.0
 margin_bottom = 52.0
 text = "Hard"
 
-[node name="FadeToBlackLayer" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="ColorRect" type="ColorRect" parent="FadeToBlackLayer"]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0, 0, 0, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlackLayer"]
-anims/transition = SubResource( 4 )
-
 [node name="VideoLayer" type="CanvasLayer" parent="."]
 
 [node name="VideoPlayer" type="VideoPlayer" parent="VideoLayer"]
@@ -236,6 +222,21 @@ bus = "Sfx"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FadeToBlackLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="FadeToBlackLayer"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlackLayer"]
+anims/transition = SubResource( 4 )
 [connection signal="done_walking" from="FrogWalking" to="." method="_on_FrogWalking_done_walking"]
 [connection signal="pressed" from="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector/Easy" to="." method="_on_Easy_pressed"]
 [connection signal="pressed" from="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector/Hard" to="." method="_on_Hard_pressed"]
