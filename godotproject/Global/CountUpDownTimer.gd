@@ -17,7 +17,8 @@ func _process(delta):
 			if player == null:
 				push_error("Unable to get player object - player won't die")
 			else:
-				player.die()
+				var rocket = get_tree().current_scene.get_node("Rocket")
+				rocket.go_to_space()
 	else:
 		# Countup timer
 		time += delta

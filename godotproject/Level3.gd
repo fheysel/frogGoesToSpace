@@ -6,7 +6,7 @@ const level_name := "Get to the Rocket!"
 # Indicate that we use the count-down timer
 const use_countdown_timer := true
 # Start countdown at 1 minute
-const countdown_timer_initial_count := 1 * 60 + 0
+const countdown_timer_initial_count := 1 * 50 + 0
 
 const SPIKE := -1
 const STAR := 10

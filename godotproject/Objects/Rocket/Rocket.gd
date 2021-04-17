@@ -33,6 +33,9 @@ func activateJet():
 func _on_door_close_animation_finished():
 	frog_on_board = true
 	$Door/glow.stop()
+	# make player invisible so that it doesnt look like the rocket takes off without them
+	var player = Global.get_player()
+	player.visible = false
 	go_to_space()
 	
 func go_to_space():
@@ -40,18 +43,20 @@ func go_to_space():
 	Global.cutscene_inhibits_pause = true # Inhibit opening the menu
 	Global.cutscene_pauses_game = true # Pause everything else
 	var player = Global.get_player()
-	player.visible = false
 	player.zoom_out(4)
 	player.trigger_screen_shake(10, 30, 8, 1)
 	$JetBoom.play()
-	speed = 250
+	speed = 250	
 	$Timer.start()
+	
 	
 func _on_Timer_timeout():
 	# Rocket has now left
 	if frog_on_board:
+		$VictorySoundPlayer.play()
 		$EOL._on_EOL_body_entered(Global.get_player())
 	else:
 		var player = Global.get_player()
-		player.die()
+		player.die()	
 		
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Tiles/Level3/BossLevel_SpaceShip.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Rocket/Jet1.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sfx/rocketDoor.wav" type="AudioStream" id=8]
 [ext_resource path="res://Objects/Rocket/Door.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Rocket/glowingDoor.png" type="Texture" id=10]
+[ext_resource path="res://sfx/endVictory.wav" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.7332, 1.92216 )
@@ -362,6 +363,10 @@ pitch_scale = 0.45
 max_distance = 1e+06
 bus = "Sfx"
 
+[node name="VictorySoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "Music"
+
 [node name="EOL" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2.06116, -199.122 )
 scale = Vector2( 0.07, 0.002 )
@@ -411,11 +416,12 @@ volume_db = 10.0
 bus = "Sfx"
 
 [node name="glow" type="AnimatedSprite" parent="Door"]
+visible = false
 modulate = Color( 1, 0.870588, 0.45098, 0.847059 )
-position = Vector2( 2.26646, 339.991 )
-scale = Vector2( 1.17838, 1.14122 )
+position = Vector2( 2.26646, 338.43 )
+scale = Vector2( 1.17838, 1.21926 )
 frames = SubResource( 70 )
-frame = 28
+frame = 42
 playing = true
 
 [node name="innerDoorArea" type="Area2D" parent="Door"]
@@ -425,6 +431,7 @@ position = Vector2( 2.77026, 350.253 )
 shape = SubResource( 71 )
 
 [node name="outerDoorArea" type="Area2D" parent="Door"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/outerDoorArea"]
 position = Vector2( 2.75938, 350.263 )

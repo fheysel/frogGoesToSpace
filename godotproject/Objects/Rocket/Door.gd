@@ -25,11 +25,13 @@ func _on_Area2D_body_entered(body):
 
 func _on_outerDoorArea_body_entered(body):
 	# Player is near the door so open it
-	if !door_open: # Ensures that its a one shot animation
-		door_open = true
-		if Global.is_player(body):
+	if Global.is_player(body):
+		if !door_open: # Ensures that its a one shot animation
+			door_open = true
 			$door_close.visible = false
 			$door_open.visible = true
 			$glow.visible = true
 			$door_open.play('open')
 			$AudioStreamPlayer2D.play()
+	
+		
