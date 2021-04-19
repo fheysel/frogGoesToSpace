@@ -1,5 +1,7 @@
 extends Node
 
+export (PackedScene) var attract_scene
+
 var inhibit_pause = true
 var inhibit_hud = true
 
@@ -10,22 +12,29 @@ enum State {
 }
 var state = State.MAIN_SCREEN
 var next_state = State.MAIN_SCREEN
+var video_node = null
 
 func set_node_paused(x, pause):
 	x.pause_mode = PAUSE_MODE_STOP if pause else PAUSE_MODE_INHERIT
 
 func transition_update_ui():
 	var video = next_state == State.VIDEO
-	$VideoLayer/VideoPlayer.visible = video
+	$ViewportLayer/AttractModeViewportContainer.visible = video
+	$ViewportLayer/MarginContainer.visible = video
 	set_node_paused($FrogWalking, video)
 	set_node_paused($MainMenuLayer, video)
-	set_node_paused($VideoLayer, !video)
+	set_node_paused($ViewportLayer, !video)
 	if video:
-		$VideoLayer/VideoPlayer.play()
+		# We can't seem to pause stuff properly... so instead we just
+		# dynamically create and remove the attract scene from the tree.
+		# This also saves having to try and reset it.
+		video_node = attract_scene.instance()
+		$ViewportLayer/AttractModeViewportContainer/Viewport.add_child(video_node)
+		video_node.get_node("Player/PlayerInputHandler").connect("playback_complete", self, "_on_VideoPlayer_finished")
 	else:
 		if state == State.VIDEO:
 			$FrogWalking.reset()
-		$VideoLayer/VideoPlayer.stop()
+			$ViewportLayer/AttractModeViewportContainer/Viewport.remove_child(video_node)
 		var open = next_state == State.DIFFICULTY_MENU
 		$FrogWalking.menu_open = open
 		$DancingTextLayer/MarginContainer/CenterContainer/DancingLetterContainer.menu_open = open

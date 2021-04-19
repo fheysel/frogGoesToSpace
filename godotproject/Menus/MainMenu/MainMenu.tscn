@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Menus/MainMenu/DancingLetterContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/MainMenu/FrogWalking.tscn" type="PackedScene" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://sfx/StartScreen-Theme.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Menus/MainMenu/StarryBackground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Menus/MainMenu/oops.ogv" type="VideoStream" id=7]
+[ext_resource path="res://Level0AttractMode.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Menus/MainMenu/TitleFont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Menus/MainMenu/DemoLabel.gd" type="Script" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "difficulty"
@@ -126,6 +128,7 @@ tracks/2/keys = {
 
 [node name="MainMenuRootNode" type="Node"]
 script = ExtResource( 3 )
+attract_scene = ExtResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -134,10 +137,13 @@ autoplay = true
 bus = "Music"
 
 [node name="StarryBackground" parent="." instance=ExtResource( 5 )]
+layer = -101
 
 [node name="FrogWalking" parent="." instance=ExtResource( 2 )]
+layer = -100
 
 [node name="DancingTextLayer" type="CanvasLayer" parent="."]
+layer = -99
 
 [node name="MarginContainer" type="MarginContainer" parent="DancingTextLayer"]
 margin_right = 640.0
@@ -158,6 +164,7 @@ margin_left = 320.0
 margin_right = 320.0
 
 [node name="MainMenuLayer" type="CanvasLayer" parent="."]
+layer = -99
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuLayer"]
 anims/difficulty = SubResource( 1 )
@@ -211,18 +218,6 @@ margin_right = 45.0
 margin_bottom = 52.0
 text = "Hard"
 
-[node name="VideoLayer" type="CanvasLayer" parent="."]
-
-[node name="VideoPlayer" type="VideoPlayer" parent="VideoLayer"]
-visible = false
-margin_right = 640.0
-margin_bottom = 512.0
-stream = ExtResource( 7 )
-bus = "Sfx"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="FadeToBlackLayer" type="CanvasLayer" parent="."]
 layer = 10
 
@@ -237,7 +232,52 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlackLayer"]
 anims/transition = SubResource( 4 )
+
+[node name="ViewportLayer" type="CanvasLayer" parent="."]
+
+[node name="AttractModeViewportContainer" type="ViewportContainer" parent="ViewportLayer"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ViewportLayer/AttractModeViewportContainer"]
+size = Vector2( 640, 512 )
+handle_input_locally = false
+render_target_update_mode = 0
+audio_listener_enable_2d = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewportLayer"]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 440
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ViewportLayer/MarginContainer"]
+margin_top = 20.0
+margin_right = 640.0
+margin_bottom = 72.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ViewportLayer/MarginContainer/CenterContainer"]
+margin_left = 253.0
+margin_right = 386.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 0.435294, 0.756863, 0.215686, 1 )
+text = "DEMO"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="done_walking" from="FrogWalking" to="." method="_on_FrogWalking_done_walking"]
 [connection signal="pressed" from="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector/Easy" to="." method="_on_Easy_pressed"]
 [connection signal="pressed" from="MainMenuLayer/MarginContainer/CenterContainer/DifficultySelector/Hard" to="." method="_on_Hard_pressed"]
-[connection signal="finished" from="VideoLayer/VideoPlayer" to="." method="_on_VideoPlayer_finished"]

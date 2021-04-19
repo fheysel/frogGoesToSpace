@@ -1,4 +1,5 @@
 extends Node
+signal playback_complete
 enum State {
 	NORMAL,
 	RECORD,
@@ -90,6 +91,7 @@ func get_input(frame_num):
 				press_list_playback_index += 1
 			if press_list_playback_index >= len(press_list):
 				playback_complete = true
+				emit_signal("playback_complete")
 			if len(current_state) > 0:
 				user_direction = str2var("Vector2"+current_state['user_direction'])
 				jump_pressed = current_state['jump_pressed']

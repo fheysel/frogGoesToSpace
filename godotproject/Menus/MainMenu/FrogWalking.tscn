@@ -4,10 +4,9 @@
 [ext_resource path="res://Menus/MainMenu/FrogWalking.gd" type="Script" id=2]
 [ext_resource path="res://player_frog.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="Animation" id=1]
-resource_name = "frog_hop"
+[sub_resource type="Animation" id=2]
 length = 0.45
 loop = true
 tracks/0/type = "value"
@@ -35,7 +34,7 @@ tracks/1/keys = {
 "values": [ 225.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 100, 300 )
 
 [node name="FrogWalking" type="CanvasLayer"]
@@ -69,15 +68,15 @@ limit_bottom = 512
 [node name="Area2D" type="Area2D" parent="FakeFrog"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FakeFrog/Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.75
-anims/frog_hop = SubResource( 1 )
+anims/frog_hop = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 4602.21, 250.584 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
