@@ -7,6 +7,7 @@ var inhibit_hud = true
 
 enum State {
 	MAIN_SCREEN,
+	CONTROLS,
 	DIFFICULTY_MENU,
 	VIDEO
 }
@@ -35,13 +36,16 @@ func transition_update_ui():
 		if state == State.VIDEO:
 			$FrogWalking.reset()
 			$ViewportLayer/AttractModeViewportContainer/Viewport.remove_child(video_node)
-		var open = next_state == State.DIFFICULTY_MENU
+		var open = next_state != State.MAIN_SCREEN
 		$FrogWalking.menu_open = open
 		$DancingTextLayer/MarginContainer/CenterContainer/DancingLetterContainer.menu_open = open
-		if open:
-			$MainMenuLayer/AnimationPlayer.play("difficulty")
-		else:
-			$MainMenuLayer/AnimationPlayer.play("start_text")
+		match next_state:
+			State.MAIN_SCREEN:
+				$MainMenuLayer/AnimationPlayer.play("start_text")
+			State.CONTROLS:
+				$MainMenuLayer/AnimationPlayer.play("controls")
+			State.DIFFICULTY_MENU:
+				$MainMenuLayer/AnimationPlayer.play("difficulty")
 	state = next_state
 
 func start_transition():
@@ -59,12 +63,17 @@ func go_to_state(next):
 			else:
 				# Don't bother fading, just go straight there
 				transition_update_ui()
+		State.CONTROLS:
+			transition_update_ui()
 		State.DIFFICULTY_MENU:
 			transition_update_ui()
 		State.VIDEO:
 			start_transition()
 
 func _ready():
+	# Always set us back to a sane volume when returning
+	# to the title screen.
+	Global.reset_volume()
 	transition_update_ui()
 
 func _process(_delta):
@@ -76,11 +85,16 @@ func _process(_delta):
 		Input.is_action_just_pressed("menu")
 	match state:
 		State.MAIN_SCREEN:
+			if pressed_fwd or pressed_bck:
+				go_to_state(State.CONTROLS)
+		State.CONTROLS:
 			if pressed_fwd:
 				go_to_state(State.DIFFICULTY_MENU)
+			elif pressed_bck:
+				go_to_state(State.MAIN_SCREEN)
 		State.DIFFICULTY_MENU:
 			if pressed_bck:
-				go_to_state(State.MAIN_SCREEN)
+				go_to_state(State.CONTROLS)
 		State.VIDEO:
 			if pressed_fwd or pressed_bck:
 				go_to_state(State.MAIN_SCREEN)
