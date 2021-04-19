@@ -22,7 +22,6 @@ func _ready():
 		var letter_tb := Label.new()
 		letter_tb.align = Label.ALIGN_CENTER
 		letter_tb.add_font_override("font", main_text_font)
-		# letter_tb.add_color_override("font_color", color)
 		letter_tb.text = letter
 		letter_tb.anchor_bottom = 1
 		letter_tb.rect_min_size.y = 100
