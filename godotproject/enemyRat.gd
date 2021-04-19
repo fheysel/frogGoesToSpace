@@ -120,10 +120,8 @@ func take_damage(attack_damage):
 			# Handle enemy health
 
 func dead():
-	print("dying")
 	is_dead = true
 	velocity = 0
-	print("dead")
 	queue_free()
 	
 	
