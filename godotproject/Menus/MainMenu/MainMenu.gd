@@ -71,9 +71,6 @@ func go_to_state(next):
 			start_transition()
 
 func _ready():
-	# Always set us back to a sane volume when returning
-	# to the title screen.
-	Global.reset_volume()
 	transition_update_ui()
 
 func _process(_delta):
