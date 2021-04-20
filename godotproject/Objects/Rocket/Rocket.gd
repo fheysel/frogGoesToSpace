@@ -39,6 +39,20 @@ func _on_door_close_animation_finished():
 	go_to_space()
 	
 func go_to_space():
+	speed = 250
+	
+	# Make sure both jets are on
+	if !$Jet1.is_playing():
+		print('hi')
+		blastOff = true
+		$Jet1.visible = true
+		$Jet1.play("looping_stream")
+	if !$Jet2.is_playing():
+		blastOff = true
+		$Jet2.visible = true
+		print('hello')
+		$Jet2.play("looping_stream")
+		
 	pause_mode = Node.PAUSE_MODE_PROCESS # Allow the rocket to keep moving
 	Global.cutscene_inhibits_pause = true # Inhibit opening the menu
 	Global.cutscene_pauses_game = true # Pause everything else
@@ -46,7 +60,6 @@ func go_to_space():
 	player.zoom_out(4)
 	player.trigger_screen_shake(10, 30, 8, 1)
 	$JetBoom.play()
-	speed = 250	
 	$Timer.start()
 	
 	
