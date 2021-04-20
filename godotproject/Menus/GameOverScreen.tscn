@@ -52,7 +52,7 @@ margin_top = 46.0
 margin_right = 300.0
 margin_bottom = 61.0
 theme = ExtResource( 2 )
-text = "You Croaked! Press Z to play again!"
+text = "You croaked! Press left button to play again!"
 align = 1
 valign = 1
 
