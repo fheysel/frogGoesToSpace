@@ -2,24 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<< HEAD:godotproject/Objects/Fan/fanPipe.png.import
-path="res://.import/fanPipe.png-3983ae54baf9dce9d5162515fa85bf33.stex"
-=======
 path="res://.import/starrynight-0.png-f91df81f69d1fc13db400783a9fb36a5.stex"
->>>>>>> Squashing all commits into one in the hopes of getting rid of the auto.tres conflict:godotproject/Tiles/starryNight/starrynight-0.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<< HEAD:godotproject/Objects/Fan/fanPipe.png.import
-source_file="res://Objects/Fan/fanPipe.png"
-dest_files=[ "res://.import/fanPipe.png-3983ae54baf9dce9d5162515fa85bf33.stex" ]
-=======
 source_file="res://Tiles/starryNight/starrynight-0.png"
 dest_files=[ "res://.import/starrynight-0.png-f91df81f69d1fc13db400783a9fb36a5.stex" ]
->>>>>>> Squashing all commits into one in the hopes of getting rid of the auto.tres conflict:godotproject/Tiles/starryNight/starrynight-0.png.import
 
 [params]
 
@@ -28,8 +19,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=false
+flags/repeat=0
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
