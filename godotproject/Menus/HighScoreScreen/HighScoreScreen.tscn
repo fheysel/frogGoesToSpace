@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
 [ext_resource path="res://Menus/HighScoreScreen/HighScoreScreen.gd" type="Script" id=3]
 [ext_resource path="res://sfx/hs_big_tap.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/hs_small_tap.wav" type="AudioStream" id=5]
+[ext_resource path="res://sfx/no_high_score.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -27,6 +28,9 @@ font_data = ExtResource( 1 )
 [node name="HighScoreScreen" type="MarginContainer" parent="."]
 margin_right = 640.0
 margin_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 640, 512 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -120,6 +124,10 @@ bus = "Sfx"
 [node name="ThonkSmallSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
 stream = ExtResource( 5 )
 volume_db = -3.0
+bus = "Sfx"
+
+[node name="SadSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
+stream = ExtResource( 6 )
 bus = "Sfx"
 [connection signal="timeout" from="HighScoreScreen/ThonkTimer" to="HighScoreScreen" method="_on_ThonkTimer_timeout"]
 [connection signal="timeout" from="HighScoreScreen/InitialTimer" to="HighScoreScreen" method="_on_InitialTimer_timeout"]

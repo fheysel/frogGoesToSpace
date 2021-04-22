@@ -7,15 +7,18 @@ export (Color) var sub_fancy_color
 
 enum State {
 	HIDDEN,
+	SHOWN_WAITING,
 	INITIAL_DISPLAY,
 	THONK,
 	FINAL_SOUND,
 	WAIT_FOR_PRESS
 }
+const num_scores_saved = 5
 
 onready var hsc := $CenterContainer/VBoxContainer/HighScoresContainer
 onready var level_label := $CenterContainer/VBoxContainer/LevelLabel
 
+var wait_in_initial_state = false
 var all_level_data = {}
 var current_level = null
 var current_level_data = null
@@ -53,16 +56,14 @@ func end_of_level(level_name, stars, time, countdown, next_scene_path):
 	var dict = {'stars':stars, 'time':time, 'score':score}
 	# Adjust current_level_data to have the current high score added to it
 	final_idx = _add_score_to_current_level(dict)
-	if final_idx == -1:
-		_change_state(State.FINAL_SOUND)
-		return
-	# Save to disk
-	_save_to_disk()
+	if final_idx < num_scores_saved:
+		# They got a high score. Save to disk
+		_save_to_disk()
 	# Set up everything required to animate the score coming in.
 	display_level_data.append(dict)
-	current_idx = 5
+	current_idx = num_scores_saved
 	_display_score_data(display_level_data, current_idx)
-	_change_state(State.INITIAL_DISPLAY)
+	_change_state(State.SHOWN_WAITING)
 
 func _change_state(state):
 	# If the state has a timer, start it.
@@ -94,8 +95,10 @@ func _step_thonk_animation():
 		_change_state(State.FINAL_SOUND)
 
 func _play_final_sound():
-	# Don't play sound if we didn't get on the scoreboard
-	if final_idx != -1:
+	if final_idx >= num_scores_saved:
+		# If we didn't get a high score, play a sad sound :(
+		$SadSFX.play()
+	else:
 		# Play sound of score settling into place
 		$ThonkBigSFX.play()
 	_change_state(State.WAIT_FOR_PRESS)
@@ -106,7 +109,7 @@ func _compare_scores(new, old):
 
 # This function is unit testable
 func _add_score_to_current_level(dict):
-	var target_i = -1
+	var target_i = num_scores_saved
 	for i in range(len(current_level_data)):
 		var test_i = len(current_level_data)-1-i
 		var test_dict = current_level_data[test_i]
@@ -114,7 +117,7 @@ func _add_score_to_current_level(dict):
 			target_i = test_i
 		else:
 			break
-	if target_i != -1:
+	if target_i < num_scores_saved:
 		current_level_data.insert(target_i, dict)
 		current_level_data.pop_back()
 	return target_i
@@ -136,7 +139,7 @@ func _change_level(name, countdown):
 	if Global.difficulty == Global.DIFFICULTY.EASY_MODE_e:
 		difficulty_str = "Easy"
 	current_level = "%s - %s" % [name, difficulty_str]
-	if current_level in all_level_data:
+	if current_level in all_level_data and len(all_level_data[current_level]) == num_scores_saved:
 		current_level_data = all_level_data[current_level]
 	else:
 		# We have to create a new set of level data for this level.
@@ -147,17 +150,17 @@ func _change_level(name, countdown):
 			var time = (8 - 2 * i) if countdown else (90 + 15 * i)
 			var score = _calculate_score(stars,time,countdown)
 			current_level_data.append({'stars':stars, 'time':time, 'score':score})
+		# Save our fresh generated data to disk.
+		_save_to_disk()
 	level_label.text = current_level
 	_display_score_data(current_level_data)
 
 func _display_score_data(score_data, user_i = -1):
 	# Remove previously-existing labels from the HighScoresContainer
-	for i in range(hsc.get_child_count()-1, 3, -1):
-		if hsc.get_child_count() > i:
-			var child = hsc.get_child(i)
-			if child == null:
-				continue
-			child.queue_free()
+	while hsc.get_child_count() > 4:
+		var child = hsc.get_child(hsc.get_child_count()-1)
+		hsc.remove_child(child)
+		child.queue_free()
 	# Always make 6 rows of labels, but don't put the #6
 	# text in the 6th label, and if we don't have enough score data,
 	# don't put any text in the labels in the last row.
@@ -208,14 +211,21 @@ func _ready():
 
 func _process(_delta):
 	self.visible = (current_state != State.HIDDEN)
-	if current_state == State.HIDDEN:
-		pass
-	elif current_state == State.WAIT_FOR_PRESS:
-		if Input.is_action_pressed("jump") \
-		or Input.is_action_pressed("menu") \
-		or Input.is_action_pressed("tongue"):
-			_save_to_disk()
-			Global.fade_to_scene(load_scene_after_high_score)
+	match current_state:
+		State.WAIT_FOR_PRESS:
+			if Input.is_action_pressed("jump") \
+			or Input.is_action_pressed("menu") \
+			or Input.is_action_pressed("tongue"):
+				Global.fade_to_scene(load_scene_after_high_score)
+		State.SHOWN_WAITING:
+			if !wait_in_initial_state:
+				if final_idx == num_scores_saved:
+					_change_state(State.FINAL_SOUND)
+				else:
+					# Save to disk
+					_save_to_disk()
+					# Display the score coming in
+					_change_state(State.INITIAL_DISPLAY)
 
 func _get_save_path():
 	return "user://scores.json"

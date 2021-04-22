@@ -356,9 +356,21 @@ position = Vector2( -128, 624 )
 [node name="TraumaBlock2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 136, 624 )
 
-[node name="JetBoom" type="AudioStreamPlayer2D" parent="."]
+[node name="JetBoom1" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( -130.353, 576.099 )
 stream = ExtResource( 5 )
-volume_db = 24.0
+pitch_scale = 0.45
+max_distance = 1e+06
+bus = "Sfx"
+
+[node name="JetBoomNonLocational" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+pitch_scale = 0.45
+bus = "Sfx"
+
+[node name="JetBoom2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 135.222, 576.848 )
+stream = ExtResource( 5 )
 pitch_scale = 0.45
 max_distance = 1e+06
 bus = "Sfx"
@@ -440,6 +452,7 @@ shape = SubResource( 72 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+[connection signal="finished" from="VictorySoundPlayer" to="." method="_on_VictorySoundPlayer_finished"]
 [connection signal="animation_finished" from="Door/door_close" to="." method="_on_door_close_animation_finished"]
 [connection signal="body_entered" from="Door/innerDoorArea" to="Door" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Door/outerDoorArea" to="Door" method="_on_outerDoorArea_body_entered"]
