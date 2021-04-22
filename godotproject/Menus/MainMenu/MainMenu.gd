@@ -7,7 +7,6 @@ var inhibit_hud = true
 
 enum State {
 	MAIN_SCREEN,
-	CONTROLS,
 	DIFFICULTY_MENU,
 	VIDEO
 }
@@ -42,8 +41,6 @@ func transition_update_ui():
 		match next_state:
 			State.MAIN_SCREEN:
 				$MainMenuLayer/AnimationPlayer.play("start_text")
-			State.CONTROLS:
-				$MainMenuLayer/AnimationPlayer.play("controls")
 			State.DIFFICULTY_MENU:
 				$MainMenuLayer/AnimationPlayer.play("difficulty")
 	state = next_state
@@ -63,8 +60,6 @@ func go_to_state(next):
 			else:
 				# Don't bother fading, just go straight there
 				transition_update_ui()
-		State.CONTROLS:
-			transition_update_ui()
 		State.DIFFICULTY_MENU:
 			transition_update_ui()
 		State.VIDEO:
@@ -82,16 +77,8 @@ func _process(_delta):
 		Input.is_action_just_pressed("menu")
 	match state:
 		State.MAIN_SCREEN:
-			if pressed_fwd or pressed_bck:
-				go_to_state(State.CONTROLS)
-		State.CONTROLS:
 			if pressed_fwd:
 				go_to_state(State.DIFFICULTY_MENU)
-			elif pressed_bck:
-				go_to_state(State.MAIN_SCREEN)
-		State.DIFFICULTY_MENU:
-			if pressed_bck:
-				go_to_state(State.CONTROLS)
 		State.VIDEO:
 			if pressed_fwd or pressed_bck:
 				go_to_state(State.MAIN_SCREEN)
