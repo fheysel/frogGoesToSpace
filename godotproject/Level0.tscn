@@ -132,11 +132,11 @@ text = "[center] Press Left Button to  [wave amp=35]jump[/wave] and Right Button
 
 [node name="TextTip2" parent="." instance=ExtResource( 17 )]
 position = Vector2( 806.767, 629.771 )
-text = "[center] jump and launch tongue at a block to [wave]swing [/wave] "
+text = "[center] Jump and launch tongue at a block to [wave]swing [/wave] "
 
 [node name="TextTip3" parent="." instance=ExtResource( 17 )]
 position = Vector2( 6828, 453.701 )
-text = "[center] press Right Button while swinging to [wave] launch [/wave] yourself up"
+text = "[center] Press Right Button while swinging to [wave] launch [/wave] yourself up"
 
 [node name="TextTip4" parent="." instance=ExtResource( 17 )]
 position = Vector2( 2587.93, 661.872 )

@@ -4,15 +4,6 @@ extends KinematicBody2D
 var tongue_stick_velocity = Vector2(0, -80) 
 var door_open = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-#func _on_door_open_animation_finished():
-#	$door_close.visible = true
-#	$door_open.visible = false
-#	$door_close.play('close')
-
 
 func _on_Area2D_body_entered(body):
 	# Player is inside so close the door.

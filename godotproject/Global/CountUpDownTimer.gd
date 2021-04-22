@@ -11,13 +11,12 @@ func _process(delta):
 	if counting_down:
 		time -= delta
 		time = max(time, 0)
-		# If the player has run out of time, kill them.
+		# If the player has run out of time, rocket takes off without them.
 		if time <= 0:
-			var player = Global.get_player()
-			if player == null:
-				push_error("Unable to get player object - player won't die")
+			var rocket = get_tree().current_scene.get_node("Rocket")
+			if rocket == null:
+				push_error("Unable to get rocket object - level won't end!")
 			else:
-				var rocket = get_tree().current_scene.get_node("Rocket")
 				rocket.go_to_space()
 	else:
 		# Countup timer

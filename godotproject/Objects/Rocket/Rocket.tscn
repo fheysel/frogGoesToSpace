@@ -421,7 +421,7 @@ modulate = Color( 1, 0.870588, 0.45098, 0.847059 )
 position = Vector2( 2.26646, 338.43 )
 scale = Vector2( 1.17838, 1.21926 )
 frames = SubResource( 70 )
-frame = 28
+frame = 12
 playing = true
 
 [node name="innerDoorArea" type="Area2D" parent="Door"]
