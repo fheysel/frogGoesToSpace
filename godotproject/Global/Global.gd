@@ -237,3 +237,8 @@ func node_exists_in_tree(node):
 		is_instance_valid(node) and \
 		node is Node and \
 		node.is_inside_tree()
+
+# Function to set volume level on both volume sliders.
+# Used on title screen to adjust volume.
+func set_volume(volume):
+	get_tree().call_group("VolumeSliders","set_volume",volume)

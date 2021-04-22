@@ -1,5 +1,9 @@
 extends HSlider
 
+func set_volume(volume):
+	value = volume
+	Global.music_volume = value
+
 func _ready():
 	Global.music_volume = value
 
