@@ -37,7 +37,6 @@ tracks/1/keys = {
 script = ExtResource( 3 )
 
 [node name="BGSprite" type="Sprite" parent="."]
-scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
