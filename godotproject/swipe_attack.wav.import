@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/swipe_attack.wav-f30c364a6678f6b0eacb3863b85c15b3.sample"
+
+[deps]
+
+source_file="res://swipe_attack.wav"
+dest_files=[ "res://.import/swipe_attack.wav-f30c364a6678f6b0eacb3863b85c15b3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

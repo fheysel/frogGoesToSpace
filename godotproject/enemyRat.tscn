@@ -1,0 +1,156 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://rat_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://RatSnarl.wav" type="AudioStream" id=2]
+[ext_resource path="res://enemyRat.gd" type="Script" id=3]
+[ext_resource path="res://swipe_attack.wav" type="AudioStream" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 1400, 400, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 2100, 400, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 2800, 400, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 3500, 400, 700, 400 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 2800, 800, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 3500, 800, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1200, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 700, 1200, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 1400, 1200, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 2100, 1200, 700, 400 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 2800, 1200, 700, 400 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=14]
+radius = 86.4373
+height = 265.734
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 462.982, 483.338 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+position = Vector2( 0, 0.6875 )
+scale = Vector2( 0.05, 0.03 )
+z_index = -1
+collision_layer = 68
+script = ExtResource( 3 )
+
+[node name="Orientation" type="Node2D" parent="."]
+
+[node name="Sprite_PNG" type="AnimatedSprite" parent="Orientation"]
+position = Vector2( 24.375, -1201.04 )
+scale = Vector2( 15, 15 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="Sprite_SwipeAttack" type="AnimatedSprite" parent="Orientation"]
+visible = false
+position = Vector2( -356.729, -1152.89 )
+scale = Vector2( 14.8552, 14.649 )
+frames = SubResource( 13 )
+frame = 2
+playing = true
+
+[node name="SwipeAttack" type="Area2D" parent="Orientation/Sprite_SwipeAttack"]
+position = Vector2( -65.8981, 112.9 )
+rotation = -0.389208
+scale = Vector2( 0.203, 0.1 )
+
+[node name="AttackCollision" type="CollisionShape2D" parent="Orientation/Sprite_SwipeAttack/SwipeAttack"]
+position = Vector2( 32.3071, 30.641 )
+rotation = 0.419561
+scale = Vector2( 1.19443, 1.244 )
+shape = SubResource( 14 )
+
+[node name="RayCastFront_Top" type="RayCast2D" parent="Orientation"]
+position = Vector2( -700.773, -179.701 )
+scale = Vector2( 0.659919, 2.94328 )
+enabled = true
+cast_to = Vector2( -6000, 0 )
+collision_mask = 2
+
+[node name="RayCastFront_Middle" type="RayCast2D" parent="Orientation"]
+position = Vector2( -714.123, 281.769 )
+scale = Vector2( 0.659919, 2.94328 )
+enabled = true
+cast_to = Vector2( -6000, 0 )
+collision_mask = 2
+
+[node name="RayCastFront_Bottom" type="RayCast2D" parent="Orientation"]
+position = Vector2( -723.553, 771.007 )
+scale = Vector2( 0.659919, 2.94328 )
+enabled = true
+cast_to = Vector2( -6000, 0 )
+collision_mask = 2
+
+[node name="MovementCollision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 3.59251, -168.382 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 15 )
+
+[node name="ActionDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioRatSnarl" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.196
+bus = "Sfx"
+
+[node name="InvulnerableFlashTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="InvulnerableTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioRatSwipe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "Sfx"
+[connection signal="timeout" from="ActionDelay" to="." method="_on_ActionDelay_timeout"]
+[connection signal="timeout" from="InvulnerableFlashTimer" to="." method="_on_InvulnerableFlashTimer_timeout"]
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
