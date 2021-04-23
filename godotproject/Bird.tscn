@@ -6,59 +6,59 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 160, 160 )
+region = Rect2( 320, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 160, 0, 160, 160 )
+region = Rect2( 0, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 160, 160 )
+region = Rect2( 160, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 480, 0, 160, 160 )
+region = Rect2( 320, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 640, 0, 160, 160 )
+region = Rect2( 480, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 800, 0, 160, 160 )
+region = Rect2( 640, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 960, 0, 160, 160 )
+region = Rect2( 800, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 1120, 0, 160, 160 )
+region = Rect2( 960, 0, 160, 160 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 160, 160 )
+region = Rect2( 1120, 0, 160, 160 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "Fly",
-"speed": 14.0
-}, {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": false,
 "name": "Swoop",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "Fly",
+"speed": 14.0
 } ]
 
 [sub_resource type="CircleShape2D" id=11]
@@ -83,7 +83,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, 36.6667 )
 frames = SubResource( 10 )
 animation = "Fly"
-frame = 2
+frame = 3
 playing = true
 flip_h = true
 
