@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Level0/Level0_ground_auto.tres" type="TileSet" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://RespawnPositionArea.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Bird.tscn" type="PackedScene" id=16]
 [ext_resource path="res://TextTip.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/HealthBug/HealthBug.tscn" type="PackedScene" id=18]
 
 [node name="Level_0" type="Node2D"]
 script = ExtResource( 12 )
@@ -154,8 +155,14 @@ scale = Vector2( 3, 1 )
 position = Vector2( 9832, 560 )
 scale = Vector2( 2, 1 )
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 16 )]
+[node name="Bird" parent="." instance=ExtResource( 16 )]
 position = Vector2( 7080, 408 )
 
-[node name="KinematicBody2D2" parent="." instance=ExtResource( 16 )]
+[node name="Bird1" parent="." instance=ExtResource( 16 )]
 position = Vector2( 7423.62, 404.548 )
+
+[node name="HealthBug" parent="." instance=ExtResource( 18 )]
+position = Vector2( 5168, 448 )
+
+[node name="HealthBug2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 8368, 480 )
