@@ -70,6 +70,7 @@ var swing_angle = 0
 var swing_pivot_position = Vector2.ZERO
 
 var dead := false
+var hit_this_frame := false
 
 var respawn_location := Vector2.ZERO
 
@@ -421,6 +422,7 @@ func get_tongue_direction():
 	return tdir.normalized()
 
 func _physics_process(delta):
+	hit_this_frame = false
 	# Update our input-related variables
 	get_input()
 
@@ -474,6 +476,11 @@ func _physics_process(delta):
 	update_anim()
 
 func takeDamage(damageTaken):
+	# Ensure player can't take damage twice a frame.  [FGTS-210]
+	if hit_this_frame:
+		return
+	# Mark that we've already been hit this frame.
+	hit_this_frame = true
 	if Global.player_is_god or dead:
 		return
 	if $InvulnerableTimer.is_stopped():
@@ -574,6 +581,10 @@ func update_respawn_position(position):
 	respawn_location = position
 
 func hit_death_plane():
+	# Ensure player can't take damage twice a frame. [FGTS-210]
+	if hit_this_frame:
+		return
+	hit_this_frame = true
 	# Subtract 1 health independent of invulnerability timer.
 	# Don't do it if we're god or dead though.
 	if !(Global.player_is_god or dead):
