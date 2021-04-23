@@ -2,6 +2,7 @@
 
 [ext_resource path="res://sfx/Level2-NasaHQTheme.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Tiles/Level2/LaboratoryTilesUnsliced.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/Level1/Tiles/FactoryTileset.png" type="Texture" id=3]
 [ext_resource path="res://Tiles/Level2/LaboratoryObjectsUnsliced.png" type="Texture" id=4]
 [ext_resource path="res://Level0Boundaries.gd" type="Script" id=5]
 [ext_resource path="res://Level2.gd" type="Script" id=6]
@@ -163,6 +164,29 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 9/shape_one_way_margin = 0.0
 9/shapes = [  ]
 9/z_index = 0
+10/name = "wall3"
+10/texture = ExtResource( 2 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 192, 96, 32, 32 )
+10/tile_mode = 1
+10/autotile/bitmask_mode = 0
+10/autotile/bitmask_flags = [  ]
+10/autotile/icon_coordinate = Vector2( 0, 0 )
+10/autotile/tile_size = Vector2( 32, 32 )
+10/autotile/spacing = 0
+10/autotile/occluder_map = [  ]
+10/autotile/navpoly_map = [  ]
+10/autotile/priority_map = [  ]
+10/autotile/z_index_map = [  ]
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
 11/name = "wall"
 11/texture = ExtResource( 2 )
 11/tex_offset = Vector2( 0, 0 )
@@ -835,7 +859,6 @@ speed = 150
 [node name="ConveyorBelt16" parent="." instance=ExtResource( 8 )]
 position = Vector2( 9472, 464 )
 constant_linear_velocity = Vector2( 0, 0 )
-
 speed = 150
 
 [node name="LaserWall" parent="." instance=ExtResource( 15 )]
@@ -946,13 +969,13 @@ Start = Vector2( -100, 0 )
 End = Vector2( 100, 0 )
 
 [node name="VatOfAcid" parent="." instance=ExtResource( 19 )]
-position = Vector2( 832, 1024 )
+position = Vector2( 832.519, 1024.71 )
 
 [node name="VatOfAcid2" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1088, 1024 )
+position = Vector2( 1088.42, 1024.71 )
 
 [node name="VatOfAcid3" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1472, 1024 )
+position = Vector2( 1472.49, 1023.53 )
 
 [node name="VatOfAcid4" parent="." instance=ExtResource( 19 )]
 position = Vector2( 1728, 1024 )
@@ -961,10 +984,10 @@ position = Vector2( 1728, 1024 )
 position = Vector2( 1984, 1024 )
 
 [node name="VatOfAcid6" parent="." instance=ExtResource( 19 )]
-position = Vector2( 2240, 1024 )
+position = Vector2( 2239.75, 1023.2 )
 
 [node name="VatOfAcid7" parent="." instance=ExtResource( 19 )]
-position = Vector2( 4064, 1024 )
+position = Vector2( 4064.69, 1023.83 )
 
 [node name="VatOfAcid8" parent="." instance=ExtResource( 19 )]
 position = Vector2( 4320, 1024 )
@@ -979,43 +1002,43 @@ position = Vector2( 5088, 1024 )
 position = Vector2( 4832, 1024 )
 
 [node name="VatOfAcid12" parent="." instance=ExtResource( 19 )]
-position = Vector2( 7520, 1024 )
+position = Vector2( 7521.42, 1024.58 )
 
 [node name="VatOfAcid13" parent="." instance=ExtResource( 19 )]
-position = Vector2( 7776, 1024 )
+position = Vector2( 7777.42, 1024.58 )
 
 [node name="VatOfAcid14" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8032, 1024 )
+position = Vector2( 8033.42, 1024.58 )
 
 [node name="VatOfAcid15" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8544, 1024 )
+position = Vector2( 8544.71, 1024.87 )
 
 [node name="VatOfAcid16" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8288, 1024 )
+position = Vector2( 8289.42, 1024.58 )
 
 [node name="VatOfAcid17" parent="." instance=ExtResource( 19 )]
-position = Vector2( 8800, 1024 )
+position = Vector2( 8800.59, 1025.15 )
 
 [node name="VatOfAcid18" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9056, 1024 )
+position = Vector2( 9056.5, 1025.37 )
 
 [node name="VatOfAcid19" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9312, 1024 )
+position = Vector2( 9312.42, 1025.58 )
 
 [node name="VatOfAcid20" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9824, 1024 )
+position = Vector2( 9823.54, 1025.42 )
 
 [node name="VatOfAcid22" parent="." instance=ExtResource( 19 )]
-position = Vector2( 10080, 1024 )
+position = Vector2( 10079.5, 1025.64 )
 
 [node name="VatOfAcid23" parent="." instance=ExtResource( 19 )]
-position = Vector2( 10336, 1024 )
+position = Vector2( 10335.1, 1025.52 )
 
 [node name="VatOfAcid24" parent="." instance=ExtResource( 19 )]
-position = Vector2( 10592, 1024 )
+position = Vector2( 10590.7, 1024.53 )
 
 [node name="VatOfAcid21" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9568, 1024 )
+position = Vector2( 9567.74, 1025.34 )
 
 [node name="RespawnPositionArea" parent="." instance=ExtResource( 20 )]
 position = Vector2( 746.325, 832.121 )
@@ -1043,8 +1066,8 @@ scale = Vector2( 0.5, 1 )
 
 [node name="BlinkingComputer" parent="." instance=ExtResource( 24 )]
 position = Vector2( 593.788, 815.941 )
-
-frame = 15
+frame = 18
 
 [node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
 position = Vector2( 3080, 736 )
+frame = 18
