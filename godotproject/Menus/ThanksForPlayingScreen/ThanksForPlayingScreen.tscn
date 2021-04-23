@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Menus/ThanksForPlayingScreen/ThanksForPlayingScreen.gd" type="Script" id=3]
+[ext_resource path="res://sfx/CreditsTheme.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Tiles/starryNight/starryNight.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menus/ThanksForPlayingScreen/SpaceFrogScene.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -11,28 +14,29 @@ font_data = ExtResource( 2 )
 [node name="ThanksForPlayingScreen" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 88.0
+custom_constants/margin_top = 512
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Music"
+
+[node name="StarryNightScene" parent="." instance=ExtResource( 5 )]
+
+[node name="SpaceFrogScene" parent="." instance=ExtResource( 6 )]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_top = 512.0
 margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.137255, 0.105882, 0.105882, 1 )
+margin_bottom = 1075.0
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Label" type="Label" parent="VBoxContainer2"]
 margin_right = 640.0
-margin_bottom = 512.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 124.0
-margin_top = 176.0
-margin_right = 515.0
-margin_bottom = 335.0
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 391.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 custom_fonts/font = SubResource( 1 )
@@ -40,23 +44,48 @@ text = "Thank you for playing!"
 align = 1
 valign = 1
 
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer2"]
 margin_top = 84.0
-margin_right = 391.0
-margin_bottom = 115.0
-text = "Please fill out the survey linked above in the page.
-We hope you enjoyed our demo!"
+margin_right = 640.0
+margin_bottom = 472.0
+text = "
+
+
+Creators:
+Allison Christensen
+Jacob Denyes
+Cooper Harasyn
+Fiona Heysel
+From Sci' 20 With Love
+
+A Special Thank You to All Our Beta Testers
+
+Music:
+Start Menu ~ Frog Shop by Louie Zong
+Morning Meadow ~ Melody Meadow by Louie Zong
+The Big City ~ Winter Melon Way by Louie Zong
+NASA HQ ~ Reconfiguration by Le Brick
+Get to Ze Rocket! ~ Boss Battle by Adam Haynes
+Credits ~ Aurora Kingdom by Louie Zong
+
+
+Created Using the Godot Editor + FRT
+Under MIT License"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 119.0
-margin_right = 391.0
-margin_bottom = 159.0
+[node name="Label3" type="Label" parent="VBoxContainer2"]
+margin_top = 476.0
+margin_right = 640.0
+margin_bottom = 563.0
 rect_min_size = Vector2( 0, 40 )
 theme = ExtResource( 1 )
-text = "Press Z to play again!"
+text = "
+
+
+
+Press any button to play again!"
 align = 1
 valign = 1

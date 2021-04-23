@@ -10,15 +10,15 @@
 size = 36
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 36
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 30
 font_data = ExtResource( 1 )
 
@@ -33,7 +33,7 @@ __meta__ = {
 }
 sub_font = SubResource( 1 )
 sub_color = Color( 1, 1, 1, 1 )
-sub_fancy_font = SubResource( 4 )
+sub_fancy_font = SubResource( 2 )
 sub_fancy_color = Color( 0.462745, 1, 0.403922, 1 )
 
 [node name="Backdrop" type="ColorRect" parent="HighScoreScreen"]
@@ -55,7 +55,7 @@ margin_bottom = 307.0
 margin_right = 236.0
 margin_bottom = 41.0
 theme = ExtResource( 2 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "High Scores"
 align = 1
 uppercase = true
@@ -64,7 +64,7 @@ uppercase = true
 margin_top = 45.0
 margin_right = 236.0
 margin_bottom = 71.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "<Level>"
 align = 1
 

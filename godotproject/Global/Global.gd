@@ -64,6 +64,11 @@ func should_inhibit_pause_menu():
 		current_scene_has_property_set("inhibit_pause") || \
 		HighScoreScreen.active()
 
+# This is checked in the CountUpDownTimer module
+func level_uses_countdown_timer():
+	return \
+		current_scene_has_property_set("use_countdown_timer")
+
 # Calculate the volume in dB for a bus, given the base volume and
 # any fading volume.
 func _calc_bus_db(base_volume : float, fade_volume : float):
@@ -138,6 +143,10 @@ func fade_set_body_to_position(body, position):
 	# Pause the game while we transition
 	pause_during_transition = true
 
+func _step_loading():
+	# We don't actually care if it's ready, we just want to load a piece.
+	var _ready = resource_queue.is_ready(loading)
+
 func _process_loading():
 	if loading == null and fade_action == FadeAction.MOVE_POSITION:
 		# Move body's position to the specified location
@@ -147,9 +156,6 @@ func _process_loading():
 	elif resource_queue.is_ready(loading):
 		# We've finished loading the resource!
 		# Prepare all the misc. other objects to be ready for this new scene.
-
-		# Reset the global timer
-		$"/root/CountupTimer".reset()
 
 		# Close the pause menu, if it was open
 		$InGameMenuLayer/InGameMenu.navigate_to_new_screen(null)
@@ -168,11 +174,21 @@ func _process_loading():
 			push_error("Unable to load level")
 			get_tree().quit(1)
 
+		# Handle events that must be processed after we have switched to the new scene
+		call_deferred("_after_loading_new_scene")
+
 		# Fade in
 		swipe_anim_state_machine.travel('swipe_out')
 
 		# Mark that we're done loading
 		loading = null
+
+func _after_loading_new_scene():
+	# Reset the global timer after switching scene
+	# Must be after changing to scene to set counting up/down!
+	var new_scene_countdown = current_scene_has_property_set('use_countdown_timer')
+	var new_scene_countdown_val = get_current_scene_property('countdown_timer_initial_count')
+	$"/root/CountUpDownTimer".reset(new_scene_countdown, new_scene_countdown_val)
 
 
 func _unpause_new_scene():
@@ -208,6 +224,11 @@ func format_time(time):
 # we only want to interact with the player.
 func is_player(body):
 	return body.name == "Player"
+
+# Get player object. Used by countdown timer to kill the player when they run out of time.
+# Returns null if player couldn't be found.
+func get_player():
+	return get_tree().current_scene.get_node_or_null("Player")
 
 # Check if a node exists and is inside the tree. Used to track if we have
 # Based on: https://godotengine.org/qa/37579/need-an-easy-way-to-check-which-ones-are-still-in-the-scene-tree
