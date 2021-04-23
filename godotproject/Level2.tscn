@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://sfx/Level2-NasaHQTheme.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Tiles/Level2/LaboratoryTilesUnsliced.png" type="Texture" id=2]
+[ext_resource path="res://Objects/HealthBug/HealthBug.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/Level2/LaboratoryObjectsUnsliced.png" type="Texture" id=4]
 [ext_resource path="res://Level0Boundaries.gd" type="Script" id=5]
 [ext_resource path="res://Level2.gd" type="Script" id=6]
@@ -958,8 +959,11 @@ scale = Vector2( 0.5, 1 )
 
 [node name="BlinkingComputer" parent="." instance=ExtResource( 24 )]
 position = Vector2( 593.788, 815.941 )
-frame = 14
+frame = 17
 
 [node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
 position = Vector2( 3080, 736 )
-frame = 14
+frame = 17
+
+[node name="HealthBug" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4714.67, 495.643 )
