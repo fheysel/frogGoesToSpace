@@ -40,7 +40,6 @@ enum DIFFICULTY {
 
 var difficulty = DIFFICULTY.EASY_MODE_e
 
-
 # This pause is applied in Global.gd (this script)
 # This refers to setting get_tree().paused
 func should_pause_game():
