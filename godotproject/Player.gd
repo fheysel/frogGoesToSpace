@@ -547,6 +547,7 @@ func collect_health_bug(health_bug):
 		health += 1
 	# Play Sound : Temporary sound waiting for Health Bug Sound
 	$GulpSoundPlayer.play(0)
+	$HealEffect.play()
 	health_bug.queue_free()
 	
 func trigger_screen_shake(duration = 0.8, frequency = 30, amplitude = 8, priority = 1):	
