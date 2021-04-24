@@ -2,13 +2,9 @@ extends HSlider
 
 var inhibit_next_sfx = false
 
-func set_volume(volume):
+func get_global_volume():
 	inhibit_next_sfx = true
-	value = volume
-	Global.sfx_volume = value
-
-func _ready():
-	Global.sfx_volume = value
+	value = Global.sfx_volume
 
 func _on_SfxVolumeSlider_value_changed(value):
 	Global.sfx_volume = value

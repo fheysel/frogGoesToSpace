@@ -4,6 +4,7 @@ export (PackedScene) var attract_scene
 
 var inhibit_pause = true
 var inhibit_hud = true
+var is_title_screen = true
 
 enum State {
 	MAIN_SCREEN,

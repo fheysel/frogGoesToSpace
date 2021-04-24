@@ -25,10 +25,17 @@ onready var InGameMenu := $InGameMenuLayer/InGameMenu
 
 onready var music_bus_idx := AudioServer.get_bus_index("Music")
 onready var sfx_bus_idx := AudioServer.get_bus_index("Sfx")
+### Used during gameplay
 # Music volume, from 0 (silent) to 1 (loud)
 var music_volume = 0
 # Sound effect volume, from 0 (silent) to 1 (loud)
 var sfx_volume = 0
+### Used during title screen
+# Title screen volume, from 0 (silent) to 1 (loud)
+# This is the initial volume for the game!
+var title_volume = 0.2
+### Used to transition volume state between the two
+var on_title_screen_last_frame = true
 
 #Game Difficulty Level:
 #Easy: Colliding with enemies does not do any damage to the player unless they are attacking
@@ -76,19 +83,44 @@ func _calc_bus_db(base_volume : float, fade_volume : float):
 	var db := linear2db(combined)
 	return db
 
+func _handle_volumes(on_title_screen):
+	if on_title_screen and not on_title_screen_last_frame:
+		# Transition from game to title
+		# Take the min of volumes
+		title_volume = min(music_volume, sfx_volume)
+		get_tree().call_group("TitleVolumeSlider", "get_global_volume")
+	elif not on_title_screen and on_title_screen_last_frame:
+		# Transition from title to game
+		music_volume = title_volume
+		sfx_volume = title_volume
+		get_tree().call_group("InGameVolumeSliders", "get_global_volume")
+	on_title_screen_last_frame = on_title_screen
+	var music_vdb
+	var sfx_vdb
+	if on_title_screen:
+		music_vdb = _calc_bus_db(title_volume, 1)
+		sfx_vdb   = _calc_bus_db(title_volume, 1)
+	else:
+		music_vdb = _calc_bus_db(music_volume, game_audio_volume_fadeout)
+		sfx_vdb   = _calc_bus_db(sfx_volume, 1)
+	AudioServer.set_bus_volume_db(music_bus_idx, music_vdb)
+	AudioServer.set_bus_volume_db(sfx_bus_idx, sfx_vdb)
+
+func _update_volumes():
+	get_tree().call_group("TitleVolumeSlider", "get_global_volume")
+	get_tree().call_group("InGameVolumeSliders", "get_global_volume")
+
 func _ready():
 	resource_queue.start()
 	swipe_anim_state_machine = $SideSwipeAnimationLayer/AnimationTree['parameters/playback']
 	swipe_anim_state_machine.start('idle')
+	call_deferred("_update_volumes")
 
 func _process(_delta_unused):
 	var pause_game_logic = should_pause_game()
 	get_tree().paused = pause_game_logic
 	# Adjust music bus volume
-	# Only calculate and update volume if it's not going to cause a
-	# division by zero
-	AudioServer.set_bus_volume_db(music_bus_idx, _calc_bus_db(music_volume, game_audio_volume_fadeout))
-	AudioServer.set_bus_volume_db(sfx_bus_idx, _calc_bus_db(sfx_volume, 1))
+	_handle_volumes(current_scene_has_property_set('is_title_screen'))
 	# Show debug mode text if we're in debug mode
 	$DebugModeTextLayer/DebugModeText.visible = debug_mode
 	# Handle debug mode button combinations
