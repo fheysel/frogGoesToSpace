@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Objects/HealthBug/HealthBug.gd" type="Script" id=1]
 [ext_resource path="res://Objects/HealthBug/health_bug.png" type="Texture" id=2]
+[ext_resource path="res://sfx/buzz.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -31,7 +32,7 @@ height = 208.495
 radius = 803.484
 height = 164.33
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="HealthBug" type="KinematicBody2D"]
 scale = Vector2( 0.01, 0.01 )
 collision_layer = 128
 collision_mask = 0
@@ -59,4 +60,12 @@ shape = SubResource( 5 )
 position = Vector2( -562.621, 171.02 )
 rotation = 1.5708
 shape = SubResource( 6 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 10.0
+autoplay = true
+max_distance = 1000.0
+attenuation = 2.0
+bus = "Sfx"
 [connection signal="body_entered" from="Orientation/PlayerHitBoxArea" to="." method="_on_PlayerHitBoxArea_body_entered"]
