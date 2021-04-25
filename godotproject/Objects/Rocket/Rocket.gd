@@ -66,14 +66,7 @@ func go_to_space():
 func _on_Timer_timeout():
 	# Rocket has now left
 	if frog_on_board:
-		$VictorySoundPlayer.play()
-		# Prevent high score screen from going until the sound effect is done
-		Global.get_node("HighScoreScreenLayer/HighScoreScreen").wait_in_initial_state = true
 		$EOL._on_EOL_body_entered(Global.get_player())
 	else:
 		var player = Global.get_player()
 		player.die()
-
-func _on_VictorySoundPlayer_finished():
-	# Once sound effect finishes playing, allow the high score screen to proceed
-	Global.get_node("HighScoreScreenLayer/HighScoreScreen").wait_in_initial_state = false

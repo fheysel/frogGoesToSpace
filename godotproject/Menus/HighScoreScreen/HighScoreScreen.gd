@@ -5,44 +5,28 @@ export (Color) var sub_color
 export (Font) var sub_fancy_font
 export (Color) var sub_fancy_color
 
-enum State {
-	HIDDEN,
-	SHOWN_WAITING,
-	INITIAL_DISPLAY,
-	THONK,
-	FINAL_SOUND,
-	WAIT_FOR_PRESS
-}
 const num_scores_saved = 5
 
 onready var hsc := $CenterContainer/VBoxContainer/HighScoresContainer
 onready var level_label := $CenterContainer/VBoxContainer/LevelLabel
+onready var anim_tree := $AnimationTree
+onready var anim_state_machine = $AnimationTree.get("parameters/playback")
 
-var wait_in_initial_state = false
+
 var all_level_data = {}
 var current_level = null
 var current_level_data = null
 var load_scene_after_high_score = null
-var current_state = State.HIDDEN
 var display_level_data = null
 var final_idx = -1
 var current_idx = -1
 
 func active():
-	return current_state != State.HIDDEN
+	var active = anim_state_machine.get_current_node() != 'hidden'
+	return active
 
 func close():
-	_change_state(State.HIDDEN)
-	$ThonkBigSFX.stop()
-	$ThonkSmallSFX.stop()
-
-func show_level(level_name, countdown, next_scene_path = null):
-	# Load this level's data
-	_change_level(level_name, countdown)
-	# Set our next scene properly. If nothing was provided, go to title screen next.
-	self.load_scene_after_high_score = next_scene_path
-	# Wait for user to close high score screen.
-	_change_state(State.WAIT_FOR_PRESS)
+	anim_state_machine.travel('hidden')
 
 func end_of_level(level_name, stars, time, countdown, next_scene_path):
 	# Set up everything needed to proceed properly
@@ -63,36 +47,28 @@ func end_of_level(level_name, stars, time, countdown, next_scene_path):
 	display_level_data.append(dict)
 	current_idx = num_scores_saved
 	_display_score_data(display_level_data, current_idx)
-	_change_state(State.SHOWN_WAITING)
+	anim_state_machine.travel('show_initial')
 
-func _change_state(state):
-	# If the state has a timer, start it.
-	if state == State.INITIAL_DISPLAY:
-		$InitialTimer.start()
-	elif state == State.THONK:
-		$ThonkTimer.start()
-	elif state == State.FINAL_SOUND:
-		$FinalSoundTimer.start()
-	current_state = state
 
 func _step_thonk_animation():
-	var current = display_level_data[current_idx]
-	display_level_data.remove(current_idx)
-	current_idx -= 1
-	display_level_data.insert(current_idx, current)
-	if current_idx != 5 and len(display_level_data) > 5:
-		display_level_data.pop_back()
-	_display_score_data(display_level_data, current_idx)
-	# This looks kinda funky, but it'll play the following notes:
-	# C D E G c
-	# It should sound nicer the higher of a place you get.
-	# Get 1st place to try it out :)
-	var rate = [2,3.0/2,5.0/4,9.0/8,1][current_idx]
-	$ThonkSmallSFX.stop()
-	$ThonkSmallSFX.pitch_scale = rate
-	$ThonkSmallSFX.play()
 	if current_idx <= final_idx:
-		_change_state(State.FINAL_SOUND)
+		anim_state_machine.travel('final_sound')
+	else:
+		var current = display_level_data[current_idx]
+		display_level_data.remove(current_idx)
+		current_idx -= 1
+		display_level_data.insert(current_idx, current)
+		if current_idx != 5 and len(display_level_data) > 5:
+			display_level_data.pop_back()
+		_display_score_data(display_level_data, current_idx)
+		# This looks kinda funky, but it'll play the following notes:
+		# C D E G c
+		# It should sound nicer the higher of a place you get.
+		# Get 1st place to try it out :)
+		var rate = [2,3.0/2,5.0/4,9.0/8,1][current_idx]
+		$ThonkSmallSFX.stop()
+		$ThonkSmallSFX.pitch_scale = rate
+		$ThonkSmallSFX.play()
 
 func _play_final_sound():
 	if final_idx >= num_scores_saved:
@@ -101,7 +77,6 @@ func _play_final_sound():
 	else:
 		# Play sound of score settling into place
 		$ThonkBigSFX.play()
-	_change_state(State.WAIT_FOR_PRESS)
 
 # This function is unit testable
 func _compare_scores(new, old):
@@ -210,22 +185,16 @@ func _ready():
 	_load_from_disk()
 
 func _process(_delta):
-	self.visible = (current_state != State.HIDDEN)
-	match current_state:
-		State.WAIT_FOR_PRESS:
-			if Input.is_action_pressed("jump") \
-			or Input.is_action_pressed("menu") \
-			or Input.is_action_pressed("tongue"):
-				Global.fade_to_scene(load_scene_after_high_score)
-		State.SHOWN_WAITING:
-			if !wait_in_initial_state:
-				if final_idx == num_scores_saved:
-					_change_state(State.FINAL_SOUND)
-				else:
-					# Save to disk
-					_save_to_disk()
-					# Display the score coming in
-					_change_state(State.INITIAL_DISPLAY)
+	var button_pressed = Input.is_action_pressed("jump") or \
+		Input.is_action_pressed("menu") or \
+		Input.is_action_pressed("tongue")
+	anim_tree.set('parameters/conditions/button_pressed', button_pressed)
+	var final_level = Global.current_scene_has_property_set("final_level")
+	anim_tree.set('parameters/conditions/eol_sound', !final_level)
+	anim_tree.set('parameters/conditions/final_eol_sound', final_level)
+
+func _go_to_next_level():
+	Global.fade_to_scene(load_scene_after_high_score)
 
 func _get_save_path():
 	return "user://scores.json"
@@ -260,16 +229,3 @@ func _load_from_disk():
 		printerr("Error loading scores from file")
 		return
 	all_level_data = json_result.result
-
-func _on_ThonkTimer_timeout():
-	if current_state == State.THONK:
-		_step_thonk_animation()
-		$ThonkTimer.start()
-
-func _on_InitialTimer_timeout():
-	if current_state == State.INITIAL_DISPLAY:
-		_change_state(State.THONK)
-
-func _on_FinalSoundTimer_timeout():
-	if current_state == State.FINAL_SOUND:
-		_play_final_sound()
