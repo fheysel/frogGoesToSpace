@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/birdAttack.wav-9b39a2eb211251e7e13af776114b9349.sample"
+
+[deps]
+
+source_file="res://sfx/birdAttack.wav"
+dest_files=[ "res://.import/birdAttack.wav-9b39a2eb211251e7e13af776114b9349.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -19,7 +19,6 @@ var attackDamage = 1
 var attackState = STATE.idle_e
 var is_dead = false
 
-var tongue_can_damage = true
 var health = 3
 	
 func _ready():
@@ -60,7 +59,7 @@ func take_damage(attack_damage):
 	if !is_dead and $InvulnerableTimer.is_stopped():
 		# Set the enemy in the invulnerable state
 		$InvulnerableTimer.start()
-		attackState = STATE.taking_damage_e
+		attackState = STATE.idle_e
 		# Handle enemy flashing after taking damage
 		$InvulnerableFlashTimer.start()
 		$Orientation/Sprite.modulate.a = 0.3

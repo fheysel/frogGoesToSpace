@@ -24,10 +24,14 @@ var attackState = STATE.idle_e
 var attackDamage = 1
 var attackFrame = 0
 var bounceCount = 0
-
-
-
 var jumpForce = 205
+
+
+func _ready():
+	# If set to hard diffictult enable collisions from hitting enemies	
+	if($"/root/Global".difficulty == $"/root/Global".DIFFICULTY.HARD_MODE_e):
+		$Orientation/PlayerCollision.set_collision_mask_bit(1,1)
+
 
 func _physics_process(_delta):	
 	if !is_dead:
@@ -108,16 +112,12 @@ func take_damage(attack_damage):
 			dead()
 		else:
 			# Set the enemy in the invulnerable state
-			attackState = STATE.taking_damage_e
 			$Orientation/Sprite_SwipeAttack.visible = false
 			$Orientation/Sprite_PNG.visible = true
 			$InvulnerableTimer.start()
 			# Handle enemy flashing after taking damage
 			$InvulnerableFlashTimer.start()
 			$Orientation/Sprite_PNG.modulate.a = 0.3
-			# Set sprite animation
-	#		$Orientation/Sprite_PNG.play("hurt")
-			# Handle enemy health
 
 func dead():
 	is_dead = true
@@ -128,10 +128,7 @@ func dead():
 func _on_InvulnerableTimer_timeout():
 	# Set player to visible
 	$Orientation/Sprite_PNG.modulate.a = 1
-	# Re-enable their logic
-	attackState = STATE.idle_e
-	# Trigger the raycast so they will shoot at the player
-#	trigger_raycast()
+
 
 func _on_InvulnerableFlashTimer_timeout():
 	if $InvulnerableTimer.is_stopped():
@@ -142,12 +139,14 @@ func _on_InvulnerableFlashTimer_timeout():
 		$Orientation/Sprite_PNG.modulate.a = 1 - $Orientation/Sprite_PNG.modulate.a
 
 
-func _on_PlayerDetection_body_entered(body):
-	pass
-
 func _on_ActionDelay_timeout():
 	if attackState == STATE.detected_player_e:
 		attackState = STATE.attacking_player_e
 		launch_Attack()
 	elif attackDamage == STATE.hit_wall_e:
 		attackState = STATE.idle_e
+
+
+func _on_PlayerCollision_body_entered(body):
+	if(body.name == "Player"):
+		body.takeDamage(attackDamage)

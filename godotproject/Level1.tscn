@@ -409,50 +409,6 @@ bus = "Music"
 position = Vector2( 10800, -160 )
 next_path = "res://Level2.tscn"
 
-[node name="EnemyBird" parent="." instance=ExtResource( 20 )]
-position = Vector2( 1648, -384 )
-collision_layer = 0
-
-[node name="EnemyBird2" parent="." instance=ExtResource( 20 )]
-position = Vector2( 3168, -792 )
-collision_layer = 0
-
-[node name="EnemyBird4" parent="." instance=ExtResource( 20 )]
-position = Vector2( 4808, -488 )
-collision_layer = 0
-
-[node name="EnemyBird5" parent="." instance=ExtResource( 20 )]
-position = Vector2( 5512, -472 )
-collision_layer = 0
-
-[node name="EnemyBird7" parent="." instance=ExtResource( 20 )]
-position = Vector2( 5912, -1408 )
-collision_layer = 0
-
-[node name="EnemyBird13" parent="." instance=ExtResource( 20 )]
-position = Vector2( 4336, -1600 )
-collision_layer = 0
-
-[node name="EnemyBird12" parent="." instance=ExtResource( 20 )]
-position = Vector2( 6560, -1416 )
-collision_layer = 0
-
-[node name="EnemyBird8" parent="." instance=ExtResource( 20 )]
-position = Vector2( 7480, -880 )
-collision_layer = 0
-
-[node name="EnemyBird9" parent="." instance=ExtResource( 20 )]
-position = Vector2( 8008, -1568 )
-collision_layer = 0
-
-[node name="EnemyBird10" parent="." instance=ExtResource( 20 )]
-position = Vector2( 8480, -1576 )
-collision_layer = 0
-
-[node name="EnemyBird11" parent="." instance=ExtResource( 20 )]
-position = Vector2( 7648, -496 )
-collision_layer = 0
-
 [node name="enemy-Ant2" parent="." instance=ExtResource( 21 )]
 position = Vector2( 3288, -672 )
 
@@ -587,3 +543,36 @@ position = Vector2( 7928, -1280 )
 
 [node name="Rat6" parent="." instance=ExtResource( 24 )]
 position = Vector2( 7240, -1280 )
+
+[node name="Bird" parent="." instance=ExtResource( 20 )]
+position = Vector2( 1648, -400 )
+
+[node name="Bird2" parent="." instance=ExtResource( 20 )]
+position = Vector2( 3161, -792 )
+
+[node name="Bird3" parent="." instance=ExtResource( 20 )]
+position = Vector2( 4808, -506 )
+
+[node name="Bird4" parent="." instance=ExtResource( 20 )]
+position = Vector2( 5512, -493 )
+
+[node name="Bird5" parent="." instance=ExtResource( 20 )]
+position = Vector2( 7648, -504 )
+
+[node name="Bird6" parent="." instance=ExtResource( 20 )]
+position = Vector2( 7470, -892 )
+
+[node name="Bird7" parent="." instance=ExtResource( 20 )]
+position = Vector2( 4336, -1592 )
+
+[node name="Bird8" parent="." instance=ExtResource( 20 )]
+position = Vector2( 5912, -1405 )
+
+[node name="Bird9" parent="." instance=ExtResource( 20 )]
+position = Vector2( 6560, -1409 )
+
+[node name="Bird10" parent="." instance=ExtResource( 20 )]
+position = Vector2( 8008, -1560 )
+
+[node name="Bird11" parent="." instance=ExtResource( 20 )]
+position = Vector2( 8480, -1560 )
