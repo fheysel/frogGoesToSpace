@@ -544,7 +544,7 @@ states/tongue_retract/node = SubResource( 65 )
 states/tongue_retract/position = Vector2( 390.719, 137.75 )
 transitions = [ "Idle", "Hop", SubResource( 66 ), "Hop", "Idle", SubResource( 67 ), "Idle", "tongue_launch", SubResource( 68 ), "tongue_retract", "Idle", SubResource( 69 ), "Idle", "Dead", SubResource( 70 ), "Idle", "Launch", SubResource( 71 ), "Launch", "Land", SubResource( 72 ), "Land", "Idle", SubResource( 73 ), "tongue_launch", "tongue_retract", SubResource( 74 ), "Launch", "jump_tongue_launch", SubResource( 75 ), "jump_tongue_launch", "jump_tongue_retract", SubResource( 76 ), "jump_tongue_launch", "swing", SubResource( 77 ), "swing", "jump_tongue_retract", SubResource( 78 ), "jump_tongue_retract", "Land", SubResource( 79 ), "Hop", "tongue_launch", SubResource( 80 ), "Land", "jump_tongue_launch", SubResource( 81 ), "Idle", "Hurt", SubResource( 82 ), "Hurt", "Idle", SubResource( 83 ), "Hop", "jump_tongue_launch", SubResource( 84 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -193.621, -9.04485 )
+graph_offset = Vector2( -193.621, -355.448 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=86]
 
