@@ -1,11 +1,10 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
 [ext_resource path="res://Menus/HighScoreScreen/HighScoreScreen.gd" type="Script" id=3]
 [ext_resource path="res://sfx/hs_big_tap.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/hs_small_tap.wav" type="AudioStream" id=5]
-[ext_resource path="res://sfx/no_high_score.wav" type="AudioStream" id=6]
 [ext_resource path="res://sfx/endVictory.wav" type="AudioStream" id=7]
 [ext_resource path="res://sfx/end_of_level.wav" type="AudioStream" id=8]
 
@@ -128,26 +127,12 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("SadSFX")
+tracks/3/path = NodePath("EndLevelSFX")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "stop"
-} ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("EndLevelSFX")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -378,10 +363,6 @@ bus = "Sfx"
 [node name="ThonkSmallSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
 stream = ExtResource( 5 )
 volume_db = -3.0
-bus = "Sfx"
-
-[node name="SadSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
-stream = ExtResource( 6 )
 bus = "Sfx"
 
 [node name="EndLevelSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]

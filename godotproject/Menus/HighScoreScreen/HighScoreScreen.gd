@@ -71,11 +71,8 @@ func _step_thonk_animation():
 		$ThonkSmallSFX.play()
 
 func _play_final_sound():
-	if final_idx >= num_scores_saved:
-		# If we didn't get a high score, play a sad sound :(
-		$SadSFX.play()
-	else:
-		# Play sound of score settling into place
+	if final_idx < num_scores_saved:
+		# Play sound of score settling into place, only if it moved
 		$ThonkBigSFX.play()
 
 # This function is unit testable
