@@ -81,6 +81,8 @@ var star_piece_count = 0
 
 var health = MAX_HEALTH
 
+var input_frame_counter = 0
+
 func fequal(x, y):
 	# Function to check if two floating point numbers are approximately equal.
 	return abs(x - y) < 0.01
@@ -104,25 +106,13 @@ func update_swing_radius_angle():
 	return swing_vec
 
 func get_input():
-	var l = Input.is_action_pressed("walk_left")
-	var r = Input.is_action_pressed("walk_right")
-	var u = Input.is_action_pressed("look_up")
-	var d = Input.is_action_pressed("look_down")
-	user_direction.x = 0
-	if l:
-		user_direction.x -= 1
-	if r:
-		user_direction.x += 1
-	user_direction.y = 0
-	if u:
-		user_direction.y -= 1
-	if d:
-		user_direction.y += 1
-	jump_pressed = Input.is_action_just_pressed("jump")
-	jump_held = Input.is_action_pressed("jump")
-	tongue_pressed = Input.is_action_just_pressed("tongue")
-	tongue_held = Input.is_action_pressed("tongue")
-
+	var inputs = $PlayerInputHandler.get_input(input_frame_counter)
+	user_direction = inputs[0]
+	jump_pressed = inputs[1]
+	jump_held = inputs[2]
+	tongue_pressed = inputs[3]
+	tongue_held = inputs[4]
+	input_frame_counter += 1
 
 func handle_normal_horizontal_movement(delta) -> int:
 	# We break movement up into two main categories: ground and air

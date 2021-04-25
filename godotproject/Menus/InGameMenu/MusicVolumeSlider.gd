@@ -1,7 +1,7 @@
 extends HSlider
 
-func _ready():
-	Global.music_volume = value
+func get_global_volume():
+	value = Global.music_volume
 
 func _on_MusicVolumeSlider_value_changed(value):
 	Global.music_volume = value
