@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Fonts/TovariSans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Menus/Menu.tres" type="Theme" id=2]
 [ext_resource path="res://Menus/HighScoreScreen/HighScoreScreen.gd" type="Script" id=3]
 [ext_resource path="res://sfx/hs_big_tap.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/hs_small_tap.wav" type="AudioStream" id=5]
+[ext_resource path="res://sfx/no_high_score.wav" type="AudioStream" id=6]
+[ext_resource path="res://sfx/endVictory.wav" type="AudioStream" id=7]
+[ext_resource path="res://sfx/end_of_level.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -22,11 +25,275 @@ font_data = ExtResource( 1 )
 size = 30
 font_data = ExtResource( 1 )
 
+[sub_resource type="Animation" id=5]
+resource_name = "do_thonk"
+length = 0.3
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_step_thonk_animation"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "final_sound"
+length = 0.7
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_play_final_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "go_to_next_level"
+length = 30.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_go_to_next_level"
+} ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "going_to_level"
+length = 0.1
+
+[sub_resource type="Animation" id=8]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("ThonkBigSFX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("ThonkSmallSFX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("SadSFX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("EndLevelSFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 1.5
+tracks/0/type = "audio"
+tracks/0/path = NodePath("EndLevelSFX")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=10]
+length = 3.8
+tracks/0/type = "audio"
+tracks/0/path = NodePath("EndLevelSFX")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( -0.3 )
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "wait_for_press"
+length = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "do_thonk"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "final_sound"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "go_to_next_level"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "hidden"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "play_eol_sound"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "play_final_eol_sound"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "show_initial"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "wait_for_press"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+advance_condition = "eol_sound"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 2
+advance_condition = "final_eol_sound"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+advance_condition = "button_pressed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachine" id=30]
+states/do_thonk/node = SubResource( 13 )
+states/do_thonk/position = Vector2( 788, 108 )
+states/final_sound/node = SubResource( 14 )
+states/final_sound/position = Vector2( 1008, 108 )
+states/go_to_next_level/node = SubResource( 15 )
+states/go_to_next_level/position = Vector2( 1008, 253 )
+states/hidden/node = SubResource( 16 )
+states/hidden/position = Vector2( 303, 253 )
+states/play_eol_sound/node = SubResource( 17 )
+states/play_eol_sound/position = Vector2( 547, 74 )
+states/play_final_eol_sound/node = SubResource( 18 )
+states/play_final_eol_sound/position = Vector2( 547, 137 )
+states/show_initial/node = SubResource( 19 )
+states/show_initial/position = Vector2( 308, 117 )
+states/wait_for_press/node = SubResource( 20 )
+states/wait_for_press/position = Vector2( 1008, 179 )
+transitions = [ "hidden", "show_initial", SubResource( 21 ), "show_initial", "play_eol_sound", SubResource( 22 ), "show_initial", "play_final_eol_sound", SubResource( 23 ), "play_eol_sound", "do_thonk", SubResource( 24 ), "play_final_eol_sound", "do_thonk", SubResource( 25 ), "do_thonk", "final_sound", SubResource( 26 ), "final_sound", "wait_for_press", SubResource( 27 ), "wait_for_press", "go_to_next_level", SubResource( 28 ), "go_to_next_level", "hidden", SubResource( 33 ) ]
+start_node = "hidden"
+graph_offset = Vector2( 153.243, 96 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=31]
+
 [node name="HighScoreScreenLayer" type="CanvasLayer"]
 
 [node name="HighScoreScreen" type="MarginContainer" parent="."]
+visible = false
 margin_right = 640.0
 margin_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 640, 512 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -105,14 +372,6 @@ margin_right = 218.0
 margin_bottom = 14.0
 text = "Score"
 
-[node name="ThonkTimer" type="Timer" parent="HighScoreScreen"]
-wait_time = 0.3
-
-[node name="InitialTimer" type="Timer" parent="HighScoreScreen"]
-wait_time = 2.0
-
-[node name="FinalSoundTimer" type="Timer" parent="HighScoreScreen"]
-
 [node name="ThonkBigSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
 stream = ExtResource( 4 )
 bus = "Sfx"
@@ -121,6 +380,31 @@ bus = "Sfx"
 stream = ExtResource( 5 )
 volume_db = -3.0
 bus = "Sfx"
-[connection signal="timeout" from="HighScoreScreen/ThonkTimer" to="HighScoreScreen" method="_on_ThonkTimer_timeout"]
-[connection signal="timeout" from="HighScoreScreen/InitialTimer" to="HighScoreScreen" method="_on_InitialTimer_timeout"]
-[connection signal="timeout" from="HighScoreScreen/FinalSoundTimer" to="HighScoreScreen" method="_on_FinalSoundTimer_timeout"]
+
+[node name="SadSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
+stream = ExtResource( 6 )
+bus = "Sfx"
+
+[node name="EndLevelSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]
+stream = ExtResource( 7 )
+bus = "Sfx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HighScoreScreen"]
+anims/do_thonk = SubResource( 5 )
+anims/final_sound = SubResource( 6 )
+anims/go_to_next_level = SubResource( 7 )
+anims/going_to_level = SubResource( 32 )
+anims/hidden = SubResource( 8 )
+anims/play_eol_sound = SubResource( 9 )
+anims/play_final_eol_sound = SubResource( 10 )
+anims/show_initial = SubResource( 11 )
+anims/wait_for_press = SubResource( 12 )
+
+[node name="AnimationTree" type="AnimationTree" parent="HighScoreScreen"]
+tree_root = SubResource( 30 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 31 )
+parameters/conditions/button_pressed = false
+parameters/conditions/eol_sound = false
+parameters/conditions/final_eol_sound = false

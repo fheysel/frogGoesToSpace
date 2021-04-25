@@ -2,6 +2,7 @@ extends Node2D
 
 # Each level has to have a name in it now, this will be displayed on the high score screen
 const level_name := "Get to Ze Rocket!"
+const final_level := true
 
 # Indicate that we use the count-down timer
 const use_countdown_timer := true

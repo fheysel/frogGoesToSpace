@@ -21,12 +21,12 @@ func activateJet():
 		trauma_level += 1
 		$Jet1.visible = true
 		$Jet1.play("launch_jetstream")
-		$JetBoom.play(0)
+		$JetBoom1.play(0)
 	elif trauma_level == 1:
 		trauma_level += 1
 		$Jet2.visible = true
 		$Jet2.play("launch_jetstream")
-		$JetBoom.play(0)
+		$JetBoom2.play(0)
 		blastOff = true
 	
 
@@ -59,17 +59,14 @@ func go_to_space():
 	var player = Global.get_player()
 	player.zoom_out(4)
 	player.trigger_screen_shake(10, 30, 8, 1)
-	$JetBoom.play()
+	$JetBoomNonLocational.play()
 	$Timer.start()
 	
 	
 func _on_Timer_timeout():
 	# Rocket has now left
 	if frog_on_board:
-		$VictorySoundPlayer.play()
 		$EOL._on_EOL_body_entered(Global.get_player())
 	else:
 		var player = Global.get_player()
-		player.die()	
-		
-
+		player.die()
