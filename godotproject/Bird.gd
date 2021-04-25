@@ -50,7 +50,7 @@ func _physics_process(delta):
 			if is_instance_valid(RC):
 				if RC.name == "Player":
 					attackState = STATE.detected_player_e
-					
+					$AttackSound.play()
 					$ActionDelay.start()
 		
 		elif attackState == STATE.attacking_player_e:		

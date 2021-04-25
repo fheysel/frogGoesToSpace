@@ -88,7 +88,7 @@ script = ExtResource( 3 )
 position = Vector2( 24.375, -1201.04 )
 scale = Vector2( 15, 15 )
 frames = SubResource( 5 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Sprite_SwipeAttack" type="AnimatedSprite" parent="Orientation"]
@@ -96,7 +96,7 @@ visible = false
 position = Vector2( -356.729, -1152.89 )
 scale = Vector2( 14.8552, 14.649 )
 frames = SubResource( 13 )
-frame = 6
+frame = 4
 playing = true
 
 [node name="SwipeAttack" type="Area2D" parent="Orientation/Sprite_SwipeAttack"]
@@ -132,6 +132,8 @@ cast_to = Vector2( -6000, 0 )
 collision_mask = 2
 
 [node name="PlayerCollision" type="Area2D" parent="Orientation"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/PlayerCollision"]
 position = Vector2( 0, 243.75 )
