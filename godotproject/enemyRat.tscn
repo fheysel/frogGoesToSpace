@@ -88,7 +88,6 @@ script = ExtResource( 3 )
 position = Vector2( 24.375, -1201.04 )
 scale = Vector2( 15, 15 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="Sprite_SwipeAttack" type="AnimatedSprite" parent="Orientation"]

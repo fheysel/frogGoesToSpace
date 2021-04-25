@@ -112,7 +112,6 @@ func take_damage(attack_damage):
 			dead()
 		else:
 			# Set the enemy in the invulnerable state
-#			attackState = STATE.taking_damage_e
 			$Orientation/Sprite_SwipeAttack.visible = false
 			$Orientation/Sprite_PNG.visible = true
 			$InvulnerableTimer.start()
@@ -129,10 +128,7 @@ func dead():
 func _on_InvulnerableTimer_timeout():
 	# Set player to visible
 	$Orientation/Sprite_PNG.modulate.a = 1
-	# Re-enable their logic
-#	attackState = STATE.idle_e
-	# Trigger the raycast so they will shoot at the player
-#	trigger_raycast()
+
 
 func _on_InvulnerableFlashTimer_timeout():
 	if $InvulnerableTimer.is_stopped():
