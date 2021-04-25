@@ -626,7 +626,6 @@ player_nodepath = NodePath("../../Level_2/Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -5.0
 autoplay = true
 bus = "Music"
 
@@ -959,11 +958,11 @@ scale = Vector2( 0.5, 1 )
 
 [node name="BlinkingComputer" parent="." instance=ExtResource( 24 )]
 position = Vector2( 593.788, 815.941 )
-frame = 17
+frame = 1
 
 [node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
 position = Vector2( 3080, 736 )
-frame = 17
+frame = 1
 
 [node name="HealthBug" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4714.67, 495.643 )
