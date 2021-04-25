@@ -76,14 +76,13 @@ func take_damage(damage):
 	if !is_dead and $InvulnerableTimer.is_stopped():
 		# Set the enemy in the invulnerable state
 		$InvulnerableTimer.start()
-#		velocity.y = 0;
-#		attackState = STATE.taking_damage_e
+
 		# Handle enemy flashing after taking damage
 		$InvulnerableFlashTimer.start()
 		$Orientation/Sprite.modulate.a = 0.3
+		
 		# Handle enemy health
 		health = health - damage
-#		attackState = STATE.idle_e
 		if health <= 0:
 			dead()
 	
