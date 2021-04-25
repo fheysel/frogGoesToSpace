@@ -81,8 +81,6 @@ func take_damage(damage):
 		# Handle enemy flashing after taking damage
 		$InvulnerableFlashTimer.start()
 		$Orientation/Sprite.modulate.a = 0.3
-		# Set sprite animation
-		$Orientation/Sprite.play("hurt")
 		# Handle enemy health
 		health = health - damage
 #		attackState = STATE.idle_e
@@ -97,7 +95,6 @@ func dead():
 func _on_ActionDelay_timeout():
 	if !is_dead:
 		if attackState == STATE.detected_player_e:
-			print("going to attack state")
 			attackState = STATE.attacking_player_e
 
 func _on_PlayerHitBoxArea_body_entered(body):
