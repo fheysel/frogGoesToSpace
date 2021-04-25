@@ -73,7 +73,11 @@ func _step_thonk_animation():
 func _play_final_sound():
 	if final_idx >= num_scores_saved:
 		# If we didn't get a high score, play a sad sound :(
-		$SadSFX.play()
+		#$SadSFX.play()
+		# nvm. Removed for stylistic reasons.
+		# Node will be left in to keep this change simple and reduce conflicts
+		# with the other audio-related change.
+		pass
 	else:
 		# Play sound of score settling into place
 		$ThonkBigSFX.play()
