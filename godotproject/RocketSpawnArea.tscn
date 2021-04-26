@@ -21,8 +21,7 @@ one_shot = true
 position = Vector2( -208, 200 )
 
 [node name="RocketLauncher" type="Sprite" parent="."]
-position = Vector2( -210.488, 195.887 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( -210, 201 )
 z_index = -1
 texture = ExtResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
