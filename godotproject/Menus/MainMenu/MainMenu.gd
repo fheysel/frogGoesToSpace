@@ -1,7 +1,6 @@
 extends Node
 
 export (PackedScene) var attract_scene
-export (PackedScene) var video_scene
 
 var inhibit_pause = true
 var inhibit_hud = true
@@ -29,21 +28,23 @@ func transition_update_ui():
 	set_node_paused($MainMenuLayer, video)
 	set_node_paused($ViewportLayer, !video)
 	if video:
+		# Hack to remove video without rewriting huge chunk of code
+		next_state = State.ATTRACT
 		# We can't seem to pause stuff properly... so instead we just
 		# dynamically create and remove the attract scene from the tree.
 		# This also saves having to try and reset it.
 		match next_state:
-			State.VIDEO:
-				video_node = video_scene.instance()
-				did_video_last = true
-				$AudioStreamPlayer.stop()
+			# State.VIDEO:
+			# 	video_node = video_scene.instance()
+			# 	did_video_last = true
+			# 	$AudioStreamPlayer.stop()
 			State.ATTRACT:
 				video_node = attract_scene.instance()
-				did_video_last = false
+				# did_video_last = false
 		$ViewportLayer/AttractModeViewportContainer/Viewport.add_child(video_node)
 		match next_state:
-			State.VIDEO:
-				video_node.connect("finished", self, "_on_VideoPlayer_finished")
+			# State.VIDEO:
+			# 	video_node.connect("finished", self, "_on_VideoPlayer_finished")
 			State.ATTRACT:
 				video_node.get_node("Player/PlayerInputHandler").connect("playback_complete", self, "_on_VideoPlayer_finished")
 	else:
@@ -118,7 +119,8 @@ func _on_Hard_pressed():
 	start_game()
 
 func _on_FrogWalking_done_walking():
-	go_to_state(State.ATTRACT if did_video_last else State.VIDEO)
+	# go_to_state(State.ATTRACT if did_video_last else State.VIDEO)
+	go_to_state(State.ATTRACT)
 
 func _on_VideoPlayer_finished():
 	go_to_state(State.MAIN_SCREEN)

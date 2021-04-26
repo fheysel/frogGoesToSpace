@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Menus/MainMenu/DancingLetterContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/MainMenu/FrogWalking.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://Tiles/MainMenu/volume.png" type="Texture" id=11]
 [ext_resource path="res://Menus/MainMenu/VolumeSlider.gd" type="Script" id=12]
 [ext_resource path="res://Tiles/MainMenu/hslider_grabber.png" type="Texture" id=13]
-[ext_resource path="res://Menus/MainMenu/VideoPlayer.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=1]
 length = 0.1
@@ -127,7 +126,6 @@ tracks/2/keys = {
 [node name="MainMenuRootNode" type="Node"]
 script = ExtResource( 3 )
 attract_scene = ExtResource( 7 )
-video_scene = ExtResource( 14 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
