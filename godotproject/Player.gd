@@ -518,6 +518,9 @@ func die():
 	$DeathSoundPlayer.play()
 	# Start our death animation
 	animation_mode.travel("Dead")
+	#set player tongue to invisible
+	$PlayerTongue.visible = false
+	$Line2D.visible = false
 	# The animation will take care of all other effects by calling functions and setting variables
 	# Detach tongue (fixes FGTS-192)
 	stop_swing()
