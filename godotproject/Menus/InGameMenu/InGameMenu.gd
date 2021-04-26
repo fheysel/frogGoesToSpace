@@ -7,7 +7,6 @@ onready var default_screen = get_node(default_screen_path)
 func init_screen_list():
 	# This is a list of screens in the current menu.
 	screens.append($PauseSubmenu)
-	screens.append($HelpSubmenu)
 	screens.append($QuitVerifySubmenu)
 
 var screens = []
