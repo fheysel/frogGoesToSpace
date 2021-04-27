@@ -634,7 +634,7 @@ script = ExtResource( 9 )
 Star = ExtResource( 16 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 328, 904 )
+position = Vector2( 1150, 400 )
 collision_layer = 34
 collision_mask = 17
 
