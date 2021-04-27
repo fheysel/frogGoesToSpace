@@ -66,8 +66,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=14]
-radius = 86.4373
-height = 265.734
+radius = 5.0
+height = 15.0
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 800, 266.667 )
@@ -95,18 +95,12 @@ visible = false
 position = Vector2( -356.729, -1152.89 )
 scale = Vector2( 75, 75 )
 frames = SubResource( 13 )
-frame = 4
 playing = true
 
 [node name="SwipeAttack" type="Area2D" parent="Orientation/Sprite_SwipeAttack"]
-position = Vector2( -65.8981, 112.9 )
-rotation = -0.389208
-scale = Vector2( 0.203, 0.1 )
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Orientation/Sprite_SwipeAttack/SwipeAttack"]
-position = Vector2( 32.3071, 30.641 )
-rotation = 0.419561
-scale = Vector2( 1.19443, 1.244 )
+position = Vector2( -10.1769, 18.6219 )
 shape = SubResource( 14 )
 
 [node name="RayCastFront_Top" type="RayCast2D" parent="Orientation"]
