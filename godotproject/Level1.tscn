@@ -289,7 +289,7 @@ Spike = ExtResource( 13 )
 Star = ExtResource( 12 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 10403.5, -1264.19 )
+position = Vector2( 22, 272 )
 collision_layer = 34
 collision_mask = 17
 
