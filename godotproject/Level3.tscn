@@ -658,14 +658,14 @@ player_nodepath = NodePath("../../Level3/Player")
 [node name="ParallaxLayerSky" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( 1464, -6352 )
-scale = Vector2( 49.2, 33.0909 )
+position = Vector2( 1464, -4936 )
+scale = Vector2( 42.5, 25.0454 )
 texture = ExtResource( 7 )
 centered = false
 
 [node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( -2464, -6352 )
-scale = Vector2( 49.2, 33.0909 )
+position = Vector2( -864, -4912 )
+scale = Vector2( 29.2, 24.9091 )
 texture = ExtResource( 7 )
 centered = false
 
