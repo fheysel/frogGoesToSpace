@@ -674,7 +674,7 @@ motion_scale = Vector2( 0.7, 0.7 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerClouds"]
 position = Vector2( -888, -1688 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 centered = false
 flip_h = true
