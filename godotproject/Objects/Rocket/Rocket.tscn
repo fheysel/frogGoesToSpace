@@ -11,92 +11,92 @@
 [ext_resource path="res://Objects/Rocket/Door.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Rocket/glowingDoor.png" type="Texture" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=69]
 extents = Vector2( 14.7332, 1.92216 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 7 )
+region = Rect2( 560, 0, 140, 119 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 7 )
+region = Rect2( 560, 0, 140, 119 )
 
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 7 )
-region = Rect2( 560, 0, 140, 119 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 7 )
-region = Rect2( 560, 0, 140, 119 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 7 )
 region = Rect2( 0, 119, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=73]
 atlas = ExtResource( 7 )
 region = Rect2( 140, 119, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=74]
 atlas = ExtResource( 7 )
 region = Rect2( 280, 119, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=75]
 atlas = ExtResource( 7 )
 region = Rect2( 420, 119, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=76]
 atlas = ExtResource( 7 )
 region = Rect2( 560, 119, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 238, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=78]
 atlas = ExtResource( 7 )
 region = Rect2( 140, 238, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=79]
 atlas = ExtResource( 7 )
 region = Rect2( 280, 238, 140, 119 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=80]
 animations = [ {
-"frames": [ SubResource( 72 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ) ],
 "loop": false,
 "name": "open",
 "speed": 15.0
 } ]
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 7 )
 region = Rect2( 280, 238, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=82]
 atlas = ExtResource( 7 )
 region = Rect2( 420, 238, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=83]
 atlas = ExtResource( 7 )
 region = Rect2( 560, 238, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=84]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 357, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=85]
 atlas = ExtResource( 7 )
 region = Rect2( 140, 357, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=86]
 atlas = ExtResource( 7 )
 region = Rect2( 280, 357, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=87]
 atlas = ExtResource( 7 )
 region = Rect2( 420, 357, 140, 119 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=88]
 atlas = ExtResource( 7 )
 region = Rect2( 560, 357, 140, 119 )
 
-[sub_resource type="SpriteFrames" id=20]
+[sub_resource type="SpriteFrames" id=89]
 animations = [ {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"frames": [ SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
 "loop": false,
 "name": "close",
 "speed": 15.0
@@ -294,7 +294,7 @@ region = Rect2( 40, 360, 40, 40 )
 atlas = ExtResource( 10 )
 region = Rect2( 80, 360, 40, 40 )
 
-[sub_resource type="SpriteFrames" id=69]
+[sub_resource type="SpriteFrames" id=90]
 animations = [ {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
 "loop": true,
@@ -302,10 +302,10 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=70]
+[sub_resource type="RectangleShape2D" id=91]
 extents = Vector2( 10.8332, 10.2942 )
 
-[sub_resource type="RectangleShape2D" id=71]
+[sub_resource type="RectangleShape2D" id=92]
 extents = Vector2( 52.0005, 67.932 )
 
 [node name="Rocket" type="Node2D"]
@@ -320,22 +320,22 @@ __meta__ = {
 }
 
 [node name="Jet1" parent="." instance=ExtResource( 2 )]
-position = Vector2( -130, 622.094 )
-scale = Vector2( 0.11, 0.139571 )
+position = Vector2( -129.896, 610.152 )
+scale = Vector2( 0.580442, 0.529006 )
 z_index = -1
-frame = 6
+frame = 0
 
 [node name="Jet2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 130, 622.094 )
-scale = Vector2( 0.11, 0.14 )
+position = Vector2( 129.015, 610.094 )
+scale = Vector2( 0.639295, 0.529 )
 z_index = -1
-frame = 6
+frame = 0
 
 [node name="TraumaBlock" parent="." instance=ExtResource( 3 )]
-position = Vector2( -128, 624 )
+position = Vector2( -126.003, 623.009 )
 
 [node name="TraumaBlock2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 136, 624 )
+position = Vector2( 136.454, 623.08 )
 
 [node name="JetBoom1" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( -130.353, 576.099 )
@@ -368,25 +368,25 @@ script = ExtResource( 9 )
 
 [node name="doorWallBot" type="CollisionShape2D" parent="Door"]
 position = Vector2( 2.92474, 367.414 )
-shape = SubResource( 1 )
+shape = SubResource( 69 )
 one_way_collision = true
 
 [node name="doorWallLeft" type="CollisionShape2D" parent="Door"]
 position = Vector2( -9.95784, 350.765 )
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 69 )
 one_way_collision = true
 
 [node name="doorWallRight" type="CollisionShape2D" parent="Door"]
 position = Vector2( 15.5502, 350.745 )
 rotation = -1.5708
-shape = SubResource( 1 )
+shape = SubResource( 69 )
 one_way_collision = true
 
 [node name="door_open" type="AnimatedSprite" parent="Door"]
 position = Vector2( 2.44329, 348.721 )
 scale = Vector2( 0.672593, 0.772235 )
-frames = SubResource( 11 )
+frames = SubResource( 80 )
 animation = "open"
 
 [node name="door_close" type="AnimatedSprite" parent="Door"]
@@ -394,7 +394,7 @@ visible = false
 position = Vector2( 2.443, 348.721 )
 scale = Vector2( 0.673, 0.772 )
 z_index = 2
-frames = SubResource( 20 )
+frames = SubResource( 89 )
 animation = "close"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Door"]
@@ -409,22 +409,22 @@ visible = false
 modulate = Color( 1, 0.870588, 0.45098, 0.847059 )
 position = Vector2( 2.26525, 349.874 )
 scale = Vector2( 1.2765, 0.888904 )
-frames = SubResource( 69 )
-frame = 8
+frames = SubResource( 90 )
+frame = 35
 playing = true
 
 [node name="innerDoorArea" type="Area2D" parent="Door"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/innerDoorArea"]
 position = Vector2( 2.77026, 350.253 )
-shape = SubResource( 70 )
+shape = SubResource( 91 )
 
 [node name="outerDoorArea" type="Area2D" parent="Door"]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/outerDoorArea"]
 position = Vector2( 2.75938, 350.263 )
-shape = SubResource( 71 )
+shape = SubResource( 92 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
