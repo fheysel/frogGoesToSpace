@@ -1,7 +1,6 @@
 extends Node
 
 export (PackedScene) var attract_scene
-export (PackedScene) var video_scene
 
 var inhibit_pause = true
 var inhibit_hud = true
@@ -10,48 +9,33 @@ var is_title_screen = true
 enum State {
 	MAIN_SCREEN,
 	DIFFICULTY_MENU,
-	ATTRACT,
-	VIDEO
+	ATTRACT
 }
 var state = State.MAIN_SCREEN
 var next_state = State.MAIN_SCREEN
-var video_node = null
-var did_video_last = true
+var attract_node = null
 
 func set_node_paused(x, pause):
 	x.pause_mode = PAUSE_MODE_STOP if pause else PAUSE_MODE_INHERIT
 
 func transition_update_ui():
-	var video = next_state == State.VIDEO or next_state == State.ATTRACT
-	$ViewportLayer/AttractModeViewportContainer.visible = video
-	$ViewportLayer/MarginContainer.visible = next_state == State.ATTRACT
-	set_node_paused($FrogWalking, video)
-	set_node_paused($MainMenuLayer, video)
-	set_node_paused($ViewportLayer, !video)
-	if video:
+	var attract = next_state == State.ATTRACT
+	$ViewportLayer/AttractModeViewportContainer.visible = attract
+	$ViewportLayer/MarginContainer.visible = attract
+	set_node_paused($FrogWalking, attract)
+	set_node_paused($MainMenuLayer, attract)
+	set_node_paused($ViewportLayer, !attract)
+	if attract:
 		# We can't seem to pause stuff properly... so instead we just
 		# dynamically create and remove the attract scene from the tree.
 		# This also saves having to try and reset it.
-		match next_state:
-			State.VIDEO:
-				video_node = video_scene.instance()
-				did_video_last = true
-				$AudioStreamPlayer.stop()
-			State.ATTRACT:
-				video_node = attract_scene.instance()
-				did_video_last = false
-		$ViewportLayer/AttractModeViewportContainer/Viewport.add_child(video_node)
-		match next_state:
-			State.VIDEO:
-				video_node.connect("finished", self, "_on_VideoPlayer_finished")
-			State.ATTRACT:
-				video_node.get_node("Player/PlayerInputHandler").connect("playback_complete", self, "_on_VideoPlayer_finished")
+		attract_node = attract_scene.instance()
+		$ViewportLayer/AttractModeViewportContainer/Viewport.add_child(attract_node)
+		attract_node.get_node("Player/PlayerInputHandler").connect("playback_complete", self, "_on_Attract_finished")
 	else:
-		if state == State.VIDEO or state == State.ATTRACT:
+		if state == State.ATTRACT:
 			$FrogWalking.reset()
-			$ViewportLayer/AttractModeViewportContainer/Viewport.remove_child(video_node)
-		if state == State.VIDEO:
-			$AudioStreamPlayer.play()
+			$ViewportLayer/AttractModeViewportContainer/Viewport.remove_child(attract_node)
 		var open = next_state != State.MAIN_SCREEN
 		$FrogWalking.menu_open = open
 		$DancingTextLayer/MarginContainer/CenterContainer/DancingLetterContainer.menu_open = open
@@ -64,14 +48,14 @@ func transition_update_ui():
 
 func start_transition():
 	$FadeToBlackLayer/AnimationPlayer.play("transition")
-	if next_state == State.VIDEO or next_state == State.ATTRACT:
+	if next_state == State.ATTRACT:
 		set_node_paused($MainMenuLayer, true)
 
 func go_to_state(next):
 	next_state = next
 	match state:
 		State.MAIN_SCREEN:
-			if next_state == State.VIDEO or next_state == State.ATTRACT:
+			if next_state == State.ATTRACT:
 				# Fade to black, then transition
 				start_transition()
 			else:
@@ -79,7 +63,7 @@ func go_to_state(next):
 				transition_update_ui()
 		State.DIFFICULTY_MENU:
 			transition_update_ui()
-		State.VIDEO, State.ATTRACT:
+		State.ATTRACT:
 			start_transition()
 
 func _ready():
@@ -99,9 +83,6 @@ func _process(_delta):
 		State.DIFFICULTY_MENU:
 			if pressed_bck:
 				go_to_state(State.MAIN_SCREEN)
-		State.VIDEO:
-			if pressed_fwd or pressed_bck:
-				go_to_state(State.MAIN_SCREEN)
 		State.ATTRACT:
 			if pressed_fwd or pressed_bck:
 				go_to_state(State.MAIN_SCREEN)
@@ -118,9 +99,9 @@ func _on_Hard_pressed():
 	start_game()
 
 func _on_FrogWalking_done_walking():
-	go_to_state(State.ATTRACT if did_video_last else State.VIDEO)
+	go_to_state(State.ATTRACT)
 
-func _on_VideoPlayer_finished():
+func _on_Attract_finished():
 	go_to_state(State.MAIN_SCREEN)
 
 func _fade_complete():
