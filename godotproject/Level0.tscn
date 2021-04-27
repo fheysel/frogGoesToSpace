@@ -93,7 +93,7 @@ motion_mirroring = Vector2( 640, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerGrass"]
 position = Vector2( 0, 640 )
-scale = Vector2( 4, 4 )
+scale = Vector2( 16, 16 )
 texture = ExtResource( 8 )
 centered = false
 region_enabled = true
