@@ -58,41 +58,41 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="AtlasTexture" id=72]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 7 )
 region = Rect2( 140, 120, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=73]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 7 )
 region = Rect2( 210, 120, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=74]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 7 )
 region = Rect2( 280, 120, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=75]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 180, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=76]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 7 )
 region = Rect2( 70, 180, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=77]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 7 )
 region = Rect2( 140, 180, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=78]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 7 )
 region = Rect2( 210, 180, 70, 60 )
 
-[sub_resource type="AtlasTexture" id=79]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 7 )
 region = Rect2( 280, 180, 70, 60 )
 
 [sub_resource type="SpriteFrames" id=20]
 animations = [ {
-"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
 "name": "close",
 "speed": 15.0
@@ -309,6 +309,7 @@ z_index = -1
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 10, 10 )
 z_index = -1
 texture = ExtResource( 1 )
 __meta__ = {
@@ -406,7 +407,7 @@ modulate = Color( 1, 0.870588, 0.45098, 0.847059 )
 position = Vector2( 2.26525, 349.874 )
 scale = Vector2( 1.2765, 0.888904 )
 frames = SubResource( 69 )
-frame = 6
+frame = 37
 playing = true
 
 [node name="innerDoorArea" type="Area2D" parent="Door"]
