@@ -325,12 +325,14 @@ __meta__ = {
 }
 
 [node name="Jet1" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( -130.896, 609.152 )
 scale = Vector2( 0.580442, 0.529006 )
 z_index = -1
 frame = 0
 
 [node name="Jet2" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 129.015, 609.094 )
 scale = Vector2( 0.639295, 0.529 )
 z_index = -1
@@ -415,7 +417,7 @@ modulate = Color( 1, 0.870588, 0.45098, 0.847059 )
 position = Vector2( 2.6857, 350.767 )
 scale = Vector2( 1.18715, 0.844231 )
 frames = SubResource( 69 )
-frame = 29
+frame = 33
 playing = true
 
 [node name="innerDoorArea" type="Area2D" parent="Door"]
