@@ -7,19 +7,19 @@
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
-region = Rect2( 1400, 400, 700, 400 )
+region = Rect2( 280, 80, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 2100, 400, 700, 400 )
+region = Rect2( 420, 80, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 2800, 400, 700, 400 )
+region = Rect2( 560, 80, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 3500, 400, 700, 400 )
+region = Rect2( 700, 80, 140, 80 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -31,31 +31,31 @@ animations = [ {
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 2800, 800, 700, 400 )
+region = Rect2( 560, 160, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 3500, 800, 700, 400 )
+region = Rect2( 700, 160, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 1200, 700, 400 )
+region = Rect2( 0, 240, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 700, 1200, 700, 400 )
+region = Rect2( 140, 240, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 1400, 1200, 700, 400 )
+region = Rect2( 280, 240, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 2100, 1200, 700, 400 )
+region = Rect2( 420, 240, 140, 80 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 2800, 1200, 700, 400 )
+region = Rect2( 560, 240, 140, 80 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -66,13 +66,13 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=14]
-radius = 86.4373
-height = 265.734
-
-[sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 800, 266.667 )
+radius = 5.0
+height = 15.0
 
 [sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 800, 266.667 )
+
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 462.982, 266.667 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -86,27 +86,21 @@ script = ExtResource( 3 )
 
 [node name="Sprite_PNG" type="AnimatedSprite" parent="Orientation"]
 position = Vector2( 24.375, -1201.04 )
-scale = Vector2( 15, 15 )
+scale = Vector2( 75, 75 )
 frames = SubResource( 5 )
 playing = true
 
 [node name="Sprite_SwipeAttack" type="AnimatedSprite" parent="Orientation"]
 visible = false
 position = Vector2( -356.729, -1152.89 )
-scale = Vector2( 14.8552, 14.649 )
+scale = Vector2( 75, 75 )
 frames = SubResource( 13 )
-frame = 4
 playing = true
 
 [node name="SwipeAttack" type="Area2D" parent="Orientation/Sprite_SwipeAttack"]
-position = Vector2( -65.8981, 112.9 )
-rotation = -0.389208
-scale = Vector2( 0.203, 0.1 )
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Orientation/Sprite_SwipeAttack/SwipeAttack"]
-position = Vector2( 32.3071, 30.641 )
-rotation = 0.419561
-scale = Vector2( 1.19443, 1.244 )
+position = Vector2( -10.1769, 18.6219 )
 shape = SubResource( 14 )
 
 [node name="RayCastFront_Top" type="RayCast2D" parent="Orientation"]
@@ -136,12 +130,12 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/PlayerCollision"]
 position = Vector2( 0, 243.75 )
-shape = SubResource( 16 )
+shape = SubResource( 15 )
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 243.75 )
 scale = Vector2( 2, 2 )
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 
 [node name="ActionDelay" type="Timer" parent="."]
 one_shot = true
