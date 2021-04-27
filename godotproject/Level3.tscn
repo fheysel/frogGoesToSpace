@@ -634,7 +634,7 @@ script = ExtResource( 9 )
 Star = ExtResource( 16 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 328, 904 )
+position = Vector2( 1150, 400 )
 collision_layer = 34
 collision_mask = 17
 
@@ -658,14 +658,14 @@ player_nodepath = NodePath("../../Level3/Player")
 [node name="ParallaxLayerSky" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( 1464, -6352 )
-scale = Vector2( 49.2, 33.0909 )
+position = Vector2( 1464, -4936 )
+scale = Vector2( 42.5, 25.0454 )
 texture = ExtResource( 7 )
 centered = false
 
 [node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( -2464, -6352 )
-scale = Vector2( 49.2, 33.0909 )
+position = Vector2( -864, -4912 )
+scale = Vector2( 29.2, 24.9091 )
 texture = ExtResource( 7 )
 centered = false
 
@@ -674,7 +674,7 @@ motion_scale = Vector2( 0.7, 0.7 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerClouds"]
 position = Vector2( -888, -1688 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 30, 30 )
 texture = ExtResource( 6 )
 centered = false
 flip_h = true
@@ -685,7 +685,7 @@ motion_mirroring = Vector2( 630, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerGrass"]
 position = Vector2( -48, 803 )
-scale = Vector2( 7.98327, 4.26907 )
+scale = Vector2( 31.932, 17.076 )
 texture = ExtResource( 8 )
 centered = false
 
@@ -699,15 +699,6 @@ bus = "Music"
 position = Vector2( 1512, -1896 )
 scale = Vector2( 4.5, 4.5 )
 
-[node name="Fan" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1232, 360 )
-
-[node name="Fan2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2392, -696 )
-
-[node name="Fan3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2448, -1128 )
-
 [node name="ConveyorBelt2" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1736, 440 )
 constant_linear_velocity = Vector2( 0, 0 )
@@ -720,3 +711,12 @@ speed = -300
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 14 )]
 position = Vector2( 2408, 496 )
+
+[node name="Fan4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1227, 360 )
+
+[node name="Fan5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2389, -696 )
+
+[node name="Fan6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2456, -1128 )

@@ -25,7 +25,7 @@ Spike = ExtResource( 11 )
 Star = ExtResource( 9 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 136, 898 )
+position = Vector2( 9881.28, 565.76 )
 collision_layer = 34
 collision_mask = 17
 
@@ -93,7 +93,7 @@ motion_mirroring = Vector2( 640, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerGrass"]
 position = Vector2( 0, 640 )
-scale = Vector2( 4, 4 )
+scale = Vector2( 16, 16 )
 texture = ExtResource( 8 )
 centered = false
 region_enabled = true
