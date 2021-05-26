@@ -186,12 +186,12 @@ margin_right = 608.0
 margin_bottom = 456.0
 
 [node name="StartText" type="Label" parent="MainMenuLayer/MarginContainer/CenterContainer"]
-margin_left = 125.0
+margin_left = 173.0
 margin_top = 135.0
-margin_right = 450.0
+margin_right = 403.0
 margin_bottom = 160.0
 custom_fonts/font = ExtResource( 6 )
-text = "Press the Left button to start!"
+text = "Press ENTER to Start!"
 
 [node name="DifficultySelector" type="VBoxContainer" parent="MainMenuLayer/MarginContainer/CenterContainer"]
 visible = false

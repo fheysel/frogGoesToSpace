@@ -33,7 +33,7 @@ __meta__ = {
 margin_left = 170.0
 margin_top = 225.0
 margin_right = 470.0
-margin_bottom = 286.0
+margin_bottom = 287.0
 alignment = 1
 
 [node name="Label" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
@@ -50,9 +50,9 @@ fit_content_height = true
 [node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_top = 46.0
 margin_right = 300.0
-margin_bottom = 61.0
+margin_bottom = 62.0
 theme = ExtResource( 2 )
-text = "You croaked! Press left button to play again!"
+text = "You croaked! Press ENTER to play again!"
 align = 1
 valign = 1
 

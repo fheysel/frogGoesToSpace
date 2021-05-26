@@ -328,32 +328,32 @@ custom_constants/margin_bottom = 10
 [node name="HighScoresContainer" type="GridContainer" parent="HighScoreScreen/CenterContainer/VBoxContainer"]
 margin_top = 89.0
 margin_right = 236.0
-margin_bottom = 103.0
+margin_bottom = 105.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 30
 columns = 4
 
 [node name="Label" type="Label" parent="HighScoreScreen/CenterContainer/VBoxContainer/HighScoresContainer"]
-margin_right = 30.0
-margin_bottom = 14.0
+margin_right = 31.0
+margin_bottom = 16.0
 text = "Rank"
 
 [node name="Label2" type="Label" parent="HighScoreScreen/CenterContainer/VBoxContainer/HighScoresContainer"]
-margin_left = 60.0
-margin_right = 91.0
-margin_bottom = 14.0
+margin_left = 61.0
+margin_right = 100.0
+margin_bottom = 16.0
 text = "Stars"
 
 [node name="Label3" type="Label" parent="HighScoreScreen/CenterContainer/VBoxContainer/HighScoresContainer"]
-margin_left = 121.0
-margin_right = 153.0
-margin_bottom = 14.0
+margin_left = 130.0
+margin_right = 162.0
+margin_bottom = 16.0
 text = "Time"
 
 [node name="Label4" type="Label" parent="HighScoreScreen/CenterContainer/VBoxContainer/HighScoresContainer"]
-margin_left = 183.0
-margin_right = 218.0
-margin_bottom = 14.0
+margin_left = 192.0
+margin_right = 233.0
+margin_bottom = 16.0
 text = "Score"
 
 [node name="ThonkBigSFX" type="AudioStreamPlayer" parent="HighScoreScreen"]

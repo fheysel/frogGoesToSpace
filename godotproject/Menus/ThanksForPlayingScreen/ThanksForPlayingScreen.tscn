@@ -33,7 +33,7 @@ bus = "Music"
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 margin_top = 512.0
 margin_right = 640.0
-margin_bottom = 1075.0
+margin_bottom = 1126.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 margin_right = 640.0
@@ -47,7 +47,7 @@ valign = 1
 [node name="Label2" type="Label" parent="VBoxContainer2"]
 margin_top = 84.0
 margin_right = 640.0
-margin_bottom = 472.0
+margin_bottom = 518.0
 text = "
 
 
@@ -77,15 +77,15 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="VBoxContainer2"]
-margin_top = 476.0
+margin_top = 522.0
 margin_right = 640.0
-margin_bottom = 563.0
+margin_bottom = 614.0
 rect_min_size = Vector2( 0, 40 )
 theme = ExtResource( 1 )
 text = "
 
 
 
-Press any button to play again!"
+Press ENTER to play again!"
 align = 1
 valign = 1

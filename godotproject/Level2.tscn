@@ -958,11 +958,11 @@ scale = Vector2( 0.5, 1 )
 
 [node name="BlinkingComputer" parent="." instance=ExtResource( 24 )]
 position = Vector2( 593.788, 815.941 )
-frame = 9
+frame = 12
 
 [node name="BlinkingComputer2" parent="." instance=ExtResource( 24 )]
 position = Vector2( 3080, 736 )
-frame = 9
+frame = 12
 
 [node name="HealthBug" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4714.67, 495.643 )
