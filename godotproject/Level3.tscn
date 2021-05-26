@@ -673,19 +673,18 @@ centered = false
 motion_scale = Vector2( 0.7, 0.7 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerClouds"]
-position = Vector2( -888, -1688 )
-scale = Vector2( 30, 30 )
+position = Vector2( -80, -752 )
+scale = Vector2( 19.25, 18 )
 texture = ExtResource( 6 )
 centered = false
-flip_h = true
 
 [node name="ParallaxLayerGrass" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.9, 0.9 )
-motion_mirroring = Vector2( 630, 0 )
+motion_mirroring = Vector2( 800, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerGrass"]
-position = Vector2( -48, 803 )
-scale = Vector2( 31.932, 17.076 )
+position = Vector2( -7.62939e-06, -624 )
+scale = Vector2( 10, 10 )
 texture = ExtResource( 8 )
 centered = false
 
