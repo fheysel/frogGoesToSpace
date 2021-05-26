@@ -80,7 +80,7 @@ motion_scale = Vector2( 0.7, 0.7 )
 motion_mirroring = Vector2( 640, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerHills"]
-position = Vector2( 0, 400 )
+position = Vector2( 0, 373 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
 centered = false
@@ -92,8 +92,8 @@ motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 640, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayerGrass"]
-position = Vector2( 0, 640 )
-scale = Vector2( 16, 16 )
+position = Vector2( 8, -404 )
+scale = Vector2( 7.76667, 7.875 )
 texture = ExtResource( 8 )
 centered = false
 region_enabled = true
@@ -129,7 +129,7 @@ bus = "Music"
 
 [node name="TextTip1" parent="." instance=ExtResource( 17 )]
 position = Vector2( 296.648, 885.363 )
-text = "[center] Press Left Button to  [wave amp=35]jump[/wave] and Right Button to [wave amp=35] shoot[/wave]"
+text = "[center] Press Z or SPACE or ENTER to  [wave amp=35]jump![/wave]  Press X or SHIFT to [wave amp=35] shoot![/wave]"
 
 [node name="TextTip2" parent="." instance=ExtResource( 17 )]
 position = Vector2( 806.767, 629.771 )
@@ -137,11 +137,11 @@ text = "[center] Jump and launch tongue at a block to [wave]swing [/wave] "
 
 [node name="TextTip3" parent="." instance=ExtResource( 17 )]
 position = Vector2( 6828, 453.701 )
-text = "[center] Press Right Button while swinging to [wave] launch [/wave] yourself up"
+text = "[center] Press X or SHIFT while swinging to [wave] launch [/wave] yourself up!"
 
 [node name="TextTip4" parent="." instance=ExtResource( 17 )]
 position = Vector2( 2587.93, 661.872 )
-text = "[center] You can control the direction of your tongue: try shooting [wave] diagonally"
+text = "[center] You can control the direction of your tongue: try shooting [wave] diagonally! [/wave]"
 
 [node name="RespawnPositionArea" parent="." instance=ExtResource( 15 )]
 position = Vector2( 276, 884 )
